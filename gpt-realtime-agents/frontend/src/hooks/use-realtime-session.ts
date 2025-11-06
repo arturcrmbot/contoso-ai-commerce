@@ -99,7 +99,7 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     toolChoice = data.tool_choice ?? "auto";
 
     logMessage(`Loaded ${cachedTools?.length || 0} tool definition(s)`);
-    
+
     // Log the actual tools for debugging
     logMessage(`Tools loaded: ${cachedTools?.map(t => t.name).join(', ') || 'none'}`);
   }, [logMessage]);

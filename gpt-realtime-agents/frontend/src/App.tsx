@@ -217,7 +217,7 @@ function App() {
                 <div className="flex items-center justify-center h-full text-muted-foreground">
                   <div className="text-center">
                     <h3 className="text-lg font-semibold mb-2">Welcome to Contoso</h3>
-                    <p className="text-sm">Start a call or click a suggestion to begin finding your perfect phone</p>
+                    <p className="text-sm">Start Session to get started</p>
                   </div>
                 </div>
               ) : (
