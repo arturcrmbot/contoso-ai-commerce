@@ -2,6 +2,8 @@
 
 Azure OpenAI Realtime-powered sales assistant that combines voice and chat to help customers find phones and plans. The application displays products visually while the AI assistant guides customers through their purchase.
 
+**Based on:** [gpt-realtime-agents](https://github.com/samelhousseini/gpt-realtime-agents) by samelhousseini
+
 ## Architecture
 
 - **Backend:** FastAPI serving API endpoints and static frontend
@@ -167,3 +169,9 @@ cd .. && Copy-Item -Recurse -Force frontend\dist audio_backend\frontend_dist
 **Container App deployment fails:**
 - See `deploy/README.md` troubleshooting section
 - Check Azure OpenAI credentials in `.env`
+
+## Credits
+
+This project is based on [gpt-realtime-agents](https://github.com/samelhousseini/gpt-realtime-agents) by [samelhousseini](https://github.com/samelhousseini).
+
+Licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
