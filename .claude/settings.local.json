@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command '$outputs = Get-Content deployment-outputs.json | ConvertFrom-Json; $outputs.app.containerAppName.value')",
+      "Bash(az containerapp list:*)",
+      "Bash(az containerapp logs show:*)",
+      "Bash(az containerapp show:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

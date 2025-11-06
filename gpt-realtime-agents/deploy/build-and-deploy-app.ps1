@@ -106,15 +106,15 @@ $deployment = az deployment group create `
     --parameters `
         location=$location `
         imageTag=$ImageTag `
-        acrLoginServer=$acrLoginServer `
-        acrUsername=$acrUsername `
-        acrPassword=$acrPassword `
-        containerEnvId=$containerEnvId `
-        azureGptRealtimeUrl=$envVars['AZURE_GPT_REALTIME_URL'] `
-        webrtcUrl=$envVars['WEBRTC_URL'] `
-        azureGptRealtimeKey=$envVars['AZURE_GPT_REALTIME_KEY'] `
-        azureGptRealtimeDeployment=$envVars['AZURE_GPT_REALTIME_DEPLOYMENT'] `
-        azureGptRealtimeVoice=$envVars['AZURE_GPT_REALTIME_VOICE'] `
+        "acrLoginServer=$acrLoginServer" `
+        "acrUsername=$acrUsername" `
+        "acrPassword=$acrPassword" `
+        "containerEnvId=$containerEnvId" `
+        "azureGptRealtimeUrl=$($envVars['AZURE_GPT_REALTIME_URL'])" `
+        "webrtcUrl=$($envVars['WEBRTC_URL'])" `
+        "azureGptRealtimeKey=$($envVars['AZURE_GPT_REALTIME_KEY'])" `
+        "azureGptRealtimeDeployment=$($envVars['AZURE_GPT_REALTIME_DEPLOYMENT'])" `
+        "azureGptRealtimeVoice=$($envVars['AZURE_GPT_REALTIME_VOICE'])" `
     --output json | ConvertFrom-Json
 
 if ($LASTEXITCODE -ne 0) {

@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useKV } from '@github/spark/hooks';
 import { toast, Toaster } from 'sonner';
 import { CallControls } from '@/components/CallControls';
 import { DynamicVisualCanvas } from '@/components/contoso/DynamicVisualCanvas';
@@ -13,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Trash } from '@phosphor-icons/react';
 
 function App() {
-  const [messages, setMessages] = useKV<ChatMessage[]>('chat-messages', []);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [escalationState, setEscalationState] = useState<EscalationState>({ status: 'available' });
   const chatScrollRef = useRef<HTMLDivElement>(null);
 
