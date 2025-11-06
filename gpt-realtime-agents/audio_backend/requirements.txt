@@ -1,0 +1,13 @@
+openai>=1.40.0
+openai[realtime]
+azure-identity>=1.17.1
+azure-eventgrid
+azure-communication-callautomation
+ipykernel
+aiohttp
+fastapi
+httpx
+
+python-dotenv
+uvicorn[standard]
+rich

@@ -1,0 +1,6 @@
+# Deployment outputs (contains sensitive info)
+deployment-outputs.json
+infra-outputs.json
+
+# Backup parameters files with secrets
+*.parameters.local.json

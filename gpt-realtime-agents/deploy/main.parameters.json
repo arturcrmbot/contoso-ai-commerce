@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "baseName": {
+      "value": "contoso"
+    },
+    "imageTag": {
+      "value": "latest"
+    },
+    "azureGptRealtimeUrl": {
+      "value": "https://arzie-mhj8yuwb-eastus2.openai.azure.com/openai/realtimeapi/sessions?api-version=2025-04-01-preview"
+    },
+    "webrtcUrl": {
+      "value": "https://eastus2.realtimeapi-preview.ai.azure.com/v1/realtimertc"
+    },
+    "azureGptRealtimeKey": {
+      "value": "B2NbyivdSHuxBycOisCncrUkl3d91vSzDUs8V2iH7vXTiosQb2mRJQQJ99BKACHYHv6XJ3w3AAAAACOGTKpA"
+    },
+    "azureGptRealtimeDeployment": {
+      "value": "gpt-realtime-2"
+    },
+    "azureGptRealtimeVoice": {
+      "value": "verse"
+    }
+  }
+}
