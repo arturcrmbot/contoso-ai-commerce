@@ -47,6 +47,11 @@ var tags = {
   environment: 'production'
 }
 
+// Reference the existing Container Apps Environment to get its domain
+resource containerAppEnv 'Microsoft.App/managedEnvironments@2023-05-01' existing = {
+  name: split(containerEnvId, '/')[8]  // Extract name from resource ID
+}
+
 // Container App
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
@@ -113,6 +118,10 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
             {
               name: 'AZURE_GPT_REALTIME_VOICE'
               value: azureGptRealtimeVoice
+            }
+            {
+              name: 'VITE_BACKEND_BASE_URL'
+              value: 'https://${containerAppName}.${containerAppEnv.properties.defaultDomain}/api'
             }
           ]
         }
