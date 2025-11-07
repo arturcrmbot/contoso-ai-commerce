@@ -101,6 +101,21 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-4">
+            {/* Brand Logos */}
+            <div className="flex items-center gap-3 mr-2 border-r pr-4">
+              <img 
+                src="/vodafone-logo.svg" 
+                alt="Vodafone" 
+                className="h-7 w-auto"
+              />
+              <div className="h-6 w-px bg-border"></div>
+              <img 
+                src="/three-logo.svg" 
+                alt="Three" 
+                className="h-7 w-auto"
+              />
+            </div>
+            
             <Button
               onClick={isConnected ? onEndCall : onStartCall}
               disabled={isConnecting}
@@ -228,6 +243,16 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Powered by Microsoft Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-md border border-border/50">
+              <img 
+                src="/microsoft-logo.svg" 
+                alt="Microsoft" 
+                className="h-5 w-5"
+              />
+              <span className="text-xs font-medium text-muted-foreground">Powered by Microsoft Azure</span>
+            </div>
+            
             {cartIcon}
             <Badge variant={getStatusVariant()}>
               {getStatusText()}
