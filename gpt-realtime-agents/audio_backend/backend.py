@@ -103,6 +103,7 @@ token_provider = get_bearer_token_provider(credential, "https://cognitiveservice
 class SessionRequest(BaseModel):
     deployment: str | None = Field(default=None, description="Azure OpenAI deployment name")
     voice: str | None = Field(default=None, description="Voice to request in the session")
+    account_number: str | None = Field(default=None, description="Customer account number for personalization")
 
 
 class SessionResponse(BaseModel):
@@ -111,6 +112,9 @@ class SessionResponse(BaseModel):
     webrtc_url: str = Field(..., description="Regional WebRTC entry point")
     deployment: str = Field(..., description="Deployment used when requesting the session")
     voice: str = Field(..., description="Voice registered with the session")
+    account_number: str | None = Field(default=None, description="Customer account number")
+    customer_name: str | None = Field(default=None, description="Customer name")
+    proactive_recommendations: list[Dict[str, Any]] = Field(default_factory=list, description="Proactive recommendations based on customer data")
 
 
 class FunctionCallRequest(BaseModel):
@@ -167,6 +171,15 @@ async def list_tools() -> Dict[str, Any]:
     }
 
 
+@app.get("/api/customer-profiles")
+async def list_customer_profiles() -> Dict[str, Any]:
+    """Return list of available customer profiles for testing."""
+    from customer_profiles import list_profiles
+    return {
+        "profiles": list_profiles()
+    }
+
+
 @app.post("/api/session", response_model=SessionResponse)
 async def create_session(request: SessionRequest) -> SessionResponse:
     """Issue an ephemeral key suitable for establishing a WebRTC session."""
@@ -190,12 +203,26 @@ async def create_session(request: SessionRequest) -> SessionResponse:
     if not ephemeral_key or not session_id:
         raise HTTPException(status_code=500, detail="Malformed session response from Azure")
 
+    # Analyze customer profile if account_number provided
+    account_number = request.account_number
+    customer_name = None
+    proactive_recommendations = []
+
+    if account_number:
+        from tools_registry import analyze_customer_profile
+        analysis_result = await analyze_customer_profile({"account_number": account_number})
+        customer_name = analysis_result.get("customer_name")
+        proactive_recommendations = analysis_result.get("recommendations", [])
+
     return SessionResponse(
         session_id=session_id,
         ephemeral_key=ephemeral_key,
         webrtc_url=WEBRTC_URL,
         deployment=deployment,
         voice=voice,
+        account_number=account_number,
+        customer_name=customer_name,
+        proactive_recommendations=proactive_recommendations,
     )
 
 

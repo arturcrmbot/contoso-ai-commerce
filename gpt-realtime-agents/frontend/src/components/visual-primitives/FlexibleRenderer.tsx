@@ -11,6 +11,7 @@ import { CreditCheckStatus } from './CreditCheckStatus';
 import { PriceBreakdown } from './PriceBreakdown';
 import { TradeInValue } from './TradeInValue';
 import { ComparisonTable } from './ComparisonTable';
+import { BundleOffer } from './BundleOffer';
 
 // Import existing components (backwards compatibility)
 import { ProductCard } from '../contoso/ProductCard';
@@ -69,6 +70,9 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
       case 'comparison_table':
       case 'product_comparison':
         return <ComparisonTable data={section.data} context={section.context || visual.context} title={section.title} />;
+
+      case 'bundle_offer':
+        return <BundleOffer data={section.data} onAction={onAction} emphasis={section.emphasis} />;
 
       // Accessory components
       case 'accessory_card':

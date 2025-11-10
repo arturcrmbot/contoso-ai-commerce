@@ -88,6 +88,20 @@
   .waveform-bar:nth-child(7) { animation-delay: 0.6s; }
   .waveform-bar:nth-child(8) { animation-delay: 0.7s; }
 
+  /* Bundle offer pulse animation */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
   /* Adaptive text sizing for suggestion cards */
   .adaptive-text {
     font-size: clamp(0.7rem, 3.5vw, 1.125rem);

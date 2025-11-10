@@ -6,6 +6,8 @@ import { CartIcon } from '@/components/contoso/CartIcon';
 import { CartSummary } from '@/components/contoso/CartSummary';
 import { MessageBubble } from '@/components/MessageBubble';
 import { ChatComposer } from '@/components/ChatComposer';
+import { ProfileSelector } from '@/components/ProfileSelector';
+import { ProactiveNudgeBanner } from '@/components/ProactiveNudgeBanner';
 import { useRealtimeSession } from '@/hooks/use-realtime-session';
 import { ChatMessage, EscalationState } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -25,6 +27,11 @@ function App() {
 
   // Prefilled text state
   const [prefilledText, setPrefilledText] = useState<string>('');
+
+  // Customer profile state
+  const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [customerName, setCustomerName] = useState<string | null>(null);
 
   const handleMessage = useCallback((message: ChatMessage) => {
     setMessages(prev => [...(prev || []), message]);
@@ -49,11 +56,20 @@ function App() {
     }
   }, []);
 
+  const handleRecommendationsReceived = useCallback((recs: any[], name?: string) => {
+    setRecommendations(recs);
+    if (name) {
+      setCustomerName(name);
+    }
+  }, []);
+
   const { sessionState, startSession, endSession, toggleMute, toggleVoiceResponse, sendTextMessage, isConnected, getCurrentMediaStream } = useRealtimeSession({
     onMessage: handleMessage,
     onStateChange: handleStateChange,
     onVisualUpdate: handleVisualUpdate,
-    onCartUpdated: handleCartUpdated
+    onCartUpdated: handleCartUpdated,
+    onRecommendationsReceived: handleRecommendationsReceived,
+    accountNumber: selectedProfile
   });
 
   // Auto-scroll to bottom when new messages arrive
@@ -156,10 +172,25 @@ function App() {
     toast.info('Chat cleared');
   };
 
+  const handleRecommendationInteract = (recommendation: any) => {
+    // User clicked "Ask me about this" on a recommendation
+    const message = `Tell me more about ${recommendation.title || 'this recommendation'}`;
+    handleSendMessage(message);
+  };
+
+  const handleRecommendationDismiss = () => {
+    setRecommendations([]);
+  };
+
   const totalMonthly = cartItems.reduce((sum, item) => sum + (item.price_monthly || 0), 0);
 
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
+      <ProfileSelector
+        selectedProfile={selectedProfile}
+        onProfileChange={setSelectedProfile}
+        disabled={sessionState.status !== 'idle'}
+      />
       <CallControls
         sessionState={sessionState}
         onStartCall={handleStartCall}
@@ -180,6 +211,15 @@ function App() {
         {/* Left Panel - Dynamic Visual Canvas (70%) */}
         <div className="w-[70%] border-r bg-muted/30 min-w-0 overflow-hidden">
           <div className="h-full p-4 flex flex-col min-h-0">
+            {/* Proactive Nudge Banner */}
+            {isConnected && recommendations.length > 0 && (
+              <ProactiveNudgeBanner
+                recommendations={recommendations}
+                onDismiss={handleRecommendationDismiss}
+                onInteract={handleRecommendationInteract}
+              />
+            )}
+
             <DynamicVisualCanvas
               visualConfig={currentVisual}
               onProductClick={handleProductClick}

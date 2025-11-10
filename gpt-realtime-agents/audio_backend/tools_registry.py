@@ -2,6 +2,7 @@ import random
 import asyncio
 from datetime import datetime, timedelta
 from typing import Any, Dict, List
+from customer_profiles import get_profile
 
 # =============================================================================
 # MOCK DATA CATALOGS
@@ -706,6 +707,118 @@ async def check_coverage(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "max_speed_mbps": random.randint(50, 300) if service_type == "5g" else random.randint(20, 80),
         "indoor_coverage": random.choice([True, True, False]),
         "nearby_towers": random.randint(2, 8)
+    }
+
+
+async def analyze_customer_profile(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Analyze customer profile and generate proactive recommendations based on usage, travel, billing, and device history."""
+    account_number = arguments.get("account_number")
+
+    profile = get_profile(account_number)
+
+    if not profile:
+        return {
+            "account_number": account_number,
+            "error": "Customer profile not found",
+            "recommendations": []
+        }
+
+    recommendations = []
+
+    # Analyze data usage patterns
+    usage_history = profile.get("usage_history", [])
+    if len(usage_history) >= 3:
+        recent_usage = usage_history[:3]  # Last 3 months
+        avg_data = sum(m["data_gb"] for m in recent_usage) / len(recent_usage)
+        current_plan = profile.get("current_plan", {})
+        data_allowance = current_plan.get("data_allowance", 50)
+
+        # High data usage recommendation
+        if avg_data > data_allowance * 0.85:  # Using >85% consistently
+            overage_history = profile.get("billing_history", [])[:3]
+            avg_overage = sum(b.get("overage_charge", 0) for b in overage_history) / len(overage_history)
+
+            recommendations.append({
+                "type": "plan_upgrade",
+                "priority": "high",
+                "reason": f"Using {avg_data:.0f}GB/month on average (85%+ of your {data_allowance}GB plan)",
+                "customer_quote": f"You've been hitting your data limit consistently",
+                "suggested_plan_id": "unlimited-max",
+                "suggested_plan_name": "Unlimited Max",
+                "monthly_savings": avg_overage,
+                "talking_point": f"You're averaging {avg_data:.0f}GB but paying £{avg_overage:.0f}/month in overage fees. Unlimited would save you money."
+            })
+
+    # Analyze travel patterns
+    travel_history = profile.get("travel_history", [])
+    if len(travel_history) > 0:
+        trips_without_roaming = [t for t in travel_history if not t.get("roaming_used", False)]
+
+        if len(trips_without_roaming) > 0:
+            total_roaming_charges = sum(t.get("roaming_charges", 0) for t in trips_without_roaming)
+            countries = list(set(t["country"] for t in trips_without_roaming))
+
+            recommendations.append({
+                "type": "roaming_pass",
+                "priority": "high",
+                "reason": f"Traveled to {len(countries)} countries without roaming ({', '.join(countries[:2])})",
+                "customer_quote": f"You've traveled internationally {len(trips_without_roaming)} times this year",
+                "suggested_addon": "international-roaming",
+                "monthly_cost": 5,
+                "annual_savings": total_roaming_charges,
+                "talking_point": f"You've spent £{total_roaming_charges:.0f} on roaming fees. Our roaming pass is just £5/month and covers 81 countries."
+            })
+
+    # Analyze device age
+    device = profile.get("current_device", {})
+    device_age_months = device.get("age_months", 0)
+
+    if device_age_months > 24:  # Older than 2 years
+        trade_in_value = device.get("trade_in_value", 0)
+
+        recommendations.append({
+            "type": "device_upgrade",
+            "priority": "medium" if device_age_months > 36 else "low",
+            "reason": f"{device.get('model')} is {device_age_months} months old ({device_age_months // 12} years)",
+            "customer_quote": f"Your phone has been going strong for {device_age_months // 12} years",
+            "trade_in_value": trade_in_value,
+            "suggested_devices": ["iphone-15-pro", "samsung-s24-ultra", "pixel-8-pro"],
+            "talking_point": f"Your {device.get('model')} is worth £{trade_in_value} trade-in. That could bring down the cost of a new phone significantly."
+        })
+
+    # Analyze billing patterns
+    billing_history = profile.get("billing_history", [])
+    late_payments = [b for b in billing_history if b.get("late", False)]
+
+    if len(late_payments) >= 2:  # 2+ late payments
+        total_late_fees = sum(b.get("late_fee", 0) for b in late_payments)
+
+        recommendations.append({
+            "type": "payment_plan",
+            "priority": "low",
+            "reason": f"{len(late_payments)} late payments in recent history",
+            "customer_quote": "Flexible payment options available",
+            "suggested_option": "direct_debit",
+            "monthly_savings": total_late_fees / len(late_payments),
+            "talking_point": f"You've paid £{total_late_fees:.0f} in late fees. Setting up direct debit ensures you never miss a payment."
+        })
+
+    # Sort by priority
+    priority_order = {"high": 0, "medium": 1, "low": 2}
+    recommendations.sort(key=lambda r: priority_order.get(r.get("priority", "low"), 2))
+
+    # Return top recommendation as primary
+    return {
+        "account_number": account_number,
+        "customer_name": profile.get("name"),
+        "recommendations": recommendations,
+        "primary_recommendation": recommendations[0] if recommendations else None,
+        "profile_summary": {
+            "current_plan": profile.get("current_plan", {}).get("plan_name"),
+            "current_device": device.get("model"),
+            "avg_monthly_data": sum(m["data_gb"] for m in usage_history[:3]) / min(3, len(usage_history)) if usage_history else 0,
+            "upgrade_eligible": profile.get("contract", {}).get("eligible_for_upgrade", False)
+        }
     }
 
 
@@ -1878,6 +1991,25 @@ TOOLS_REGISTRY = {
             }
         },
         "executor": customise_webpage
+    },
+
+    "analyze_customer_profile": {
+        "definition": {
+            "type": "function",
+            "name": "analyze_customer_profile",
+            "description": "Analyze customer profile to generate proactive recommendations based on usage patterns, travel history, device age, and billing. Call this IMMEDIATELY at session start if account_number available.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "account_number": {
+                        "type": "string",
+                        "description": "Customer account number (e.g. VF001_HIGH_DATA_USER)"
+                    }
+                },
+                "required": ["account_number"]
+            }
+        },
+        "executor": analyze_customer_profile
     }
 }
 

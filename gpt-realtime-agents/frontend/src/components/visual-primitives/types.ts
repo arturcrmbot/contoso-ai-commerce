@@ -36,6 +36,10 @@ export type ComponentType =
   // Promotional
   | 'promo_banner'
   | 'deal_highlight'
+  | 'bundle_offer'
+  | 'countdown_timer'
+  | 'limited_time_banner'
+  | 'savings_badge'
   // Layout components
   | 'section_divider'
   | 'info_callout'

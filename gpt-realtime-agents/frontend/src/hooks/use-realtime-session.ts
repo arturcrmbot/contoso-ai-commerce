@@ -14,6 +14,8 @@ interface UseRealtimeSessionProps {
   onProductsDiscovered?: (products: any[]) => void;
   onCartUpdated?: (cartData: any) => void;
   onVisualUpdate?: (visualConfig: any) => void;
+  onRecommendationsReceived?: (recommendations: any[], customerName?: string) => void;
+  accountNumber?: string | null;
 }
 
 
@@ -63,7 +65,7 @@ function convertToFlexibleVisual(visual: any): any {
   };
 }
 
-export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate }: UseRealtimeSessionProps) {
+export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate, onRecommendationsReceived, accountNumber }: UseRealtimeSessionProps) {
   const [sessionState, setSessionState] = useState<SessionState>({
     status: 'idle',
     isMuted: false,
@@ -104,16 +106,22 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     logMessage(`Tools loaded: ${cachedTools?.map(t => t.name).join(', ') || 'none'}`);
   }, [logMessage]);
 
-  const requestSession = useCallback(async () => {
+  const requestSession = useCallback(async (accountNumber?: string | null) => {
+    const requestBody: any = {
+      deployment: CONFIG.deployment,
+      voice: CONFIG.voice,
+    };
+
+    if (accountNumber) {
+      requestBody.account_number = accountNumber;
+    }
+
     const response = await fetch(`${CONFIG.backendBaseUrl}/session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        deployment: CONFIG.deployment,
-        voice: CONFIG.voice,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
@@ -126,6 +134,8 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       sessionId: payload.session_id,
       ephemeralKey: payload.ephemeral_key,
       webrtcUrl: payload.webrtc_url,
+      customerName: payload.customer_name,
+      proactiveRecommendations: payload.proactive_recommendations || [],
     };
   }, []);
 
@@ -424,10 +434,16 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     try {
       setSessionState(prev => ({ ...prev, status: 'connecting' }));
       await ensureToolsLoaded();
-      const session = await requestSession();
+      const session = await requestSession(accountNumber);
 
       logMessage("Ephemeral Key Received: ***");
       logMessage(`WebRTC Session Id = ${session.sessionId}`);
+
+      // Pass recommendations to parent component if available
+      if (session.proactiveRecommendations && session.proactiveRecommendations.length > 0) {
+        onRecommendationsReceived?.(session.proactiveRecommendations, session.customerName);
+        logMessage(`Received ${session.proactiveRecommendations.length} proactive recommendation(s)`);
+      }
 
       await initSession({
         sessionId: session.sessionId,
@@ -442,7 +458,7 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       setSessionState(prev => ({ ...prev, status: 'idle' }));
       throw error;
     }
-  }, [ensureToolsLoaded, requestSession, initSession, logMessage]);
+  }, [ensureToolsLoaded, requestSession, initSession, logMessage, onRecommendationsReceived, accountNumber]);
 
   const endSession = useCallback(() => {
     const { dataChannel, peerConnection, clientMedia } = sessionRef.current;
