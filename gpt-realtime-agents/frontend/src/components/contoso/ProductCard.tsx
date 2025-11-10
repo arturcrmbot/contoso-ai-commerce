@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { DeviceMobile, Star } from '@phosphor-icons/react';
+import { VisualContext } from '@/components/visual-primitives/types';
 
 interface Device {
   id: string;
@@ -24,15 +25,23 @@ interface ProductCardProps {
   device: Device;
   isHighlighted?: boolean;
   onClick: () => void;
+  context?: VisualContext;
 }
 
-export function ProductCard({ device, isHighlighted = false, onClick }: ProductCardProps) {
-  const getBadgeVariant = (quality: string) => {
+export function ProductCard({ device, isHighlighted = false, onClick, context }: ProductCardProps) {
+  const isPriority = (attr: string) => context?.user_priorities?.includes(attr);
+
+  const getBadgeVariant = (quality: string, attr: string) => {
+    if (isPriority(attr)) return 'default';
     switch (quality) {
       case 'excellent': return 'default';
       case 'very_good': return 'secondary';
       default: return 'outline';
     }
+  };
+
+  const formatAttributeName = (attr: string) => {
+    return attr.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
 
   return (
@@ -88,12 +97,22 @@ export function ProductCard({ device, isHighlighted = false, onClick }: ProductC
           {device.attributes && (
             <div className="flex flex-wrap gap-1">
               {device.attributes.battery_life && (
-                <Badge variant={getBadgeVariant(device.attributes.battery_life)} className="text-xs">
+                <Badge
+                  variant={getBadgeVariant(device.attributes.battery_life, 'battery_life')}
+                  className={`text-xs ${isPriority('battery_life') ? 'ring-2 ring-primary shadow-lg animate-pulse' : ''}`}
+                  title={isPriority('battery_life') ? context?.priority_quotes?.['battery_life'] : undefined}
+                >
+                  {isPriority('battery_life') && '✓ '}
                   Battery: {device.attributes.battery_life}
                 </Badge>
               )}
               {device.attributes.camera_quality && (
-                <Badge variant={getBadgeVariant(device.attributes.camera_quality)} className="text-xs">
+                <Badge
+                  variant={getBadgeVariant(device.attributes.camera_quality, 'camera_quality')}
+                  className={`text-xs ${isPriority('camera_quality') ? 'ring-2 ring-primary shadow-lg animate-pulse' : ''}`}
+                  title={isPriority('camera_quality') ? context?.priority_quotes?.['camera_quality'] : undefined}
+                >
+                  {isPriority('camera_quality') && '✓ '}
                   Camera: {device.attributes.camera_quality}
                 </Badge>
               )}

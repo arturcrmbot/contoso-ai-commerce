@@ -399,19 +399,31 @@ async def get_device_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
 async def compare_devices(arguments: Dict[str, Any]) -> Dict[str, Any]:
     """Compare multiple devices side-by-side."""
     device_ids = arguments.get("device_ids", [])
+    context = arguments.get("_context", {})
 
     devices = [d for d in MOCK_DEVICES if d["id"] in device_ids]
 
+    # Determine which attributes to compare based on user priorities
+    priorities = context.get("user_priorities", [])
+
+    if priorities:
+        # Show only priority attributes + price
+        matrix_keys = priorities + ["price_monthly", "price_upfront"]
+    else:
+        # Default: show common attributes
+        matrix_keys = ["battery_life", "camera_quality", "screen_size", "price_monthly", "price_upfront", "rating"]
+
+    # Build comparison matrix
+    comparison_matrix = {}
+    for key in matrix_keys:
+        if key in ["price_monthly", "price_upfront", "rating"]:
+            comparison_matrix[key] = [d.get(key, 0) for d in devices]
+        else:
+            comparison_matrix[key] = [d["attributes"].get(key, "N/A") for d in devices]
+
     comparison = {
         "devices": devices,
-        "comparison_matrix": {
-            "battery_life": [d["attributes"]["battery_life"] for d in devices],
-            "camera_quality": [d["attributes"]["camera_quality"] for d in devices],
-            "screen_size": [d["attributes"]["screen_size"] for d in devices],
-            "price_monthly": [d["price_monthly"] for d in devices],
-            "price_upfront": [d["price_upfront"] for d in devices],
-            "rating": [d["rating"] for d in devices]
-        },
+        "comparison_matrix": comparison_matrix,
         "best_for": {
             "battery": devices[0]["name"] if devices else None,
             "camera": devices[0]["name"] if devices else None,
@@ -421,11 +433,8 @@ async def compare_devices(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "type": "comparison_table",
             "title": "Device Comparison",
             "devices": devices,
-            "matrix": {
-                "battery_life": [d["attributes"]["battery_life"] for d in devices],
-                "camera_quality": [d["attributes"]["camera_quality"] for d in devices],
-                "price_monthly": [d["price_monthly"] for d in devices]
-            }
+            "matrix": comparison_matrix,
+            "context": context
         }
     }
 

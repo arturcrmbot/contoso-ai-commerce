@@ -10,6 +10,7 @@ import { CheckoutStepper } from './CheckoutStepper';
 import { CreditCheckStatus } from './CreditCheckStatus';
 import { PriceBreakdown } from './PriceBreakdown';
 import { TradeInValue } from './TradeInValue';
+import { ComparisonTable } from './ComparisonTable';
 
 // Import existing components (backwards compatibility)
 import { ProductCard } from '../contoso/ProductCard';
@@ -37,7 +38,7 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
       switch (section.type) {
         // Product components
         case 'product_hero':
-          return <ProductHero data={section.data} onAction={onAction} emphasis={section.emphasis} />;
+          return <ProductHero data={section.data} onAction={onAction} emphasis={section.emphasis} context={section.context || visual.context} />;
 
         case 'product_card':
           return (
@@ -59,10 +60,15 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
                 key={item.id || Math.random()}
                 device={item}
                 onClick={() => onAction?.('product_click', { device_id: item.id })}
+                context={section.context || visual.context}
               />
             ))}
           </div>
         );
+
+      case 'comparison_table':
+      case 'product_comparison':
+        return <ComparisonTable data={section.data} context={section.context || visual.context} title={section.title} />;
 
       // Accessory components
       case 'accessory_card':
@@ -137,6 +143,7 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
             title={section.title || 'Available Plans'}
             items={planItems}
             onPlanClick={(plan) => onAction?.('plan_select', { plan_id: plan.id })}
+            context={section.context || visual.context}
           />
         );
 
@@ -292,6 +299,13 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
               <Badge variant="default">{visual.header.badge}</Badge>
             )}
           </div>
+        </div>
+      )}
+
+      {/* Context Banner */}
+      {visual.context?.context_message && (
+        <div className="bg-primary/10 border-l-4 border-primary p-3 rounded mb-4 flex-shrink-0">
+          <p className="text-sm font-medium">{visual.context.context_message}</p>
         </div>
       )}
 

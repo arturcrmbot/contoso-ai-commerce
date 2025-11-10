@@ -53,6 +53,17 @@ export type Emphasis = 'low' | 'medium' | 'high' | 'critical';
 export type Size = 'sm' | 'md' | 'lg' | 'xl';
 export type Position = 'above' | 'below' | 'left' | 'right' | 'inline';
 
+export interface VisualContext {
+  user_priorities?: string[];
+  priority_quotes?: Record<string, string>;
+  highlight_values?: Record<string, any>;
+  context_message?: string;
+  comparison_context?: {
+    comparing_on: string[];
+    winner_attribute?: string;
+  };
+}
+
 export interface VisualSection {
   id?: string;
   type: ComponentType;
@@ -68,6 +79,7 @@ export interface VisualSection {
     action: string;
     params?: any;
   };
+  context?: VisualContext;
 }
 
 export interface CTAConfig {
@@ -94,6 +106,7 @@ export interface FlexibleVisual {
   };
   theme?: 'default' | 'success' | 'warning' | 'info';
   animation?: 'fade' | 'slide' | 'scale' | 'none';
+  context?: VisualContext;
 }
 
 // Backwards compatibility - map old visual types to new flexible system
@@ -104,6 +117,7 @@ export interface LegacyVisual {
   devices?: any[];
   matrix?: any;
   summary?: any;
+  context?: VisualContext;
 }
 
 export type VisualConfig = FlexibleVisual | LegacyVisual;

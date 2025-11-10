@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { DeviceMobile, Star, ShoppingCart } from '@phosphor-icons/react';
+import { VisualContext } from './types';
 
 interface ProductHeroProps {
   data: {
@@ -19,9 +20,12 @@ interface ProductHeroProps {
   };
   onAction?: (action: string, params?: any) => void;
   emphasis?: 'low' | 'medium' | 'high' | 'critical';
+  context?: VisualContext;
 }
 
-export function ProductHero({ data, onAction, emphasis = 'high' }: ProductHeroProps) {
+export function ProductHero({ data, onAction, emphasis = 'high', context }: ProductHeroProps) {
+  const isPriority = (attr: string) => context?.user_priorities?.includes(attr);
+
   const emphasisClasses = {
     low: 'border',
     medium: 'border-2',
@@ -96,13 +100,34 @@ export function ProductHero({ data, onAction, emphasis = 'high' }: ProductHeroPr
               {data.attributes && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {data.attributes.battery_life && (
-                    <Badge variant="outline">🔋 {data.attributes.battery_life} battery</Badge>
+                    <Badge
+                      variant={isPriority('battery_life') ? 'default' : 'outline'}
+                      className={isPriority('battery_life') ? 'ring-2 ring-primary shadow-lg animate-pulse' : ''}
+                      title={isPriority('battery_life') ? context?.priority_quotes?.['battery_life'] : undefined}
+                    >
+                      {isPriority('battery_life') && '✓ '}
+                      🔋 {data.attributes.battery_life} battery
+                    </Badge>
                   )}
                   {data.attributes.camera_quality && (
-                    <Badge variant="outline">📸 {data.attributes.camera_quality} camera</Badge>
+                    <Badge
+                      variant={isPriority('camera_quality') ? 'default' : 'outline'}
+                      className={isPriority('camera_quality') ? 'ring-2 ring-primary shadow-lg animate-pulse' : ''}
+                      title={isPriority('camera_quality') ? context?.priority_quotes?.['camera_quality'] : undefined}
+                    >
+                      {isPriority('camera_quality') && '✓ '}
+                      📸 {data.attributes.camera_quality} camera
+                    </Badge>
                   )}
                   {data.attributes.screen_size && (
-                    <Badge variant="outline">📱 {data.attributes.screen_size}" screen</Badge>
+                    <Badge
+                      variant={isPriority('screen_size') ? 'default' : 'outline'}
+                      className={isPriority('screen_size') ? 'ring-2 ring-primary shadow-lg animate-pulse' : ''}
+                      title={isPriority('screen_size') ? context?.priority_quotes?.['screen_size'] : undefined}
+                    >
+                      {isPriority('screen_size') && '✓ '}
+                      📱 {data.attributes.screen_size}" screen
+                    </Badge>
                   )}
                   {data.attributes["5g"] && (
                     <Badge variant="default">5G</Badge>
