@@ -82,6 +82,14 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     clientMedia: null,
   });
 
+  const customerDataRef = useRef<{
+    name: string | null;
+    recommendations: any[];
+  }>({
+    name: null,
+    recommendations: [],
+  });
+
   const logMessage = useCallback((message: string) => {
     console.log('[VoiceCare]', message);
   }, []);
@@ -140,10 +148,20 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
   }, []);
 
   const sendSessionUpdate = useCallback((dataChannel: RTCDataChannel, tools: any[], toolChoiceValue: string, voiceEnabled: boolean = false) => {
+    let instructions = SYSTEM_PROMPT;
+
+    // Inject customer context if available
+    const { name, recommendations } = customerDataRef.current;
+    if (name && recommendations.length > 0) {
+      const topRec = recommendations[0];
+      const customerContext = `\n\n## CURRENT CUSTOMER CONTEXT\n\nYou are speaking with ${name}.\n\nTOP PRIORITY RECOMMENDATION:\n- Type: ${topRec.type}\n- Priority: ${topRec.priority}\n- Title: ${topRec.title}\n- Talking Point: ${topRec.talking_point}\n${topRec.estimated_savings ? `- Potential Savings: £${topRec.estimated_savings}/month` : ''}\n\nIMPORTANT: Mention this recommendation naturally in your FIRST response, following the proactive nudging guidelines above.`;
+      instructions += customerContext;
+    }
+
     const sessionPayload = {
       type: "session.update",
       session: {
-        instructions: SYSTEM_PROMPT,
+        instructions,
         modalities: voiceEnabled ? ["text", "audio"] : ["text"], // Control audio output
         input_audio_transcription: {
           model: "whisper-1"
@@ -157,7 +175,7 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     }
 
     dataChannel.send(JSON.stringify(sessionPayload));
-    logMessage(`Sent session.update with ${tools.length} tools, voice=${voiceEnabled}`);
+    logMessage(`Sent session.update with ${tools.length} tools, voice=${voiceEnabled}, customer=${name || 'anonymous'}`);
   }, [logMessage]);
 
   const fulfillFunctionCall = useCallback(async (functionCallItem: any, dataChannel: RTCDataChannel) => {
@@ -439,10 +457,14 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       logMessage("Ephemeral Key Received: ***");
       logMessage(`WebRTC Session Id = ${session.sessionId}`);
 
-      // Pass recommendations to parent component if available
+      // Store customer data for session instructions
       if (session.proactiveRecommendations && session.proactiveRecommendations.length > 0) {
+        customerDataRef.current = {
+          name: session.customerName || null,
+          recommendations: session.proactiveRecommendations,
+        };
         onRecommendationsReceived?.(session.proactiveRecommendations, session.customerName);
-        logMessage(`Received ${session.proactiveRecommendations.length} proactive recommendation(s)`);
+        logMessage(`Received ${session.proactiveRecommendations.length} proactive recommendation(s) for ${session.customerName || 'customer'}`);
       }
 
       await initSession({
@@ -484,7 +506,12 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       clientMedia: null,
     };
 
-    setSessionState({ status: 'idle', isMuted: false });
+    customerDataRef.current = {
+      name: null,
+      recommendations: [],
+    };
+
+    setSessionState({ status: 'idle', isMuted: false, voiceResponseEnabled: false });
     logMessage("Session closed.");
   }, [logMessage]);
 

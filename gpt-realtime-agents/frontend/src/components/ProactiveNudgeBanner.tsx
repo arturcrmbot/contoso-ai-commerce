@@ -20,25 +20,25 @@ interface ProactiveNudgeBannerProps {
 
 const PRIORITY_STYLES = {
   high: {
-    border: 'border-orange-500',
-    bg: 'bg-gradient-to-r from-orange-50 to-red-50',
-    text: 'text-orange-700',
-    badge: 'bg-orange-100 text-orange-700 border-orange-300',
-    icon: 'text-orange-500'
+    border: 'border-orange-400',
+    bg: 'bg-gradient-to-r from-orange-100 to-red-100',
+    text: 'text-orange-900',
+    badge: 'bg-orange-200 text-orange-900 border-orange-400',
+    icon: 'text-orange-600'
   },
   medium: {
-    border: 'border-blue-500',
-    bg: 'bg-gradient-to-r from-blue-50 to-indigo-50',
-    text: 'text-blue-700',
-    badge: 'bg-blue-100 text-blue-700 border-blue-300',
-    icon: 'text-blue-500'
+    border: 'border-blue-400',
+    bg: 'bg-gradient-to-r from-blue-100 to-indigo-100',
+    text: 'text-blue-900',
+    badge: 'bg-blue-200 text-blue-900 border-blue-400',
+    icon: 'text-blue-600'
   },
   low: {
     border: 'border-gray-400',
-    bg: 'bg-gradient-to-r from-gray-50 to-slate-50',
-    text: 'text-gray-700',
-    badge: 'bg-gray-100 text-gray-700 border-gray-300',
-    icon: 'text-gray-500'
+    bg: 'bg-gradient-to-r from-gray-100 to-slate-100',
+    text: 'text-gray-900',
+    badge: 'bg-gray-200 text-gray-900 border-gray-400',
+    icon: 'text-gray-600'
   }
 };
 
@@ -86,22 +86,22 @@ export function ProactiveNudgeBanner({
   };
 
   return (
-    <Card className={`${styles.border} ${styles.bg} border-2 shadow-md mb-4 overflow-hidden`}>
-      <div className="p-4 flex items-start gap-3">
+    <Card className={`${styles.border} ${styles.bg} border-2 shadow-lg mb-6 overflow-hidden`}>
+      <div className="p-6 flex items-start gap-4">
         {/* Icon */}
         <div className={`flex-shrink-0 ${styles.icon}`}>
-          <IconComponent size={24} weight="duotone" />
+          <IconComponent size={32} weight="duotone" />
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
           {/* Type Badge */}
-          <div className="flex items-center gap-2 mb-1">
-            <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${styles.badge}`}>
+          <div className="flex items-center gap-2 mb-2">
+            <span className={`text-xs font-medium px-3 py-1 rounded-full border ${styles.badge}`}>
               {label}
             </span>
             {priority === 'high' && (
-              <span className="text-xs font-semibold text-orange-600 animate-pulse">
+              <span className="text-xs font-semibold text-orange-700 animate-pulse">
                 ⚡ High Priority
               </span>
             )}
@@ -109,19 +109,19 @@ export function ProactiveNudgeBanner({
 
           {/* Title */}
           {topRecommendation.title && (
-            <h4 className={`font-semibold text-sm mb-1 ${styles.text}`}>
+            <h4 className={`font-semibold text-base mb-2 ${styles.text}`}>
               {topRecommendation.title}
             </h4>
           )}
 
           {/* Talking Point */}
-          <p className="text-sm text-gray-700 mb-2">
+          <p className="text-sm text-gray-900 mb-3 leading-relaxed">
             {topRecommendation.talking_point}
           </p>
 
           {/* Savings Badge */}
           {topRecommendation.estimated_savings && (
-            <div className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded">
+            <div className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-100 px-3 py-1.5 rounded mb-3">
               💰 Save up to £{topRecommendation.estimated_savings}/month
             </div>
           )}
@@ -142,10 +142,10 @@ export function ProactiveNudgeBanner({
         {/* Dismiss Button */}
         <button
           onClick={handleDismiss}
-          className="flex-shrink-0 p-1 rounded hover:bg-white/50 transition-colors text-gray-400 hover:text-gray-600"
+          className="flex-shrink-0 p-2 rounded hover:bg-white/50 transition-colors text-gray-400 hover:text-gray-600"
           aria-label="Dismiss"
         >
-          <X size={18} weight="bold" />
+          <X size={20} weight="bold" />
         </button>
       </div>
     </Card>
