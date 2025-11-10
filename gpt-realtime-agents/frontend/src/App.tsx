@@ -216,7 +216,7 @@ function App() {
               {(messages || []).length === 0 ? (
                 <div className="flex items-center justify-center h-full text-muted-foreground">
                   <div className="text-center">
-                    <h3 className="text-lg font-semibold mb-2">Welcome to Contoso</h3>
+                    <h3 className="text-lg font-semibold mb-2">Welcome to Vodafone Three</h3>
                     <p className="text-sm">Start Session to get started</p>
                   </div>
                 </div>
