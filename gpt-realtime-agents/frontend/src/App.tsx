@@ -211,15 +211,6 @@ function App() {
         {/* Left Panel - Dynamic Visual Canvas (70%) */}
         <div className="w-[70%] border-r bg-muted/30 min-w-0 overflow-hidden">
           <div className="h-full p-4 flex flex-col min-h-0">
-            {/* Proactive Nudge Banner */}
-            {isConnected && recommendations.length > 0 && (
-              <ProactiveNudgeBanner
-                recommendations={recommendations}
-                onDismiss={handleRecommendationDismiss}
-                onInteract={handleRecommendationInteract}
-              />
-            )}
-
             <DynamicVisualCanvas
               visualConfig={currentVisual}
               onProductClick={handleProductClick}

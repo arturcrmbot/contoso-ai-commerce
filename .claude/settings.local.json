@@ -5,7 +5,16 @@
       "Bash(az containerapp list:*)",
       "Bash(az containerapp logs show:*)",
       "Bash(az containerapp show:*)",
-      "Bash(docker build:*)"
+      "Bash(docker build:*)",
+      "Bash(pwsh:*)",
+      "Bash(az acr login:*)",
+      "Bash(docker login:*)",
+      "Bash(az account set:*)",
+      "Bash(az containerapp revision list:*)",
+      "Bash(az acr repository show-tags:*)",
+      "Bash(az containerapp update:*)",
+      "Bash(az acr repository:*)",
+      "Bash(docker push:*)"
     ],
     "deny": [],
     "ask": []
