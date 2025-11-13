@@ -72,6 +72,11 @@ function App() {
     accountNumber: selectedProfile
   });
 
+  // Clear cart on browser refresh/mount
+  useEffect(() => {
+    setCartItems([]);
+  }, []);
+
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (chatScrollRef.current) {
@@ -85,6 +90,13 @@ function App() {
     } catch (error: any) {
       toast.error(`Failed to start call: ${error.message}`);
     }
+  };
+
+  const handleEndCall = () => {
+    // Clear the cart when ending the call
+    setCartItems([]);
+    setCartOpen(false);
+    endSession();
   };
 
   const handleSendMessage = (text: string) => {
@@ -194,7 +206,7 @@ function App() {
       <CallControls
         sessionState={sessionState}
         onStartCall={handleStartCall}
-        onEndCall={endSession}
+        onEndCall={handleEndCall}
         onToggleMute={toggleMute}
         onToggleVoiceResponse={toggleVoiceResponse}
         getCurrentMediaStream={getCurrentMediaStream}
