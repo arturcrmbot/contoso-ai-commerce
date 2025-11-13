@@ -1,6 +1,6 @@
 # Azure Container Apps Deployment
 
-Deploy Contoso AI Commerce to Azure Container Apps using simplified Bicep templates.
+Deploy Contoso AI Commerce to Azure Container Apps with a single command.
 
 ## What Gets Deployed
 
@@ -13,49 +13,35 @@ Deploy Contoso AI Commerce to Azure Container Apps using simplified Bicep templa
 
 ## Prerequisites
 
-- Azure CLI installed and logged in
+- Azure CLI installed and logged in (`az login`)
 - Docker Desktop running
 - `.env` file configured with Azure OpenAI credentials
 - PowerShell (Windows) or pwsh (Linux/Mac)
 
-## Deployment Steps
+## Deployment
 
-### Option 1: Full Deployment (Recommended)
+### One Command Deployment
 
 ```powershell
 cd deploy
-.\deploy-all-fixed.ps1
+.\deploy.ps1
 ```
 
-This runs both infrastructure and application deployment automatically.
+**First run:** Deploys infrastructure + builds and deploys app (~15 minutes)
+**Subsequent runs:** Quick rebuild and update (~5 minutes)
 
-**Time:** ~15 minutes
+The script automatically detects if infrastructure exists and runs the appropriate workflow.
 
-### Option 2: Manual Step-by-Step
+### Custom Configuration
 
-**Step 1: Deploy Infrastructure**
 ```powershell
-.\deploy-infra-only.ps1
+.\deploy.ps1 -ResourceGroupName "my-rg" -Location "westus2"
 ```
 
-Creates ACR and Container Apps Environment. Takes ~3-5 minutes.
+### Force Full Redeployment
 
-**Step 2: Build and Deploy Application**
 ```powershell
-.\build-and-deploy-app.ps1
-```
-
-Builds Docker image, pushes to ACR, creates Container App. Takes ~10-15 minutes.
-
-## Configuration
-
-### Resource Group
-
-Default: `rg-contosoaicommerce` in `eastus2`
-
-To customize:
-```powershell
-.\deploy-all-fixed.ps1 -ResourceGroupName "my-rg" -Location "westus2"
+.\deploy.ps1 -Force
 ```
 
 ### Environment Variables
@@ -97,37 +83,30 @@ az containerapp logs show --name $appName --resource-group rg-contosoaicommerce 
 az containerapp revision restart --name $appName --resource-group rg-contosoaicommerce
 ```
 
-### Redeploy After Code Changes
+### Update After Code Changes
 
 ```powershell
-.\build-and-deploy-app.ps1
+.\deploy.ps1
 ```
 
-This rebuilds the Docker image and updates the Container App.
+The script detects existing infrastructure and performs a quick update.
 
 ## Troubleshooting
 
-### Deployment Fails with "Container App name too long"
+### Docker Desktop Not Running
 
-The base name is too long. This is fixed in current templates (uses `contoso` instead of `contosoaicommerce`).
-
-### "Image not found" Error
-
-The deployment tries to create the Container App before the image is pushed. Use the fixed deployment:
-```powershell
-.\deploy-all-fixed.ps1
-```
+The script will detect this and prompt you to start Docker Desktop before continuing.
 
 ### Docker Build Fails
 
 - Verify Docker Desktop is running
-- Check you're in the `deploy/` directory when running scripts
 - Ensure `.env` file exists in project root
+- Check Docker has enough resources allocated
 
 ### ACR Login Fails
 
 ```powershell
-$acrName = (Get-Content infra-outputs.json | ConvertFrom-Json).acrName.value
+$acrName = (Get-Content deployment-outputs.json | ConvertFrom-Json).infra.acrName.value
 az acr login --name $acrName
 ```
 
@@ -147,13 +126,12 @@ Common issues:
 
 ```
 deploy/
-├── main-infra-only.bicep       # ACR + Environment
-├── main-app-only.bicep         # Container App
-├── deploy-infra-only.ps1       # Deploy infrastructure
-├── build-and-deploy-app.ps1    # Build and deploy app
-├── deploy-all-fixed.ps1        # Full deployment
-├── infra-outputs.json          # Generated after step 1
-├── deployment-outputs.json     # Generated after step 2
+├── deploy.ps1                  # Single unified deployment script
+├── main-infra-only.bicep       # Bicep: ACR + Environment
+├── main-app-only.bicep         # Bicep: Container App
+├── main.bicep                  # Bicep: Legacy (not used)
+├── main.parameters.json        # Legacy parameters (not used)
+├── deployment-outputs.json     # Generated deployment info
 └── README.md                   # This file
 ```
 
@@ -163,14 +141,3 @@ Delete all resources:
 ```powershell
 az group delete --name rg-contosoaicommerce --yes
 ```
-
-## Old Deployment Files (Not Used)
-
-These files are not used by the current deployment:
-- `main.bicep` - Old single-step deployment (has chicken-egg problem)
-- `main.parameters.json` - Old parameters file
-- `deploy.ps1` - Old deployment script
-- `build-and-push.ps1` - Old build script
-- `deploy-all.ps1` - Old combined script
-
-Use the `-fixed` versions instead.
