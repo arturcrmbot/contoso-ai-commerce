@@ -779,7 +779,7 @@ TRAVEL_DEALS = [
         },
         "images": [
             "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800"
-        },
+        ],
         "rating": 4.7,
         "review_count": 334,
         "features": {

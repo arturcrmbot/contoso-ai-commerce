@@ -101,34 +101,33 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-4">
-            {/* Brand Logos */}
-            <div className="flex items-center gap-3 mr-2 border-r pr-4">
-              <img 
-                src="/vodafone-logo.svg" 
-                alt="Vodafone" 
-                className="h-7 w-auto"
-              />
-              <div className="h-6 w-px bg-border"></div>
-              <img 
-                src="/three-logo.svg" 
-                alt="Three" 
-                className="h-7 w-auto"
-              />
+            {/* Travel Agent Branding */}
+            <div className="flex items-center gap-3 mr-2">
+              <div className="flex items-center gap-2">
+                <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Travel Agent AI</h1>
+                </div>
+              </div>
             </div>
-            
+
             <Button
               onClick={isConnected ? onEndCall : onStartCall}
               disabled={isConnecting}
               variant={isConnected ? "destructive" : "default"}
               size="lg"
               className={`gap-2 px-6 py-3 text-base font-semibold ${
-                !isConnected && !isConnecting ? 'start-call-pulse' : ''
-              }`}
+                isConnected
+                  ? ''
+                  : 'bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white'
+              } ${!isConnected && !isConnecting ? 'start-call-pulse' : ''}`}
             >
               {isConnected ? (
                 <>
                   <PhoneX size={22} />
-                  End Call
+                  End Session
                 </>
               ) : (
                 <>
@@ -243,16 +242,6 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Powered by Microsoft Badge */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-md border border-border/50">
-              <img 
-                src="/microsoft-logo.svg" 
-                alt="Microsoft" 
-                className="h-5 w-5"
-              />
-              <span className="text-xs font-medium text-muted-foreground">Powered by Microsoft Azure</span>
-            </div>
-            
             {cartIcon}
             <Badge variant={getStatusVariant()}>
               {getStatusText()}

@@ -18,6 +18,10 @@ import { ProductCard } from '../contoso/ProductCard';
 import { PlanCards } from '../contoso/PlanCards';
 import { PromoBanner } from '../contoso/PromoBanner';
 
+// Import travel components
+import { DealCard } from '../contoso/DealCard';
+import { DealGrid } from '../contoso/DealGrid';
+
 interface FlexibleRendererProps {
   visual: FlexibleVisual;
   onAction?: (action: string, params?: any) => void;
@@ -73,6 +77,59 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
 
       case 'bundle_offer':
         return <BundleOffer data={section.data} onAction={onAction} emphasis={section.emphasis} />;
+
+      // Travel deal components
+      case 'deal_hero':
+        const dealData = section.data?.deal || section.data;
+        if (!dealData) return null;
+        return (
+          <div className="space-y-3">
+            {section.title && (
+              <h3 className="text-lg font-bold">{section.title}</h3>
+            )}
+            <DealCard
+              deal={dealData}
+              onClick={() => onAction?.('deal_click', { deal_id: dealData.id })}
+            />
+          </div>
+        );
+
+      case 'deal_grid':
+        const dealGridItems = section.data?.deals || section.data || [];
+        if (!Array.isArray(dealGridItems) || dealGridItems.length === 0) {
+          return <div className="text-sm text-muted-foreground">No deals found</div>;
+        }
+        return (
+          <DealGrid
+            deals={dealGridItems}
+            highlightSavings={section.data?.highlight_savings}
+            highlightUrgency={section.data?.highlight_urgency}
+            onDealClick={(deal) => onAction?.('deal_click', { deal_id: deal.id })}
+            title={section.title || 'Travel Deals'}
+          />
+        );
+
+      case 'deal_comparison':
+        const compareDeals = section.data?.deals || [];
+        if (!Array.isArray(compareDeals) || compareDeals.length === 0) {
+          return null;
+        }
+        return (
+          <div className="space-y-3">
+            {section.title && (
+              <h3 className="text-lg font-bold">{section.title || 'Compare Deals'}</h3>
+            )}
+            <div className="grid grid-cols-2 gap-4">
+              {compareDeals.map((deal: any) => (
+                <DealCard
+                  key={deal.id}
+                  deal={deal}
+                  onClick={() => onAction?.('deal_click', { deal_id: deal.id })}
+                />
+              ))}
+            </div>
+          </div>
+        );
 
       // Accessory components
       case 'accessory_card':

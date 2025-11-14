@@ -25,18 +25,32 @@ export function SuggestionCards({
   const renderCard = (card: SuggestionCard) => (
     <Card
       key={card.id}
-      className={`cursor-pointer transition-all hover:shadow-md border h-full flex flex-col @container ${
-        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-primary/50 hover:bg-accent/10'
+      className={`cursor-pointer transition-all hover:shadow-xl border-2 h-full flex flex-col overflow-hidden group ${
+        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-teal-500 hover:scale-105'
       }`}
       onClick={() => handleCardClick(card)}
     >
-      <CardContent className="p-3 flex flex-col items-center justify-center h-full text-center">
-        <div className="text-primary mb-2">
-          {renderIcon(card.icon)}
-        </div>
-        <h3 className="font-semibold text-sm mb-1 leading-tight">{card.title}</h3>
-        <p className="text-xs text-muted-foreground leading-tight">{card.subtitle}</p>
-      </CardContent>
+      <div className="relative h-full">
+        {/* Background Image */}
+        {card.image && (
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110"
+            style={{ backgroundImage: `url(${card.image})` }}
+          />
+        )}
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+
+        {/* Content */}
+        <CardContent className="relative p-4 flex flex-col justify-end h-full text-left z-10">
+          <div className="text-white/90 mb-2">
+            {renderIcon(card.icon)}
+          </div>
+          <h3 className="font-bold text-base mb-1 leading-tight text-white drop-shadow-lg">{card.title}</h3>
+          <p className="text-sm text-white/90 leading-tight">{card.subtitle}</p>
+        </CardContent>
+      </div>
     </Card>
   );
 

@@ -25,6 +25,9 @@ function App() {
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
 
+  // Chat visibility state
+  const [chatExpanded, setChatExpanded] = useState(false);
+
   // Prefilled text state
   const [prefilledText, setPrefilledText] = useState<string>('');
 
@@ -198,11 +201,6 @@ function App() {
 
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
-      <ProfileSelector
-        selectedProfile={selectedProfile}
-        onProfileChange={setSelectedProfile}
-        disabled={sessionState.status !== 'idle'}
-      />
       <CallControls
         sessionState={sessionState}
         onStartCall={handleStartCall}
@@ -219,74 +217,104 @@ function App() {
         }
       />
 
-      <div className="flex-1 flex overflow-hidden min-h-0">
-        {/* Left Panel - Dynamic Visual Canvas (70%) */}
-        <div className="w-[70%] border-r bg-muted/30 min-w-0 overflow-hidden">
-          <div className="h-full p-4 flex flex-col min-h-0">
-            <DynamicVisualCanvas
-              visualConfig={currentVisual}
-              onProductClick={handleProductClick}
-              onBackToSuggestions={() => setCurrentVisual(null)}
-              onSuggestionClick={handleSuggestionClick}
-              disabled={!isConnected}
-            />
-          </div>
+      {/* Full-width deal area */}
+      <div className="flex-1 overflow-hidden min-h-0">
+        <div className="h-full p-6 overflow-y-auto">
+          <DynamicVisualCanvas
+            visualConfig={currentVisual}
+            onProductClick={handleProductClick}
+            onBackToSuggestions={() => setCurrentVisual(null)}
+            onSuggestionClick={handleSuggestionClick}
+            disabled={!isConnected}
+          />
         </div>
+      </div>
 
-        {/* Right Panel - Chat (30%) */}
-        <div className="w-[30%] flex flex-col min-w-0 overflow-hidden">
-          <div className="flex-1 bg-card border-l overflow-hidden flex flex-col min-h-0">
-            {/* Chat Header with Clear Button */}
-            <div className="border-b p-3 flex items-center justify-between bg-card flex-shrink-0">
-              <h3 className="font-semibold text-sm">Chat</h3>
+      {/* Floating Chat Button */}
+      {!chatExpanded && (
+        <button
+          onClick={() => setChatExpanded(true)}
+          className="fixed bottom-6 right-6 z-40 w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110"
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          {(messages || []).length > 0 && (
+            <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full text-xs flex items-center justify-center font-bold">
+              {(messages || []).length}
+            </span>
+          )}
+        </button>
+      )}
+
+      {/* Floating Chat Window */}
+      {chatExpanded && (
+        <div className="fixed bottom-6 right-6 z-40 w-96 h-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-800">
+          {/* Chat Header */}
+          <div className="bg-gradient-to-r from-teal-500 to-cyan-600 p-4 flex items-center justify-between text-white flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              <h3 className="font-semibold">Travel Assistant</h3>
+            </div>
+            <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleClearChat}
                 disabled={(messages || []).length === 0}
-                className="h-8 px-2 text-xs"
+                className="h-8 px-2 text-xs text-white hover:bg-white/20"
               >
                 <Trash size={14} className="mr-1" />
                 Clear
               </Button>
-            </div>
-
-            {/* Chat Messages */}
-            <div
-              ref={chatScrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll min-h-0"
-            >
-              {(messages || []).length === 0 ? (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold mb-2">Welcome to Vodafone Three</h3>
-                    <p className="text-sm">Start Session to get started</p>
-                  </div>
-                </div>
-              ) : (
-                (messages || []).map((message) => (
-                  <MessageBubble key={message.id} message={message} />
-                ))
-              )}
-            </div>
-
-            {/* Chat Composer */}
-            <div className="flex-shrink-0">
-              <ChatComposer
-                onSendMessage={handleSendMessage}
-                onEscalate={handleEscalate}
-                escalationState={escalationState}
-                disabled={!isConnected}
-                getCurrentMediaStream={getCurrentMediaStream}
-                isConnected={isConnected}
-                isMuted={sessionState.isMuted}
-                prefilledText={prefilledText}
-                onPrefilledTextUsed={handlePrefilledTextUsed}
-              />
+              <button
+                onClick={() => setChatExpanded(false)}
+                className="hover:bg-white/20 rounded-full p-1.5"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
           </div>
+
+          {/* Chat Messages */}
+          <div
+            ref={chatScrollRef}
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-950"
+          >
+            {(messages || []).length === 0 ? (
+              <div className="flex items-center justify-center h-full text-muted-foreground">
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold mb-2">Your Travel Assistant</h3>
+                  <p className="text-sm">Start a session to discover amazing deals</p>
+                </div>
+              </div>
+            ) : (
+              (messages || []).map((message) => (
+                <MessageBubble key={message.id} message={message} />
+              ))
+            )}
+          </div>
+
+          {/* Chat Composer */}
+          <div className="flex-shrink-0 bg-white dark:bg-gray-900 border-t dark:border-gray-800">
+            <ChatComposer
+              onSendMessage={handleSendMessage}
+              onEscalate={handleEscalate}
+              escalationState={escalationState}
+              disabled={!isConnected}
+              getCurrentMediaStream={getCurrentMediaStream}
+              isConnected={isConnected}
+              isMuted={sessionState.isMuted}
+              prefilledText={prefilledText}
+              onPrefilledTextUsed={handlePrefilledTextUsed}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Cart Summary Modal */}
       <CartSummary

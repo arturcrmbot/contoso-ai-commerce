@@ -32,10 +32,10 @@ function convertToFlexibleVisual(visual: any): any {
 
   // Legacy simple visual types - auto-convert
   const type = visual.type;
-  const simpleTypes = ['product_grid', 'plan_cards', 'promo_banner', 'comparison_table', 'cart_preview'];
+  const legacyTypes = ['product_grid', 'plan_cards', 'promo_banner', 'comparison_table', 'cart_preview'];
 
-  if (simpleTypes.includes(type)) {
-    // Return as-is for legacy renderer
+  if (legacyTypes.includes(type)) {
+    // Return as-is for legacy renderer (Vodafone phone types only)
     return visual;
   }
 
@@ -47,7 +47,13 @@ function convertToFlexibleVisual(visual: any): any {
     'accessory_grid': 'accessory_grid',
     'price_breakdown': 'price_breakdown',
     'credit_check_status': 'credit_check_status',
-    'info_callout': 'info_callout'
+    'info_callout': 'info_callout',
+    'deal_grid': 'deal_grid',
+    'deal_hero': 'deal_hero',
+    'deal_comparison': 'deal_comparison',
+    'cart_drawer': 'cart_drawer',
+    'cart_confirmation': 'cart_confirmation',
+    'empty_state': 'empty_state'
   };
 
   const componentType = typeToComponent[type] || 'info_callout';

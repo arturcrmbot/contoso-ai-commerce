@@ -28,8 +28,8 @@ export function DynamicVisualCanvas({
     return (
       <>
         <div className="mb-4">
-          <h2 className="text-xl font-bold text-foreground mb-1">Vodafone Three Agentic Sales Assistant</h2>
-          <p className="text-sm text-muted-foreground">Find your perfect phone and plan</p>
+          <h2 className="text-xl font-bold text-foreground mb-1">AI Travel Agent</h2>
+          <p className="text-sm text-muted-foreground">Discover amazing travel deals through conversation</p>
         </div>
         <SuggestionCards
           onSuggestionClick={onSuggestionClick}

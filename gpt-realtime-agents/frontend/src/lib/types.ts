@@ -18,6 +18,7 @@ export interface SuggestionCard {
   icon: string;
   prompt: string;
   toolName?: string;
+  image?: string;
 }
 
 export interface SessionState {
