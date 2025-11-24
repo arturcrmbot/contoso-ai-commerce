@@ -23,8 +23,8 @@ if (-not (Test-Path $outputsFile)) {
 }
 
 $outputs = Get-Content $outputsFile | ConvertFrom-Json
-$acrName = $outputs.acrName.value
-$acrLoginServer = $outputs.acrLoginServer.value
+$acrName = $outputs.infra.acrName.value
+$acrLoginServer = $outputs.infra.acrLoginServer.value
 
 Write-Host "📋 Using ACR: $acrLoginServer" -ForegroundColor Yellow
 Write-Host ""
@@ -69,7 +69,7 @@ Write-Host ""
 
 # Update Container App to use new image
 Write-Host "🔄 Updating Container App with new image..." -ForegroundColor Yellow
-$containerAppName = $outputs.containerAppName.value
+$containerAppName = $outputs.app.containerAppName.value
 
 az containerapp update `
     --name $containerAppName `
@@ -87,7 +87,7 @@ Write-Host ""
 Write-Host "🎉 Build and Deployment Complete!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Your app is now running at:" -ForegroundColor Cyan
-Write-Host "$($outputs.containerAppUrl.value)" -ForegroundColor White
+Write-Host "$($outputs.app.containerAppUrl.value)" -ForegroundColor White
 Write-Host ""
 Write-Host "To view logs, run:" -ForegroundColor Cyan
 Write-Host "az containerapp logs show --name $containerAppName --resource-group $ResourceGroupName --follow" -ForegroundColor Gray
