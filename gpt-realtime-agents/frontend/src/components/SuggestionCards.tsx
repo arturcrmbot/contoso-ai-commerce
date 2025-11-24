@@ -25,44 +25,38 @@ export function SuggestionCards({
   const renderCard = (card: SuggestionCard) => (
     <Card
       key={card.id}
-      className={`cursor-pointer transition-all hover:shadow-xl border-2 h-full flex flex-col overflow-hidden group ${
-        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-teal-500 hover:scale-105'
+      className={`relative h-64 cursor-pointer overflow-hidden group border-0 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 ${
+        disabled ? 'opacity-50 cursor-not-allowed' : 'hover:-translate-y-1'
       }`}
       onClick={() => handleCardClick(card)}
     >
-      <div className="relative h-full">
-        {/* Background Image */}
-        {card.image && (
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform group-hover:scale-110"
-            style={{ backgroundImage: `url(${card.image})` }}
-          />
-        )}
+      {/* Background Image */}
+      {card.image && (
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+          style={{ backgroundImage: `url(${card.image})` }}
+        />
+      )}
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
-        {/* Content */}
-        <CardContent className="relative p-4 flex flex-col justify-end h-full text-left z-10">
-          <div className="text-white/90 mb-2">
+      {/* Content */}
+      <CardContent className="relative h-full flex flex-col justify-end p-6 text-white z-10">
+        <div className="mb-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+          <div className="bg-white/20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm mb-3">
             {renderIcon(card.icon)}
           </div>
-          <h3 className="font-bold text-base mb-1 leading-tight text-white drop-shadow-lg">{card.title}</h3>
-          <p className="text-sm text-white/90 leading-tight">{card.subtitle}</p>
-        </CardContent>
-      </div>
+          <h3 className="font-bold text-xl mb-1 leading-tight">{card.title}</h3>
+          <p className="text-sm text-white/80 font-medium">{card.subtitle}</p>
+        </div>
+      </CardContent>
     </Card>
   );
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex items-center justify-between mb-3 flex-shrink-0">
-        <h2 className="text-base font-semibold">How can I help you today?</h2>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 flex-1 min-h-0 overflow-y-auto">
-        {DEFAULT_SUGGESTION_CARDS.map(renderCard)}
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-8">
+      {DEFAULT_SUGGESTION_CARDS.map(renderCard)}
     </div>
   );
 }

@@ -41,17 +41,94 @@ TRAVEL_DEALS = [
         },
         "images": [
             "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800",
-            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800"
+            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.7,
         "review_count": 342,
+        "address": {
+            "street": "ul. Krakowskie Przedmieście 87/89",
+            "city": "Warsaw",
+            "postal_code": "00-079",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 826 1234",
+            "email": "reservations@royalpalacehotel.pl",
+            "website": "www.royalpalacehotel-warsaw.pl"
+        },
         "features": {
             "accommodation": "4-star boutique hotel",
             "amenities": ["restaurant", "spa", "conference_room", "bar", "parking"],
             "room_type": "Deluxe Room with Old Town View",
+            "room_types_available": ["Standard Double", "Deluxe Room", "Junior Suite", "Executive Suite"],
+            "capacity": {"max_guests": 2, "max_adults": 2, "max_children": 1},
+            "pets_allowed": False,
             "suitable_for": ["business", "couples", "culture"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage", "room_service"],
+            "business": ["conference_room", "meeting_rooms", "business_center", "printing_service"],
+            "wellness": ["spa", "gym", "massage_service", "sauna"],
+            "dining": ["restaurant", "bar", "breakfast_buffet", "room_service"],
+            "room": ["minibar", "safe", "air_conditioning", "flat_screen_tv", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Double",
+                "size_sqm": 28,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Minibar", "Safe", "Work desk"]
+            },
+            {
+                "name": "Deluxe Room with Old Town View",
+                "size_sqm": 35,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Old Town view", "Minibar", "Safe", "Seating area", "Coffee maker"]
+            },
+            {
+                "name": "Junior Suite",
+                "size_sqm": 45,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Old Town view", "Minibar", "Safe", "Living area", "Coffee maker", "Bathrobe"]
+            },
+            {
+                "name": "Executive Suite",
+                "size_sqm": 60,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Panoramic view", "Minibar", "Safe", "Separate living room", "Coffee machine", "Bathrobe", "Spa access"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Michael B.",
+                "rating": 5,
+                "date": "2025-02-10",
+                "title": "Perfect location in Old Town",
+                "text": "Stunning boutique hotel right in the heart of Warsaw's Old Town. The rooms are elegantly decorated with modern amenities. The spa was excellent and the restaurant serves outstanding Polish cuisine. Staff went above and beyond to make our stay memorable."
+            },
+            {
+                "author": "Catherine L.",
+                "rating": 5,
+                "date": "2025-01-28",
+                "title": "Business trip made luxurious",
+                "text": "Stayed here for a conference and was thoroughly impressed. The conference facilities are top-notch, the room was spacious and quiet, and the breakfast buffet had excellent variety. Perfect for business travelers."
+            },
+            {
+                "author": "James T.",
+                "rating": 4,
+                "date": "2025-01-15",
+                "title": "Beautiful hotel with great service",
+                "text": "Lovely hotel with a historic charm. The Old Town views from our room were spectacular. Only minor issue was occasional noise from the busy street below, but overall an excellent stay. Would definitely recommend."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 8,
@@ -84,10 +161,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1581104478174-e041b34e1729?w=800"
+            "https://images.unsplash.com/photo-1581104478174-e041b34e1729?w=800",
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+            "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=800",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.4,
         "review_count": 189,
+        "address": {
+            "street": "ul. Twarda 52",
+            "city": "Warsaw",
+            "postal_code": "00-831",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 654 7890",
+            "email": "hello@modernloft-warsaw.pl",
+            "website": "www.modernloft-warsaw.com"
+        },
         "features": {
             "accommodation": "3-star modern hotel",
             "amenities": ["gym", "24h_reception", "kitchenette"],
@@ -95,6 +186,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["solo", "business", "budget"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "express_checkout"],
+            "wellness": ["gym", "fitness_center"],
+            "dining": ["breakfast_room", "coffee_bar", "vending_machines"],
+            "room": ["kitchenette", "microwave", "mini_fridge", "flat_screen_tv", "work_desk"]
+        },
+        "rooms": [
+            {
+                "name": "Studio Loft",
+                "size_sqm": 25,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Kitchenette", "Work desk", "Smart TV"]
+            },
+            {
+                "name": "Superior Studio",
+                "size_sqm": 30,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Skylight", "Kitchenette", "Dining table", "Work desk", "Premium bedding"]
+            },
+            {
+                "name": "Deluxe Loft",
+                "size_sqm": 38,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "High ceiling", "Full kitchenette", "Living area", "Work desk", "Balcony"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "David S.",
+                "rating": 4,
+                "date": "2025-02-18",
+                "title": "Great value in city center",
+                "text": "Perfect for a business trip. The location is excellent, just minutes from the central station. The loft-style room was modern and clean, and the kitchenette was very handy. Great value for money in such a central location."
+            },
+            {
+                "author": "Emma W.",
+                "rating": 5,
+                "date": "2025-02-05",
+                "title": "Modern and convenient",
+                "text": "Loved the contemporary design and the kitchenette was perfect for preparing quick meals. The gym was well-equipped and the 24-hour reception was helpful when I had a late check-in. Would stay again!"
+            },
+            {
+                "author": "Robert K.",
+                "rating": 4,
+                "date": "2025-01-22",
+                "title": "Good for solo travelers",
+                "text": "Clean, modern room with everything you need. The kitchenette saved me money on meals. Only downside is that the room can feel a bit small if you have large luggage, but overall a solid choice for the price."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 15,
@@ -127,10 +270,25 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "spa_access", "airport_transfer", "minibar"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800"
+            "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800",
+            "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+            "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.9,
         "review_count": 567,
+        "address": {
+            "street": "ul. Senatorska 29",
+            "city": "Warsaw",
+            "postal_code": "00-099",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 556 9000",
+            "email": "reservations@palacegarden.pl",
+            "website": "www.palacegardenwarsaw.com"
+        },
         "features": {
             "accommodation": "5-star luxury hotel",
             "amenities": ["spa", "pool", "restaurant", "concierge", "parking", "bar"],
@@ -138,6 +296,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["luxury", "honeymoon", "couples"],
             "accessibility": ["elevator", "wheelchair_friendly", "accessible_bathroom"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_concierge", "valet_parking", "luggage_storage", "room_service"],
+            "luxury": ["limousine_service", "butler_service", "private_check_in", "turndown_service"],
+            "wellness": ["luxury_spa", "indoor_pool", "sauna", "steam_room", "massage_service", "beauty_salon"],
+            "dining": ["fine_dining_restaurant", "lobby_bar", "in_room_dining", "champagne_bar"],
+            "room": ["premium_minibar", "nespresso_machine", "smart_tv", "safe", "bathrobe_slippers", "luxury_toiletries"]
+        },
+        "rooms": [
+            {
+                "name": "Deluxe Room",
+                "size_sqm": 42,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Garden view", "Marble bathroom", "Walk-in shower", "Premium minibar", "Nespresso"]
+            },
+            {
+                "name": "Executive Suite",
+                "size_sqm": 65,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Palace view", "Marble bathroom", "Separate living room", "Premium minibar", "Nespresso", "Bathtub"]
+            },
+            {
+                "name": "Royal Suite",
+                "size_sqm": 85,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Panoramic view", "Luxury bathroom", "Separate living room", "Dining area", "Premium minibar", "Butler service"]
+            },
+            {
+                "name": "Presidential Suite",
+                "size_sqm": 120,
+                "beds": "1 King Bed + Extra room",
+                "max_guests": 4,
+                "features": ["AC", "360° views", "Master bathroom", "Guest bathroom", "Private terrace", "Full kitchen", "Butler service", "Piano"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Alexandra M.",
+                "rating": 5,
+                "date": "2025-02-12",
+                "title": "Unparalleled luxury experience",
+                "text": "This hotel exceeded all expectations. From the moment we arrived, we were treated like royalty. The Executive Suite was breathtaking with palace views. The spa is world-class and the fine dining restaurant deserves its Michelin recognition. Perfect for our anniversary."
+            },
+            {
+                "author": "William H.",
+                "rating": 5,
+                "date": "2025-01-30",
+                "title": "Best hotel in Warsaw",
+                "text": "Simply the finest hotel I've stayed at in Poland. The attention to detail is remarkable, from the luxurious rooms to the exceptional service. The indoor pool and spa are stunning. Airport transfer was seamless. Worth every penny."
+            },
+            {
+                "author": "Sophie D.",
+                "rating": 5,
+                "date": "2025-01-18",
+                "title": "Honeymoon perfection",
+                "text": "We spent our honeymoon here and it was magical. The staff arranged champagne and roses in our suite. The spa treatments were incredible and the restaurant served the best meal we had in Warsaw. Cannot recommend highly enough for special occasions."
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 3,
@@ -170,10 +388,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "bike_rental"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800"
+            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+            "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
         ],
         "rating": 4.5,
         "review_count": 223,
+        "address": {
+            "street": "ul. Wybrzeże Kościuszkowskie 31",
+            "city": "Warsaw",
+            "postal_code": "00-379",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 443 2100",
+            "email": "stay@riversideinn.pl",
+            "website": "www.vistulariversideinn.pl"
+        },
         "features": {
             "accommodation": "3-star riverside hotel",
             "amenities": ["restaurant", "terrace", "bike_rental", "river_view"],
@@ -181,6 +413,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["families", "couples", "nature"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "free_parking"],
+            "recreation": ["bike_rental", "river_terrace", "jogging_path", "boat_tours"],
+            "dining": ["riverside_restaurant", "terrace_bar", "breakfast_buffet"],
+            "room": ["flat_screen_tv", "coffee_maker", "safe", "air_conditioning", "river_view"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Room",
+                "size_sqm": 24,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Coffee maker", "Work desk", "Smart TV"]
+            },
+            {
+                "name": "River View Room",
+                "size_sqm": 28,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "River view", "Balcony", "Coffee maker", "Mini fridge"]
+            },
+            {
+                "name": "Family River View",
+                "size_sqm": 38,
+                "beds": "1 Queen + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "River view", "Balcony", "Seating area", "Coffee maker", "Mini fridge"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Jennifer L.",
+                "rating": 5,
+                "date": "2025-02-15",
+                "title": "Beautiful riverside location",
+                "text": "The river views are absolutely stunning, especially at sunset. The bike rental was perfect for exploring the riverside paths. Restaurant serves great Polish food and the terrace is lovely. Very peaceful despite being in the city."
+            },
+            {
+                "author": "Mark P.",
+                "rating": 4,
+                "date": "2025-02-03",
+                "title": "Great for families",
+                "text": "Wonderful hotel for a family stay. The kids loved being by the river and the bikes were a huge hit. The family room was spacious and comfortable. Good breakfast selection. Only small issue was limited parking, but overall excellent value."
+            },
+            {
+                "author": "Lisa K.",
+                "rating": 5,
+                "date": "2025-01-20",
+                "title": "Relaxing retreat",
+                "text": "Perfect escape from the busy city center while still being easily accessible. The river terrace is so relaxing and the staff arranged a boat tour for us. Clean rooms, friendly service, and great breakfast. Highly recommend!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 12,
@@ -213,10 +497,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "art_gallery_access"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1581104478174-e041b34e1729?w=800"
+            "https://images.unsplash.com/photo-1581104478174-e041b34e1729?w=800",
+            "https://images.unsplash.com/photo-1590073844006-33379778ae09?w=800",
+            "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800"
         ],
         "rating": 4.6,
         "review_count": 298,
+        "address": {
+            "street": "ul. Marszałkowska 115",
+            "city": "Warsaw",
+            "postal_code": "00-102",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 333 4567",
+            "email": "contact@culturehub-warsaw.pl",
+            "website": "www.culturehubhotel.com"
+        },
         "features": {
             "accommodation": "4-star design hotel",
             "amenities": ["restaurant", "gallery", "rooftop_bar", "library"],
@@ -224,6 +522,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["culture", "art_lovers", "couples"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage"],
+            "culture": ["art_gallery", "library", "cultural_events", "artist_workshops", "exhibition_space"],
+            "dining": ["restaurant", "rooftop_bar", "breakfast_buffet", "coffee_lounge"],
+            "room": ["designer_furniture", "smart_tv", "bluetooth_speaker", "coffee_maker", "safe"]
+        },
+        "rooms": [
+            {
+                "name": "Designer Room",
+                "size_sqm": 30,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Custom artwork", "Designer furniture", "Smart lighting"]
+            },
+            {
+                "name": "Gallery Suite",
+                "size_sqm": 42,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Gallery view", "Original artworks", "Designer furniture", "Seating area", "Vinyl player"]
+            },
+            {
+                "name": "Artist Loft",
+                "size_sqm": 55,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Skylight", "Art studio setup", "Custom furniture", "Living area", "Work desk", "Balcony"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Isabella R.",
+                "rating": 5,
+                "date": "2025-02-08",
+                "title": "A cultural gem",
+                "text": "This hotel is a work of art itself! Every room features unique pieces from Polish artists. The gallery hosts fantastic exhibitions and the rooftop bar has amazing city views. Perfect for art enthusiasts. The staff are knowledgeable and passionate about culture."
+            },
+            {
+                "author": "Daniel M.",
+                "rating": 5,
+                "date": "2025-01-25",
+                "title": "Unique and inspiring",
+                "text": "Stayed in the Artist Loft and loved every minute. The design is impeccable and the cultural events they organize are wonderful. Library has a great collection. Restaurant serves creative cuisine. This is more than a hotel, it's an experience."
+            },
+            {
+                "author": "Rachel T.",
+                "rating": 4,
+                "date": "2025-01-12",
+                "title": "Design lovers paradise",
+                "text": "Beautiful hotel with incredible attention to design details. The art gallery access is a great bonus. Rooftop bar is trendy and serves excellent cocktails. Room was stylish and comfortable. Breakfast could have more variety but overall a wonderful stay."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 7,
@@ -256,10 +606,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "airport_shuttle"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800"
+            "https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800",
+            "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.2,
         "review_count": 456,
+        "address": {
+            "street": "ul. Komitetu Obrony Robotników 49",
+            "city": "Warsaw",
+            "postal_code": "02-146",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 123 9876",
+            "email": "reservations@airportexpress.pl",
+            "website": "www.warsawairporthotel.com"
+        },
         "features": {
             "accommodation": "3-star airport hotel",
             "amenities": ["restaurant", "24h_reception", "free_shuttle", "parking"],
@@ -267,6 +631,59 @@ TRAVEL_DEALS = [
             "suitable_for": ["business", "transit", "solo"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "express_checkout", "currency_exchange"],
+            "business": ["business_center", "meeting_room", "printing_service"],
+            "transport": ["free_airport_shuttle", "free_parking", "car_rental_desk", "taxi_service"],
+            "dining": ["restaurant", "24h_snack_bar", "breakfast_buffet"],
+            "room": ["soundproof_windows", "blackout_curtains", "flat_screen_tv", "coffee_maker", "safe"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Room",
+                "size_sqm": 22,
+                "beds": "1 Queen Bed or 2 Singles",
+                "max_guests": 2,
+                "features": ["AC", "Soundproof", "Blackout curtains", "Work desk", "Coffee maker"]
+            },
+            {
+                "name": "Business Room",
+                "size_sqm": 26,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Soundproof", "Large work desk", "Ergonomic chair", "Coffee maker", "Iron"]
+            },
+            {
+                "name": "Family Room",
+                "size_sqm": 32,
+                "beds": "1 Queen + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "Soundproof", "Seating area", "Mini fridge", "Coffee maker", "Extra space"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Thomas B.",
+                "rating": 4,
+                "date": "2025-02-20",
+                "title": "Perfect for airport layover",
+                "text": "Exactly what you need for an airport hotel. Free shuttle runs every 20 minutes, room was quiet despite proximity to airport. Check-in was quick, breakfast was good. Ideal for early flights or layovers."
+            },
+            {
+                "author": "Sandra M.",
+                "rating": 4,
+                "date": "2025-02-07",
+                "title": "Convenient and efficient",
+                "text": "Great for business travelers. The shuttle service is reliable and the room had everything I needed for work. Soundproofing is excellent. Restaurant stays open late which is helpful for evening arrivals. Good value."
+            },
+            {
+                "author": "Kevin P.",
+                "rating": 5,
+                "date": "2025-01-28",
+                "title": "Stress-free transit stay",
+                "text": "Stayed here between connecting flights and it was perfect. Super close to airport, free parking, comfortable bed, and good breakfast. Staff were helpful with arranging early shuttle. Would definitely use again for layovers."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 20,
@@ -299,10 +716,24 @@ TRAVEL_DEALS = [
             "includes": ["wifi", "kitchen", "parking"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800"
+            "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800",
+            "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+            "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
+            "https://images.unsplash.com/photo-1502672260066-6bc35f0a1f80?w=800"
         ],
         "rating": 4.8,
         "review_count": 178,
+        "address": {
+            "street": "ul. Żurawia 24",
+            "city": "Warsaw",
+            "postal_code": "00-515",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 22 789 4321",
+            "email": "booking@familynest.pl",
+            "website": "www.familynest-warsaw.com"
+        },
         "features": {
             "accommodation": "4-star apartment hotel",
             "amenities": ["kitchen", "washing_machine", "parking", "playground"],
@@ -310,6 +741,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["families", "long_stay", "groups"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "free_parking", "reception", "luggage_storage", "concierge"],
+            "family": ["playground", "kids_playroom", "high_chairs", "baby_cots_available", "family_activities"],
+            "apartment": ["full_kitchen", "washing_machine", "dishwasher", "dining_table", "living_room"],
+            "room": ["flat_screen_tv", "coffee_maker", "safe", "iron", "air_conditioning"]
+        },
+        "rooms": [
+            {
+                "name": "1-Bedroom Apartment",
+                "size_sqm": 55,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 4,
+                "features": ["AC", "Full kitchen", "Living room", "Washing machine", "Balcony", "Dining area"]
+            },
+            {
+                "name": "2-Bedroom Apartment",
+                "size_sqm": 75,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 5,
+                "features": ["AC", "Full kitchen", "Living room", "Washing machine", "2 bathrooms", "Balcony", "Dining area"]
+            },
+            {
+                "name": "3-Bedroom Family Apartment",
+                "size_sqm": 95,
+                "beds": "1 King + 2 Queens",
+                "max_guests": 7,
+                "features": ["AC", "Full kitchen", "Large living room", "Washing machine", "2 bathrooms", "Balcony", "Play area"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Patricia G.",
+                "rating": 5,
+                "date": "2025-02-14",
+                "title": "Perfect for families with children",
+                "text": "We stayed for a week with our two kids and it was wonderful. The apartment had everything we needed - full kitchen, washing machine, plenty of space. The playground kept the kids entertained and the location is convenient. Felt like home away from home."
+            },
+            {
+                "author": "James F.",
+                "rating": 5,
+                "date": "2025-01-30",
+                "title": "Excellent for longer stays",
+                "text": "Stayed here for 10 days while working in Warsaw. Having a kitchen saved so much money on meals and the apartment was spacious and comfortable. Free parking is a huge plus in Warsaw. Staff were helpful and responsive. Highly recommended for families or longer visits."
+            },
+            {
+                "author": "Maria S.",
+                "rating": 4,
+                "date": "2025-01-17",
+                "title": "Great value for groups",
+                "text": "Booked the 3-bedroom apartment for our family reunion. Plenty of space for everyone and having multiple bathrooms was convenient. Kitchen was well-equipped. Kids loved the playroom. Only minor issue was Wi-Fi could be faster, but overall excellent value for the price."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 5,
@@ -345,10 +828,24 @@ TRAVEL_DEALS = [
         },
         "images": [
             "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
-            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.8,
         "review_count": 892,
+        "address": {
+            "street": "Nerudova 211/44",
+            "city": "Prague",
+            "postal_code": "118 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 257 532 088",
+            "email": "reservations@castleviewheritage.cz",
+            "website": "www.castleviewprague.com"
+        },
         "features": {
             "accommodation": "5-star heritage hotel",
             "amenities": ["spa", "restaurant", "bar", "concierge", "parking"],
@@ -356,6 +853,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["romantic", "luxury", "honeymoon"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_concierge", "valet_parking", "luggage_storage", "room_service"],
+            "luxury": ["private_castle_tours", "champagne_welcome", "butler_service", "turndown_service"],
+            "wellness": ["luxury_spa", "massage_treatments", "sauna", "hot_tub"],
+            "dining": ["fine_dining_restaurant", "rooftop_bar", "breakfast_terrace", "in_room_dining"],
+            "room": ["premium_minibar", "nespresso_machine", "smart_tv", "safe", "luxury_toiletries", "bathrobe"]
+        },
+        "rooms": [
+            {
+                "name": "Superior Room",
+                "size_sqm": 35,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Marble bathroom", "Minibar", "Nespresso", "Safe"]
+            },
+            {
+                "name": "Castle View Suite",
+                "size_sqm": 55,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Castle view", "Marble bathroom", "Living area", "Premium minibar", "Nespresso", "Balcony"]
+            },
+            {
+                "name": "Royal Suite",
+                "size_sqm": 75,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Panoramic castle view", "Luxury bathroom", "Separate living room", "Dining area", "Butler service"]
+            },
+            {
+                "name": "Presidential Suite",
+                "size_sqm": 110,
+                "beds": "1 King + Extra bed",
+                "max_guests": 4,
+                "features": ["AC", "360° views", "Master bathroom", "Private terrace", "Full bar", "Piano", "Butler service"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Charlotte W.",
+                "rating": 5,
+                "date": "2025-02-16",
+                "title": "Magical castle views",
+                "text": "The views of Prague Castle from our suite were absolutely breathtaking, especially at night when it's illuminated. The private castle tour arranged by the concierge was fascinating. Spa treatments were world-class. Perfect honeymoon destination!"
+            },
+            {
+                "author": "Henry M.",
+                "rating": 5,
+                "date": "2025-02-01",
+                "title": "Unmatched elegance",
+                "text": "This heritage hotel combines historic charm with modern luxury perfectly. The Presidential Suite exceeded all expectations. Fine dining restaurant deserves its recognition. Staff attention to detail is impeccable. Best hotel experience in Prague."
+            },
+            {
+                "author": "Victoria L.",
+                "rating": 5,
+                "date": "2025-01-19",
+                "title": "Romantic perfection",
+                "text": "Celebrated our anniversary here and it was magical. The champagne welcome, rose petals, and castle views created an unforgettable atmosphere. Breakfast on the terrace overlooking the castle is a must. Cannot recommend highly enough for special occasions."
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 4,
@@ -388,10 +945,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800"
+            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800"
         ],
         "rating": 4.6,
         "review_count": 534,
+        "address": {
+            "street": "Karlova 188/2",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 222 220 888",
+            "email": "stay@charlesbridgeinn.cz",
+            "website": "www.charlesbridgeboutique.com"
+        },
         "features": {
             "accommodation": "4-star boutique hotel",
             "amenities": ["restaurant", "bar", "historic_building"],
@@ -399,6 +970,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["romantic", "couples", "culture"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage"],
+            "historic": ["historic_building", "original_architecture", "heritage_tours", "period_features"],
+            "dining": ["traditional_restaurant", "wine_bar", "breakfast_room"],
+            "room": ["antique_furniture", "flat_screen_tv", "minibar", "safe", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Classic Room",
+                "size_sqm": 26,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["Historic decor", "City view", "Antique furniture", "Minibar", "Safe"]
+            },
+            {
+                "name": "Bridge View Room",
+                "size_sqm": 32,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Bridge view", "Period features", "Seating area", "Minibar", "Coffee maker"]
+            },
+            {
+                "name": "Junior Suite",
+                "size_sqm": 42,
+                "beds": "1 King Bed + Sofa",
+                "max_guests": 3,
+                "features": ["Bridge view", "Separate sitting area", "Original beams", "Minibar", "Bathtub"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Oliver S.",
+                "rating": 5,
+                "date": "2025-02-11",
+                "title": "Historic charm at its finest",
+                "text": "This boutique hotel is housed in a beautifully preserved historic building just steps from Charles Bridge. Our room had original wooden beams and period features while still offering modern comfort. The restaurant serves excellent Czech cuisine. Perfect romantic getaway."
+            },
+            {
+                "author": "Amelia K.",
+                "rating": 5,
+                "date": "2025-01-27",
+                "title": "Incredible location and character",
+                "text": "Waking up to views of Charles Bridge was magical. The hotel beautifully preserves its historic character with antique furniture and original architecture. Staff are knowledgeable about Prague's history. Walking distance to everything. Highly recommended for couples."
+            },
+            {
+                "author": "Lucas M.",
+                "rating": 4,
+                "date": "2025-01-14",
+                "title": "Charming but note the stairs",
+                "text": "Beautiful historic hotel with wonderful atmosphere and great location. Rooms are cozy with authentic period details. Wine bar is excellent. Only note there's no elevator, so be prepared for stairs. But the charm and location more than make up for it."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 9,
@@ -431,10 +1054,25 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "minibar", "spa_access", "champagne"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800",
+            "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+            "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
         ],
         "rating": 4.9,
         "review_count": 1023,
+        "address": {
+            "street": "Staroměstské náměstí 24",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 221 771 200",
+            "email": "reservations@oldtownpalace.cz",
+            "website": "www.oldtownsquarepalace.com"
+        },
         "features": {
             "accommodation": "5-star palace hotel",
             "amenities": ["spa", "restaurant", "bar", "concierge", "rooftop_terrace"],
@@ -442,6 +1080,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["luxury", "honeymoon", "special_occasion"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_concierge", "valet_parking", "luggage_storage", "room_service"],
+            "luxury": ["champagne_bar", "private_shopping", "limousine_service", "butler_service", "personal_stylist"],
+            "wellness": ["luxury_spa", "indoor_pool", "sauna", "steam_room", "beauty_treatments", "fitness_center"],
+            "dining": ["michelin_restaurant", "champagne_bar", "rooftop_terrace", "in_room_dining", "private_dining"],
+            "room": ["premium_minibar", "nespresso_machine", "smart_tv", "safe", "luxury_linens", "designer_toiletries"]
+        },
+        "rooms": [
+            {
+                "name": "Deluxe Room",
+                "size_sqm": 40,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Square view", "Marble bathroom", "Walk-in closet", "Premium minibar", "Nespresso"]
+            },
+            {
+                "name": "Executive Suite",
+                "size_sqm": 70,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Square view", "Luxury bathroom", "Separate living room", "Dining area", "Premium minibar"]
+            },
+            {
+                "name": "Royal Suite",
+                "size_sqm": 95,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Panoramic square view", "Master bathroom", "Living room", "Dining room", "Butler service", "Terrace"]
+            },
+            {
+                "name": "Presidential Suite",
+                "size_sqm": 140,
+                "beds": "1 King + Extra bedroom",
+                "max_guests": 4,
+                "features": ["AC", "360° views", "Master suite", "Guest suite", "Private terrace", "Full kitchen", "Butler", "Grand piano"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Sebastian L.",
+                "rating": 5,
+                "date": "2025-02-09",
+                "title": "The epitome of luxury",
+                "text": "This palace hotel is absolutely magnificent. Our Royal Suite overlooking Old Town Square was breathtaking. The Michelin restaurant exceeded expectations, spa treatments were divine, and the champagne bar on the rooftop is spectacular. Flawless service throughout our stay."
+            },
+            {
+                "author": "Gabriella R.",
+                "rating": 5,
+                "date": "2025-01-24",
+                "title": "Unforgettable honeymoon",
+                "text": "We celebrated our honeymoon here and it was perfection. The butler service anticipated our every need, the champagne welcome was elegant, and watching the Astronomical Clock from our suite was magical. The spa and indoor pool are world-class. Worth every penny!"
+            },
+            {
+                "author": "Christopher D.",
+                "rating": 5,
+                "date": "2025-01-11",
+                "title": "Best hotel in Prague",
+                "text": "Having stayed at many luxury hotels, this is truly special. The location on Old Town Square is unbeatable, rooms are palatial, and the service is impeccable. Private dining experience was extraordinary. Perfect for celebrating special occasions."
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 2,
@@ -474,10 +1172,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "art_gallery"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800"
+            "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
+            "https://images.unsplash.com/photo-1590073844006-33379778ae09?w=800",
+            "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
         ],
         "rating": 4.7,
         "review_count": 412,
+        "address": {
+            "street": "Na Příkopě 22",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 224 234 111",
+            "email": "info@artnouveauprague.cz",
+            "website": "www.artnouveaudesignhotel.com"
+        },
         "features": {
             "accommodation": "4-star design hotel",
             "amenities": ["restaurant", "bar", "art_gallery", "library"],
@@ -485,6 +1197,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["art_lovers", "culture", "couples"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage"],
+            "art_culture": ["art_gallery", "library", "art_workshops", "curated_exhibitions", "design_store"],
+            "dining": ["contemporary_restaurant", "design_bar", "breakfast_lounge"],
+            "room": ["designer_furniture", "art_pieces", "smart_tv", "nespresso", "safe", "premium_linens"]
+        },
+        "rooms": [
+            {
+                "name": "Art Deco Room",
+                "size_sqm": 32,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "Art Deco design", "Custom furniture", "Original artwork", "Nespresso"]
+            },
+            {
+                "name": "Art Nouveau Suite",
+                "size_sqm": 48,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Art Nouveau features", "Living area", "Designer furniture", "Gallery views", "Bathtub"]
+            },
+            {
+                "name": "Designer Loft",
+                "size_sqm": 60,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "High ceilings", "Contemporary art", "Full living area", "Designer kitchen", "Balcony"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Francesca T.",
+                "rating": 5,
+                "date": "2025-02-13",
+                "title": "A masterpiece of design",
+                "text": "This hotel is a work of art! Every room features carefully curated pieces and the Art Nouveau Suite was breathtaking. The gallery exhibitions are world-class and the art workshops were fascinating. Design bar has creative cocktails. Perfect for art and design enthusiasts."
+            },
+            {
+                "author": "Marcus W.",
+                "rating": 5,
+                "date": "2025-01-29",
+                "title": "Inspiring and beautiful",
+                "text": "Stayed here for a design conference and was blown away. The attention to artistic detail is remarkable, from the custom furniture to the curated artwork in each room. Library has an excellent collection. Staff are knowledgeable about Prague's art scene."
+            },
+            {
+                "author": "Nina P.",
+                "rating": 4,
+                "date": "2025-01-16",
+                "title": "Unique cultural experience",
+                "text": "Beautiful hotel that celebrates Art Nouveau heritage while being thoroughly modern. The art gallery access is fantastic and the design store has unique pieces. Restaurant serves creative cuisine. Only minor issue was some street noise, but earplugs provided. Highly recommended for culture lovers."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 11,
@@ -497,7 +1261,7 @@ TRAVEL_DEALS = [
         "title": "Czech Beer Spa Hotel",
         "destination": {
             "city": "Prague",
-            "country": "Poland",
+            "country": "Czech Republic",
             "region": "Prague",
             "coordinates": CITY_COORDINATES["Prague"]
         },
@@ -517,10 +1281,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "beer_spa_treatment"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800"
+            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800",
+            "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
         ],
         "rating": 4.5,
         "review_count": 687,
+        "address": {
+            "street": "Rybná 685/7",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 222 333 444",
+            "email": "bookings@czechbeerspa.cz",
+            "website": "www.praguebeerspahotel.com"
+        },
         "features": {
             "accommodation": "3-star spa hotel",
             "amenities": ["beer_spa", "restaurant", "bar", "sauna"],
@@ -528,6 +1306,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["unique_experience", "groups", "couples"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage"],
+            "spa_wellness": ["beer_spa_baths", "hop_treatments", "sauna", "relaxation_room", "massage_service"],
+            "dining": ["czech_restaurant", "beer_bar", "tasting_room", "breakfast_buffet"],
+            "room": ["comfortable_beds", "flat_screen_tv", "minibar", "safe", "bathrobe_provided"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Spa Room",
+                "size_sqm": 24,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Modern bathroom", "Minibar", "Coffee maker"]
+            },
+            {
+                "name": "Superior Spa Room",
+                "size_sqm": 30,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Bathtub", "Seating area", "Minibar", "Bathrobe"]
+            },
+            {
+                "name": "Deluxe Spa Suite",
+                "size_sqm": 40,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Separate living area", "Jacuzzi tub", "Minibar", "Extra spa treatment included"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Brian H.",
+                "rating": 5,
+                "date": "2025-02-17",
+                "title": "Unique and fun experience!",
+                "text": "The beer spa is absolutely fantastic - such a unique Czech experience! Soaking in warm beer baths with hops was surprisingly relaxing and the unlimited beer while bathing was a fun touch. Restaurant serves excellent traditional Czech food. Staff are friendly and fun. Highly recommend for groups!"
+            },
+            {
+                "author": "Elena M.",
+                "rating": 4,
+                "date": "2025-02-04",
+                "title": "One-of-a-kind spa",
+                "text": "Never thought I'd bathe in beer, but it was amazing! The hop treatments left my skin feeling wonderful. Rooms are comfortable and clean. Beer bar has great selection. Perfect for couples looking for something different. Only small downside is it can get busy, so book spa times early."
+            },
+            {
+                "author": "Max K.",
+                "rating": 5,
+                "date": "2025-01-21",
+                "title": "Must-try in Prague",
+                "text": "This place is a blast! The beer spa concept is executed perfectly - relaxing and entertaining. Great value for what you get. Restaurant has hearty Czech dishes. Central location makes exploring Prague easy. Perfect for bachelor parties or fun couples getaway."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 14,
@@ -560,10 +1390,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "walking_tour"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800"
+            "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
         ],
         "rating": 4.6,
         "review_count": 378,
+        "address": {
+            "street": "Maiselova 15",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 222 317 555",
+            "email": "reception@jewishquarterhotel.cz",
+            "website": "www.jewishquarterhotel.com"
+        },
         "features": {
             "accommodation": "4-star historic hotel",
             "amenities": ["restaurant", "library", "courtyard", "historic_tours"],
@@ -571,6 +1415,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["culture", "history", "solo"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage"],
+            "cultural": ["library", "historic_tours", "courtyard", "heritage_exhibits", "cultural_programs"],
+            "dining": ["traditional_restaurant", "courtyard_cafe", "breakfast_room"],
+            "room": ["period_furniture", "flat_screen_tv", "minibar", "safe", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Heritage Room",
+                "size_sqm": 28,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["Period decor", "Courtyard view", "Antique furniture", "Minibar", "Safe"]
+            },
+            {
+                "name": "Superior Heritage Room",
+                "size_sqm": 34,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Historic features", "Quarter view", "Seating area", "Minibar", "Coffee maker"]
+            },
+            {
+                "name": "Heritage Suite",
+                "size_sqm": 45,
+                "beds": "1 King Bed + Sofa",
+                "max_guests": 3,
+                "features": ["Original architecture", "Living area", "Courtyard view", "Minibar", "Bathtub"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Benjamin R.",
+                "rating": 5,
+                "date": "2025-02-19",
+                "title": "Rich in history and culture",
+                "text": "This hotel is a treasure trove of Jewish history. The guided tours of the quarter organized by the hotel were incredibly informative. The library has fascinating historical documents. Rooms beautifully preserve period features. Perfect for history enthusiasts."
+            },
+            {
+                "author": "Ruth S.",
+                "rating": 5,
+                "date": "2025-02-06",
+                "title": "Authentic and educational",
+                "text": "Stayed here to explore Prague's Jewish heritage and couldn't have chosen better. The hotel staff are knowledgeable historians. The courtyard is peaceful and beautiful. Restaurant serves traditional recipes. Walking distance to all synagogues and museums. Highly recommend."
+            },
+            {
+                "author": "David L.",
+                "rating": 4,
+                "date": "2025-01-23",
+                "title": "Wonderful historic setting",
+                "text": "Beautiful hotel in the heart of the Jewish Quarter. Rooms have authentic character with modern amenities. The cultural programs and walking tours are excellent. Only note that there's no elevator due to historic building regulations. But worth it for the atmosphere and location."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 8,
@@ -603,10 +1499,24 @@ TRAVEL_DEALS = [
             "includes": ["wifi", "common_kitchen"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800"
+            "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800",
+            "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800",
+            "https://images.unsplash.com/photo-1506057278219-795838d4c2dd?w=800",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.3,
         "review_count": 923,
+        "address": {
+            "street": "Sokolovská 112",
+            "city": "Prague",
+            "postal_code": "186 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 220 871 111",
+            "email": "info@praguecityhostel.com",
+            "website": "www.praguecityhostel.com"
+        },
         "features": {
             "accommodation": "2-star hostel",
             "amenities": ["common_room", "kitchen", "bar", "laundry"],
@@ -614,6 +1524,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["budget", "solo", "backpackers"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "lockers"],
+            "social": ["common_room", "hostel_bar", "games_room", "terrace", "organized_events"],
+            "practical": ["shared_kitchen", "laundry_facilities", "vending_machines", "bike_storage"],
+            "room": ["comfortable_beds", "bedding_included", "reading_lights", "power_outlets"]
+        },
+        "rooms": [
+            {
+                "name": "Private Room",
+                "size_sqm": 16,
+                "beds": "2 Singles or 1 Double",
+                "max_guests": 2,
+                "features": ["Shared bathroom", "Lockers", "Reading lights", "Desk"]
+            },
+            {
+                "name": "Private Triple",
+                "size_sqm": 20,
+                "beds": "3 Singles",
+                "max_guests": 3,
+                "features": ["Shared bathroom", "Lockers", "Reading lights", "Storage space"]
+            },
+            {
+                "name": "Private Quad",
+                "size_sqm": 24,
+                "beds": "4 Singles",
+                "max_guests": 4,
+                "features": ["Shared bathroom", "Lockers", "Reading lights", "Extra space"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Sophie T.",
+                "rating": 4,
+                "date": "2025-02-22",
+                "title": "Great budget option",
+                "text": "Perfect hostel for backpackers! Clean private rooms, great common areas to meet other travelers, and the bar has cheap drinks. Kitchen is well-equipped. Staff organize fun pub crawls and city tours. Good value for Prague."
+            },
+            {
+                "author": "Jake M.",
+                "rating": 5,
+                "date": "2025-02-09",
+                "title": "Social and clean",
+                "text": "One of the best hostels I've stayed at. The private room was clean and comfortable, common room is great for socializing, and I met awesome people. Location is decent with good tram connections. Breakfast could be better but at this price point, it's excellent value."
+            },
+            {
+                "author": "Emma B.",
+                "rating": 4,
+                "date": "2025-01-26",
+                "title": "Budget traveler's dream",
+                "text": "Clean, safe, and affordable. Staff are friendly and helpful with recommendations. The organized events are fun. Kitchen facilities are good. Only minor downside is it's not in the absolute center, but the tram stop is nearby. Would definitely stay again."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 25,
@@ -646,10 +1608,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "river_cruise"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800"
+            "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800",
+            "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
         ],
         "rating": 4.7,
         "review_count": 445,
+        "address": {
+            "street": "Dvořákovo nábřeží 12",
+            "city": "Prague",
+            "postal_code": "110 00",
+            "country": "Czech Republic"
+        },
+        "contact": {
+            "phone": "+420 221 984 111",
+            "email": "reservations@vltavariverhotel.cz",
+            "website": "www.vltavariverhotel.com"
+        },
         "features": {
             "accommodation": "4-star riverside hotel",
             "amenities": ["restaurant", "terrace", "river_view", "boat_tours"],
@@ -657,6 +1633,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["romantic", "couples", "families"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "concierge", "luggage_storage"],
+            "river_activities": ["river_cruises", "boat_tours", "private_charters", "sunset_cruises"],
+            "dining": ["riverside_restaurant", "terrace_bar", "breakfast_terrace", "river_view_dining"],
+            "room": ["river_views", "balconies", "flat_screen_tv", "minibar", "safe", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Room",
+                "size_sqm": 26,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Modern bathroom", "Minibar", "Coffee maker"]
+            },
+            {
+                "name": "River View Room",
+                "size_sqm": 32,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "River view", "Balcony", "Seating area", "Minibar", "Nespresso"]
+            },
+            {
+                "name": "Family River Suite",
+                "size_sqm": 48,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "Panoramic river view", "Large balcony", "Living area", "Minibar", "2 bathrooms"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Andrew C.",
+                "rating": 5,
+                "date": "2025-02-14",
+                "title": "River cruise included was amazing!",
+                "text": "The included river cruise was the highlight of our stay! Seeing Prague from the Vltava River at sunset was magical. Our river view room had a perfect balcony for morning coffee. Restaurant has excellent Czech and international cuisine. Staff arranged a private dinner cruise for our anniversary."
+            },
+            {
+                "author": "Jessica P.",
+                "rating": 5,
+                "date": "2025-01-31",
+                "title": "Perfect riverside location",
+                "text": "Wonderful hotel right on the Vltava River. The boat tours are fantastic and great value. Family suite was spacious with amazing views. Terrace restaurant is beautiful in good weather. Kids loved watching the boats. Great for families wanting something special."
+            },
+            {
+                "author": "Martin K.",
+                "rating": 4,
+                "date": "2025-01-18",
+                "title": "Romantic and scenic",
+                "text": "Beautiful riverside hotel with stunning views. The sunset cruise was incredibly romantic. Rooms are comfortable and well-appointed. Restaurant quality is excellent. Only minor point is the breakfast could have more variety, but overall a wonderful experience. Highly recommended for couples."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 10,
@@ -1125,17 +2153,90 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "beach_access", "bbq", "bikes"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1601892546722-f9cb29c554b9?w=800"
+            "https://images.unsplash.com/photo-1601892546722-f9cb29c554b9?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+            "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.7,
         "review_count": 445,
+        "address": {
+            "street": "ul. Morska 15",
+            "city": "Sopot",
+            "postal_code": "81-704",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 123 4567",
+            "email": "info@beachbungalow.pl",
+            "website": "www.beachbungalow-sopot.pl"
+        },
         "features": {
             "accommodation": "3-star beach bungalows",
-            "amenities": ["beach_access", "bbq", "bike_rental", "terrace", "garden"],
+            "amenities": ["beach_access", "bbq", "bike_rental", "terrace", "garden", "pet_bowls", "dog_park"],
             "room_type": "Beach Bungalow",
-            "suitable_for": ["beach", "families", "groups", "summer"],
+            "room_types_available": ["Standard Bungalow", "Family Bungalow", "Deluxe Bungalow with Terrace"],
+            "capacity": {"max_guests": 4, "max_adults": 2, "max_children": 3},
+            "pets_allowed": True,
+            "pet_fee": 15,
+            "suitable_for": ["beach", "families", "groups", "summer", "pets"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "free_parking", "24h_reception", "luggage_storage", "concierge"],
+            "beach": ["beach_chairs", "beach_umbrellas", "beach_towels", "water_sports"],
+            "food": ["breakfast_buffet", "bbq_facilities", "shared_kitchen", "picnic_area"],
+            "recreation": ["bike_rental", "playground", "beach_volleyball", "ping_pong"],
+            "pet_friendly": ["dog_park", "pet_bowls", "pet_beds_available", "dog_walking_area"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Bungalow",
+                "size_sqm": 35,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "Private terrace", "Garden view", "Mini fridge", "Coffee maker"]
+            },
+            {
+                "name": "Family Bungalow",
+                "size_sqm": 50,
+                "beds": "1 Queen + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "Private terrace", "Sea view", "Kitchenette", "Living area", "BBQ"]
+            },
+            {
+                "name": "Deluxe Bungalow with Terrace",
+                "size_sqm": 60,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "Large terrace", "Direct beach access", "Full kitchen", "Outdoor shower", "BBQ"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Sarah M.",
+                "rating": 5,
+                "date": "2025-05-15",
+                "title": "Perfect family getaway with our dog!",
+                "text": "Amazing place for families with pets! The dog park was fantastic and our golden retriever loved the beach access. Bungalows are spacious and the BBQ facilities were great for family dinners."
+            },
+            {
+                "author": "Tom K.",
+                "rating": 5,
+                "date": "2025-05-10",
+                "title": "Beach paradise",
+                "text": "Direct beach access is a game changer. Bikes included made exploring Sopot super easy. Staff was incredibly friendly and helpful."
+            },
+            {
+                "author": "Anna P.",
+                "rating": 4,
+                "date": "2025-05-05",
+                "title": "Great value for money",
+                "text": "Excellent location right on the beach. Bungalows are cozy and well-equipped. Only minor downside is it can get a bit noisy during peak hours but that's expected at a beach resort."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 7,
@@ -1174,9 +2275,13 @@ TRAVEL_DEALS = [
         "review_count": 923,
         "features": {
             "accommodation": "4-star family resort",
-            "amenities": ["kids_club", "pool", "playground", "restaurant", "animation"],
+            "amenities": ["kids_club", "pool", "playground", "restaurant", "animation", "pet_area"],
             "room_type": "Family Room",
-            "suitable_for": ["families", "children", "beach"],
+            "room_types_available": ["Standard Family Room", "Family Suite", "Connecting Rooms", "Family Apartment"],
+            "capacity": {"max_guests": 5, "max_adults": 2, "max_children": 3},
+            "pets_allowed": True,
+            "pet_fee": 20,
+            "suitable_for": ["families", "children", "beach", "pets"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
         "urgency": {

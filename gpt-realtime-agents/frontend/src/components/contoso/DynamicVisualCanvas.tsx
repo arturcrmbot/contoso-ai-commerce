@@ -23,19 +23,48 @@ export function DynamicVisualCanvas({
   onSuggestionClick,
   disabled
 }: DynamicVisualCanvasProps) {
-  // No visual data - show suggestions
+  // No visual data - show suggestions (HOMEPAGE)
   if (!visualConfig) {
     return (
-      <>
-        <div className="mb-4">
-          <h2 className="text-xl font-bold text-foreground mb-1">AI Travel Agent</h2>
-          <p className="text-sm text-muted-foreground">Discover amazing travel deals through conversation</p>
+      <div className="flex flex-col min-h-full">
+        {/* Hero Section */}
+        <div className="relative w-full h-[400px] flex items-center justify-center overflow-hidden mb-8">
+          <div 
+            className="absolute inset-0 bg-cover bg-center z-0"
+            style={{ 
+              backgroundImage: 'url(https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600&h=900&fit=crop)',
+            }}
+          />
+          <div className="absolute inset-0 bg-black/40 z-10" />
+          <div className="relative z-20 text-center text-white px-4 max-w-3xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 drop-shadow-lg tracking-tight">
+              Your Dream Trip Awaits
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-white/90 drop-shadow-md font-light">
+              Discover amazing deals, hidden gems, and personalized itineraries with your AI travel companion.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-teal-500 hover:bg-teal-600 text-white border-none text-lg px-8 py-6 rounded-full shadow-xl transition-transform hover:scale-105"
+              onClick={() => onSuggestionClick("Help me plan a trip")}
+              disabled={disabled}
+            >
+              Start Planning
+            </Button>
+          </div>
         </div>
-        <SuggestionCards
-          onSuggestionClick={onSuggestionClick}
-          disabled={disabled}
-        />
-      </>
+
+        {/* Suggestions Section */}
+        <div className="flex-1 px-6 pb-12 max-w-7xl mx-auto w-full">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Popular Destinations & Themes</h2>
+          </div>
+          <SuggestionCards
+            onSuggestionClick={onSuggestionClick}
+            disabled={disabled}
+          />
+        </div>
+      </div>
     );
   }
 
@@ -53,6 +82,13 @@ export function DynamicVisualCanvas({
         }
         break;
 
+      case 'deal_click':
+        if (onProductClick) {
+          // Pass deal click to trigger AI detail view
+          onProductClick({ action: 'deal_click', ...params });
+        }
+        break;
+
       case 'plan_select':
         if (onProductClick) {
           onProductClick({ action: 'plan_select', type: 'plan', ...params });
@@ -67,7 +103,7 @@ export function DynamicVisualCanvas({
   // New flexible visual system
   if (isFlexibleVisual(visualConfig)) {
     return (
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col p-6">
         <Button
           variant="ghost"
           size="sm"
@@ -89,7 +125,7 @@ export function DynamicVisualCanvas({
   const legacyVisual = visualConfig as LegacyVisual;
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col p-6">
       <Button
         variant="ghost"
         size="sm"

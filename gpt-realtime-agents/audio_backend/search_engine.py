@@ -13,6 +13,8 @@ def search_deals(
     deal_type: Optional[str] = None,
     suitable_for: Optional[List[str]] = None,
     min_rating: Optional[float] = None,
+    min_guests: Optional[int] = None,
+    pets_allowed: Optional[bool] = None,
     limit: Optional[int] = None
 ) -> List[Dict]:
     """
@@ -24,8 +26,10 @@ def search_deals(
         budget_min: Minimum price in GBP
         budget_max: Maximum price in GBP
         deal_type: Type of deal (e.g., "hotel")
-        suitable_for: List of tags (e.g., ["romantic", "beach"])
+        suitable_for: List of tags (e.g., ["romantic", "beach", "families", "pets"])
         min_rating: Minimum rating (0-5)
+        min_guests: Minimum guest capacity (for family/group searches)
+        pets_allowed: Filter by pet-friendly properties
         limit: Max number of results to return
 
     Returns:
@@ -60,6 +64,20 @@ def search_deals(
     # Filter by rating
     if min_rating is not None:
         results = [d for d in results if d.get("rating", 0) >= min_rating]
+
+    # Filter by guest capacity
+    if min_guests is not None:
+        results = [
+            d for d in results
+            if d["features"].get("capacity", {}).get("max_guests", 2) >= min_guests
+        ]
+
+    # Filter by pets allowed
+    if pets_allowed is True:
+        results = [
+            d for d in results
+            if d["features"].get("pets_allowed", False)
+        ]
 
     # Sort by a combination of factors (deal quality)
     # Prioritize: discount, rating, urgency

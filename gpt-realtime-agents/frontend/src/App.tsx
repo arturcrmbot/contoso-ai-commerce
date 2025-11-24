@@ -18,8 +18,9 @@ function App() {
   const [escalationState, setEscalationState] = useState<EscalationState>({ status: 'available' });
   const chatScrollRef = useRef<HTMLDivElement>(null);
 
-  // Dynamic visual state
-  const [currentVisual, setCurrentVisual] = useState<any | null>(null);
+  // Dynamic visual state with history
+  const [visualHistory, setVisualHistory] = useState<any[]>([]);
+  const currentVisual = visualHistory.length > 0 ? visualHistory[visualHistory.length - 1] : null;
 
   // Cart state
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -50,7 +51,7 @@ function App() {
 
   const handleVisualUpdate = useCallback((visualConfig: any) => {
     console.log('[APP] Visual update received:', visualConfig);
-    setCurrentVisual(visualConfig);
+    setVisualHistory(prev => [...prev, visualConfig]);
   }, []);
 
   const handleCartUpdated = useCallback((cartData: any) => {
@@ -66,12 +67,19 @@ function App() {
     }
   }, []);
 
+  const handleError = useCallback((error: Error, context?: string) => {
+    const errorMessage = context ? `${context}: ${error.message}` : error.message;
+    toast.error(errorMessage);
+    console.error('[ERROR]', context, error);
+  }, []);
+
   const { sessionState, startSession, endSession, toggleMute, toggleVoiceResponse, sendTextMessage, isConnected, getCurrentMediaStream } = useRealtimeSession({
     onMessage: handleMessage,
     onStateChange: handleStateChange,
     onVisualUpdate: handleVisualUpdate,
     onCartUpdated: handleCartUpdated,
     onRecommendationsReceived: handleRecommendationsReceived,
+    onError: handleError,
     accountNumber: selectedProfile
   });
 
@@ -96,9 +104,10 @@ function App() {
   };
 
   const handleEndCall = () => {
-    // Clear the cart when ending the call
+    // Clear the cart and visuals when ending the call
     setCartItems([]);
     setCartOpen(false);
+    setVisualHistory([]);
     endSession();
   };
 
@@ -128,6 +137,10 @@ function App() {
     if (params.action === 'add_to_cart' || params.action === 'add_accessory') {
       const itemName = params.name || params.device_id || params.item_id || 'this item';
       message = `I want to purchase ${itemName}`;
+    }
+    // If it's a deal_click action (clicking on travel deals)
+    else if (params.action === 'deal_click' && params.deal_id) {
+      message = `Show me full details for deal ${params.deal_id}`;
     }
     // If it's a product object from clicking a card (just browsing)
     else if (params.id && params.name) {
@@ -183,7 +196,7 @@ function App() {
 
   const handleClearChat = () => {
     setMessages([]);
-    setCurrentVisual(null);
+    setVisualHistory([]);
     toast.info('Chat cleared');
   };
 
@@ -218,16 +231,34 @@ function App() {
       />
 
       {/* Full-width deal area */}
-      <div className="flex-1 overflow-hidden min-h-0">
-        <div className="h-full p-6 overflow-y-auto">
+      <div className="flex-1 overflow-hidden min-h-0 relative">
+        <div className="h-full overflow-y-auto">
           <DynamicVisualCanvas
             visualConfig={currentVisual}
             onProductClick={handleProductClick}
-            onBackToSuggestions={() => setCurrentVisual(null)}
+            onBackToSuggestions={() => {
+              // Pop from history stack
+              setVisualHistory(prev => {
+                if (prev.length > 1) {
+                  return prev.slice(0, -1);
+                }
+                return [];
+              });
+            }}
             onSuggestionClick={handleSuggestionClick}
             disabled={!isConnected}
           />
         </div>
+
+        {/* Loading Overlay */}
+        {sessionState.isProcessing && (
+          <div className="absolute inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-30">
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-6 flex flex-col items-center gap-3">
+              <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" />
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Finding your perfect deals...</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Floating Chat Button */}

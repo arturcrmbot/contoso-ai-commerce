@@ -6,6 +6,7 @@ interface SessionState {
   status: 'idle' | 'connecting' | 'connected' | 'ended';
   isMuted: boolean;
   voiceResponseEnabled: boolean;
+  isProcessing: boolean;
 }
 
 interface UseRealtimeSessionProps {
@@ -15,6 +16,7 @@ interface UseRealtimeSessionProps {
   onCartUpdated?: (cartData: any) => void;
   onVisualUpdate?: (visualConfig: any) => void;
   onRecommendationsReceived?: (recommendations: any[], customerName?: string) => void;
+  onError?: (error: Error, context?: string) => void;
   accountNumber?: string | null;
 }
 
@@ -50,6 +52,7 @@ function convertToFlexibleVisual(visual: any): any {
     'info_callout': 'info_callout',
     'deal_grid': 'deal_grid',
     'deal_hero': 'deal_hero',
+    'deal_detail_page': 'deal_detail_page',
     'deal_comparison': 'deal_comparison',
     'cart_drawer': 'cart_drawer',
     'cart_confirmation': 'cart_confirmation',
@@ -71,11 +74,12 @@ function convertToFlexibleVisual(visual: any): any {
   };
 }
 
-export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate, onRecommendationsReceived, accountNumber }: UseRealtimeSessionProps) {
+export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate, onRecommendationsReceived, onError, accountNumber }: UseRealtimeSessionProps) {
   const [sessionState, setSessionState] = useState<SessionState>({
     status: 'idle',
     isMuted: false,
     voiceResponseEnabled: false, // Start with voice responses OFF
+    isProcessing: false,
   });
 
   const sessionRef = useRef<{
@@ -318,8 +322,13 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       const errorPayload = { error: error.message };
       sendFunctionCallOutput(dataChannel, callId, errorPayload);
       logMessage(`Function ${functionName} failed: ${error.message}`);
+
+      // Notify app of error
+      if (onError) {
+        onError(error, `Failed to execute ${functionName}`);
+      }
     }
-  }, [logMessage, onMessage]);
+  }, [logMessage, onMessage, onError]);
 
   const sendFunctionCallOutput = useCallback((dataChannel: RTCDataChannel, callId: string, output: any) => {
     const conversationEvent = {
@@ -386,6 +395,12 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
 
       if (realtimeEvent.type === "session.error") {
         logMessage(`Error: ${realtimeEvent.error.message}`);
+        // Clear processing state on error
+        setSessionState(prev => ({ ...prev, isProcessing: false }));
+        // Notify app of error
+        if (onError) {
+          onError(new Error(realtimeEvent.error.message), 'Session error');
+        }
       } else if (realtimeEvent.type === "session.end") {
         logMessage("Session ended.");
       } else if (realtimeEvent.type === "response.output_text.delta") {
@@ -401,6 +416,8 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
             timestamp: Date.now()
           });
         }
+        // Clear processing state when text response is done
+        setSessionState(prev => ({ ...prev, isProcessing: false }));
       } else if (realtimeEvent.type === "response.output_audio_transcript.delta") {
         logMessage(`Transcript delta: ${realtimeEvent.delta}`);
       } else if (realtimeEvent.type === "response.audio_transcript.done") {
@@ -413,6 +430,8 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
             timestamp: Date.now()
           });
         }
+        // Clear processing state when audio transcript is done
+        setSessionState(prev => ({ ...prev, isProcessing: false }));
       } else if (realtimeEvent.type === "conversation.item.input_audio_transcription.completed") {
         // Handle user audio transcription
         if (realtimeEvent.transcript) {
@@ -425,6 +444,8 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
         }
       } else if (realtimeEvent.type === "response.done") {
         await handleResponseDone(realtimeEvent, dataChannel);
+        // Clear processing state when response is completely done
+        setSessionState(prev => ({ ...prev, isProcessing: false }));
       }
     });
 
@@ -517,7 +538,7 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
       recommendations: [],
     };
 
-    setSessionState({ status: 'idle', isMuted: false, voiceResponseEnabled: false });
+    setSessionState({ status: 'idle', isMuted: false, voiceResponseEnabled: false, isProcessing: false });
     logMessage("Session closed.");
   }, [logMessage]);
 
@@ -556,6 +577,9 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
     if (!text.trim()) {
       throw new Error("Please enter a message before sending.");
     }
+
+    // Set processing state
+    setSessionState(prev => ({ ...prev, isProcessing: true }));
 
     const conversationEvent = {
       type: "conversation.item.create",

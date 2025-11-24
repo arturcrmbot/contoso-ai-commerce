@@ -36,7 +36,9 @@
       "Bash(docker-compose down:*)",
       "Bash(xargs:*)",
       "Bash(test:*)",
-      "Bash(az account show:*)"
+      "Bash(az account show:*)",
+      "Bash(docker-compose ps:*)",
+      "Bash(docker-compose exec:*)"
     ],
     "deny": [],
     "ask": []

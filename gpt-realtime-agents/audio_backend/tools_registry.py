@@ -5,6 +5,7 @@ LLM does the reasoning, these are just primitives.
 """
 import asyncio
 from typing import Any, Dict, List
+import search_engine
 from search_engine import (
     search_deals,
     get_deal_details,
@@ -35,6 +36,8 @@ async def tool_search_deals(arguments: Dict[str, Any]) -> Dict[str, Any]:
     deal_type = arguments.get("deal_type", "hotel")
     suitable_for = arguments.get("suitable_for")  # List of tags
     min_rating = arguments.get("min_rating")
+    min_guests = arguments.get("min_guests")
+    pets_allowed = arguments.get("pets_allowed")
     limit = arguments.get("limit", 10)
 
     results = search_deals(
@@ -44,6 +47,8 @@ async def tool_search_deals(arguments: Dict[str, Any]) -> Dict[str, Any]:
         deal_type=deal_type,
         suitable_for=suitable_for,
         min_rating=min_rating,
+        min_guests=min_guests,
+        pets_allowed=pets_allowed,
         limit=limit
     )
 
@@ -84,7 +89,7 @@ async def tool_get_deal_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "deal": deal,
         "_visual": {
-            "type": "deal_hero",
+            "type": "deal_detail_page",
             "data": {"deal": deal}
         }
     }
@@ -383,11 +388,19 @@ TOOLS_CATALOG = {
                     "suitable_for": {
                         "type": "array",
                         "items": {"type": "string"},
-                        "description": "Tags like 'romantic', 'beach', 'skiing', 'families', 'budget', 'luxury', 'business'"
+                        "description": "Tags like 'romantic', 'beach', 'skiing', 'families', 'pets', 'budget', 'luxury', 'business'"
                     },
                     "min_rating": {
                         "type": "number",
                         "description": "Minimum rating (0-5)"
+                    },
+                    "min_guests": {
+                        "type": "number",
+                        "description": "Minimum guest capacity needed (use for family/group searches, e.g. 3 for a family of 3)"
+                    },
+                    "pets_allowed": {
+                        "type": "boolean",
+                        "description": "Set to true to filter for pet-friendly properties only"
                     },
                     "limit": {
                         "type": "number",

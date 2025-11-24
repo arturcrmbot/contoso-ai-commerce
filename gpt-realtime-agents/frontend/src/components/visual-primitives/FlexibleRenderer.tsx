@@ -21,6 +21,7 @@ import { PromoBanner } from '../contoso/PromoBanner';
 // Import travel components
 import { DealCard } from '../contoso/DealCard';
 import { DealGrid } from '../contoso/DealGrid';
+import { DealDetailPage } from '../contoso/DealDetailPage';
 
 interface FlexibleRendererProps {
   visual: FlexibleVisual;
@@ -129,6 +130,16 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
               ))}
             </div>
           </div>
+        );
+
+      case 'deal_detail_page':
+        const detailDeal = section.data?.deal || section.data;
+        if (!detailDeal) return null;
+        return (
+          <DealDetailPage
+            deal={detailDeal}
+            onAddToCart={() => onAction?.('add_to_cart', { deal_id: detailDeal.id, name: detailDeal.title })}
+          />
         );
 
       // Accessory components

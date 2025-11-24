@@ -75,22 +75,22 @@ export function DealCard({
 
   return (
     <Card
-      className={`cursor-pointer transition-all hover:shadow-lg border-2 ${
+      className={`cursor-pointer transition-all duration-300 group border-0 shadow-sm hover:shadow-xl hover:-translate-y-1 rounded-xl overflow-hidden bg-card ${
         isHighlighted
-          ? 'border-primary shadow-lg animate-pulse'
-          : 'border-border hover:border-primary/50'
+          ? 'ring-2 ring-primary shadow-lg'
+          : ''
       }`}
       onClick={onClick}
     >
       <CardContent className="p-0">
         {/* Deal Image */}
-        <div className="aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-t-lg overflow-hidden relative">
+        <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
           {deal.images && deal.images.length > 0 ? (
             <>
               <img
                 src={deal.images[0]}
                 alt={deal.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const fallback = e.currentTarget.parentElement?.querySelector('.fallback-icon');
@@ -100,12 +100,17 @@ export function DealCard({
               <MapPin size={32} className="text-muted-foreground absolute hidden fallback-icon top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" weight="thin" />
             </>
           ) : (
-            <MapPin size={32} className="text-muted-foreground absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" weight="thin" />
+            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+              <MapPin size={32} className="text-muted-foreground/50" weight="thin" />
+            </div>
           )}
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
           {/* Urgency Badge */}
           {highlightUrgency && deal.urgency?.ending_soon && (
-            <Badge variant="destructive" className="absolute top-2 right-2 text-xs">
+            <Badge variant="destructive" className="absolute top-3 right-3 shadow-lg animate-pulse">
               <Clock size={12} className="mr-1" />
               Ending Soon
             </Badge>
@@ -113,95 +118,89 @@ export function DealCard({
 
           {/* Discount Badge */}
           {(highlightSavings || deal.pricing.discount_percent >= 30) && (
-            <Badge variant="default" className="absolute top-2 left-2 text-xs font-bold">
+            <Badge className="absolute top-3 left-3 bg-green-600 hover:bg-green-700 shadow-lg font-bold border-0">
               <TrendingDown size={12} className="mr-1" />
-              {deal.pricing.discount_percent}% OFF
+              -{deal.pricing.discount_percent}%
             </Badge>
           )}
+
+          {/* Location Overlay */}
+          <div className="absolute bottom-3 left-3 text-white flex items-center gap-1 text-sm font-medium drop-shadow-md">
+            <MapPin size={14} weight="fill" />
+            {deal.destination.city}, {deal.destination.country}
+          </div>
         </div>
 
         {/* Deal Info */}
-        <div className="p-4 space-y-2">
+        <div className="p-4 space-y-3">
           <div>
-            <div className="flex items-start justify-between gap-2">
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <MapPin size={12} weight="bold" />
-                  {deal.destination.city}, {deal.destination.country}
-                </p>
-                <h3 className="font-semibold text-sm leading-tight mt-1">{deal.title}</h3>
-              </div>
-            </div>
+            <h3 className="font-bold text-base leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+              {deal.title}
+            </h3>
           </div>
 
           {/* Rating & Stars */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             {deal.rating && (
-              <div className="flex items-center gap-1 text-xs">
+              <div className="flex items-center gap-1 bg-yellow-50 px-1.5 py-0.5 rounded text-yellow-700 font-medium">
                 <Star size={12} weight="fill" className="text-yellow-500" />
-                <span className="font-medium">{deal.rating}</span>
-                <span className="text-muted-foreground">
-                  ({deal.review_count?.toLocaleString()})
-                </span>
+                <span>{deal.rating}</span>
               </div>
             )}
             {stars && (
-              <Badge variant="outline" className="text-xs">
+              <span className="text-muted-foreground text-xs border px-1.5 py-0.5 rounded">
                 {stars}★ Hotel
-              </Badge>
+              </span>
+            )}
+            {deal.review_count && (
+              <span className="text-muted-foreground text-xs">
+                ({deal.review_count} reviews)
+              </span>
             )}
           </div>
 
           {/* Suitable For Tags */}
           {deal.features?.suitable_for && deal.features.suitable_for.length > 0 && (
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1.5">
               {deal.features.suitable_for.slice(0, 3).map((tag) => (
-                <Badge key={tag} variant="secondary" className="text-xs capitalize">
+                <span key={tag} className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground bg-secondary/50 px-2 py-1 rounded-full">
                   {tag.replace('_', ' ')}
-                </Badge>
+                </span>
               ))}
             </div>
           )}
 
           {/* Pricing */}
-          <div className="pt-2 border-t">
-            <div className="flex items-baseline justify-between">
-              <div>
-                <p className="text-xs text-muted-foreground">From</p>
-                <div className="flex items-baseline gap-2">
-                  <p className="text-lg font-bold text-primary">
-                    {formatCurrency(deal.pricing.deal_price, deal.pricing.currency)}
-                    <span className="text-xs font-normal text-muted-foreground">/{deal.pricing.per}</span>
-                  </p>
-                  {deal.pricing.discount_percent > 0 && (
-                    <p className="text-xs text-muted-foreground line-through">
-                      {formatCurrency(deal.pricing.original_price, deal.pricing.currency)}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-green-600 font-semibold">
-                  Save {deal.pricing.discount_percent}%
+          <div className="pt-3 border-t flex items-end justify-between">
+            <div>
+              <p className="text-xs text-muted-foreground mb-0.5">Total price from</p>
+              <div className="flex items-baseline gap-2">
+                <p className="text-xl font-bold text-primary">
+                  {formatCurrency(deal.pricing.deal_price, deal.pricing.currency)}
                 </p>
+                {deal.pricing.discount_percent > 0 && (
+                  <p className="text-xs text-muted-foreground line-through decoration-red-500/50">
+                    {formatCurrency(deal.pricing.original_price, deal.pricing.currency)}
+                  </p>
+                )}
               </div>
             </div>
+            
+            <Button 
+              size="sm" 
+              className="rounded-full px-4 bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors font-semibold shadow-none hover:shadow-md"
+            >
+              View
+            </Button>
           </div>
 
           {/* Urgency Indicator */}
           {deal.urgency && deal.urgency.spots_left && deal.urgency.spots_left <= 10 && (
-            <p className="text-xs text-orange-600 font-medium">
+            <p className="text-xs text-orange-600 font-medium flex items-center gap-1 bg-orange-50 p-1.5 rounded justify-center">
+              <Clock size={12} weight="bold" />
               Only {deal.urgency.spots_left} spots left!
             </p>
           )}
-
-          {/* CTA */}
-          <button
-            className="w-full mt-2 px-3 py-2 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white rounded-md text-xs font-medium transition-all shadow-sm hover:shadow-md"
-            onClick={(e) => { e.stopPropagation(); onClick?.(); }}
-          >
-            View Deal
-          </button>
         </div>
       </CardContent>
     </Card>

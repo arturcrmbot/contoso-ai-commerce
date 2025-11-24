@@ -62,18 +62,18 @@ export function DealGrid({
   const defaultSubtitle = `${deals.length} ${deals.length === 1 ? 'deal' : 'deals'} found`;
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col px-6 pb-6">
       {/* Header */}
-      <div className="mb-4 flex-shrink-0">
-        <h2 className="text-xl font-bold text-foreground">{title}</h2>
-        <p className="text-sm text-muted-foreground">
+      <div className="mb-6 flex-shrink-0">
+        <h2 className="text-2xl font-bold text-foreground tracking-tight">{title}</h2>
+        <p className="text-base text-muted-foreground">
           {subtitle || defaultSubtitle}
         </p>
       </div>
 
       {/* Deal Grid */}
-      <div className="flex-1 overflow-y-auto min-h-0">
-        <div className="grid grid-cols-2 gap-4 pb-4">
+      <div className="flex-1 overflow-y-auto min-h-0 pr-2 -mr-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
           {deals.map((deal) => (
             <DealCard
               key={deal.id}
@@ -87,8 +87,9 @@ export function DealGrid({
         </div>
 
         {deals.length === 0 && (
-          <div className="flex items-center justify-center h-full text-muted-foreground">
-            <p className="text-sm">No deals to display yet</p>
+          <div className="flex flex-col items-center justify-center h-64 text-muted-foreground bg-gray-50 rounded-xl border-2 border-dashed">
+            <p className="text-lg font-medium">No deals found</p>
+            <p className="text-sm">Try adjusting your search criteria</p>
           </div>
         )}
       </div>

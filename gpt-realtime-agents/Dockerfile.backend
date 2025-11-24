@@ -1,0 +1,14 @@
+FROM python:3.11-bullseye
+
+WORKDIR /app
+
+COPY audio_backend/requirements.txt ./requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+COPY audio_backend/ ./audio_backend
+COPY prompts/ ./prompts
+COPY .env ./.env
+
+EXPOSE 8080
+
+CMD ["uvicorn", "audio_backend.backend:app", "--host", "0.0.0.0", "--port", "8080"]
