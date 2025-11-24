@@ -17,7 +17,7 @@ export const WaveformVisualizer = memo(({
   height = 40,
   width = 120,
   className,
-  color = 'hsl(var(--primary))',
+  color = '#14b8a6',
   barCount = 12
 }: WaveformVisualizerProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
