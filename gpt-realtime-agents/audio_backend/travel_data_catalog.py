@@ -3181,10 +3181,24 @@ TRAVEL_DEALS = [
             "includes": ["wifi", "surf_lessons", "beach_access"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1601892546722-f9cb29c554b9?w=800"
+            "https://images.unsplash.com/photo-1601892546722-f9cb29c554b9?w=800",
+            "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800",
+            "https://images.unsplash.com/photo-1506057278219-795838d4c2dd?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
         ],
         "rating": 4.5,
         "review_count": 634,
+        "address": {
+            "street": "ul. Władysława IV 2",
+            "city": "Sopot",
+            "postal_code": "81-706",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 344 7777",
+            "email": "info@surfingparadise.pl",
+            "website": "www.surfingparadisesopot.com"
+        },
         "features": {
             "accommodation": "2-star surf hostel",
             "amenities": ["surf_school", "common_room", "bbq", "beach_bar"],
@@ -3192,6 +3206,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["surfing", "adventure", "solo", "groups"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "lockers", "free_parking"],
+            "surf": ["surf_school", "board_rental", "wetsuit_rental", "surf_storage", "beach_access"],
+            "social": ["common_room", "beach_bar", "bbq_area", "terrace", "organized_events"],
+            "room": ["comfortable_beds", "bedding_included", "shared_bathrooms", "lockers"]
+        },
+        "rooms": [
+            {
+                "name": "Private Room",
+                "size_sqm": 16,
+                "beds": "2 Singles or 1 Double",
+                "max_guests": 2,
+                "features": ["Shared bathroom", "Lockers", "Beach view", "Surf storage"]
+            },
+            {
+                "name": "Private Triple",
+                "size_sqm": 20,
+                "beds": "3 Singles",
+                "max_guests": 3,
+                "features": ["Shared bathroom", "Lockers", "Beach view", "Surf storage", "Extra space"]
+            },
+            {
+                "name": "Private Quad",
+                "size_sqm": 24,
+                "beds": "4 Singles",
+                "max_guests": 4,
+                "features": ["Shared bathroom", "Lockers", "Beach view", "Surf storage", "Group space"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Łukasz S.",
+                "rating": 5,
+                "date": "2025-07-02",
+                "title": "Surfer's dream hostel",
+                "text": "Perfect hostel for surfers! Surf school is professional with good instructors. Board rental is convenient and beach access direct. Met amazing people in the common room. Beach bar vibe is great. BBQ area perfect for evening hangouts. Best surf hostel on Baltic!"
+            },
+            {
+                "author": "Nina H.",
+                "rating": 4,
+                "date": "2025-06-20",
+                "title": "Fun and social",
+                "text": "Great atmosphere for solo travelers and surfers! Staff organized surf lessons and beach activities. Common areas are social and beach bar is fun. Rooms are basic but clean. Perfect for adventure seekers and meeting other travelers. Good value!"
+            },
+            {
+                "author": "Daniel P.",
+                "rating": 5,
+                "date": "2025-06-08",
+                "title": "Beach paradise for groups",
+                "text": "Came with friends for surfing and had a blast! Surf instructors are excellent and patient. Beach bar has good prices and atmosphere. BBQ nights are social and fun. Private quad was perfect for our group. Highly recommend for surf enthusiasts!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 16,
@@ -3224,10 +3290,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "jazz_concert_tickets"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800"
+            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800",
+            "https://images.unsplash.com/photo-1590073844006-33379778ae09?w=800",
+            "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
         ],
         "rating": 4.6,
         "review_count": 389,
+        "address": {
+            "street": "ul. Bohaterów Monte Cassino 44",
+            "city": "Sopot",
+            "postal_code": "81-759",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 555 8888",
+            "email": "booking@jazzclubhotel.pl",
+            "website": "www.sopotjazzhotel.com"
+        },
         "features": {
             "accommodation": "3-star music hotel",
             "amenities": ["jazz_club", "restaurant", "bar", "terrace"],
@@ -3235,6 +3315,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["music_lovers", "culture", "nightlife"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "concierge"],
+            "music_culture": ["jazz_club", "live_concerts", "music_library", "vinyl_collection", "concert_tickets"],
+            "dining": ["restaurant", "jazz_bar", "terrace", "breakfast_room"],
+            "room": ["music_themed_decor", "bluetooth_speaker", "flat_screen_tv", "safe", "soundproofing"]
+        },
+        "rooms": [
+            {
+                "name": "Music Themed Room",
+                "size_sqm": 26,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "Music decor", "Bluetooth speaker", "Soundproof", "Jazz artwork"]
+            },
+            {
+                "name": "Jazz Suite",
+                "size_sqm": 36,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Music memorabilia", "Seating area", "Vinyl player", "Jazz library", "Balcony"]
+            },
+            {
+                "name": "Musician's Loft",
+                "size_sqm": 45,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Music studio vibe", "Living area", "Premium sound system", "Jazz collection", "Terrace"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Krzysztof L.",
+                "rating": 5,
+                "date": "2025-06-28",
+                "title": "Jazz lover's paradise",
+                "text": "Perfect hotel for music enthusiasts! The jazz club has incredible live performances. Our Music Themed Room had authentic jazz memorabilia. Concert tickets included were a great touch. Bar has jazz classics playing. Restaurant atmosphere is sophisticated. Must-visit for jazz fans!"
+            },
+            {
+                "author": "Ola M.",
+                "rating": 5,
+                "date": "2025-06-15",
+                "title": "Unique cultural experience",
+                "text": "What a unique hotel concept! Jazz Suite with vinyl player was amazing. Live concerts every weekend are professionally done. Staff are passionate about music. Location on Monte Cassino is perfect. Combining beach vacation with jazz culture was brilliant!"
+            },
+            {
+                "author": "Piotr N.",
+                "rating": 4,
+                "date": "2025-06-03",
+                "title": "Great for music and nightlife",
+                "text": "Excellent hotel for those who love music and culture. Jazz club is intimate and atmospheric. Rooms are well-soundproofed which is important. Restaurant has good food and jazz ambiance. Only note is it can be lively at night, but that's the charm! Perfect for music lovers."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 8,
