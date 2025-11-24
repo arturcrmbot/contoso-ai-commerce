@@ -24,6 +24,8 @@ export interface SuggestionCard {
 export interface SessionState {
   status: 'idle' | 'connecting' | 'connected' | 'ended';
   isMuted: boolean;
+  voiceResponseEnabled: boolean;
+  isProcessing: boolean;
 }
 
 export interface EscalationState {
