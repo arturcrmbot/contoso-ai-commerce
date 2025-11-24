@@ -1720,10 +1720,24 @@ TRAVEL_DEALS = [
         },
         "images": [
             "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800",
-            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800"
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800",
+            "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800",
+            "https://images.unsplash.com/photo-1605181379317-d6a5de8f2056?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.8,
         "review_count": 567,
+        "address": {
+            "street": "ul. Droga do Białego 25",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 206 7890",
+            "email": "reservations@tatralodge.pl",
+            "website": "www.tatramountainlodge.com"
+        },
         "features": {
             "accommodation": "4-star mountain lodge",
             "amenities": ["spa", "sauna", "restaurant", "ski_storage", "parking"],
@@ -1731,6 +1745,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["skiing", "families", "nature", "adventure"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "ski_storage"],
+            "mountain_wellness": ["spa", "sauna", "steam_room", "massage_treatments", "hot_tub"],
+            "skiing": ["ski_pass_office", "ski_storage", "equipment_rental_nearby", "ski_school_bookings"],
+            "dining": ["mountain_restaurant", "fireside_bar", "breakfast_buffet", "packed_lunches"],
+            "room": ["mountain_views", "balconies", "flat_screen_tv", "safe", "coffee_maker", "heating"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Mountain Room",
+                "size_sqm": 28,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Mountain view", "Balcony", "Safe", "Coffee maker"]
+            },
+            {
+                "name": "Mountain View Room",
+                "size_sqm": 34,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Tatra view", "Large balcony", "Seating area", "Minibar", "Bathrobe"]
+            },
+            {
+                "name": "Family Mountain Suite",
+                "size_sqm": 50,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 4,
+                "features": ["Heating", "Panoramic view", "2 balconies", "Living area", "Fireplace", "2 bathrooms"]
+            },
+            {
+                "name": "Alpine Chalet Room",
+                "size_sqm": 45,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["Heating", "Mountain view", "Private terrace", "Fireplace", "Kitchenette", "Hot tub access"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Piotr W.",
+                "rating": 5,
+                "date": "2025-01-20",
+                "title": "Perfect ski vacation",
+                "text": "Amazing lodge with direct access to ski slopes! The included ski pass saved us hassle. Rooms have stunning Tatra views and the sauna after skiing was heavenly. Restaurant serves hearty mountain food. Staff are knowledgeable about ski conditions. Perfect for ski enthusiasts!"
+            },
+            {
+                "author": "Anna M.",
+                "rating": 5,
+                "date": "2025-01-10",
+                "title": "Mountain paradise",
+                "text": "Stayed here with family and loved every minute. The Family Suite was spacious with amazing views. Spa facilities are excellent - hot tub with mountain views is incredible. Breakfast buffet has great variety. Kids loved the snow activities. Highly recommend!"
+            },
+            {
+                "author": "Marek K.",
+                "rating": 4,
+                "date": "2025-01-05",
+                "title": "Great mountain retreat",
+                "text": "Beautiful lodge in perfect location for Tatra Mountains. Rooms are cozy and well-heated. Spa is relaxing after hiking. Restaurant quality is good. Only minor issue was Wi-Fi could be stronger, but when you're in the mountains, that's expected. Would definitely return!"
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 5,
@@ -1763,10 +1837,25 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "dinner", "ski_pass", "spa_access", "ski_lessons"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1605181379317-d6a5de8f2056?w=800"
+            "https://images.unsplash.com/photo-1605181379317-d6a5de8f2056?w=800",
+            "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+            "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800",
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800"
         ],
         "rating": 4.9,
         "review_count": 892,
+        "address": {
+            "street": "ul. Przewodników Tatrzańskich 10",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 200 5000",
+            "email": "reservations@grandskiResort.pl",
+            "website": "www.grandskizakopane.com"
+        },
         "features": {
             "accommodation": "5-star ski resort",
             "amenities": ["spa", "pool", "restaurant", "ski_school", "equipment_rental", "parking"],
@@ -1774,6 +1863,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["skiing", "luxury", "families", "groups"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_concierge", "valet_parking", "luggage_storage", "ski_valet"],
+            "luxury_ski": ["ski_in_ski_out", "private_ski_school", "equipment_rental", "ski_concierge", "heated_boot_room"],
+            "wellness": ["luxury_spa", "indoor_pool", "outdoor_hot_tub", "sauna", "steam_room", "massage", "beauty_salon"],
+            "dining": ["fine_dining", "apres_ski_bar", "pool_bar", "breakfast_buffet", "room_service"],
+            "room": ["mountain_views", "balconies", "fireplace", "minibar", "nespresso", "bathrobe", "premium_toiletries"]
+        },
+        "rooms": [
+            {
+                "name": "Deluxe Mountain Room",
+                "size_sqm": 38,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Mountain view", "Balcony", "Fireplace", "Minibar", "Bathrobe"]
+            },
+            {
+                "name": "Suite with Balcony",
+                "size_sqm": 55,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["Heating", "Panoramic view", "Large balcony", "Living area", "Fireplace", "Jacuzzi tub"]
+            },
+            {
+                "name": "Family Ski Suite",
+                "size_sqm": 75,
+                "beds": "1 King + 2 Queens",
+                "max_guests": 6,
+                "features": ["Heating", "Ski slope view", "2 balconies", "2 bathrooms", "Living room", "Kitchenette"]
+            },
+            {
+                "name": "Presidential Chalet Suite",
+                "size_sqm": 120,
+                "beds": "2 King Beds + Extra room",
+                "max_guests": 6,
+                "features": ["Heating", "360° views", "Private terrace", "Hot tub", "Full kitchen", "Fireplace", "Butler service"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Katarzyna B.",
+                "rating": 5,
+                "date": "2025-01-18",
+                "title": "Ultimate luxury ski experience",
+                "text": "This resort is world-class! Ski-in/ski-out access is incredibly convenient. Private ski lessons were excellent and equipment rental was seamless. The spa is stunning with mountain views from the hot tub. Fine dining restaurant is Michelin-worthy. Worth every zloty!"
+            },
+            {
+                "author": "Tomasz G.",
+                "rating": 5,
+                "date": "2025-01-08",
+                "title": "Perfect for families",
+                "text": "Stayed with our family and kids in the Family Ski Suite - absolutely perfect! Ski school for kids was fantastic, pool and spa kept everyone happy. Breakfast buffet has amazing variety. Staff go above and beyond. Best ski vacation we've ever had!"
+            },
+            {
+                "author": "Magdalena S.",
+                "rating": 5,
+                "date": "2024-12-28",
+                "title": "5-star mountain paradise",
+                "text": "Everything about this resort screams luxury. From the heated boot room to the après-ski bar, every detail is perfect. Our suite had a fireplace and the most amazing Tatra views. Spa treatments are world-class. Cannot wait to return!"
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 3,
@@ -1806,10 +1955,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "fireplace"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800"
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800",
+            "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=800",
+            "https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?w=800",
+            "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800"
         ],
         "rating": 4.7,
         "review_count": 334,
+        "address": {
+            "street": "ul. Krupówki 22",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 201 4567",
+            "email": "info@woodencottage.pl",
+            "website": "www.traditionwoodencottage.com"
+        },
         "features": {
             "accommodation": "3-star traditional cottage",
             "amenities": ["restaurant", "fireplace", "garden", "parking"],
@@ -1817,6 +1980,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["romantic", "couples", "nature", "authentic"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "reception", "free_parking", "luggage_storage"],
+            "traditional": ["wood_construction", "traditional_decor", "fireplaces", "mountain_garden", "highlander_atmosphere"],
+            "dining": ["traditional_restaurant", "fireplace_lounge", "breakfast_room", "highland_cuisine"],
+            "room": ["wooden_furnishings", "fireplaces", "mountain_views", "traditional_bedding", "heating"]
+        },
+        "rooms": [
+            {
+                "name": "Rustic Room with Fireplace",
+                "size_sqm": 25,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Fireplace", "Mountain view", "Wood furnishings", "Traditional decor"]
+            },
+            {
+                "name": "Highland Suite",
+                "size_sqm": 35,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Large fireplace", "Tatra view", "Seating area", "Traditional bathroom"]
+            },
+            {
+                "name": "Family Cottage Room",
+                "size_sqm": 45,
+                "beds": "1 Queen + 2 Singles",
+                "max_guests": 4,
+                "features": ["Heating", "Fireplace", "Mountain view", "Separate sleeping area", "Traditional furnishings"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Jan P.",
+                "rating": 5,
+                "date": "2025-01-15",
+                "title": "Authentic highland experience",
+                "text": "This cottage hotel is a gem! The traditional wooden architecture and authentic highland decor create such a cozy atmosphere. Our room's fireplace was perfect for romantic evenings. Restaurant serves amazing traditional food. Felt like stepping back in time in the best way!"
+            },
+            {
+                "author": "Ewa K.",
+                "rating": 5,
+                "date": "2025-01-06",
+                "title": "Charming and romantic",
+                "text": "Perfect for a romantic mountain getaway. The fireplace in our room, the wooden beams, the mountain views - everything was magical. Staff are warm and welcoming. Traditional breakfast was delicious. Great value and authentic Zakopane experience."
+            },
+            {
+                "author": "Michał W.",
+                "rating": 4,
+                "date": "2024-12-30",
+                "title": "Traditional charm",
+                "text": "Beautiful traditional cottage with genuine highland character. Rooms are cozy and well-heated. Love the authentic wooden construction. Restaurant has excellent regional dishes. No elevator but the rustic charm makes up for it. Recommended for couples seeking authentic atmosphere."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 7,
@@ -1849,10 +2064,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "hiking_guide"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800"
+            "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800",
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+            "https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=800"
         ],
         "rating": 4.6,
         "review_count": 289,
+        "address": {
+            "street": "ul. Chałubińskiego 44",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 206 3333",
+            "email": "info@hikingbase.pl",
+            "website": "www.hikingbasezakopane.com"
+        },
         "features": {
             "accommodation": "3-star mountain hotel",
             "amenities": ["restaurant", "parking", "bike_rental", "hiking_maps"],
@@ -1860,6 +2089,59 @@ TRAVEL_DEALS = [
             "suitable_for": ["hiking", "adventure", "nature", "families"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "drying_room"],
+            "hiking": ["hiking_guides", "trail_maps", "packed_lunches", "gear_storage", "route_planning"],
+            "recreation": ["bike_rental", "mountain_gear_rental", "guided_tours"],
+            "dining": ["mountain_restaurant", "packed_lunch_service", "breakfast_buffet"],
+            "room": ["mountain_views", "heating", "comfortable_beds", "coffee_maker", "balconies"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Mountain Room",
+                "size_sqm": 22,
+                "beds": "1 Queen Bed or 2 Singles",
+                "max_guests": 2,
+                "features": ["Heating", "Mountain view", "Coffee maker", "Gear storage"]
+            },
+            {
+                "name": "Mountain View Room",
+                "size_sqm": 28,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Tatra view", "Balcony", "Seating area", "Minibar"]
+            },
+            {
+                "name": "Family Hiking Room",
+                "size_sqm": 38,
+                "beds": "1 Queen + 2 Singles",
+                "max_guests": 4,
+                "features": ["Heating", "Mountain view", "Balcony", "Extra storage", "2 bathrooms"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Wojciech M.",
+                "rating": 5,
+                "date": "2025-06-15",
+                "title": "Perfect hiking base",
+                "text": "Ideal location for Tatra hiking! Staff are knowledgeable about trails and provided excellent route recommendations. Packed lunches were generous. Drying room was essential after rainy hikes. Restaurant has hearty meals perfect after long days. Great value for hikers!"
+            },
+            {
+                "author": "Aleksandra N.",
+                "rating": 4,
+                "date": "2025-06-05",
+                "title": "Great for outdoor enthusiasts",
+                "text": "Perfect hotel for hiking and biking. Bike rental was convenient and gear storage secure. Staff organized guided hikes which were fantastic. Rooms are simple but comfortable with beautiful mountain views. Breakfast has good energy for hiking. Highly recommend for active travelers."
+            },
+            {
+                "author": "Paweł R.",
+                "rating": 5,
+                "date": "2025-05-28",
+                "title": "Hiker's paradise",
+                "text": "Everything a hiker needs! Trail maps, packed lunches, early breakfasts, drying facilities. The hiking guides were professional and showed us amazing trails. Family room was perfect for us and the kids. Will definitely return for our next Tatra adventure!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 12,
@@ -1892,10 +2174,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "spa_treatments", "yoga_classes", "healthy_meals"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1605181379317-d6a5de8f2056?w=800"
+            "https://images.unsplash.com/photo-1605181379317-d6a5de8f2056?w=800",
+            "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+            "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800"
         ],
         "rating": 4.8,
         "review_count": 423,
+        "address": {
+            "street": "ul. Pardałówka 17",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 202 8888",
+            "email": "reservations@mountainwellness.pl",
+            "website": "www.wellnessretreat-zakopane.com"
+        },
         "features": {
             "accommodation": "4-star wellness hotel",
             "amenities": ["spa", "yoga_studio", "pool", "restaurant", "meditation_room"],
@@ -1903,6 +2199,59 @@ TRAVEL_DEALS = [
             "suitable_for": ["wellness", "relaxation", "couples", "solo"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "concierge"],
+            "wellness": ["spa_treatments", "yoga_classes", "meditation_sessions", "wellness_programs", "health_consultations"],
+            "spa_facilities": ["indoor_pool", "sauna", "steam_room", "hot_tub", "relaxation_lounge", "treatment_rooms"],
+            "dining": ["healthy_restaurant", "juice_bar", "wellness_cafe", "organic_breakfast"],
+            "room": ["mountain_views", "aromatherapy", "yoga_mats", "meditation_cushions", "premium_bedding"]
+        },
+        "rooms": [
+            {
+                "name": "Wellness Room",
+                "size_sqm": 30,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Mountain view", "Yoga mat", "Aromatherapy", "Meditation cushion"]
+            },
+            {
+                "name": "Wellness Suite",
+                "size_sqm": 42,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["Heating", "Panoramic view", "Living area", "Hot tub", "Yoga space", "Balcony"]
+            },
+            {
+                "name": "Detox Suite",
+                "size_sqm": 50,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["Heating", "Mountain view", "Meditation room", "Private sauna", "Yoga area", "Tea station"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Agnieszka L.",
+                "rating": 5,
+                "date": "2025-03-10",
+                "title": "Pure relaxation and rejuvenation",
+                "text": "This wellness retreat exceeded all expectations! The yoga classes with mountain views are incredible. Spa treatments are world-class and the wellness programs are expertly designed. Healthy restaurant serves delicious organic food. Left feeling completely refreshed and centered."
+            },
+            {
+                "author": "Barbara S.",
+                "rating": 5,
+                "date": "2025-02-25",
+                "title": "Mountain wellness paradise",
+                "text": "Perfect escape from city stress. Daily yoga and meditation sessions were transformative. The Wellness Suite with hot tub and mountain views was heavenly. Staff are caring wellness professionals. Organic meals were nutritious and tasty. Highly recommend for wellness seekers!"
+            },
+            {
+                "author": "Krzysztof T.",
+                "rating": 4,
+                "date": "2025-02-12",
+                "title": "Excellent wellness experience",
+                "text": "Great wellness hotel with professional programs. Spa facilities are excellent and treatments very relaxing. Yoga instructors are experienced. Healthy food is delicious. Only minor point is some wellness programs book up fast, so reserve early. Overall fantastic experience."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 8,
@@ -1935,10 +2284,24 @@ TRAVEL_DEALS = [
             "includes": ["wifi", "kitchen", "parking", "playground"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800"
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=800",
+            "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=800",
+            "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800",
+            "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800"
         ],
         "rating": 4.7,
         "review_count": 267,
+        "address": {
+            "street": "ul. Bogdańskiego 8",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 201 9999",
+            "email": "booking@familychalet.pl",
+            "website": "www.familychalet-zakopane.com"
+        },
         "features": {
             "accommodation": "4-star chalet apartments",
             "amenities": ["kitchen", "fireplace", "parking", "playground", "bbq"],
@@ -1946,6 +2309,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["families", "groups", "long_stay"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "free_parking", "reception", "luggage_storage"],
+            "family": ["playground", "children's_play_area", "bbq_facilities", "family_activities", "garden"],
+            "chalet": ["full_kitchen", "fireplace", "dining_area", "living_room", "private_entrance", "terrace"],
+            "room": ["mountain_views", "heating", "flat_screen_tv", "washer", "dishwasher"]
+        },
+        "rooms": [
+            {
+                "name": "1-Bedroom Chalet",
+                "size_sqm": 50,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 4,
+                "features": ["Heating", "Full kitchen", "Fireplace", "Terrace", "Mountain view", "BBQ"]
+            },
+            {
+                "name": "2-Bedroom Chalet",
+                "size_sqm": 70,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 5,
+                "features": ["Heating", "Full kitchen", "Fireplace", "Large terrace", "2 bathrooms", "BBQ", "Garden access"]
+            },
+            {
+                "name": "3-Bedroom Family Chalet",
+                "size_sqm": 95,
+                "beds": "1 King + 2 Queens",
+                "max_guests": 7,
+                "features": ["Heating", "Full kitchen", "2 fireplaces", "Large terrace", "2 bathrooms", "BBQ", "Play area"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Joanna K.",
+                "rating": 5,
+                "date": "2025-02-20",
+                "title": "Perfect for family vacation",
+                "text": "Amazing chalet for our family of 5! Full kitchen was perfect for cooking meals, fireplace created cozy evenings, and kids loved the playground. Tatra views from the terrace are stunning. Having our own space with BBQ was wonderful. Highly recommend for families!"
+            },
+            {
+                "author": "Robert M.",
+                "rating": 5,
+                "date": "2025-01-28",
+                "title": "Home away from home",
+                "text": "Stayed for a week and felt completely at home. Chalet is spacious and well-equipped with everything you need. Fireplace and mountain views are magical. Kids played in the garden while we barbecued. Great value for families or groups. Will definitely return!"
+            },
+            {
+                "author": "Dorota W.",
+                "rating": 4,
+                "date": "2025-01-14",
+                "title": "Great for longer stays",
+                "text": "Excellent chalet apartments for extended mountain stays. Having a kitchen saved money and the living space is comfortable. Playground kept the kids busy. Only note is limited reception hours, but staff are helpful when available. Overall great value for families."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 6,
@@ -1978,10 +2393,24 @@ TRAVEL_DEALS = [
             "includes": ["wifi", "common_kitchen"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800"
+            "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=800",
+            "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800",
+            "https://images.unsplash.com/photo-1506057278219-795838d4c2dd?w=800",
+            "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.4,
         "review_count": 512,
+        "address": {
+            "street": "ul. Zamoyskiego 8",
+            "city": "Zakopane",
+            "postal_code": "34-500",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 18 206 1234",
+            "email": "info@mountainhostel.pl",
+            "website": "www.zakopanebudgethostel.com"
+        },
         "features": {
             "accommodation": "2-star hostel",
             "amenities": ["common_room", "kitchen", "parking", "ski_storage"],
@@ -1989,6 +2418,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["budget", "backpackers", "solo", "groups"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "lockers"],
+            "social": ["common_room", "shared_kitchen", "terrace", "game_room", "group_activities"],
+            "mountain": ["ski_storage", "drying_room", "hiking_info", "tour_bookings"],
+            "room": ["comfortable_beds", "bedding_included", "heating", "reading_lights"]
+        },
+        "rooms": [
+            {
+                "name": "Private Room",
+                "size_sqm": 16,
+                "beds": "2 Singles or 1 Double",
+                "max_guests": 2,
+                "features": ["Heating", "Shared bathroom", "Lockers", "Mountain view"]
+            },
+            {
+                "name": "Private Triple",
+                "size_sqm": 20,
+                "beds": "3 Singles",
+                "max_guests": 3,
+                "features": ["Heating", "Shared bathroom", "Lockers", "Storage space"]
+            },
+            {
+                "name": "Family Room",
+                "size_sqm": 24,
+                "beds": "4 Singles",
+                "max_guests": 4,
+                "features": ["Heating", "Shared bathroom", "Lockers", "Mountain view", "Extra space"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Adam S.",
+                "rating": 4,
+                "date": "2025-01-25",
+                "title": "Great budget option for mountains",
+                "text": "Perfect hostel for budget travelers! Clean rooms, great common areas to meet other hikers and skiers. Kitchen is well-equipped. Ski storage and drying room are essential. Staff are friendly and helpful with mountain advice. Excellent value for Zakopane!"
+            },
+            {
+                "author": "Karolina P.",
+                "rating": 5,
+                "date": "2025-01-12",
+                "title": "Budget-friendly and social",
+                "text": "Best budget accommodation in Zakopane! Met amazing people in the common room. Staff organized group hikes which were fun. Private room was clean and comfortable. Free parking is a bonus. Kitchen saved me lots of money. Definitely recommend for backpackers!"
+            },
+            {
+                "author": "Marcin L.",
+                "rating": 4,
+                "date": "2024-12-29",
+                "title": "Good value hostel",
+                "text": "Clean and affordable hostel close to ski slopes. Common areas are cozy and great for socializing. Kitchen facilities are good. Staff are helpful with local tips. Only minor issue is bathrooms can get busy in the morning, but that's expected at a hostel. Good choice for budget travelers."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 18,
@@ -2024,10 +2505,24 @@ TRAVEL_DEALS = [
         },
         "images": [
             "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800",
-            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
+            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
         ],
         "rating": 4.9,
         "review_count": 1234,
+        "address": {
+            "street": "ul. Powstańców Warszawy 12/14",
+            "city": "Sopot",
+            "postal_code": "81-718",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 520 6000",
+            "email": "reservations@grandbaltic.pl",
+            "website": "www.grandbaltichotel.com"
+        },
         "features": {
             "accommodation": "5-star grand hotel",
             "amenities": ["spa", "pool", "restaurant", "beach_club", "casino", "pier_access"],
@@ -2035,6 +2530,66 @@ TRAVEL_DEALS = [
             "suitable_for": ["luxury", "romantic", "spa", "beach"],
             "accessibility": ["elevator", "wheelchair_friendly", "accessible_bathroom"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_concierge", "valet_parking", "luggage_storage", "room_service"],
+            "luxury": ["casino", "pier_access", "beach_club", "limousine_service", "butler_service"],
+            "wellness": ["luxury_spa", "indoor_pool", "outdoor_pool", "sauna", "steam_room", "beauty_salon", "massage"],
+            "dining": ["fine_dining", "beach_restaurant", "lobby_bar", "pool_bar", "in_room_dining"],
+            "room": ["sea_views", "balconies", "premium_minibar", "nespresso", "bathrobe", "designer_toiletries"]
+        },
+        "rooms": [
+            {
+                "name": "Superior Room",
+                "size_sqm": 35,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Park view", "Marble bathroom", "Minibar", "Nespresso", "Balcony"]
+            },
+            {
+                "name": "Sea View Suite",
+                "size_sqm": 55,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Sea view", "Large balcony", "Living area", "Premium minibar", "Bathtub"]
+            },
+            {
+                "name": "Grand Suite",
+                "size_sqm": 75,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Panoramic sea view", "Living room", "Dining area", "2 bathrooms", "Butler service"]
+            },
+            {
+                "name": "Presidential Suite",
+                "size_sqm": 120,
+                "beds": "1 King + Extra bedroom",
+                "max_guests": 4,
+                "features": ["AC", "360° views", "Private terrace", "Full bar", "Master bathroom", "Grand piano", "Butler"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Monika Z.",
+                "rating": 5,
+                "date": "2025-07-15",
+                "title": "Absolute Baltic luxury",
+                "text": "This grand hotel is magnificent! Our Sea View Suite had stunning Baltic views and direct pier access. The spa is world-class with incredible treatments. Fine dining restaurant is Michelin-worthy. Beach club service was impeccable. Perfect anniversary celebration!"
+            },
+            {
+                "author": "Grzegorz P.",
+                "rating": 5,
+                "date": "2025-07-05",
+                "title": "Best hotel on the Baltic coast",
+                "text": "Simply spectacular! Every detail screams luxury from the marble bathrooms to the butler service. Casino adds entertainment, beach club is exclusive, and spa treatments divine. Indoor and outdoor pools are stunning. Worth every zloty for a special occasion!"
+            },
+            {
+                "author": "Natalia K.",
+                "rating": 5,
+                "date": "2025-06-28",
+                "title": "Unforgettable luxury experience",
+                "text": "Celebrated our honeymoon here and it was perfection. Presidential Suite was beyond our dreams with pier and sea views. Staff anticipated every need. Spa, restaurants, beach access - everything was five-star. The most luxurious hotel experience in Poland!"
+            }
+        ],
         "urgency": {
             "ending_soon": True,
             "spots_left": 4,
@@ -2067,10 +2622,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "beach_access"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800"
+            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800",
+            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800"
         ],
         "rating": 4.6,
         "review_count": 567,
+        "address": {
+            "street": "ul. Bitwy pod Płowcami 59",
+            "city": "Sopot",
+            "postal_code": "81-732",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 555 1234",
+            "email": "booking@pierview-sopot.pl",
+            "website": "www.pierviewhotel.com"
+        },
         "features": {
             "accommodation": "4-star beachfront hotel",
             "amenities": ["restaurant", "bar", "terrace", "pier_view"],
@@ -2078,6 +2647,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["beach", "couples", "families"],
             "accessibility": ["elevator"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "luggage_storage", "concierge"],
+            "beach": ["beach_access", "beach_chairs", "beach_towels", "pier_view"],
+            "dining": ["beachfront_restaurant", "pier_bar", "terrace_dining", "breakfast_buffet"],
+            "room": ["sea_views", "balconies", "flat_screen_tv", "minibar", "safe", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Room",
+                "size_sqm": 26,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "City view", "Modern bathroom", "Coffee maker", "Safe"]
+            },
+            {
+                "name": "Pier View Room",
+                "size_sqm": 32,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Pier view", "Balcony", "Seating area", "Minibar", "Coffee maker"]
+            },
+            {
+                "name": "Family Pier View",
+                "size_sqm": 45,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 4,
+                "features": ["AC", "Pier and sea view", "Large balcony", "Living area", "Minibar", "2 bathrooms"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Beata W.",
+                "rating": 5,
+                "date": "2025-07-12",
+                "title": "Perfect beachfront location",
+                "text": "Amazing hotel right by the pier! Our room had stunning views of the longest wooden pier in Europe. Beach access is direct and the restaurant terrace overlooks the sea. Staff are friendly and helpful. Perfect for beach lovers and romantic getaways!"
+            },
+            {
+                "author": "Filip K.",
+                "rating": 4,
+                "date": "2025-07-03",
+                "title": "Great family beach hotel",
+                "text": "Excellent location for families. Family room was spacious with great pier views. Kids loved being so close to the beach and pier. Restaurant has good food. Only minor point is it can get busy during peak season but that's expected. Overall great value!"
+            },
+            {
+                "author": "Zofia M.",
+                "rating": 5,
+                "date": "2025-06-25",
+                "title": "Romantic seaside escape",
+                "text": "Perfect for a romantic weekend. Waking up to pier and sea views was magical. Walking distance to everything in Sopot. Terrace bar is lovely for sunset drinks. Rooms are comfortable and clean. Highly recommend for couples!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 11,
@@ -2110,10 +2731,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "spa_treatments", "pool_access", "massage"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
+            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+            "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800",
+            "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
+            "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.8,
         "review_count": 789,
+        "address": {
+            "street": "ul. Haffnera 83",
+            "city": "Sopot",
+            "postal_code": "81-715",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 550 9000",
+            "email": "wellness@balticspa.pl",
+            "website": "www.balticspasopot.com"
+        },
         "features": {
             "accommodation": "4-star spa resort",
             "amenities": ["spa", "pool", "sauna", "restaurant", "wellness_programs"],
@@ -2121,6 +2756,59 @@ TRAVEL_DEALS = [
             "suitable_for": ["spa", "wellness", "relaxation", "couples"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "concierge"],
+            "spa_wellness": ["luxury_spa", "wellness_programs", "massage_treatments", "beauty_treatments", "health_consultations"],
+            "facilities": ["indoor_pool", "outdoor_pool", "sauna", "steam_room", "hot_tub", "relaxation_lounge"],
+            "dining": ["wellness_restaurant", "juice_bar", "healthy_cafe", "breakfast_buffet"],
+            "room": ["sea_views", "balconies", "aromatherapy", "premium_bedding", "bathrobe"]
+        },
+        "rooms": [
+            {
+                "name": "Wellness Room",
+                "size_sqm": 30,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Park view", "Balcony", "Aromatherapy", "Bathrobe", "Tea station"]
+            },
+            {
+                "name": "Wellness Suite",
+                "size_sqm": 42,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Sea view", "Large balcony", "Living area", "Hot tub", "Premium spa products"]
+            },
+            {
+                "name": "Spa Suite with Terrace",
+                "size_sqm": 55,
+                "beds": "1 King Bed + Sofa bed",
+                "max_guests": 3,
+                "features": ["AC", "Sea view", "Private terrace", "Outdoor hot tub", "Treatment room", "Yoga space"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Iwona S.",
+                "rating": 5,
+                "date": "2025-07-10",
+                "title": "Ultimate spa relaxation",
+                "text": "This spa resort is paradise! Wellness programs are expertly designed and treatments are world-class. Both pools are beautiful, sauna facilities excellent. Healthy restaurant serves delicious food. Our Wellness Suite was heavenly. Left feeling completely rejuvenated!"
+            },
+            {
+                "author": "Andrzej T.",
+                "rating": 5,
+                "date": "2025-06-30",
+                "title": "Best spa on the Baltic",
+                "text": "Incredible wellness experience! Massage treatments were professional, spa facilities top-notch. The outdoor pool with sea views is stunning. Wellness programs include yoga and meditation. Staff are caring professionals. Perfect for couples seeking relaxation."
+            },
+            {
+                "author": "Marta L.",
+                "rating": 4,
+                "date": "2025-06-18",
+                "title": "Excellent wellness retreat",
+                "text": "Great spa resort with comprehensive wellness offerings. Spa Suite with hot tub was amazing. Treatments are high quality and wellness consultations helpful. Healthy food is tasty. Only minor point is spa can book up, so reserve treatments early. Highly recommended!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 9,
@@ -2269,10 +2957,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "kids_club", "pool_access", "entertainment"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
+            "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800",
+            "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+            "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
+            "https://images.unsplash.com/photo-1502672260066-6bc35f0a1f80?w=800"
         ],
         "rating": 4.8,
         "review_count": 923,
+        "address": {
+            "street": "ul. Grunwaldzka 74",
+            "city": "Sopot",
+            "postal_code": "81-771",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 556 7000",
+            "email": "family@beachresortsopot.pl",
+            "website": "www.familybeachresort.com"
+        },
         "features": {
             "accommodation": "4-star family resort",
             "amenities": ["kids_club", "pool", "playground", "restaurant", "animation", "pet_area"],
@@ -2284,6 +2986,60 @@ TRAVEL_DEALS = [
             "suitable_for": ["families", "children", "beach", "pets"],
             "accessibility": ["elevator", "wheelchair_friendly"]
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "24h_reception", "free_parking", "luggage_storage", "concierge"],
+            "family": ["kids_club", "playground", "childrens_pool", "baby_cots", "high_chairs", "animation_team"],
+            "beach": ["beach_access", "beach_toys", "beach_volleyball", "water_activities"],
+            "dining": ["family_restaurant", "kids_menu", "poolside_bar", "ice_cream_bar", "breakfast_buffet"],
+            "pet_friendly": ["pet_area", "dog_walking_space", "pet_bowls", "pet_beds_available"],
+            "room": ["sea_views", "balconies", "family_amenities", "flat_screen_tv", "minibar"]
+        },
+        "rooms": [
+            {
+                "name": "Standard Family Room",
+                "size_sqm": 35,
+                "beds": "1 Queen + 1 Single + Sofa bed",
+                "max_guests": 4,
+                "features": ["AC", "Park view", "Balcony", "Kids area", "Minibar", "Safe"]
+            },
+            {
+                "name": "Family Suite",
+                "size_sqm": 50,
+                "beds": "1 King + 2 Singles",
+                "max_guests": 5,
+                "features": ["AC", "Sea view", "Large balcony", "Separate kids room", "Kitchenette", "2 bathrooms"]
+            },
+            {
+                "name": "Family Apartment",
+                "size_sqm": 70,
+                "beds": "1 King + 2 Queens",
+                "max_guests": 6,
+                "features": ["AC", "Sea view", "Living room", "Full kitchen", "2 bathrooms", "Washing machine", "Terrace"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Kamila R.",
+                "rating": 5,
+                "date": "2025-07-08",
+                "title": "Perfect for families with kids",
+                "text": "Amazing family resort! Kids club kept our children entertained for hours. Animation team was fantastic. Pool area is great with separate kids pool. Restaurant has excellent kids menu. Beach access is easy. Our family had a wonderful vacation!"
+            },
+            {
+                "author": "Tomasz D.",
+                "rating": 5,
+                "date": "2025-06-27",
+                "title": "Family paradise with pets",
+                "text": "Excellent resort that welcomes families and pets! Our dog loved the pet area and beach walks. Kids enjoyed playground and pool. Family Suite was spacious and comfortable. Staff are family-friendly and helpful. Highly recommend for families!"
+            },
+            {
+                "author": "Justyna P.",
+                "rating": 4,
+                "date": "2025-06-15",
+                "title": "Great family vacation",
+                "text": "Wonderful resort for families. Kids club and entertainment kept children busy. Pool area is nice and beach access convenient. Family Apartment was perfect with full kitchen. Only minor point is restaurant can get crowded during peak times but overall excellent experience!"
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 12,
@@ -2316,10 +3072,24 @@ TRAVEL_DEALS = [
             "includes": ["breakfast", "wifi", "garden_access"]
         },
         "images": [
-            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800"
+            "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?w=800",
+            "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800",
+            "https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?w=800",
+            "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=800"
         ],
         "rating": 4.7,
         "review_count": 278,
+        "address": {
+            "street": "ul. Chopina 32",
+            "city": "Sopot",
+            "postal_code": "81-786",
+            "country": "Poland"
+        },
+        "contact": {
+            "phone": "+48 58 344 5555",
+            "email": "stay@seasidevilla.pl",
+            "website": "www.seasideboutiquevilla.com"
+        },
         "features": {
             "accommodation": "3-star boutique villa",
             "amenities": ["garden", "terrace", "library", "bikes"],
@@ -2327,6 +3097,58 @@ TRAVEL_DEALS = [
             "suitable_for": ["romantic", "couples", "quiet"],
             "accessibility": []
         },
+        "detailed_amenities": {
+            "general": ["free_wifi", "reception", "luggage_storage", "concierge"],
+            "boutique": ["garden", "terrace", "library", "bike_rental", "peaceful_atmosphere"],
+            "dining": ["breakfast_terrace", "tea_lounge", "garden_dining"],
+            "room": ["elegant_decor", "quality_bedding", "flat_screen_tv", "safe", "coffee_maker"]
+        },
+        "rooms": [
+            {
+                "name": "Garden View Room",
+                "size_sqm": 24,
+                "beds": "1 Queen Bed",
+                "max_guests": 2,
+                "features": ["AC", "Garden view", "Elegant decor", "Coffee maker", "Bathrobe"]
+            },
+            {
+                "name": "Superior Garden Room",
+                "size_sqm": 30,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Garden view", "Balcony", "Seating area", "Premium bedding", "Tea station"]
+            },
+            {
+                "name": "Romantic Suite",
+                "size_sqm": 40,
+                "beds": "1 King Bed",
+                "max_guests": 2,
+                "features": ["AC", "Garden and partial sea view", "Private terrace", "Living area", "Bathtub", "Champagne on arrival"]
+            }
+        ],
+        "reviews": [
+            {
+                "author": "Sylwia K.",
+                "rating": 5,
+                "date": "2025-07-05",
+                "title": "Romantic and peaceful",
+                "text": "Perfect boutique villa for a romantic getaway! The garden is beautiful and peaceful. Our room was elegantly decorated with attention to detail. Breakfast on the terrace was lovely. Bikes provided were great for exploring quiet Sopot streets. Highly recommend for couples!"
+            },
+            {
+                "author": "Michał B.",
+                "rating": 5,
+                "date": "2025-06-22",
+                "title": "Charming hideaway",
+                "text": "What a charming place! The villa has character and the garden is a tranquil oasis. Library has interesting books. Romantic Suite was perfect for our anniversary. Staff are attentive and service personal. A hidden gem in Sopot!"
+            },
+            {
+                "author": "Kasia W.",
+                "rating": 4,
+                "date": "2025-06-10",
+                "title": "Quiet boutique experience",
+                "text": "Beautiful boutique villa away from the busy beach crowds. Garden is peaceful and well-maintained. Rooms are cozy with quality furnishings. Breakfast is simple but fresh. No elevator but the intimate atmosphere makes up for it. Perfect for couples seeking tranquility."
+            }
+        ],
         "urgency": {
             "ending_soon": False,
             "spots_left": 5,

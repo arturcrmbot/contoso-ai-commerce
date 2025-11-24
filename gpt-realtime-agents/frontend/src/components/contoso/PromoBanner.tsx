@@ -24,31 +24,37 @@ export function PromoBanner({ title, items, onPromoClick }: PromoBannerProps) {
   };
 
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg font-bold">{title}</h3>
+    <div className="space-y-4">
+      <h3 className="text-xl font-bold tracking-tight">{title}</h3>
       {items.map((promo, idx) => (
-        <Card key={idx} className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
-          <CardContent className="p-4">
-            <div className="flex items-start justify-between mb-2">
+        <Card key={idx} className="border-0 bg-gradient-to-r from-violet-500 to-fuchsia-600 text-white shadow-lg overflow-hidden relative">
+          {/* Decorative circles */}
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-black/10 rounded-full blur-2xl" />
+          
+          <CardContent className="p-5 relative z-10">
+            <div className="flex items-start justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Tag size={20} className="text-primary" weight="fill" />
-                <h4 className="font-semibold">{promo.title}</h4>
+                <div className="bg-white/20 p-1.5 rounded-lg backdrop-blur-sm">
+                  <Tag size={20} className="text-white" weight="fill" />
+                </div>
+                <h4 className="font-bold text-lg">{promo.title}</h4>
               </div>
               {promo.auto_apply && (
-                <Badge variant="secondary" className="text-xs">Auto-applied</Badge>
+                <Badge className="bg-white/20 hover:bg-white/30 text-white border-0 backdrop-blur-sm">Auto-applied</Badge>
               )}
             </div>
-            <p className="text-sm text-muted-foreground mb-3">{promo.description}</p>
+            <p className="text-sm text-white/90 mb-4 font-medium leading-relaxed">{promo.description}</p>
             {promo.code && !promo.auto_apply && (
-              <div className="flex items-center gap-2">
-                <code className="flex-1 px-3 py-2 bg-background rounded border font-mono text-sm">
+              <div className="flex items-center gap-2 bg-black/20 p-1.5 rounded-lg backdrop-blur-sm">
+                <code className="flex-1 px-3 py-1.5 font-mono text-sm font-bold tracking-wider text-white">
                   {promo.code}
                 </code>
                 <Button
                   size="sm"
-                  variant="outline"
+                  variant="ghost"
                   onClick={() => copyCode(promo.code!)}
-                  className="gap-1"
+                  className="gap-1 text-white hover:bg-white/20 hover:text-white h-8"
                 >
                   <Copy size={14} />
                   Copy

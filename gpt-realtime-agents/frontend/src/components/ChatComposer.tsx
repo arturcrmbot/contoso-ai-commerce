@@ -94,25 +94,26 @@ export function ChatComposer({
   };
 
   return (
-    <div className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="p-4 space-y-3">
-        <form onSubmit={handleSubmit} className="flex gap-3">
-          <div className="flex-1 relative">
+    <div className="border-t bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.1)] z-10">
+      <div className="p-4 space-y-4 max-w-4xl mx-auto">
+        <form onSubmit={handleSubmit} className="flex gap-3 items-end">
+          <div className="flex-1 relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <Input
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Speak or type your question..."
+              placeholder="Ask about flights, hotels, or travel tips..."
               disabled={disabled}
-              className="pr-12"
+              className="pr-12 h-14 rounded-2xl border-gray-200 shadow-sm focus-visible:ring-teal-500 text-lg bg-white relative z-10"
             />
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0 gap-1"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 p-0 rounded-xl hover:bg-teal-50 text-teal-600 z-20"
               disabled={disabled}
             >
-              <Microphone size={16} />
+              <Microphone size={20} weight={voiceActivity.isSpeaking ? "fill" : "regular"} />
               {isMobile ? (
                 <SimpleVoiceIndicator
                   isSpeaking={voiceActivity.isSpeaking}
@@ -132,22 +133,23 @@ export function ChatComposer({
           <Button 
             type="submit" 
             disabled={disabled || !message.trim()}
-            className="gap-2"
+            className="h-14 px-6 rounded-2xl bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 shadow-lg hover:shadow-teal-500/25 transition-all duration-300"
           >
-            <PaperPlaneTilt size={16} />
-            Send
+            <PaperPlaneTilt size={20} weight="fill" />
+            <span className="ml-2 font-semibold">Send</span>
           </Button>
         </form>
 
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="text-xs text-muted-foreground">
-              Press Enter to send • Click mic for voice input
+        <div className="flex justify-between items-center px-1">
+          <div className="flex items-center gap-3">
+            <div className="text-xs font-medium text-gray-500 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
+              Press Enter to send
             </div>
             {voiceActivity.isSpeaking && (
-              <Badge variant="outline" className="text-xs py-1 px-2 gap-1">
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                Listening
+              <Badge variant="outline" className="text-xs py-0.5 px-2 gap-1.5 border-teal-200 bg-teal-50 text-teal-700">
+                <div className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse" />
+                Listening...
               </Badge>
             )}
           </div>
