@@ -125,7 +125,7 @@ function HotelHeader({ hotel }: HotelHeaderProps) {
   console.log('[HotelHeader] Rendering hotel:', hotel);
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden bg-white dark:bg-gray-900">
       {hotel.image && (
         <div
           className="h-48 bg-cover bg-center"
@@ -138,20 +138,20 @@ function HotelHeader({ hotel }: HotelHeaderProps) {
             <h3 className="text-xl font-bold text-gray-900 dark:text-white">
               {hotel.name || '[No name]'}
             </h3>
-            <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 mt-1">
-              <MapPin size={14} weight="fill" />
+            <div className="flex items-center gap-1 text-sm text-gray-700 dark:text-gray-300 mt-1">
+              <MapPin size={14} weight="fill" className="text-gray-600 dark:text-gray-400" />
               <span>{hotel.city || '[No city]'}</span>
             </div>
           </div>
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <div className="flex items-center gap-1 bg-teal-500/10 px-2 py-1 rounded">
-              <Star size={16} weight="fill" className="text-teal-600" />
-              <span className="text-sm font-bold text-teal-700 dark:text-teal-400">
+              <Star size={16} weight="fill" className="text-teal-600 dark:text-teal-400" />
+              <span className="text-sm font-bold text-teal-700 dark:text-teal-300">
                 {hotel.rating?.toFixed(1) || '0.0'}
               </span>
             </div>
             {hotel.stars && hotel.stars > 0 && (
-              <div className="text-yellow-500">
+              <div className="text-yellow-500 dark:text-yellow-400">
                 {Array.from({ length: hotel.stars }).map((_, i) => (
                   <Star key={i} size={14} weight="fill" className="inline" />
                 ))}
@@ -164,7 +164,7 @@ function HotelHeader({ hotel }: HotelHeaderProps) {
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
               £{hotel.price_per_night || '0'}
             </span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">per night</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">per night</span>
           </div>
         </div>
       </div>

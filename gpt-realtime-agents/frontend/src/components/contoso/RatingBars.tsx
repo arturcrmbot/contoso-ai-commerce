@@ -26,10 +26,10 @@ export function RatingBars({ ratings }: RatingBarsProps) {
   ].filter(cat => cat.value !== undefined);
 
   return (
-    <Card>
+    <Card className="bg-white dark:bg-gray-900">
       <CardHeader className="pb-3">
-        <h4 className="font-semibold text-sm flex items-center gap-2">
-          <Star size={16} weight="fill" className="text-teal-600" />
+        <h4 className="font-semibold text-sm flex items-center gap-2 text-gray-900 dark:text-white">
+          <Star size={16} weight="fill" className="text-teal-600 dark:text-teal-400" />
           Ratings Breakdown
         </h4>
       </CardHeader>
@@ -37,14 +37,14 @@ export function RatingBars({ ratings }: RatingBarsProps) {
         {ratingCategories.map((category) => (
           <div key={category.key}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-gray-900 dark:text-gray-100">
+              <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
                 {category.label}
               </span>
               <span className="text-xs font-bold text-gray-900 dark:text-white">
                 {category.value?.toFixed(1)}
               </span>
             </div>
-            <div className="h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full transition-all"
                 style={{ width: `${((category.value || 0) / 5) * 100}%` }}
