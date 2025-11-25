@@ -47,6 +47,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.8,
+            "cleanliness": 4.9,
+            "location": 4.9,
+            "service": 4.8,
+            "value": 4.4,
+            "facilities": 4.7
+        },
         "review_count": 342,
         "address": {
             "street": "ul. Krakowskie Przedmieście 87/89",
@@ -167,6 +176,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800"
         ],
         "rating": 4.4,
+        "ratings": {
+            "overall": 4.4,
+            "breakfast": 4.2,
+            "cleanliness": 4.6,
+            "location": 4.7,
+            "service": 4.3,
+            "value": 4.7,
+            "facilities": 4.2
+        },
         "review_count": 189,
         "address": {
             "street": "ul. Twarda 52",
@@ -278,6 +296,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800"
         ],
         "rating": 4.9,
+        "ratings": {
+            "overall": 4.9,
+            "breakfast": 4.9,
+            "cleanliness": 5.0,
+            "location": 4.8,
+            "service": 4.9,
+            "value": 4.3,
+            "facilities": 4.9
+        },
         "review_count": 567,
         "address": {
             "street": "ul. Senatorska 29",
@@ -396,6 +423,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800"
         ],
         "rating": 4.5,
+        "ratings": {
+            "overall": 4.5,
+            "breakfast": 4.3,
+            "cleanliness": 4.6,
+            "location": 4.3,
+            "service": 4.4,
+            "value": 4.6,
+            "facilities": 4.4
+        },
         "review_count": 223,
         "address": {
             "street": "ul. Wybrzeże Kościuszkowskie 31",
@@ -506,6 +542,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.5,
+            "cleanliness": 4.7,
+            "location": 4.5,
+            "service": 4.6,
+            "value": 4.5,
+            "facilities": 4.7
+        },
         "review_count": 298,
         "address": {
             "street": "ul. Marszałkowska 115",
@@ -615,6 +660,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800"
         ],
         "rating": 4.2,
+        "ratings": {
+            "overall": 4.2,
+            "breakfast": 4.0,
+            "cleanliness": 4.5,
+            "location": 3.9,
+            "service": 4.2,
+            "value": 4.8,
+            "facilities": 4.0
+        },
         "review_count": 456,
         "address": {
             "street": "ul. Komitetu Obrony Robotników 49",
@@ -726,6 +780,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.0,
+            "cleanliness": 4.8,
+            "location": 4.7,
+            "service": 4.6,
+            "value": 4.6,
+            "facilities": 4.9
+        },
         "review_count": 178,
         "address": {
             "street": "ul. Żurawia 24",
@@ -839,6 +902,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1512916194211-3f2b7f5f7de3?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.9,
+            "cleanliness": 4.9,
+            "location": 5.0,
+            "service": 4.8,
+            "value": 4.4,
+            "facilities": 4.8
+        },
         "review_count": 892,
         "address": {
             "street": "Nerudova 211/44",
@@ -957,6 +1029,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.4,
+            "cleanliness": 4.7,
+            "location": 4.6,
+            "service": 4.5,
+            "value": 4.5,
+            "facilities": 4.6
+        },
         "review_count": 534,
         "address": {
             "street": "Karlova 188/2",
@@ -1068,6 +1149,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.9,
+        "ratings": {
+            "overall": 4.9,
+            "breakfast": 5.0,
+            "cleanliness": 5.0,
+            "location": 4.9,
+            "service": 4.9,
+            "value": 4.2,
+            "facilities": 4.9
+        },
         "review_count": 1023,
         "address": {
             "street": "Staroměstské náměstí 24",
@@ -1186,6 +1276,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.6,
+            "cleanliness": 4.7,
+            "location": 4.6,
+            "service": 4.7,
+            "value": 4.6,
+            "facilities": 4.8
+        },
         "review_count": 412,
         "address": {
             "street": "Na Příkopě 22",
@@ -1296,6 +1395,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800"
         ],
         "rating": 4.5,
+        "ratings": {
+            "overall": 4.5,
+            "breakfast": 4.2,
+            "cleanliness": 4.6,
+            "location": 4.4,
+            "service": 4.4,
+            "value": 4.7,
+            "facilities": 4.8
+        },
         "review_count": 687,
         "address": {
             "street": "Rybná 685/7",
@@ -1406,6 +1514,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.5,
+            "cleanliness": 4.7,
+            "location": 4.8,
+            "service": 4.6,
+            "value": 4.6,
+            "facilities": 4.5
+        },
         "review_count": 378,
         "address": {
             "street": "Maiselova 15",
@@ -1515,6 +1632,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=800"
         ],
         "rating": 4.3,
+        "ratings": {
+            "overall": 4.3,
+            "breakfast": 3.8,
+            "cleanliness": 4.4,
+            "location": 4.5,
+            "service": 4.2,
+            "value": 4.9,
+            "facilities": 4.0
+        },
         "review_count": 923,
         "address": {
             "street": "Sokolovská 112",
@@ -1625,6 +1751,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.6,
+            "cleanliness": 4.8,
+            "location": 4.7,
+            "service": 4.7,
+            "value": 4.5,
+            "facilities": 4.7
+        },
         "review_count": 445,
         "address": {
             "street": "Dvořákovo nábřeží 12",
@@ -1738,6 +1873,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.7,
+            "cleanliness": 4.8,
+            "location": 4.6,
+            "service": 4.8,
+            "value": 4.6,
+            "facilities": 4.9
+        },
         "review_count": 567,
         "address": {
             "street": "ul. Droga do Białego 25",
@@ -1857,6 +2001,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=800"
         ],
         "rating": 4.9,
+        "ratings": {
+            "overall": 4.9,
+            "breakfast": 4.9,
+            "cleanliness": 4.9,
+            "location": 4.7,
+            "service": 4.9,
+            "value": 4.3,
+            "facilities": 5.0
+        },
         "review_count": 892,
         "address": {
             "street": "ul. Przewodników Tatrzańskich 10",
@@ -1975,6 +2128,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.6,
+            "cleanliness": 4.6,
+            "location": 4.8,
+            "service": 4.7,
+            "value": 4.7,
+            "facilities": 4.5
+        },
         "review_count": 334,
         "address": {
             "street": "ul. Krupówki 22",
@@ -2085,6 +2247,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.3,
+            "cleanliness": 4.7,
+            "location": 4.5,
+            "service": 4.5,
+            "value": 4.8,
+            "facilities": 4.4
+        },
         "review_count": 289,
         "address": {
             "street": "ul. Chałubińskiego 44",
@@ -2197,6 +2368,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.9,
+            "cleanliness": 4.9,
+            "location": 4.5,
+            "service": 4.8,
+            "value": 4.5,
+            "facilities": 4.9
+        },
         "review_count": 423,
         "address": {
             "street": "ul. Pardałówka 17",
@@ -2308,6 +2488,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.1,
+            "cleanliness": 4.7,
+            "location": 4.6,
+            "service": 4.6,
+            "value": 4.7,
+            "facilities": 4.8
+        },
         "review_count": 267,
         "address": {
             "street": "ul. Bogdańskiego 8",
@@ -2417,6 +2606,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
         ],
         "rating": 4.4,
+        "ratings": {
+            "overall": 4.4,
+            "breakfast": 3.9,
+            "cleanliness": 4.5,
+            "location": 4.6,
+            "service": 4.3,
+            "value": 4.9,
+            "facilities": 4.1
+        },
         "review_count": 512,
         "address": {
             "street": "ul. Zamoyskiego 8",
@@ -2530,6 +2728,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.9,
+        "ratings": {
+            "overall": 4.9,
+            "breakfast": 4.9,
+            "cleanliness": 5.0,
+            "location": 5.0,
+            "service": 4.9,
+            "value": 4.3,
+            "facilities": 4.9
+        },
         "review_count": 1234,
         "address": {
             "street": "ul. Powstańców Warszawy 12/14",
@@ -2648,6 +2855,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.5,
+            "cleanliness": 4.7,
+            "location": 4.9,
+            "service": 4.6,
+            "value": 4.6,
+            "facilities": 4.6
+        },
         "review_count": 567,
         "address": {
             "street": "ul. Bitwy pod Płowcami 59",
@@ -2759,6 +2975,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.7,
+            "cleanliness": 4.9,
+            "location": 4.7,
+            "service": 4.8,
+            "value": 4.5,
+            "facilities": 4.9
+        },
         "review_count": 789,
         "address": {
             "street": "ul. Haffnera 83",
@@ -2870,6 +3095,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.5,
+            "cleanliness": 4.6,
+            "location": 4.8,
+            "service": 4.6,
+            "value": 4.7,
+            "facilities": 4.6
+        },
         "review_count": 445,
         "address": {
             "street": "ul. Morska 15",
@@ -2986,6 +3220,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.8,
+        "ratings": {
+            "overall": 4.8,
+            "breakfast": 4.8,
+            "cleanliness": 4.8,
+            "location": 4.7,
+            "service": 4.8,
+            "value": 4.5,
+            "facilities": 4.9
+        },
         "review_count": 923,
         "address": {
             "street": "ul. Grunwaldzka 74",
@@ -3102,6 +3345,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
         ],
         "rating": 4.7,
+        "ratings": {
+            "overall": 4.7,
+            "breakfast": 4.6,
+            "cleanliness": 4.7,
+            "location": 4.6,
+            "service": 4.7,
+            "value": 4.7,
+            "facilities": 4.6
+        },
         "review_count": 278,
         "address": {
             "street": "ul. Chopina 32",
@@ -3212,6 +3464,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.5,
+        "ratings": {
+            "overall": 4.5,
+            "breakfast": 3.9,
+            "cleanliness": 4.5,
+            "location": 4.8,
+            "service": 4.4,
+            "value": 4.9,
+            "facilities": 4.3
+        },
         "review_count": 634,
         "address": {
             "street": "ul. Władysława IV 2",
@@ -3322,6 +3583,15 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
         ],
         "rating": 4.6,
+        "ratings": {
+            "overall": 4.6,
+            "breakfast": 4.4,
+            "cleanliness": 4.6,
+            "location": 4.7,
+            "service": 4.6,
+            "value": 4.7,
+            "facilities": 4.5
+        },
         "review_count": 389,
         "address": {
             "street": "ul. Bohaterów Monte Cassino 44",

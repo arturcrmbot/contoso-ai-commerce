@@ -165,20 +165,80 @@ async def tool_get_budget_deals(arguments: Dict[str, Any]) -> Dict[str, Any]:
 
 
 async def tool_compare_deals(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Compare multiple deals side by side."""
+    """
+    Compare multiple deals side by side with flexible comparison aspects.
+    Agent decides what to compare (rooms, facilities, ratings, pricing, etc.)
+    """
     deal_ids = arguments.get("deal_ids", [])
+    aspects = arguments.get("aspects", ["overview", "ratings", "rooms", "facilities"])
+    price_params = arguments.get("price_params", {})
 
     if not deal_ids or len(deal_ids) < 2:
         return {"error": "Need at least 2 deal IDs to compare"}
 
-    results = compare_deals(deal_ids)
+    if len(deal_ids) > 2:
+        deal_ids = deal_ids[:2]  # Limit to 2 hotels for side-by-side comparison
+
+    # Fetch deal details
+    deals = compare_deals(deal_ids)
+
+    if len(deals) < 2:
+        return {"error": "Could not find enough deals to compare"}
+
+    # Build comparison data structure
+    comparison_data = {
+        "hotels": [],
+        "aspects": aspects,
+        "has_price_calculation": bool(price_params)
+    }
+
+    for deal in deals:
+        hotel_data = {
+            "id": deal["id"],
+            "name": deal["title"],
+            "city": deal["destination"]["city"],
+            "stars": deal.get("stars", 0),
+            "rating": deal.get("rating", 0),
+            "ratings": deal.get("ratings", {}),
+            "price_per_night": deal["pricing"]["deal_price"],
+            "image": deal["images"][0] if deal.get("images") else None
+        }
+
+        # Include rooms if requested
+        if "rooms" in aspects:
+            hotel_data["rooms"] = deal.get("rooms", [])
+
+        # Include facilities if requested
+        if "facilities" in aspects:
+            detailed_amenities = deal.get("detailed_amenities", {})
+            hotel_data["facilities"] = {
+                "wellness": detailed_amenities.get("wellness", []),
+                "dining": detailed_amenities.get("dining", []),
+                "activities": detailed_amenities.get("activities", []),
+                "business": detailed_amenities.get("business", [])
+            }
+
+        # Calculate total price if params provided
+        if price_params:
+            nights = price_params.get("nights", 1)
+            guests = price_params.get("guests", 2)
+            base_price = deal["pricing"]["deal_price"] * nights
+            hotel_data["price_calculation"] = {
+                "nights": nights,
+                "guests": guests,
+                "price_per_night": deal["pricing"]["deal_price"],
+                "base_price": base_price,
+                "total": base_price  # Simplified - could add taxes/fees later
+            }
+
+        comparison_data["hotels"].append(hotel_data)
 
     return {
-        "deals": results,
-        "count": len(results),
+        "comparison": comparison_data,
+        "count": len(comparison_data["hotels"]),
         "_visual": {
             "type": "deal_comparison",
-            "data": {"deals": results}
+            "data": comparison_data
         }
     }
 
@@ -515,14 +575,27 @@ TOOLS_CATALOG = {
         "definition": {
             "type": "function",
             "name": "compare_deals",
-            "description": "Compare multiple deals side-by-side",
+            "description": "Compare 2 hotels side by side with flexible comparison aspects. You decide what to compare based on user needs: rooms, facilities, ratings, pricing, etc.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "deal_ids": {
                         "type": "array",
                         "items": {"type": "string"},
-                        "description": "Array of deal IDs to compare (2-4 deals)"
+                        "description": "Array of 2 deal IDs to compare side by side"
+                    },
+                    "aspects": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "What to compare: 'overview', 'ratings', 'rooms', 'facilities', 'pricing'. Include what's relevant to the user's question. Defaults to all."
+                    },
+                    "price_params": {
+                        "type": "object",
+                        "description": "Optional: If comparing total prices, specify nights and guests to calculate totals",
+                        "properties": {
+                            "nights": {"type": "number", "description": "Number of nights"},
+                            "guests": {"type": "number", "description": "Number of guests"}
+                        }
                     }
                 },
                 "required": ["deal_ids"]

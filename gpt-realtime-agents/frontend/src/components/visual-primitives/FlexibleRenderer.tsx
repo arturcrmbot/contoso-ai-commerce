@@ -22,6 +22,7 @@ import { PromoBanner } from '../contoso/PromoBanner';
 import { DealCard } from '../contoso/DealCard';
 import { DealGrid } from '../contoso/DealGrid';
 import { DealDetailPage } from '../contoso/DealDetailPage';
+import { ComparisonView } from '../contoso/ComparisonView';
 
 interface FlexibleRendererProps {
   visual: FlexibleVisual;
@@ -111,26 +112,12 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
         );
 
       case 'deal_comparison':
-        const compareDeals = section.data?.deals || [];
-        if (!Array.isArray(compareDeals) || compareDeals.length === 0) {
-          return null;
+        // Use new ComparisonView for flexible comparison
+        const comparisonData = section.data;
+        if (!comparisonData || !comparisonData.hotels || comparisonData.hotels.length < 2) {
+          return <div className="text-sm text-muted-foreground p-4">Need at least 2 hotels to compare</div>;
         }
-        return (
-          <div className="space-y-3">
-            {section.title && (
-              <h3 className="text-lg font-bold">{section.title || 'Compare Deals'}</h3>
-            )}
-            <div className="grid grid-cols-2 gap-4">
-              {compareDeals.map((deal: any) => (
-                <DealCard
-                  key={deal.id}
-                  deal={deal}
-                  onClick={() => onAction?.('deal_click', { deal_id: deal.id })}
-                />
-              ))}
-            </div>
-          </div>
-        );
+        return <ComparisonView data={comparisonData} />;
 
       case 'deal_detail_page':
         const detailDeal = section.data?.deal || section.data;
