@@ -59,6 +59,8 @@ interface ComparisonViewProps {
 export function ComparisonView({ data }: ComparisonViewProps) {
   const { hotels, aspects } = data;
 
+  console.log('[ComparisonView] Data received:', { hotels, aspects });
+
   if (!hotels || hotels.length < 2) {
     return (
       <div className="p-6 text-center text-muted-foreground">
@@ -68,6 +70,8 @@ export function ComparisonView({ data }: ComparisonViewProps) {
   }
 
   const [hotel1, hotel2] = hotels;
+  console.log('[ComparisonView] Hotel 1:', hotel1);
+  console.log('[ComparisonView] Hotel 2:', hotel2);
 
   const showRatings = aspects.includes('ratings') || aspects.includes('overview');
   const showRooms = aspects.includes('rooms');
@@ -118,6 +122,8 @@ interface HotelHeaderProps {
 }
 
 function HotelHeader({ hotel }: HotelHeaderProps) {
+  console.log('[HotelHeader] Rendering hotel:', hotel);
+
   return (
     <Card className="overflow-hidden">
       {hotel.image && (
@@ -128,33 +134,37 @@ function HotelHeader({ hotel }: HotelHeaderProps) {
       )}
       <div className="p-4 space-y-2">
         <div className="flex items-start justify-between">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">{hotel.name}</h3>
-            <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+              {hotel.name || '[No name]'}
+            </h3>
+            <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 mt-1">
               <MapPin size={14} weight="fill" />
-              <span>{hotel.city}</span>
+              <span>{hotel.city || '[No city]'}</span>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-1">
+          <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <div className="flex items-center gap-1 bg-teal-500/10 px-2 py-1 rounded">
               <Star size={16} weight="fill" className="text-teal-600" />
               <span className="text-sm font-bold text-teal-700 dark:text-teal-400">
-                {hotel.rating.toFixed(1)}
+                {hotel.rating?.toFixed(1) || '0.0'}
               </span>
             </div>
-            <div className="text-yellow-500">
-              {Array.from({ length: hotel.stars }).map((_, i) => (
-                <Star key={i} size={14} weight="fill" className="inline" />
-              ))}
-            </div>
+            {hotel.stars && hotel.stars > 0 && (
+              <div className="text-yellow-500">
+                {Array.from({ length: hotel.stars }).map((_, i) => (
+                  <Star key={i} size={14} weight="fill" className="inline" />
+                ))}
+              </div>
+            )}
           </div>
         </div>
-        <div className="pt-2 border-t">
+        <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-baseline justify-between">
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
-              £{hotel.price_per_night}
+              £{hotel.price_per_night || '0'}
             </span>
-            <span className="text-sm text-muted-foreground">per night</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">per night</span>
           </div>
         </div>
       </div>

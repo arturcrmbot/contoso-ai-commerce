@@ -37,7 +37,7 @@ export function RatingBars({ ratings }: RatingBarsProps) {
         {ratingCategories.map((category) => (
           <div key={category.key}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-xs font-semibold text-gray-900 dark:text-gray-100">
                 {category.label}
               </span>
               <span className="text-xs font-bold text-gray-900 dark:text-white">

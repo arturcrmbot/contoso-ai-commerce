@@ -47,6 +47,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.7,
+        "stars": 5,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.8,
@@ -176,6 +177,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800"
         ],
         "rating": 4.4,
+        "stars": 4,
         "ratings": {
             "overall": 4.4,
             "breakfast": 4.2,
@@ -296,6 +298,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800"
         ],
         "rating": 4.9,
+        "stars": 5,
         "ratings": {
             "overall": 4.9,
             "breakfast": 4.9,
@@ -423,6 +426,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1601853895209-3a8a0b9f27a9?w=800"
         ],
         "rating": 4.5,
+        "stars": 4,
         "ratings": {
             "overall": 4.5,
             "breakfast": 4.3,
@@ -542,6 +546,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.5,
@@ -660,6 +665,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800"
         ],
         "rating": 4.2,
+        "stars": 3,
         "ratings": {
             "overall": 4.2,
             "breakfast": 4.0,
@@ -780,6 +786,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800"
         ],
         "rating": 4.8,
+        "stars": 4,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.0,
@@ -902,6 +909,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1512916194211-3f2b7f5f7de3?w=800"
         ],
         "rating": 4.8,
+        "stars": 4,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.9,
@@ -1029,6 +1037,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.4,
@@ -1149,6 +1158,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
         ],
         "rating": 4.9,
+        "stars": 5,
         "ratings": {
             "overall": 4.9,
             "breakfast": 5.0,
@@ -1276,6 +1286,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.6,
@@ -1395,6 +1406,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800"
         ],
         "rating": 4.5,
+        "stars": 5,
         "ratings": {
             "overall": 4.5,
             "breakfast": 4.2,
@@ -1514,6 +1526,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.5,
@@ -1632,6 +1645,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=800"
         ],
         "rating": 4.3,
+        "stars": 3,
         "ratings": {
             "overall": 4.3,
             "breakfast": 3.8,
@@ -1751,6 +1765,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.6,
@@ -1873,6 +1888,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.8,
+        "stars": 4,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.7,
@@ -2001,6 +2017,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?w=800"
         ],
         "rating": 4.9,
+        "stars": 5,
         "ratings": {
             "overall": 4.9,
             "breakfast": 4.9,
@@ -2128,6 +2145,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.6,
@@ -2247,6 +2265,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.3,
@@ -2368,6 +2387,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
         ],
         "rating": 4.8,
+        "stars": 4,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.9,
@@ -2488,6 +2508,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.1,
@@ -2606,6 +2627,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
         ],
         "rating": 4.4,
+        "stars": 3,
         "ratings": {
             "overall": 4.4,
             "breakfast": 3.9,
@@ -2728,6 +2750,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.9,
+        "stars": 5,
         "ratings": {
             "overall": 4.9,
             "breakfast": 4.9,
@@ -2855,6 +2878,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.5,
@@ -2975,6 +2999,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800"
         ],
         "rating": 4.8,
+        "stars": 5,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.7,
@@ -3095,6 +3120,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.5,
@@ -3220,6 +3246,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.8,
+        "stars": 4,
         "ratings": {
             "overall": 4.8,
             "breakfast": 4.8,
@@ -3345,6 +3372,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
         ],
         "rating": 4.7,
+        "stars": 4,
         "ratings": {
             "overall": 4.7,
             "breakfast": 4.6,
@@ -3464,6 +3492,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
         ],
         "rating": 4.5,
+        "stars": 3,
         "ratings": {
             "overall": 4.5,
             "breakfast": 3.9,
@@ -3583,6 +3612,7 @@ TRAVEL_DEALS = [
             "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
         ],
         "rating": 4.6,
+        "stars": 4,
         "ratings": {
             "overall": 4.6,
             "breakfast": 4.4,
