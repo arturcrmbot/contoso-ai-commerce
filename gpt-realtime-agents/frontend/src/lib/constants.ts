@@ -82,7 +82,7 @@ const runtimeConfig = typeof window !== 'undefined' ? window.__APP_CONFIG__ : un
 const runtimeBackendBaseUrl = runtimeConfig?.backendBaseUrl;
 
 export const CLIENT_CONFIG = {
-  backendBaseUrl: runtimeBackendBaseUrl ?? import.meta.env.VITE_BACKEND_BASE_URL ?? "http://localhost:8080/api",
+  backendBaseUrl: runtimeBackendBaseUrl ?? import.meta.env.VITE_BACKEND_BASE_URL ?? "/api",
   deployment: "gpt-realtime-2",
   voice: "verse",
 };
