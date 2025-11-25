@@ -19,7 +19,7 @@ $ErrorActionPreference = "Stop"
 Write-Host ""
 Write-Host "╔════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
 Write-Host "║                                                            ║" -ForegroundColor Cyan
-Write-Host "║         🚀 Contoso AI Commerce - Deploy 🚀                ║" -ForegroundColor Cyan
+Write-Host "║         🚀 Travel Agent - Deploy 🚀                       ║" -ForegroundColor Cyan
 Write-Host "║                                                            ║" -ForegroundColor Cyan
 Write-Host "╚════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
 Write-Host ""
@@ -72,7 +72,7 @@ if ($isFirstDeploy) {
 
     # Deploy infrastructure
     Write-Host "🏗️  Deploying ACR and Container Apps Environment..." -ForegroundColor Yellow
-    $deploymentName = "contoso-infra-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+    $deploymentName = "travelagent-infra-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
 
     Set-Location $PSScriptRoot
     $infraDeployment = az deployment group create `
@@ -137,7 +137,7 @@ if ($isFirstDeploy) {
 
     # Build Docker image
     Set-Location $projectRoot
-    $imageName = "contoso"
+    $imageName = "travelagent"
     $fullImageName = "${acrLoginServer}/${imageName}:${imageTag}"
 
     Write-Host "🏗️  Building Docker image..." -ForegroundColor Yellow
@@ -189,7 +189,7 @@ if ($isFirstDeploy) {
 
     # Deploy Container App
     Write-Host "🚀 Creating Container App..." -ForegroundColor Yellow
-    $appDeploymentName = "contoso-app-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+    $appDeploymentName = "travelagent-app-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
 
     Set-Location $PSScriptRoot
     $appDeployment = az deployment group create `
@@ -278,7 +278,7 @@ if ($isFirstDeploy) {
 
     # Build Docker image
     Set-Location $projectRoot
-    $imageName = "contoso"
+    $imageName = "travelagent"
     $fullImageName = "${acrLoginServer}/${imageName}:${imageTag}"
 
     Write-Host "🏗️  Building Docker image..." -ForegroundColor Yellow

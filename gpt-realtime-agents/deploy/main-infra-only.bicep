@@ -2,7 +2,7 @@
 targetScope = 'resourceGroup'
 
 @description('Base name for resources')
-param baseName string = 'contoso'
+param baseName string = 'travelagent'
 
 @description('Location for all resources')
 param location string = resourceGroup().location
@@ -14,7 +14,7 @@ var containerAppEnvName = '${baseName}-env-${uniqueSuffix}'
 var logAnalyticsName = '${baseName}-logs-${uniqueSuffix}'
 
 var tags = {
-  application: 'Contoso AI Commerce'
+  application: 'Travel Agent'
   environment: 'production'
 }
 

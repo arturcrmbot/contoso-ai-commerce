@@ -2,7 +2,7 @@
 targetScope = 'resourceGroup'
 
 @description('Base name for resources')
-param baseName string = 'contoso'
+param baseName string = 'travelagent'
 
 @description('Location for all resources')
 param location string = resourceGroup().location
@@ -43,7 +43,7 @@ var uniqueSuffix = uniqueString(resourceGroup().id)
 var containerAppName = '${baseName}-app-${uniqueSuffix}'
 
 var tags = {
-  application: 'Contoso AI Commerce'
+  application: 'Travel Agent'
   environment: 'production'
 }
 
@@ -92,7 +92,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
     template: {
       containers: [
         {
-          name: 'contoso-ai-commerce'
+          name: 'travelagent'
           image: '${acrLoginServer}/${baseName}:${imageTag}'
           resources: {
             cpu: json('1.0')
