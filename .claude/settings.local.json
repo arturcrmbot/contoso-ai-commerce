@@ -55,7 +55,8 @@
       "Bash(tar:*)",
       "Bash(if not exist C:temp mkdir C:temp)",
       "Bash(docker version:*)",
-      "Bash(docker info:*)"
+      "Bash(docker info:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []
