@@ -2,8 +2,8 @@ FROM node:20-bullseye AS frontend-builder
 
 WORKDIR /frontend
 
-COPY frontend/package*.json ./
-RUN npm ci
+COPY frontend/package.json ./
+RUN npm install
 
 COPY frontend/ ./
 RUN node node_modules/vite/bin/vite.js build
