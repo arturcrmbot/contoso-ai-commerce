@@ -50,7 +50,12 @@
       "Bash(az containerapp identity assign:*)",
       "Bash(az rest:*)",
       "Bash(python -m uvicorn:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(az acr build:*)",
+      "Bash(tar:*)",
+      "Bash(if not exist C:temp mkdir C:temp)",
+      "Bash(docker version:*)",
+      "Bash(docker info:*)"
     ],
     "deny": [],
     "ask": []

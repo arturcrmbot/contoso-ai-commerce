@@ -118,7 +118,7 @@ export function DealCard({
           )}
 
           {/* Discount Badge */}
-          {(highlightSavings || deal.pricing.discount_percent >= 30) && (
+          {deal.pricing && (highlightSavings || deal.pricing.discount_percent >= 30) && (
             <Badge className="absolute top-3 left-3 bg-green-600 hover:bg-green-700 shadow-lg font-bold border-0">
               <TrendingDown size={12} className="mr-1" />
               -{deal.pricing.discount_percent}%
@@ -126,10 +126,12 @@ export function DealCard({
           )}
 
           {/* Location Overlay */}
-          <div className="absolute bottom-3 left-3 text-white flex items-center gap-1 text-sm font-medium drop-shadow-md">
-            <MapPin size={14} weight="fill" />
-            {deal.destination.city}, {deal.destination.country}
-          </div>
+          {deal.destination && (
+            <div className="absolute bottom-3 left-3 text-white flex items-center gap-1 text-sm font-medium drop-shadow-md">
+              <MapPin size={14} weight="fill" />
+              {deal.destination.city}, {deal.destination.country}
+            </div>
+          )}
         </div>
 
         {/* Deal Info */}
@@ -177,9 +179,9 @@ export function DealCard({
               <p className="text-xs text-muted-foreground mb-0.5">Total price from</p>
               <div className="flex items-baseline gap-2">
                 <p className="text-xl font-bold text-primary">
-                  {formatCurrency(deal.pricing.deal_price, deal.pricing.currency)}
+                  {deal.pricing ? formatCurrency(deal.pricing.deal_price, deal.pricing.currency) : 'Price TBD'}
                 </p>
-                {deal.pricing.discount_percent > 0 && (
+                {deal.pricing && deal.pricing.discount_percent > 0 && (
                   <p className="text-xs text-muted-foreground line-through decoration-red-500/50">
                     {formatCurrency(deal.pricing.original_price, deal.pricing.currency)}
                   </p>
