@@ -29,10 +29,6 @@ param azureGptRealtimeUrl string
 @description('WebRTC URL')
 param webrtcUrl string
 
-@description('Azure OpenAI Realtime API Key')
-@secure()
-param azureGptRealtimeKey string
-
 @description('Azure OpenAI Realtime Deployment Name')
 param azureGptRealtimeDeployment string = 'gpt-realtime-2'
 
@@ -57,6 +53,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
   location: location
   tags: tags
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     managedEnvironmentId: containerEnvId
     configuration: {
@@ -83,10 +82,6 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
           name: 'acr-password'
           value: acrPassword
         }
-        {
-          name: 'azure-gpt-realtime-key'
-          value: azureGptRealtimeKey
-        }
       ]
     }
     template: {
@@ -106,10 +101,6 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
             {
               name: 'WEBRTC_URL'
               value: webrtcUrl
-            }
-            {
-              name: 'AZURE_GPT_REALTIME_KEY'
-              secretRef: 'azure-gpt-realtime-key'
             }
             {
               name: 'AZURE_GPT_REALTIME_DEPLOYMENT'
@@ -138,3 +129,4 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 output containerAppName string = containerApp.name
 output containerAppUrl string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 output containerAppFqdn string = containerApp.properties.configuration.ingress.fqdn
+output containerAppPrincipalId string = containerApp.identity.principalId

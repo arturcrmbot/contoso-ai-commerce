@@ -38,7 +38,19 @@
       "Bash(test:*)",
       "Bash(az account show:*)",
       "Bash(docker-compose ps:*)",
-      "Bash(docker-compose exec:*)"
+      "Bash(docker-compose exec:*)",
+      "Bash(cat:*)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\arzielinski\\\\OneDrive - Microsoft\\\\repos\\\\vodafone\\\\gpt-realtime-agents\" -Filter \"*.py\" -Recurse)",
+      "Bash(Where-Object { $_FullName -notlike \"*\\\\.venv\\\\*\" -and $_FullName -notlike \"*node_modules*\" })",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(az cognitiveservices account list:*)",
+      "Bash(az ad signed-in-user show:*)",
+      "Bash(az role assignment create:*)",
+      "Bash(az role assignment list:*)",
+      "Bash(az containerapp identity assign:*)",
+      "Bash(az rest:*)",
+      "Bash(python -m uvicorn:*)",
+      "Bash(pip install:*)"
     ],
     "deny": [],
     "ask": []

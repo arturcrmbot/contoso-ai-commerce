@@ -205,7 +205,6 @@ if ($isFirstDeploy) {
             "containerEnvId=$containerEnvId" `
             "azureGptRealtimeUrl=$($envVars['AZURE_GPT_REALTIME_URL'])" `
             "webrtcUrl=$($envVars['WEBRTC_URL'])" `
-            "azureGptRealtimeKey=$($envVars['AZURE_GPT_REALTIME_KEY'])" `
             "azureGptRealtimeDeployment=$($envVars['AZURE_GPT_REALTIME_DEPLOYMENT'])" `
             "azureGptRealtimeVoice=$($envVars['AZURE_GPT_REALTIME_VOICE'])" `
         --output json | ConvertFrom-Json
@@ -217,6 +216,46 @@ if ($isFirstDeploy) {
 
     $appOutputs = $appDeployment.properties.outputs
     Write-Host "✅ Container App deployed" -ForegroundColor Green
+    Write-Host ""
+
+    # Assign Cognitive Services OpenAI User role to the Container App's managed identity
+    Write-Host "🔐 Configuring role-based authentication..." -ForegroundColor Yellow
+    $principalId = $appOutputs.containerAppPrincipalId.value
+
+    # Extract Azure OpenAI resource info from the URL (e.g., https://arzie-mhj8yuwb-eastus2.openai.azure.com/...)
+    $realtimeUrl = $envVars['AZURE_GPT_REALTIME_URL']
+    if ($realtimeUrl -match 'https://([^.]+)\.openai\.azure\.com') {
+        $openAiResourceName = $matches[1]
+        Write-Host "   OpenAI Resource: $openAiResourceName" -ForegroundColor Gray
+        Write-Host "   Principal ID: $principalId" -ForegroundColor Gray
+
+        # Find the OpenAI resource ID
+        $openAiResources = az cognitiveservices account list --query "[?contains(name, '$openAiResourceName')]" --output json | ConvertFrom-Json
+        if ($openAiResources -and $openAiResources.Count -gt 0) {
+            $openAiResourceId = $openAiResources[0].id
+            Write-Host "   Resource ID: $openAiResourceId" -ForegroundColor Gray
+
+            # Assign the role
+            Write-Host "   Assigning 'Cognitive Services OpenAI User' role..." -ForegroundColor Gray
+            az role assignment create `
+                --role "Cognitive Services OpenAI User" `
+                --assignee-object-id $principalId `
+                --assignee-principal-type ServicePrincipal `
+                --scope $openAiResourceId `
+                --output none 2>&1 | Out-Null
+
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "✅ Role assigned successfully" -ForegroundColor Green
+            } else {
+                Write-Host "⚠️  Role assignment may have failed or already exists" -ForegroundColor Yellow
+            }
+        } else {
+            Write-Host "⚠️  Could not find Azure OpenAI resource. You may need to assign the role manually:" -ForegroundColor Yellow
+            Write-Host "   az role assignment create --role 'Cognitive Services OpenAI User' --assignee-object-id $principalId --scope <your-openai-resource-id>" -ForegroundColor Gray
+        }
+    } else {
+        Write-Host "⚠️  Could not parse OpenAI resource from URL. Manual role assignment required." -ForegroundColor Yellow
+    }
     Write-Host ""
 
     # Save outputs
