@@ -4,736 +4,814 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
 # =============================================================================
-# MOCK DATA CATALOGS
+# MOCK DATA CATALOGS - FOOTBALL BETTING
 # =============================================================================
 
-MOCK_DEVICES = [
+MOCK_EVENTS = [
     {
-        "id": "iphone-15-pro",
-        "name": "iPhone 15 Pro",
-        "brand": "Apple",
-        "price_upfront": 199,
-        "price_monthly": 47,
-        "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-bluetitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845699220",
-        "attributes": {
-            "battery_life": "excellent",  # 5000mAh+
-            "camera_quality": "excellent",  # 48MP+
-            "storage_options": [128, 256, 512, 1024],
-            "screen_size": 6.1,
-            "5g": True,
-            "use_cases": ["photography", "gaming", "business", "everyday"]
+        "id": "epl-arsenal-chelsea",
+        "sport": "Football",
+        "league": "Premier League",
+        "home_team": "Arsenal",
+        "away_team": "Chelsea",
+        "kick_off": (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Emirates Stadium",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.10, "draw": 3.40, "away": 3.60},
+            "over_under": {"over_2_5": 1.85, "under_2_5": 1.95},
+            "both_teams_score": {"yes": 1.70, "no": 2.10},
+            "double_chance": {"home_draw": 1.30, "home_away": 1.40, "draw_away": 1.80}
         },
-        "rating": 4.8,
-        "reviews_count": 2341
+        "form": {"home": "WWDWL", "away": "LDWDW"},
+        "head_to_head": "Last 5: Arsenal 2 wins, Chelsea 2 wins, 1 draw"
     },
     {
-        "id": "samsung-s24-ultra",
-        "name": "Samsung Galaxy S24 Ultra",
-        "brand": "Samsung",
-        "price_upfront": 149,
-        "price_monthly": 45,
-        "image_url": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "excellent",
-            "camera_quality": "excellent",
-            "storage_options": [256, 512, 1024],
-            "screen_size": 6.8,
-            "5g": True,
-            "use_cases": ["photography", "gaming", "content_creation", "business"]
+        "id": "epl-man-city-liverpool",
+        "sport": "Football",
+        "league": "Premier League",
+        "home_team": "Manchester City",
+        "away_team": "Liverpool",
+        "kick_off": (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Etihad Stadium",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.30, "draw": 3.20, "away": 3.10},
+            "over_under": {"over_2_5": 1.65, "under_2_5": 2.20},
+            "both_teams_score": {"yes": 1.55, "no": 2.40},
+            "double_chance": {"home_draw": 1.35, "home_away": 1.45, "draw_away": 1.70}
         },
-        "rating": 4.7,
-        "reviews_count": 1823
+        "form": {"home": "WWWWW", "away": "WWDWW"},
+        "head_to_head": "Last 5: Man City 3 wins, Liverpool 1 win, 1 draw"
     },
     {
-        "id": "pixel-8-pro",
-        "name": "Google Pixel 8 Pro",
-        "brand": "Google",
-        "price_upfront": 99,
-        "price_monthly": 42,
-        "image_url": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "very_good",
-            "camera_quality": "excellent",
-            "storage_options": [128, 256, 512],
-            "screen_size": 6.7,
-            "5g": True,
-            "use_cases": ["photography", "everyday", "ai_features"]
+        "id": "epl-man-utd-tottenham",
+        "sport": "Football",
+        "league": "Premier League",
+        "home_team": "Manchester United",
+        "away_team": "Tottenham",
+        "kick_off": (datetime.now() + timedelta(days=4)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Old Trafford",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.50, "draw": 3.30, "away": 2.80},
+            "over_under": {"over_2_5": 1.90, "under_2_5": 1.90},
+            "both_teams_score": {"yes": 1.65, "no": 2.20},
+            "double_chance": {"home_draw": 1.45, "home_away": 1.50, "draw_away": 1.60}
         },
-        "rating": 4.6,
-        "reviews_count": 1456
+        "form": {"home": "WDLWD", "away": "WWLWD"},
+        "head_to_head": "Last 5: Man Utd 2 wins, Tottenham 2 wins, 1 draw"
     },
     {
-        "id": "iphone-15",
-        "name": "iPhone 15",
-        "brand": "Apple",
-        "price_upfront": 99,
-        "price_monthly": 39,
-        "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923781972",
-        "attributes": {
-            "battery_life": "good",
-            "camera_quality": "very_good",
-            "storage_options": [128, 256, 512],
-            "screen_size": 6.1,
-            "5g": True,
-            "use_cases": ["everyday", "photography", "business"]
+        "id": "laliga-real-madrid-barcelona",
+        "sport": "Football",
+        "league": "La Liga",
+        "home_team": "Real Madrid",
+        "away_team": "Barcelona",
+        "kick_off": (datetime.now() + timedelta(days=5)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Santiago Bernabéu",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.40, "draw": 3.10, "away": 3.00},
+            "over_under": {"over_2_5": 1.80, "under_2_5": 2.00},
+            "both_teams_score": {"yes": 1.60, "no": 2.30},
+            "double_chance": {"home_draw": 1.40, "home_away": 1.45, "draw_away": 1.75}
         },
-        "rating": 4.7,
-        "reviews_count": 3421
+        "form": {"home": "WWWDW", "away": "WWWLW"},
+        "head_to_head": "Last 5: Real Madrid 2 wins, Barcelona 2 wins, 1 draw"
     },
     {
-        "id": "samsung-s24",
-        "name": "Samsung Galaxy S24",
-        "brand": "Samsung",
-        "price_upfront": 79,
-        "price_monthly": 37,
-        "image_url": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "very_good",
-            "camera_quality": "very_good",
-            "storage_options": [128, 256],
-            "screen_size": 6.2,
-            "5g": True,
-            "use_cases": ["everyday", "photography", "gaming"]
+        "id": "bundesliga-bayern-dortmund",
+        "sport": "Football",
+        "league": "Bundesliga",
+        "home_team": "Bayern Munich",
+        "away_team": "Borussia Dortmund",
+        "kick_off": (datetime.now() + timedelta(days=6)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Allianz Arena",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 1.85, "draw": 3.60, "away": 4.20},
+            "over_under": {"over_2_5": 1.70, "under_2_5": 2.10},
+            "both_teams_score": {"yes": 1.65, "no": 2.20},
+            "double_chance": {"home_draw": 1.25, "home_away": 1.30, "draw_away": 1.95}
         },
-        "rating": 4.6,
-        "reviews_count": 2103
+        "form": {"home": "WWWWW", "away": "WWDLD"},
+        "head_to_head": "Last 5: Bayern 4 wins, Dortmund 1 win"
     },
     {
-        "id": "xiaomi-14",
-        "name": "Xiaomi 14",
-        "brand": "Xiaomi",
-        "price_upfront": 49,
-        "price_monthly": 32,
-        "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "excellent",
-            "camera_quality": "very_good",
-            "storage_options": [256, 512],
-            "screen_size": 6.36,
-            "5g": True,
-            "use_cases": ["everyday", "gaming", "budget_premium"]
+        "id": "seriea-juventus-inter",
+        "sport": "Football",
+        "league": "Serie A",
+        "home_team": "Juventus",
+        "away_team": "Inter Milan",
+        "kick_off": (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Allianz Stadium",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.60, "draw": 3.00, "away": 2.80},
+            "over_under": {"over_2_5": 2.00, "under_2_5": 1.80},
+            "both_teams_score": {"yes": 1.75, "no": 2.05},
+            "double_chance": {"home_draw": 1.50, "home_away": 1.55, "draw_away": 1.55}
         },
-        "rating": 4.5,
-        "reviews_count": 876
+        "form": {"home": "WDWDW", "away": "WWWDL"},
+        "head_to_head": "Last 5: Juventus 2 wins, Inter 2 wins, 1 draw"
     },
     {
-        "id": "oneplus-12",
-        "name": "OnePlus 12",
-        "brand": "OnePlus",
-        "price_upfront": 69,
-        "price_monthly": 35,
-        "image_url": "https://images.unsplash.com/photo-1592286927505-decd0cb4084d?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "excellent",
-            "camera_quality": "very_good",
-            "storage_options": [256, 512],
-            "screen_size": 6.7,
-            "5g": True,
-            "use_cases": ["gaming", "everyday", "fast_charging"]
+        "id": "epl-newcastle-aston-villa",
+        "sport": "Football",
+        "league": "Premier League",
+        "home_team": "Newcastle",
+        "away_team": "Aston Villa",
+        "kick_off": (datetime.now() + timedelta(hours=6)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "St James' Park",
+        "status": "live",
+        "live_score": {"home": 1, "away": 1, "minute": 67},
+        "odds": {
+            "match_result": {"home": 2.20, "draw": 3.20, "away": 3.30},
+            "over_under": {"over_2_5": 1.75, "under_2_5": 2.05},
+            "both_teams_score": {"yes": 1.62, "no": 2.25}
         },
-        "rating": 4.5,
-        "reviews_count": 1234
+        "form": {"home": "WWDLW", "away": "DWWDL"},
+        "head_to_head": "Last 5: Newcastle 3 wins, Aston Villa 1 win, 1 draw"
     },
     {
-        "id": "iphone-14",
-        "name": "iPhone 14",
-        "brand": "Apple",
-        "price_upfront": 49,
-        "price_monthly": 32,
-        "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027336558",
-        "attributes": {
-            "battery_life": "good",
-            "camera_quality": "good",
-            "storage_options": [128, 256],
-            "screen_size": 6.1,
-            "5g": True,
-            "use_cases": ["everyday", "budget_apple"]
+        "id": "champions-league-psg-bayern",
+        "sport": "Football",
+        "league": "Champions League",
+        "home_team": "PSG",
+        "away_team": "Bayern Munich",
+        "kick_off": (datetime.now() + timedelta(days=8)).strftime("%Y-%m-%d %H:%M"),
+        "venue": "Parc des Princes",
+        "status": "upcoming",
+        "odds": {
+            "match_result": {"home": 2.70, "draw": 3.20, "away": 2.60},
+            "over_under": {"over_2_5": 1.75, "under_2_5": 2.05},
+            "both_teams_score": {"yes": 1.58, "no": 2.35},
+            "double_chance": {"home_draw": 1.50, "home_away": 1.50, "draw_away": 1.55}
         },
-        "rating": 4.6,
-        "reviews_count": 5234
-    },
-    {
-        "id": "samsung-a54",
-        "name": "Samsung Galaxy A54",
-        "brand": "Samsung",
-        "price_upfront": 0,
-        "price_monthly": 25,
-        "image_url": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "very_good",
-            "camera_quality": "good",
-            "storage_options": [128, 256],
-            "screen_size": 6.4,
-            "5g": True,
-            "use_cases": ["everyday", "budget"]
-        },
-        "rating": 4.4,
-        "reviews_count": 2876
-    },
-    {
-        "id": "pixel-8a",
-        "name": "Google Pixel 8a",
-        "brand": "Google",
-        "price_upfront": 0,
-        "price_monthly": 28,
-        "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop",
-        "attributes": {
-            "battery_life": "good",
-            "camera_quality": "very_good",
-            "storage_options": [128],
-            "screen_size": 6.1,
-            "5g": True,
-            "use_cases": ["everyday", "photography", "budget"]
-        },
-        "rating": 4.5,
-        "reviews_count": 1543
+        "form": {"home": "WWWDW", "away": "WWWWW"},
+        "head_to_head": "Last 5: PSG 1 win, Bayern 3 wins, 1 draw"
     }
 ]
 
-MOCK_PLANS = [
+MOCK_BET_TYPES = [
     {
-        "id": "unlimited-max",
-        "name": "Unlimited Max",
-        "type": "unlimited",
-        "data": "Unlimited",
-        "minutes": "Unlimited",
-        "texts": "Unlimited",
-        "international_roaming": True,
-        "5g": True,
-        "price_monthly": 35,
-        "highlights": ["5G speeds", "Roaming in 81 countries", "Unlimited hotspot"]
+        "id": "match-result",
+        "name": "Match Result",
+        "description": "Predict the final result: Home win, Draw, or Away win",
+        "category": "main",
+        "popularity": "high",
+        "risk_level": "medium"
     },
     {
-        "id": "unlimited-lite",
-        "name": "Unlimited Lite",
-        "type": "unlimited",
-        "data": "Unlimited (2Mbps after 50GB)",
-        "minutes": "Unlimited",
-        "texts": "Unlimited",
-        "international_roaming": False,
-        "5g": True,
-        "price_monthly": 25,
-        "highlights": ["5G speeds", "Entertainment apps included"]
+        "id": "over-under",
+        "name": "Over/Under Goals",
+        "description": "Bet on whether total goals will be over or under a specific number (usually 2.5)",
+        "category": "main",
+        "popularity": "high",
+        "risk_level": "medium"
     },
     {
-        "id": "data-100gb",
-        "name": "Essential 100GB",
-        "type": "capped",
-        "data": "100GB",
-        "minutes": "Unlimited",
-        "texts": "Unlimited",
-        "international_roaming": False,
-        "5g": True,
-        "price_monthly": 20,
-        "highlights": ["Perfect for most users", "5G ready"]
+        "id": "both-teams-score",
+        "name": "Both Teams to Score",
+        "description": "Will both teams score at least one goal?",
+        "category": "main",
+        "popularity": "high",
+        "risk_level": "medium"
     },
     {
-        "id": "data-50gb",
-        "name": "Essential 50GB",
-        "type": "capped",
-        "data": "50GB",
-        "minutes": "Unlimited",
-        "texts": "Unlimited",
-        "international_roaming": False,
-        "5g": False,
-        "price_monthly": 15,
-        "highlights": ["Great value", "4G speeds"]
+        "id": "double-chance",
+        "name": "Double Chance",
+        "description": "Cover two of three possible outcomes (Home/Draw, Home/Away, Draw/Away)",
+        "category": "main",
+        "popularity": "medium",
+        "risk_level": "low"
     },
     {
-        "id": "data-20gb",
-        "name": "Essential 20GB",
-        "type": "capped",
-        "data": "20GB",
-        "minutes": "Unlimited",
-        "texts": "Unlimited",
-        "international_roaming": False,
-        "5g": False,
-        "price_monthly": 10,
-        "highlights": ["Budget friendly", "Perfect for light users"]
+        "id": "correct-score",
+        "name": "Correct Score",
+        "description": "Predict the exact final score",
+        "category": "advanced",
+        "popularity": "medium",
+        "risk_level": "high"
+    },
+    {
+        "id": "first-goalscorer",
+        "name": "First Goalscorer",
+        "description": "Which player will score the first goal",
+        "category": "player",
+        "popularity": "high",
+        "risk_level": "high"
+    },
+    {
+        "id": "anytime-goalscorer",
+        "name": "Anytime Goalscorer",
+        "description": "Which player will score at any time during the match",
+        "category": "player",
+        "popularity": "high",
+        "risk_level": "medium"
+    },
+    {
+        "id": "half-time-full-time",
+        "name": "Half Time/Full Time",
+        "description": "Predict result at half-time and full-time",
+        "category": "advanced",
+        "popularity": "low",
+        "risk_level": "high"
+    },
+    {
+        "id": "asian-handicap",
+        "name": "Asian Handicap",
+        "description": "Level the playing field by giving virtual advantage/disadvantage",
+        "category": "advanced",
+        "popularity": "medium",
+        "risk_level": "medium"
+    },
+    {
+        "id": "accumulator",
+        "name": "Accumulator/Parlay",
+        "description": "Combine multiple bets - all must win for payout",
+        "category": "combo",
+        "popularity": "very_high",
+        "risk_level": "high"
     }
 ]
 
-MOCK_ACCESSORIES = {
-    "iphone-15-pro": [
-        {"id": "case-iphone-15-pro", "name": "Apple Silicone Case", "type": "case", "price": 49, "in_stock": True, "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWND3?wid=400&hei=400&fmt=jpeg&qlt=90"},
-        {"id": "charger-usbc-20w", "name": "20W USB-C Charger", "type": "charger", "price": 25, "in_stock": True, "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHJE3?wid=400&hei=400&fmt=jpeg&qlt=90"},
-        {"id": "airpods-pro", "name": "AirPods Pro (2nd gen)", "type": "earbuds", "price": 229, "in_stock": True, "image_url": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQD83?wid=400&hei=400&fmt=jpeg&qlt=90"},
-        {"id": "screen-protector", "name": "Screen Protector", "type": "screen_protector", "price": 15, "in_stock": True, "image_url": "https://m.media-amazon.com/images/I/61S+VmKJ1WL._AC_SX300_SY300_.jpg"}
-    ],
-    "samsung-s24-ultra": [
-        {"id": "case-s24-ultra", "name": "Samsung Rugged Case", "type": "case", "price": 39, "in_stock": True, "image_url": "https://images.samsung.com/is/image/samsung/p6pim/uk/ef-ru916cbegww/gallery/uk-galaxy-s24-ultra-protective-standing-cover-ef-ru916-ef-ru916cbegww-542072913?imwidth=400"},
-        {"id": "charger-45w", "name": "45W Super Fast Charger", "type": "charger", "price": 35, "in_stock": True, "image_url": "https://images.samsung.com/is/image/samsung/p6pim/uk/ep-t4510xbegww/gallery/uk-45w-usb-c-super-fast-charging-wall-charger-ep-t4510xbegww-535606456?imwidth=400"},
-        {"id": "buds-pro", "name": "Galaxy Buds2 Pro", "type": "earbuds", "price": 199, "in_stock": True, "image_url": "https://images.samsung.com/is/image/samsung/p6pim/uk/2202/gallery/uk-galaxy-buds2-pro-sm-r510nlvaeua-530891235?imwidth=400"},
-        {"id": "screen-protector-s24", "name": "Tempered Glass Protector", "type": "screen_protector", "price": 18, "in_stock": True, "image_url": "https://m.media-amazon.com/images/I/61S+VmKJ1WL._AC_SX300_SY300_.jpg"}
-    ],
-    "default": [
-        {"id": "case-universal", "name": "Universal Protective Case", "type": "case", "price": 25, "in_stock": True, "image_url": "https://m.media-amazon.com/images/I/71ux+r8jC5L._AC_SX300_SY300_.jpg"},
-        {"id": "charger-usbc", "name": "USB-C Charger", "type": "charger", "price": 19, "in_stock": True, "image_url": "https://m.media-amazon.com/images/I/41pBh1CEq8L._AC_SX300_SY300_.jpg"},
-        {"id": "screen-protector-universal", "name": "Universal Screen Protector", "type": "screen_protector", "price": 12, "in_stock": True, "image_url": "https://m.media-amazon.com/images/I/61S+VmKJ1WL._AC_SX300_SY300_.jpg"}
-    ]
+MOCK_MARKETS = {
+    "match_result": ["Home Win", "Draw", "Away Win"],
+    "over_under": ["Over 0.5", "Over 1.5", "Over 2.5", "Over 3.5", "Under 0.5", "Under 1.5", "Under 2.5", "Under 3.5"],
+    "both_teams_score": ["Yes", "No"],
+    "double_chance": ["Home or Draw", "Home or Away", "Draw or Away"],
+    "correct_score": ["0-0", "1-0", "1-1", "2-0", "2-1", "2-2", "3-0", "3-1", "3-2", "Other"],
+    "halftime_result": ["Home", "Draw", "Away"]
 }
 
-# Shopping cart (in-memory - will be lost on restart)
-SHOPPING_CART = {}
+MOCK_PLAYERS = {
+    "Arsenal": ["Bukayo Saka", "Gabriel Jesus", "Martin Ødegaard", "Leandro Trossard"],
+    "Chelsea": ["Cole Palmer", "Nicolas Jackson", "Raheem Sterling", "Christopher Nkunku"],
+    "Manchester City": ["Erling Haaland", "Phil Foden", "Kevin De Bruyne", "Julian Alvarez"],
+    "Liverpool": ["Mohamed Salah", "Darwin Núñez", "Luis Díaz", "Cody Gakpo"],
+    "Manchester United": ["Marcus Rashford", "Bruno Fernandes", "Rasmus Højlund", "Alejandro Garnacho"],
+    "Tottenham": ["Son Heung-min", "Richarlison", "Dejan Kulusevski", "James Maddison"],
+    "Real Madrid": ["Vinícius Júnior", "Jude Bellingham", "Rodrygo", "Joselu"],
+    "Barcelona": ["Robert Lewandowski", "Raphinha", "Ferran Torres", "João Félix"],
+    "Bayern Munich": ["Harry Kane", "Jamal Musiala", "Leroy Sané", "Thomas Müller"],
+    "Borussia Dortmund": ["Donyell Malen", "Karim Adeyemi", "Niclas Füllkrug", "Marco Reus"],
+    "default": ["Player A", "Player B", "Player C"]
+}
+
+# Bet slip (in-memory - will be lost on restart)
+BET_SLIP = {}
 
 # =============================================================================
-# CONTOSO SALES TOOLS
+# CONTOSO BET TOOLS
 # =============================================================================
 
-async def search_devices_by_attributes(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Intelligent device search based on customer requirements using scoring."""
-    battery_pref = arguments.get("battery_life")
-    camera_pref = arguments.get("camera_quality")
-    price_max = arguments.get("price_max_monthly", 999)
-    brand = arguments.get("brand")
-    use_case = arguments.get("use_case")
+async def search_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Search for football events/matches based on criteria."""
+    league = arguments.get("league")
+    team = arguments.get("team")
+    date_range = arguments.get("date_range", "upcoming")  # "today", "tomorrow", "week", "upcoming"
+    status = arguments.get("status", "upcoming")  # "upcoming", "live", "all"
 
-    quality_levels = {"good": 1, "very_good": 2, "excellent": 3}
-
-    # Score each device based on how well it matches criteria
-    scored_devices = []
-    for device in MOCK_DEVICES:
-        attrs = device["attributes"]
-        score = 0
-
-        # Hard price filter - don't show devices over budget
-        if device["price_monthly"] > price_max:
+    filtered_events = []
+    for event in MOCK_EVENTS:
+        # Status filter
+        if status != "all" and event["status"] != status:
             continue
 
-        # Brand match - strong preference (exact match gets big boost)
-        if brand:
-            if device["brand"].lower() == brand.lower():
-                score += 50  # Exact brand match
-            else:
-                continue  # Skip non-matching brands if brand specified
+        # League filter
+        if league and league.lower() not in event["league"].lower():
+            continue
 
-        # Battery scoring (not exclusion)
-        if battery_pref:
-            required_level = quality_levels.get(battery_pref, 0)
-            device_level = quality_levels.get(attrs.get("battery_life", "good"), 0)
-            # Give points based on how close/better the device is
-            if device_level >= required_level:
-                score += 20 + (device_level - required_level) * 5  # Bonus for exceeding
-            else:
-                score += device_level * 5  # Partial credit
+        # Team filter
+        if team:
+            team_lower = team.lower()
+            if (team_lower not in event["home_team"].lower() and
+                team_lower not in event["away_team"].lower()):
+                continue
 
-        # Camera scoring (not exclusion)
-        if camera_pref:
-            required_level = quality_levels.get(camera_pref, 0)
-            device_level = quality_levels.get(attrs.get("camera_quality", "good"), 0)
-            if device_level >= required_level:
-                score += 20 + (device_level - required_level) * 5
-            else:
-                score += device_level * 5
+        filtered_events.append(event)
 
-        # Use case match
-        if use_case and use_case in attrs.get("use_cases", []):
-            score += 15
-
-        # Rating contribution
-        score += (device.get("rating", 0) * 5)
-
-        # Price value - cheaper is better (within budget)
-        price_score = max(0, (price_max - device["price_monthly"]) / 5)
-        score += price_score
-
-        scored_devices.append({"device": device, "score": score})
-
-    # Sort by score descending
-    scored_devices.sort(key=lambda x: -x["score"])
-
-    # Return top devices with their scores
-    top_devices = [item["device"] for item in scored_devices[:5]]
+    # Sort by kick-off time
+    filtered_events.sort(key=lambda e: e.get("kick_off", ""))
 
     return {
-        "search_criteria": arguments,
-        "results_count": len(top_devices),
-        "devices": top_devices,
-        "message": f"Found {len(scored_devices)} devices, showing top {len(top_devices)} matches",
-        "scoring_used": True,
+        "events": filtered_events[:10],
+        "count": len(filtered_events),
+        "filters_applied": {"league": league, "team": team, "status": status},
         "_visual": {
             "type": "product_grid",
-            "title": "Recommended Phones",
-            "items": top_devices
+            "title": "Upcoming Matches" if status == "upcoming" else "Live Matches" if status == "live" else "Football Matches",
+            "items": [
+                {
+                    "id": e["id"],
+                    "name": f"{e['home_team']} vs {e['away_team']}",
+                    "brand": e["league"],
+                    "price_monthly": e["odds"]["match_result"]["home"],
+                    "image_url": f"https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop",
+                    "attributes": {
+                        "kick_off": e.get("kick_off", "TBD"),
+                        "venue": e.get("venue", ""),
+                        "status": e.get("status", "upcoming")
+                    }
+                }
+                for e in filtered_events[:10]
+            ]
         }
     }
 
 
-async def get_device_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Get full details for a specific device."""
-    device_id = arguments.get("device_id")
+async def get_event_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Get complete details for a specific match including odds and stats."""
+    event_id = arguments.get("event_id")
 
-    device = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
-    if not device:
-        return {"error": "Device not found"}
+    event = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
+    if not event:
+        return {"error": "Event not found"}
+
+    # Get players for both teams
+    home_players = MOCK_PLAYERS.get(event["home_team"], MOCK_PLAYERS["default"])
+    away_players = MOCK_PLAYERS.get(event["away_team"], MOCK_PLAYERS["default"])
 
     # Enhanced details
-    enhanced_device = {
-        **device,
-        "description": f"The {device['name']} combines cutting-edge technology with elegant design. Perfect for {', '.join(device['attributes'].get('use_cases', [])[:2])}.",
-        "full_specs": {
-            "processor": "Latest generation",
-            "ram": "8GB",
-            "weight": "195g",
-            "water_resistant": True,
-            "warranty": "2 years"
+    enhanced_event = {
+        **event,
+        "description": f"{event['home_team']} face {event['away_team']} at {event['venue']} in what promises to be an exciting {event['league']} clash.",
+        "statistics": {
+            "home_win_percentage": random.randint(35, 65),
+            "draw_percentage": random.randint(20, 30),
+            "away_win_percentage": random.randint(25, 45),
+            "avg_goals_per_match": round(random.uniform(2.3, 3.2), 1)
         },
-        "customer_reviews": [
-            {"rating": 5, "comment": "Best phone I've ever had!", "helpful": 234},
-            {"rating": 4, "comment": "Great camera but pricey", "helpful": 123}
-        ],
-        "available_colors": ["Black", "Silver", "Blue"],
-        "stock_status": "In stock",
-        "delivery_estimate": "Next day delivery available"
+        "team_news": {
+            "home": f"{event['home_team']} have no major injury concerns. Full squad available.",
+            "away": f"{event['away_team']} will be without 1-2 key players but squad looking strong."
+        },
+        "top_goalscorers": {
+            "home": home_players[0],
+            "away": away_players[0]
+        },
+        "referee": random.choice(["Michael Oliver", "Anthony Taylor", "Paul Tierney", "Simon Hooper"]),
+        "weather": random.choice(["Clear", "Partly cloudy", "Light rain expected"]),
+        "player_odds": {
+            "first_goalscorer": {
+                home_players[0]: round(random.uniform(4.5, 7.5), 2),
+                home_players[1]: round(random.uniform(6.0, 9.0), 2),
+                away_players[0]: round(random.uniform(5.0, 8.0), 2),
+                away_players[1]: round(random.uniform(6.5, 9.5), 2)
+            },
+            "anytime_goalscorer": {
+                home_players[0]: round(random.uniform(2.2, 3.5), 2),
+                home_players[1]: round(random.uniform(2.8, 4.2), 2),
+                away_players[0]: round(random.uniform(2.5, 3.8), 2),
+                away_players[1]: round(random.uniform(3.0, 4.5), 2)
+            }
+        }
     }
 
     return {
-        **enhanced_device,
+        **enhanced_event,
         "_visual": {
-            "type": "product_hero",
-            "data": enhanced_device
+            "layout": "multi_section",
+            "theme": "default",
+            "sections": [
+                {
+                    "type": "product_hero",
+                    "data": {
+                        "name": f"{event['home_team']} vs {event['away_team']}",
+                        "description": enhanced_event["description"],
+                        "image_url": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&h=400&fit=crop",
+                        "price_monthly": event["odds"]["match_result"]["home"],
+                        "attributes": {
+                            "League": event["league"],
+                            "Venue": event["venue"],
+                            "Kick-off": event["kick_off"],
+                            "Status": event["status"]
+                        }
+                    }
+                },
+                {
+                    "type": "price_breakdown",
+                    "title": "Match Odds",
+                    "data": {
+                        "items": [
+                            {"label": f"{event['home_team']} Win", "amount": event["odds"]["match_result"]["home"], "type": "odds"},
+                            {"label": "Draw", "amount": event["odds"]["match_result"]["draw"], "type": "odds"},
+                            {"label": f"{event['away_team']} Win", "amount": event["odds"]["match_result"]["away"], "type": "odds"}
+                        ]
+                    }
+                }
+            ]
         }
     }
 
 
-async def compare_devices(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Compare multiple devices side-by-side."""
-    device_ids = arguments.get("device_ids", [])
+async def compare_odds(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Compare odds for multiple events or markets."""
+    event_ids = arguments.get("event_ids", [])
+    bet_type = arguments.get("bet_type", "match_result")
 
-    devices = [d for d in MOCK_DEVICES if d["id"] in device_ids]
+    events = [e for e in MOCK_EVENTS if e["id"] in event_ids]
+
+    if not events:
+        return {"error": "No events found"}
 
     comparison = {
-        "devices": devices,
-        "comparison_matrix": {
-            "battery_life": [d["attributes"]["battery_life"] for d in devices],
-            "camera_quality": [d["attributes"]["camera_quality"] for d in devices],
-            "screen_size": [d["attributes"]["screen_size"] for d in devices],
-            "price_monthly": [d["price_monthly"] for d in devices],
-            "price_upfront": [d["price_upfront"] for d in devices],
-            "rating": [d["rating"] for d in devices]
-        },
-        "best_for": {
-            "battery": devices[0]["name"] if devices else None,
-            "camera": devices[0]["name"] if devices else None,
-            "value": min(devices, key=lambda d: d["price_monthly"])["name"] if devices else None
-        },
+        "events": events,
+        "bet_type": bet_type,
+        "odds_comparison": [],
         "_visual": {
             "type": "comparison_table",
-            "title": "Device Comparison",
-            "devices": devices,
-            "matrix": {
-                "battery_life": [d["attributes"]["battery_life"] for d in devices],
-                "camera_quality": [d["attributes"]["camera_quality"] for d in devices],
-                "price_monthly": [d["price_monthly"] for d in devices]
-            }
+            "title": f"Odds Comparison - {bet_type.replace('_', ' ').title()}",
+            "devices": [
+                {
+                    "id": e["id"],
+                    "name": f"{e['home_team']} vs {e['away_team']}",
+                    "brand": e["league"],
+                    "price_monthly": e["odds"]["match_result"]["home"],
+                    "attributes": {
+                        "home_odds": e["odds"]["match_result"]["home"],
+                        "draw_odds": e["odds"]["match_result"]["draw"],
+                        "away_odds": e["odds"]["match_result"]["away"]
+                    }
+                }
+                for e in events
+            ]
         }
     }
 
     return comparison
 
 
-async def get_similar_devices(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Find alternative devices at different price points."""
-    device_id = arguments.get("device_id")
+async def get_similar_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Find similar matches (same league, same teams, similar odds)."""
+    event_id = arguments.get("event_id")
 
-    current = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
+    current = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
     if not current:
-        return {"error": "Device not found"}
+        return {"error": "Event not found"}
 
-    current_price = current["price_monthly"]
+    # Find events in same league
+    same_league = [e for e in MOCK_EVENTS if e["league"] == current["league"] and e["id"] != event_id]
 
-    # Find cheaper, similar price, and premium alternatives
-    cheaper = [d for d in MOCK_DEVICES if d["price_monthly"] < current_price - 5]
-    premium = [d for d in MOCK_DEVICES if d["price_monthly"] > current_price + 5]
-    similar = [d for d in MOCK_DEVICES if abs(d["price_monthly"] - current_price) <= 5 and d["id"] != device_id]
-
-    all_alternatives = (
-        sorted(cheaper, key=lambda d: -d["rating"])[:2] +
-        sorted(premium, key=lambda d: d["price_monthly"])[:2] +
-        sorted(similar, key=lambda d: -d["rating"])[:2]
-    )
-
-    return {
-        "current_device": current,
-        "cheaper_options": sorted(cheaper, key=lambda d: -d["rating"])[:2],
-        "premium_options": sorted(premium, key=lambda d: d["price_monthly"])[:2],
-        "similar_price": sorted(similar, key=lambda d: -d["rating"])[:2],
-        "_visual": {
-            "type": "product_grid",
-            "title": f"Alternatives to {current['name']}",
-            "items": all_alternatives
-        }
-    }
-
-
-async def recommend_plan_for_device(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Recommend plans suitable for a device and usage profile."""
-    device_id = arguments.get("device_id")
-    data_usage = arguments.get("estimated_data_usage_gb", 50)
-    international = arguments.get("needs_international", False)
-
-    device = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
-
-    # Filter plans based on needs
-    suitable_plans = []
-    for plan in MOCK_PLANS:
-        # Data requirement
-        if plan["type"] == "capped":
-            plan_data = int(plan["data"].replace("GB", ""))
-            if plan_data < data_usage:
-                continue
-
-        # International requirement
-        if international and not plan.get("international_roaming"):
-            continue
-
-        suitable_plans.append(plan)
-
-    # Sort by price
-    suitable_plans.sort(key=lambda p: p["price_monthly"])
-
-    # Calculate total monthly cost
-    recommendations = []
-    if device and suitable_plans:
-        for plan in suitable_plans[:3]:
-            total_monthly = device["price_monthly"] + plan["price_monthly"]
-            recommendations.append({
-                "plan": plan,
-                "device": device["name"],
-                "total_monthly": total_monthly,
-                "total_upfront": device["price_upfront"],
-                "total_24_months": total_monthly * 24 + device["price_upfront"]
-            })
-
-    return {
-        "device_id": device_id,
-        "recommendations": recommendations,
-        "message": f"Here are {len(recommendations)} plan options for the {device['name'] if device else 'selected device'}",
-        "_visual": {
-            "type": "plan_cards",
-            "title": f"Plans for {device['name'] if device else 'Your Device'}",
-            "items": suitable_plans[:3]
-        }
-    }
-
-
-async def get_compatible_accessories(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Get accessories compatible with a device (upsell opportunity)."""
-    device_id = arguments.get("device_id")
-
-    accessories = MOCK_ACCESSORIES.get(device_id, MOCK_ACCESSORIES["default"])
-
-    # Get device name for context
-    device = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
-    device_name = device["name"] if device else "this device"
-
-    # Group accessories by type for better presentation
-    essential = [a for a in accessories if a.get("type") in ["case", "screen_protector"]]
-    optional = [a for a in accessories if a.get("type") not in ["case", "screen_protector", None]]
-
-    return {
-        "device_id": device_id,
-        "accessories": accessories,
-        "recommended": accessories[0] if accessories else None,
-        "bundle_discount": "Save 10% when purchased together",
-        "_visual": {
-            "type": "accessory_grid",
-            "title": f"Accessories for {device_name}",
-            "items": accessories
-        }
-    }
-
-
-async def calculate_total_cost(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Calculate complete cost breakdown for a purchase."""
-    plan_id = arguments.get("plan_id")
-    device_id = arguments.get("device_id")
-    accessory_ids = arguments.get("accessory_ids", [])
-    contract_months = arguments.get("contract_months", 24)
-
-    device = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
-    plan = next((p for p in MOCK_PLANS if p["id"] == plan_id), None)
-
-    if not device or not plan:
-        return {"error": "Invalid device or plan ID"}
-
-    # Calculate accessories cost
-    all_accessories = []
-    for acc_list in MOCK_ACCESSORIES.values():
-        all_accessories.extend(acc_list)
-
-    accessories_cost = sum(
-        acc["price"] for acc in all_accessories if acc["id"] in accessory_ids
-    )
-
-    # Cost breakdown
-    upfront_total = device["price_upfront"] + accessories_cost
-    monthly_total = device["price_monthly"] + plan["price_monthly"]
-    contract_total = (monthly_total * contract_months) + upfront_total
-
-    breakdown_data = {
-        "upfront_costs": {
-            "device": device["price_upfront"],
-            "accessories": accessories_cost,
-            "total": upfront_total
-        },
-        "monthly_costs": {
-            "device": device["price_monthly"],
-            "plan": plan["price_monthly"],
-            "total": monthly_total
-        },
-        "contract_summary": {
-            "duration_months": contract_months,
-            "total_cost": contract_total,
-            "monthly_payment": monthly_total
-        }
-    }
-
-    return {
-        "breakdown": breakdown_data,
-        "device_name": device["name"],
-        "plan_name": plan["name"],
-        "_visual": {
-            "type": "price_breakdown",
-            "data": {
-                "items": [
-                    {"label": f"{device['name']} (device)", "amount": device["price_monthly"], "type": "monthly"},
-                    {"label": f"{plan['name']} (plan)", "amount": plan["price_monthly"], "type": "monthly"}
-                ],
-                "total_upfront": upfront_total,
-                "total_monthly": monthly_total,
-                "total_24m": contract_total
-            }
-        }
-    }
-
-
-async def check_stock_availability(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Check device stock at local stores."""
-    device_id = arguments.get("device_id")
-    postcode = arguments.get("postcode", "SW1A 1AA")
-
-    device = next((d for d in MOCK_DEVICES if d["id"] == device_id), None)
-    if not device:
-        return {"error": "Device not found"}
-
-    # Mock store availability
-    stores = [
-        {"name": "Contoso Oxford Street", "distance_miles": 0.5, "stock": random.choice([0, 2, 5, 10])},
-        {"name": "Contoso Westfield", "distance_miles": 2.3, "stock": random.choice([0, 1, 8])},
-        {"name": "Contoso Covent Garden", "distance_miles": 1.1, "stock": random.choice([3, 7, 12])}
+    # Find events with same teams
+    same_teams = [
+        e for e in MOCK_EVENTS
+        if (e["home_team"] in [current["home_team"], current["away_team"]] or
+            e["away_team"] in [current["home_team"], current["away_team"]])
+        and e["id"] != event_id
     ]
 
-    online_stock = random.choice(["In stock", "Low stock - 3 remaining", "Out of stock"])
+    all_similar = list({e["id"]: e for e in (same_league[:3] + same_teams[:2])}.values())
 
     return {
-        "device": device["name"],
-        "online_availability": online_stock,
-        "nearby_stores": stores,
-        "postcode_searched": postcode
+        "current_event": current,
+        "similar_events": all_similar,
+        "_visual": {
+            "type": "product_grid",
+            "title": f"Similar to {current['home_team']} vs {current['away_team']}",
+            "items": [
+                {
+                    "id": e["id"],
+                    "name": f"{e['home_team']} vs {e['away_team']}",
+                    "brand": e["league"],
+                    "price_monthly": e["odds"]["match_result"]["home"],
+                    "image_url": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop"
+                }
+                for e in all_similar
+            ]
+        }
     }
 
 
-# Customer & Eligibility Tools (MOCKED)
+async def recommend_bet_types(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Recommend bet types based on user preferences and risk appetite."""
+    event_id = arguments.get("event_id")
+    risk_level = arguments.get("risk_level", "medium")  # "low", "medium", "high"
+    budget = arguments.get("budget", 20)
 
-async def check_upgrade_eligibility(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Check if customer is eligible for upgrade (MOCKED)."""
-    await asyncio.sleep(0.5)  # Simulate API call
+    event = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
+
+    if not event:
+        return {"error": "Event not found"}
+
+    # Filter bet types by risk level
+    suitable_bet_types = [bt for bt in MOCK_BET_TYPES if bt["risk_level"] == risk_level or risk_level == "all"]
+
+    recommendations = []
+    for bet_type in suitable_bet_types[:5]:
+        potential_return = round(budget * random.uniform(1.5, 8.0), 2)
+        recommendations.append({
+            "bet_type": bet_type,
+            "event": f"{event['home_team']} vs {event['away_team']}",
+            "stake": budget,
+            "potential_return": potential_return,
+            "profit": round(potential_return - budget, 2)
+        })
+
+    return {
+        "event_id": event_id,
+        "event_name": f"{event['home_team']} vs {event['away_team']}",
+        "recommendations": recommendations,
+        "_visual": {
+            "type": "plan_cards",
+            "title": f"Recommended Bets for {event['home_team']} vs {event['away_team']}",
+            "items": [
+                {
+                    "id": rec["bet_type"]["id"],
+                    "name": rec["bet_type"]["name"],
+                    "type": rec["bet_type"]["category"],
+                    "price_monthly": round(rec["potential_return"], 2),
+                    "highlights": [
+                        f"Stake: £{rec['stake']}",
+                        f"Potential return: £{rec['potential_return']}",
+                        f"Profit: £{rec['profit']}"
+                    ]
+                }
+                for rec in recommendations
+            ]
+        }
+    }
+
+
+async def get_related_bets(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Get related bet suggestions for accumulator/parlay opportunities."""
+    event_id = arguments.get("event_id")
+
+    event = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
+    if not event:
+        return {"error": "Event not found"}
+
+    # Suggest popular accumulator combinations
+    related_bets = [
+        {
+            "id": "combo-1",
+            "name": f"{event['home_team']} to Win + Over 2.5 Goals",
+            "type": "combo",
+            "odds": round(event["odds"]["match_result"]["home"] * event["odds"]["over_under"]["over_2_5"], 2),
+            "description": "Higher risk, higher reward combination"
+        },
+        {
+            "id": "combo-2",
+            "name": f"Both Teams to Score + Over 2.5 Goals",
+            "type": "combo",
+            "odds": round(event["odds"]["both_teams_score"]["yes"] * event["odds"]["over_under"]["over_2_5"], 2),
+            "description": "Popular combo for attacking teams"
+        },
+        {
+            "id": "combo-3",
+            "name": f"{event['home_team']} Win or Draw + Under 3.5 Goals",
+            "type": "combo",
+            "odds": round(event["odds"]["double_chance"]["home_draw"] * 1.4, 2),
+            "description": "Safer option with decent returns"
+        }
+    ]
+
+    return {
+        "event_id": event_id,
+        "related_bets": related_bets,
+        "bundle_bonus": "Add to accumulator for 10% odds boost!",
+        "_visual": {
+            "type": "accessory_grid",
+            "title": f"Bet Combos for {event['home_team']} vs {event['away_team']}",
+            "items": [
+                {
+                    "id": bet["id"],
+                    "name": bet["name"],
+                    "type": bet["type"],
+                    "price": bet["odds"],
+                    "in_stock": True,
+                    "image_url": "https://images.unsplash.com/photo-1508970259924-5fbe90befa5a?w=400&h=300&fit=crop"
+                }
+                for bet in related_bets
+            ]
+        }
+    }
+
+
+async def calculate_bet_returns(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Calculate potential returns for a bet or accumulator."""
+    bets = arguments.get("bets", [])  # List of {event_id, market, selection, stake, odds}
+    bet_type = arguments.get("bet_type", "single")  # "single", "accumulator", "system"
+    total_stake = arguments.get("total_stake", 10)
+
+    if not bets:
+        return {"error": "No bets provided"}
+
+    if bet_type == "single":
+        # Single bet calculation
+        bet = bets[0]
+        potential_return = round(bet.get("stake", total_stake) * bet.get("odds", 2.0), 2)
+        profit = round(potential_return - bet.get("stake", total_stake), 2)
+
+        return {
+            "bet_type": "single",
+            "total_stake": bet.get("stake", total_stake),
+            "potential_return": potential_return,
+            "profit": profit,
+            "_visual": {
+                "type": "price_breakdown",
+                "data": {
+                    "items": [
+                        {"label": "Stake", "amount": bet.get("stake", total_stake), "type": "upfront"},
+                        {"label": f"Odds: {bet.get('odds', 2.0)}", "amount": potential_return, "type": "return"}
+                    ],
+                    "total_upfront": bet.get("stake", total_stake),
+                    "total_monthly": 0,
+                    "total_24m": potential_return
+                }
+            }
+        }
+
+    elif bet_type == "accumulator":
+        # Accumulator calculation - all odds multiplied
+        combined_odds = 1.0
+        for bet in bets:
+            combined_odds *= bet.get("odds", 2.0)
+
+        combined_odds = round(combined_odds, 2)
+        potential_return = round(total_stake * combined_odds, 2)
+        profit = round(potential_return - total_stake, 2)
+
+        return {
+            "bet_type": "accumulator",
+            "num_selections": len(bets),
+            "total_stake": total_stake,
+            "combined_odds": combined_odds,
+            "potential_return": potential_return,
+            "profit": profit,
+            "warning": "All selections must win for payout",
+            "_visual": {
+                "type": "price_breakdown",
+                "data": {
+                    "items": [
+                        {"label": f"Selection {i+1}: {bet.get('selection', 'N/A')}", "amount": bet.get("odds", 2.0), "type": "odds"}
+                        for i, bet in enumerate(bets)
+                    ] + [
+                        {"label": f"Combined Odds ({len(bets)} selections)", "amount": combined_odds, "type": "odds"},
+                        {"label": "Total Stake", "amount": total_stake, "type": "upfront"},
+                        {"label": "Potential Return", "amount": potential_return, "type": "return"}
+                    ],
+                    "total_upfront": total_stake,
+                    "total_monthly": 0,
+                    "total_24m": potential_return
+                }
+            }
+        }
+
+
+async def check_event_status(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Check if event is available for betting (live odds, suspended, etc.)."""
+    event_id = arguments.get("event_id")
+
+    event = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
+    if not event:
+        return {"error": "Event not found"}
+
+    betting_status = {
+        "upcoming": "Available for betting",
+        "live": "Live betting available - odds updating in real-time",
+        "suspended": "Betting temporarily suspended",
+        "finished": "Event finished - no longer available"
+    }
+
+    return {
+        "event": f"{event['home_team']} vs {event['away_team']}",
+        "status": event["status"],
+        "betting_status": betting_status.get(event["status"], "Unknown"),
+        "markets_available": len(event.get("odds", {})),
+        "live_score": event.get("live_score") if event["status"] == "live" else None
+    }
+
+
+# Customer & Account Tools
+
+async def check_betting_limits(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Check customer's betting limits and responsible gambling status."""
+    await asyncio.sleep(0.5)
 
     account_number = arguments.get("account_number", "MOCK")
 
-    eligible = random.choice([True, True, False])  # 66% eligible
-    months_remaining = 0 if eligible else random.randint(1, 12)
+    # Mock limits
+    daily_limit = random.randint(50, 500)
+    weekly_limit = daily_limit * 5
+    current_daily_spend = random.randint(0, int(daily_limit * 0.7))
 
     return {
         "account_number": account_number,
-        "eligible": eligible,
-        "contract_end_date": (datetime.now() + timedelta(days=months_remaining * 30)).strftime("%Y-%m-%d"),
-        "months_remaining": months_remaining,
-        "early_upgrade_fee": 0 if eligible else months_remaining * 15,
-        "message": "You're eligible to upgrade now!" if eligible else f"Upgrade available in {months_remaining} months",
+        "limits": {
+            "daily_limit": daily_limit,
+            "weekly_limit": weekly_limit,
+            "monthly_limit": weekly_limit * 4,
+            "single_bet_limit": int(daily_limit * 0.5)
+        },
+        "current_spend": {
+            "today": current_daily_spend,
+            "this_week": current_daily_spend * 3,
+            "this_month": current_daily_spend * 10
+        },
+        "remaining_today": daily_limit - current_daily_spend,
+        "responsible_gambling": {
+            "self_exclusion": False,
+            "timeout_active": False,
+            "reality_check_enabled": True
+        },
         "_visual": {
             "type": "info_callout",
             "data": {
-                "message": "✓ You're eligible to upgrade now!" if eligible else f"⏳ Upgrade available in {months_remaining} months"
+                "message": f"✓ Daily limit: £{daily_limit} | Remaining today: £{daily_limit - current_daily_spend}"
             }
         }
     }
 
 
-async def get_customer_usage(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Get customer's historical usage to recommend appropriate plan (MOCKED)."""
+async def get_betting_history(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Get customer's betting history and statistics."""
     await asyncio.sleep(0.5)
 
+    account_number = arguments.get("account_number", "MOCK")
+    timeframe = arguments.get("timeframe", "month")  # "week", "month", "year"
+
+    # Mock betting history
+    num_bets = random.randint(15, 50)
+    win_rate = random.randint(35, 55)
+    total_staked = random.randint(200, 1000)
+    total_returns = int(total_staked * random.uniform(0.85, 1.15))
+    profit_loss = total_returns - total_staked
+
     return {
-        "account_number": arguments.get("account_number"),
-        "average_monthly_usage": {
-            "data_gb": random.randint(10, 80),
-            "minutes": random.randint(100, 800),
-            "texts": random.randint(50, 500)
+        "account_number": account_number,
+        "timeframe": timeframe,
+        "summary": {
+            "total_bets": num_bets,
+            "bets_won": int(num_bets * win_rate / 100),
+            "bets_lost": int(num_bets * (100 - win_rate) / 100),
+            "win_rate_percentage": win_rate,
+            "total_staked": total_staked,
+            "total_returns": total_returns,
+            "profit_loss": profit_loss
         },
-        "peak_usage_month": {
-            "data_gb": random.randint(60, 120),
-            "month": "August 2024"
-        },
-        "current_plan": random.choice(["Essential 50GB", "Unlimited Lite"]),
-        "recommendation": "Based on your usage, consider upgrading to 100GB plan"
+        "favorite_bet_types": ["Match Result", "Over/Under 2.5", "Both Teams to Score"],
+        "favorite_leagues": ["Premier League", "Champions League", "La Liga"],
+        "biggest_win": {
+            "event": "Liverpool vs Manchester City",
+            "stake": 20,
+            "return": 180,
+            "odds": 9.0
+        }
     }
 
 
-async def check_coverage(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Check network coverage at customer's location."""
-    postcode = arguments.get("postcode")
-    service_type = arguments.get("service_type", "5g")  # "4g", "5g", "broadband"
-
-    # Mock coverage data
-    coverage_quality = random.choice(["Excellent", "Good", "Fair"])
-
-    return {
-        "postcode": postcode,
-        "service_type": service_type.upper(),
-        "coverage": coverage_quality,
-        "signal_strength": random.randint(3, 5),
-        "max_speed_mbps": random.randint(50, 300) if service_type == "5g" else random.randint(20, 80),
-        "indoor_coverage": random.choice([True, True, False]),
-        "nearby_towers": random.randint(2, 8)
-    }
-
-
-async def run_credit_check(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Run credit check for contract approval. Requires customer details."""
-    # Require customer information
+async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Verify customer age and identity for betting compliance."""
     customer_name = arguments.get("customer_name")
+    date_of_birth = arguments.get("date_of_birth")
+    id_type = arguments.get("id_type")
     address = arguments.get("address")
     postcode = arguments.get("postcode")
-    dob = arguments.get("date_of_birth")
 
-    if not all([customer_name, address, postcode]):
+    if not all([customer_name, date_of_birth, address, postcode]):
         return {
             "error": "Missing required information",
-            "message": "I need your full name, address, and postcode to run the credit check",
+            "message": "We need your full name, date of birth, address, and postcode for age verification",
             "_visual": {
                 "type": "info_callout",
-                "data": {"message": "📋 Please provide your details for credit check"}
+                "data": {"message": "📋 Age verification required - must be 18+ to bet"}
             }
         }
 
-    # Simulate different outcomes
-    await asyncio.sleep(2)  # Simulate processing time
+    # Simulate verification
+    await asyncio.sleep(2)
 
-    outcome = random.choices(
-        ['approved', 'approved', 'approved', 'review_required', 'declined'],
-        weights=[0.7, 0.15, 0.1, 0.04, 0.01]
-    )[0]
+    # Calculate age from DOB
+    try:
+        dob_date = datetime.strptime(date_of_birth, "%Y-%m-%d")
+        age = (datetime.now() - dob_date).days // 365
+    except:
+        age = 18  # Default for mock
 
-    if outcome == 'approved':
-        deposit = random.choice([0, 0, 0, 99]) if random.random() > 0.7 else 0
+    if age < 18:
         return {
+            "verified": False,
+            "status": "underage",
+            "message": "You must be 18 or older to place bets",
+            "_visual": {
+                "type": "info_callout",
+                "data": {"message": "❌ Age verification failed - must be 18+"}
+            }
+        }
+
+    # Mock verification success
+    verified = random.random() > 0.1  # 90% success rate
+
+    if verified:
+        return {
+            "verified": True,
             "customer_name": customer_name,
-            "status": "approved",
-            "deposit_required": deposit,
-            "credit_limit": 2500,
-            "message": f"Credit check passed! {f'Deposit of £{deposit} required.' if deposit > 0 else 'No deposit needed.'}",
+            "age": age,
+            "status": "verified",
+            "message": "Identity verified successfully. You can now place bets!",
             "_visual": {
                 "layout": "multi_section",
                 "theme": "success",
@@ -741,378 +819,333 @@ async def run_credit_check(arguments: Dict[str, Any]) -> Dict[str, Any]:
                     {
                         "type": "info_callout",
                         "data": {
-                            "message": f"📋 Credit Check for: {customer_name}\n📍 Delivery to: {address}, {postcode}"
+                            "message": f"✅ Identity Verified\n👤 {customer_name}\n📍 {postcode}"
                         },
-                        "style": "minimal"
-                    },
-                    {
-                        "type": "credit_check_status",
-                        "data": {
-                            "status": "approved",
-                            "message": "Great news! Your credit check has been approved.",
-                            "credit_limit": 2500
-                        },
-                        "emphasis": "high"
+                        "style": "emphasized"
                     }
-                ],
-                "animation": "scale"
-            }
-        }
-    elif outcome == 'review_required':
-        return {
-            "customer_name": customer_name,
-            "status": "review_required",
-            "message": "Your application requires manual review. We'll contact you within 24 hours.",
-            "_visual": {
-                "type": "credit_check_status",
-                "data": {
-                    "status": "review_required",
-                    "message": "Your application needs a quick review."
-                }
+                ]
             }
         }
     else:
         return {
-            "customer_name": customer_name,
-            "status": "declined",
-            "message": "Unfortunately, we cannot approve your application at this time.",
-            "reasons": [
-                "Credit history requires further review",
-                "Consider our pay-as-you-go options instead"
-            ],
+            "verified": False,
+            "status": "verification_failed",
+            "message": "Unable to verify identity. Please contact support.",
             "_visual": {
-                "type": "credit_check_status",
-                "data": {
-                    "status": "declined",
-                    "message": "We're unable to approve your application at this time."
-                }
+                "type": "info_callout",
+                "data": {"message": "⚠️ Verification failed - please contact support"}
             }
         }
 
 
-async def verify_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Verify customer identity (MOCKED)."""
-    await asyncio.sleep(1.5)
+async def check_account_balance(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Check customer's account balance and available funds."""
+    account_number = arguments.get("account_number", "MOCK")
+
+    await asyncio.sleep(0.3)
+
+    balance = round(random.uniform(10, 500), 2)
+    pending_bets = round(random.uniform(0, 50), 2)
+    available = round(balance - pending_bets, 2)
 
     return {
-        "verified": True,
-        "id_type": arguments.get("id_type"),
-        "confidence": "high",
-        "message": "Identity verified successfully"
+        "account_number": account_number,
+        "balance": balance,
+        "pending_bets": pending_bets,
+        "available_to_bet": available,
+        "currency": "GBP",
+        "bonus_balance": round(random.uniform(0, 25), 2),
+        "message": f"Available balance: £{available}",
+        "_visual": {
+            "type": "info_callout",
+            "data": {
+                "message": f"💰 Balance: £{balance}\n🎯 Available: £{available}\n🎁 Bonus: £{round(random.uniform(0, 25), 2)}"
+            }
+        }
     }
 
 
-async def check_trade_in_value(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Estimate trade-in value for customer's old device."""
-    device_model = arguments.get("device_model", "")
-    condition = arguments.get("condition", "good")  # excellent, good, fair, poor
+async def check_cashout_value(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Check cash-out value for active bet."""
+    bet_id = arguments.get("bet_id", "BET-12345")
 
-    if not device_model:
-        return {
-            "error": "Missing device model",
-            "message": "Please tell me what phone you'd like to trade in"
-        }
-
-    # Simulate processing
     await asyncio.sleep(1)
 
-    # Mock trade-in values based on device model and condition
-    base_values = {
-        "iphone 15 pro": 650,
-        "iphone 15": 550,
-        "iphone 14 pro": 500,
-        "iphone 14": 400,
-        "iphone 13": 300,
-        "iphone 12": 200,
-        "samsung galaxy s24 ultra": 600,
-        "samsung galaxy s24": 500,
-        "samsung galaxy s23": 400,
-        "samsung galaxy a54": 200,
-        "google pixel 8 pro": 450,
-        "google pixel 8": 350,
-        "google pixel 8a": 250,
-    }
+    # Mock cash-out calculation
+    original_stake = random.randint(10, 50)
+    potential_return = original_stake * random.uniform(3, 10)
+    cashout_value = round(original_stake * random.uniform(1.2, 2.5), 2)
+    profit_if_cashout = round(cashout_value - original_stake, 2)
 
-    # Find matching device (case insensitive, partial match)
-    device_lower = device_model.lower()
-    base_value = 150  # Default for unknown devices
-    matched_model = device_model
-
-    for model_key, value in base_values.items():
-        if model_key in device_lower or device_lower in model_key:
-            base_value = value
-            matched_model = model_key.title()
-            break
-
-    # Adjust for condition
-    condition_multipliers = {
-        "excellent": 1.0,
-        "good": 0.75,
-        "fair": 0.5,
-        "poor": 0.25
-    }
-
-    multiplier = condition_multipliers.get(condition.lower(), 0.75)
-    trade_in_value = int(base_value * multiplier)
-
-    # Bonus offer (random chance)
-    bonus_offer = None
-    if random.random() > 0.6:
-        bonus_offer = f"Trade in today and get an extra £50 off your new phone!"
-
-    # Build response with visual
     return {
-        "device_model": matched_model,
-        "condition": condition,
-        "trade_in_value": trade_in_value,
-        "original_value": base_value,
-        "message": f"Your {matched_model} in {condition} condition is worth £{trade_in_value} as a trade-in.",
+        "bet_id": bet_id,
+        "original_stake": original_stake,
+        "potential_return": round(potential_return, 2),
+        "cashout_value": cashout_value,
+        "profit_if_cashout": profit_if_cashout,
+        "cashout_available": True,
+        "message": f"Cash out now for £{cashout_value} (£{profit_if_cashout} profit)",
         "_visual": {
             "layout": "single_focus",
-            "theme": "default",
+            "theme": "info",
             "sections": [
                 {
                     "type": "trade_in_value",
                     "data": {
-                        "device_model": matched_model,
-                        "condition": condition,
-                        "trade_in_value": trade_in_value,
-                        "original_price": base_value,
+                        "device_model": f"Bet #{bet_id}",
+                        "condition": "Active",
+                        "trade_in_value": cashout_value,
+                        "original_price": original_stake,
                         "factors": {
-                            "screen_condition": "Good" if condition != "poor" else "Cracked",
-                            "battery_health": f"{random.randint(75, 95)}%" if condition in ["excellent", "good"] else f"{random.randint(50, 70)}%",
-                            "physical_damage": "None" if condition == "excellent" else "Minor scratches" if condition == "good" else "Visible wear"
+                            "Original Stake": f"£{original_stake}",
+                            "Current Value": f"£{cashout_value}",
+                            "Potential Return": f"£{round(potential_return, 2)}"
                         },
-                        "bonus_offer": bonus_offer,
+                        "bonus_offer": "Cash out now to secure your profit!",
                         "next_steps": [
-                            "Add your new phone to cart",
-                            "Trade-in value applied at checkout",
-                            "Send your old phone within 14 days"
+                            "Click 'Cash Out' to confirm",
+                            "Funds credited immediately",
+                            "Bet will be settled"
                         ]
                     },
                     "emphasis": "high"
                 }
-            ],
-            "animation": "fade"
+            ]
         }
     }
 
 
-# Cart Management Tools
+# Bet Slip Management
 
-async def add_to_cart(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Add item to shopping cart."""
+async def add_to_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Add selection to bet slip."""
     session_id = arguments.get("session_id", "default")
-    item_type = arguments.get("item_type")  # "device", "plan", "accessory"
-    item_id = arguments.get("item_id")
-    config = arguments.get("config", {})  # color, storage, etc.
+    event_id = arguments.get("event_id")
+    market = arguments.get("market")  # "match_result", "over_under", etc.
+    selection = arguments.get("selection")  # "home", "away", "over_2_5", etc.
+    odds = arguments.get("odds", 2.0)
 
-    if session_id not in SHOPPING_CART:
-        SHOPPING_CART[session_id] = {"items": [], "created_at": datetime.now()}
+    if session_id not in BET_SLIP:
+        BET_SLIP[session_id] = {"selections": [], "created_at": datetime.now()}
 
-    cart_item = {
-        "id": f"cart_{len(SHOPPING_CART[session_id]['items'])}",
-        "type": item_type,
-        "item_id": item_id,
-        "config": config,
+    # Get event details
+    event = next((e for e in MOCK_EVENTS if e["id"] == event_id), None)
+
+    bet_item = {
+        "id": f"bet_{len(BET_SLIP[session_id]['selections'])}",
+        "event_id": event_id,
+        "event_name": f"{event['home_team']} vs {event['away_team']}" if event else "Unknown Event",
+        "market": market,
+        "selection": selection,
+        "odds": odds,
         "added_at": datetime.now().isoformat()
     }
 
-    SHOPPING_CART[session_id]["items"].append(cart_item)
+    BET_SLIP[session_id]["selections"].append(bet_item)
 
-    # Get full cart summary for visual
-    cart_summary = await get_cart_summary({"session_id": session_id})
+    # Get bet slip summary
+    slip_summary = await get_bet_slip_summary({"session_id": session_id})
 
     return {
         "success": True,
-        "cart_item_id": cart_item["id"],
-        "cart_count": len(SHOPPING_CART[session_id]["items"]),
-        "message": f"Added {item_type} to cart",
+        "bet_id": bet_item["id"],
+        "bet_slip_count": len(BET_SLIP[session_id]["selections"]),
+        "message": f"Added {selection} to bet slip",
         "_visual": {
             "type": "cart_preview",
-            "title": "Shopping Cart",
-            "items": cart_summary.get("items", []),
+            "title": "Bet Slip",
+            "items": slip_summary.get("selections", []),
             "summary": {
-                "monthly": cart_summary.get("total_monthly", 0),
-                "total_24m": cart_summary.get("total_24m", 0)
+                "monthly": slip_summary.get("potential_return", 0),
+                "total_24m": slip_summary.get("total_stake", 0)
             }
         }
     }
 
 
-async def remove_from_cart(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Remove item from cart."""
+async def remove_from_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Remove selection from bet slip."""
     session_id = arguments.get("session_id", "default")
-    cart_item_id = arguments.get("cart_item_id")
+    bet_id = arguments.get("bet_id")
 
-    if session_id in SHOPPING_CART:
-        SHOPPING_CART[session_id]["items"] = [
-            item for item in SHOPPING_CART[session_id]["items"]
-            if item["id"] != cart_item_id
+    if session_id in BET_SLIP:
+        BET_SLIP[session_id]["selections"] = [
+            bet for bet in BET_SLIP[session_id]["selections"]
+            if bet["id"] != bet_id
         ]
 
-    # Get updated cart summary for visual
-    cart_summary = await get_cart_summary({"session_id": session_id})
+    slip_summary = await get_bet_slip_summary({"session_id": session_id})
 
     return {
         "success": True,
-        "cart_count": len(SHOPPING_CART.get(session_id, {}).get("items", [])),
-        "message": "Item removed from cart",
+        "bet_slip_count": len(BET_SLIP.get(session_id, {}).get("selections", [])),
+        "message": "Selection removed from bet slip",
         "_visual": {
             "type": "cart_preview",
-            "title": "Shopping Cart",
-            "items": cart_summary.get("items", []),
+            "title": "Bet Slip",
+            "items": slip_summary.get("selections", []),
             "summary": {
-                "monthly": cart_summary.get("total_monthly", 0),
-                "total_24m": cart_summary.get("total_24m", 0)
+                "monthly": slip_summary.get("potential_return", 0),
+                "total_24m": slip_summary.get("total_stake", 0)
             }
         }
     }
 
 
-async def get_cart_summary(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Get complete cart with pricing."""
+async def get_bet_slip_summary(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Get complete bet slip with potential returns."""
     session_id = arguments.get("session_id", "default")
 
-    if session_id not in SHOPPING_CART:
-        return {"items": [], "total_upfront": 0, "total_monthly": 0}
+    if session_id not in BET_SLIP:
+        return {"selections": [], "total_stake": 0, "potential_return": 0}
 
-    cart = SHOPPING_CART[session_id]
-    items_details = []
-    total_upfront = 0
-    total_monthly = 0
+    slip = BET_SLIP[session_id]
+    selections = slip["selections"]
 
-    for item in cart["items"]:
-        if item["type"] == "device":
-            device = next((d for d in MOCK_DEVICES if d["id"] == item["item_id"]), None)
-            if device:
-                items_details.append({**device, "cart_item_id": item["id"]})
-                total_upfront += device["price_upfront"]
-                total_monthly += device["price_monthly"]
-        elif item["type"] == "plan":
-            plan = next((p for p in MOCK_PLANS if p["id"] == item["item_id"]), None)
-            if plan:
-                items_details.append({**plan, "cart_item_id": item["id"]})
-                total_monthly += plan["price_monthly"]
-        elif item["type"] == "accessory":
-            # Find accessory in any list
-            for acc_list in MOCK_ACCESSORIES.values():
-                acc = next((a for a in acc_list if a["id"] == item["item_id"]), None)
-                if acc:
-                    items_details.append({**acc, "cart_item_id": item["id"]})
-                    total_upfront += acc["price"]
-                    break
+    # Default stake per bet
+    stake_per_bet = 10
+    total_stake = stake_per_bet * len(selections) if selections else 0
+
+    # Calculate potential returns (accumulator style)
+    if selections:
+        combined_odds = 1.0
+        for bet in selections:
+            combined_odds *= bet.get("odds", 2.0)
+        potential_return = round(stake_per_bet * combined_odds, 2)
+    else:
+        potential_return = 0
 
     return {
-        "items": items_details,
-        "summary": {
-            "upfront_total": total_upfront,
-            "monthly_total": total_monthly,
-            "contract_value_24m": (total_monthly * 24) + total_upfront
-        },
-        "item_count": len(items_details),
+        "selections": selections,
+        "num_selections": len(selections),
+        "total_stake": total_stake,
+        "combined_odds": round(combined_odds, 2) if selections else 0,
+        "potential_return": potential_return,
+        "potential_profit": round(potential_return - total_stake, 2) if selections else 0,
         "_visual": {
             "type": "cart_preview",
-            "title": "Your Cart",
-            "items": items_details,
+            "title": "Your Bet Slip",
+            "items": [
+                {
+                    "name": bet["event_name"],
+                    "brand": bet["market"],
+                    "price": bet["odds"],
+                    "cart_item_id": bet["id"]
+                }
+                for bet in selections
+            ],
             "summary": {
-                "monthly": total_monthly,
-                "total_24m": (total_monthly * 24) + total_upfront
+                "monthly": potential_return,
+                "total_24m": total_stake
             }
         }
     }
 
 
-async def apply_promo_code(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Apply promotional discount code (MOCKED)."""
+async def apply_bonus(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Apply bonus or promotion code."""
     code = arguments.get("code", "").upper()
-    cart_value = arguments.get("cart_value", 0)
+    bet_value = arguments.get("bet_value", 0)
 
-    # Mock promo codes
+    # Mock bonus codes
     valid_codes = {
-        "WELCOME10": {"type": "percentage", "value": 10, "description": "10% off first month"},
-        "SAVE50": {"type": "fixed", "value": 50, "description": "£50 off upfront cost"},
-        "STUDENT": {"type": "percentage", "value": 15, "description": "15% student discount"},
-        "UPGRADE20": {"type": "fixed", "value": 20, "description": "£20 upgrade credit"}
+        "WELCOME50": {"type": "free_bet", "value": 50, "description": "£50 free bet for new customers"},
+        "ACCA10": {"type": "odds_boost", "value": 10, "description": "10% odds boost on accumulators"},
+        "CASHBACK20": {"type": "cashback", "value": 20, "description": "20% cashback on losses (up to £20)"},
+        "DOUBLE": {"type": "multiplier", "value": 2, "description": "Double your winnings on first bet"}
     }
 
     if code in valid_codes:
-        promo = valid_codes[code]
-        if promo["type"] == "percentage":
-            discount = cart_value * (promo["value"] / 100)
-        else:
-            discount = promo["value"]
-
+        bonus = valid_codes[code]
         return {
             "valid": True,
             "code": code,
-            "discount_amount": discount,
-            "description": promo["description"],
-            "message": f"Promo code applied! You save £{discount:.2f}"
+            "bonus_type": bonus["type"],
+            "bonus_value": bonus["value"],
+            "description": bonus["description"],
+            "message": f"Bonus applied! {bonus['description']}"
         }
 
     return {
         "valid": False,
         "code": code,
-        "message": "Invalid promo code"
+        "message": "Invalid bonus code"
     }
 
 
-async def process_payment(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Process checkout and payment (MOCKED - Always succeeds)."""
-    await asyncio.sleep(2)  # Simulate payment processing
+async def place_bet(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Place bet and process transaction."""
+    await asyncio.sleep(2)
 
-    payment_method = arguments.get("payment_method", "card")
     session_id = arguments.get("session_id", "default")
+    bet_type = arguments.get("bet_type", "accumulator")  # "single", "accumulator", "system"
 
-    # Get cart details for order summary
-    cart_summary = await get_cart_summary({"session_id": session_id})
+    # Get bet slip
+    slip_summary = await get_bet_slip_summary({"session_id": session_id})
 
-    order_id = f"VF-{random.randint(100000, 999999)}"
-    delivery_date = (datetime.now() + timedelta(days=random.randint(1, 3))).strftime("%A, %B %d")
+    if not slip_summary.get("selections"):
+        return {"error": "Bet slip is empty"}
 
-    # Create stunning multi-section order confirmation
-    cart_items = cart_summary.get("items", [])
+    bet_id = f"CB-{random.randint(100000, 999999)}"
+    settlement_time = "After all events complete" if bet_type == "accumulator" else "After event completion"
+
+    selections = slip_summary.get("selections", [])
 
     return {
         "success": True,
-        "order_id": order_id,
+        "bet_id": bet_id,
+        "bet_type": bet_type,
         "confirmation_number": f"CONF-{random.randint(1000000, 9999999)}",
-        "payment_status": "completed",
-        "delivery_estimate": delivery_date,
-        "message": "Order confirmed! You'll receive a confirmation email shortly.",
+        "status": "accepted",
+        "total_stake": slip_summary.get("total_stake", 0),
+        "potential_return": slip_summary.get("potential_return", 0),
+        "combined_odds": slip_summary.get("combined_odds", 0),
+        "num_selections": len(selections),
+        "settlement_time": settlement_time,
+        "message": "Bet placed successfully! Good luck!",
         "_visual": {
             "layout": "multi_section",
             "theme": "success",
             "header": {
-                "title": "🎉 Order Confirmed!",
-                "subtitle": f"Order #{order_id}",
-                "badge": "Payment Complete"
+                "title": "🎉 Bet Placed!",
+                "subtitle": f"Bet ID: {bet_id}",
+                "badge": "Confirmed"
             },
             "sections": [
                 {
                     "type": "info_callout",
                     "data": {
-                        "message": f"✅ Your order has been confirmed and will be delivered on {delivery_date}"
+                        "message": f"✅ Your {bet_type} bet has been placed successfully"
                     },
                     "style": "emphasized"
                 },
                 {
                     "type": "product_grid",
-                    "title": "Your New Devices & Plans",
-                    "data": {"items": cart_items[:4]},  # Show up to 4 items with images
+                    "title": "Your Selections",
+                    "data": {
+                        "items": [
+                            {
+                                "name": sel["event_name"],
+                                "brand": sel["market"],
+                                "price": sel["odds"]
+                            }
+                            for sel in selections[:4]
+                        ]
+                    },
                     "emphasis": "high"
                 },
                 {
                     "type": "price_breakdown",
                     "data": {
                         "items": [
-                            {"label": item.get("name", "Item"), "amount": item.get("price_monthly", item.get("price", 0)), "type": "monthly" if "price_monthly" in item else "upfront"}
-                            for item in cart_items
+                            {"label": "Total Stake", "amount": slip_summary.get("total_stake", 0), "type": "upfront"},
+                            {"label": f"Combined Odds", "amount": slip_summary.get("combined_odds", 0), "type": "odds"},
+                            {"label": "Potential Return", "amount": slip_summary.get("potential_return", 0), "type": "return"},
+                            {"label": "Potential Profit", "amount": slip_summary.get("potential_profit", 0), "type": "profit"}
                         ],
-                        "total_upfront": cart_summary.get("total_upfront", 0),
-                        "total_monthly": cart_summary.get("total_monthly", 0),
-                        "total_24m": cart_summary.get("total_24m", 0)
+                        "total_upfront": slip_summary.get("total_stake", 0),
+                        "total_monthly": 0,
+                        "total_24m": slip_summary.get("potential_return", 0)
                     },
                     "style": "minimal"
                 },
@@ -1123,7 +1156,7 @@ async def process_payment(arguments: Dict[str, Any]) -> Dict[str, Any]:
                 {
                     "type": "info_callout",
                     "data": {
-                        "message": f"📧 Confirmation email sent\n📦 Track your delivery online\n📱 Your service activates on delivery day"
+                        "message": f"📧 Confirmation sent to your email\n📊 Track your bet in 'My Bets'\n🏆 Results after matches complete"
                     }
                 }
             ],
@@ -1132,46 +1165,57 @@ async def process_payment(arguments: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-async def get_available_plans(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Browse all available plans."""
-    plan_type = arguments.get("plan_type")  # "unlimited", "capped", "all"
+async def get_available_markets(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Browse all available betting markets/bet types."""
+    category = arguments.get("category")  # "main", "player", "advanced", "combo", "all"
 
-    if plan_type and plan_type != "all":
-        filtered = [p for p in MOCK_PLANS if p["type"] == plan_type]
+    if category and category != "all":
+        filtered = [bt for bt in MOCK_BET_TYPES if bt["category"] == category]
     else:
-        filtered = MOCK_PLANS
+        filtered = MOCK_BET_TYPES
 
     return {
-        "plans": filtered,
+        "bet_types": filtered,
         "count": len(filtered),
-        "plan_type": plan_type or "all",
+        "category": category or "all",
         "_visual": {
             "type": "plan_cards",
-            "title": "Available Plans",
-            "items": filtered
+            "title": "Available Bet Types",
+            "items": [
+                {
+                    "id": bt["id"],
+                    "name": bt["name"],
+                    "type": bt["category"],
+                    "highlights": [
+                        bt["description"],
+                        f"Risk: {bt['risk_level']}",
+                        f"Popularity: {bt['popularity']}"
+                    ]
+                }
+                for bt in filtered
+            ]
         }
     }
 
 
 async def get_active_promotions(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Get current promotions and deals."""
-    customer_type = arguments.get("customer_type", "new")  # "new", "upgrade", "existing"
+    """Get current betting promotions and offers."""
+    customer_type = arguments.get("customer_type", "new")  # "new", "existing"
 
     promotions = {
         "new": [
-            {"title": "Welcome Offer", "description": "50% off first 3 months on Unlimited plans", "code": "WELCOME50"},
-            {"title": "Free Accessories", "description": "Free case and screen protector with any iPhone", "auto_apply": True}
-        ],
-        "upgrade": [
-            {"title": "Loyalty Reward", "description": "£100 credit towards new device", "code": "LOYAL100"},
-            {"title": "Trade-In Bonus", "description": "Extra £50 when you trade in your old phone", "auto_apply": True}
+            {"title": "Welcome Bonus", "description": "Bet £10, Get £50 in Free Bets", "code": "WELCOME50"},
+            {"title": "Risk Free First Bet", "description": "Money back as a free bet if your first bet loses (up to £25)", "code": "RISKFREE"},
+            {"title": "Odds Boost", "description": "Enhanced odds on selected Premier League matches", "auto_apply": True}
         ],
         "existing": [
-            {"title": "Refer a Friend", "description": "£25 credit for you and your friend", "code": "REFER25"}
+            {"title": "Acca Insurance", "description": "Get your stake back if one leg lets you down (5+ selections)", "auto_apply": True},
+            {"title": "Cashback Fridays", "description": "10% cashback on all football bets placed on Fridays", "code": "FRIDAY10"},
+            {"title": "Refer a Friend", "description": "£25 for you and your friend when they place first bet", "code": "REFER25"}
         ]
     }
 
-    promos = promotions.get(customer_type, [])
+    promos = promotions.get(customer_type, promotions["existing"])
 
     return {
         "customer_type": customer_type,
@@ -1185,60 +1229,39 @@ async def get_active_promotions(arguments: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-async def schedule_store_appointment(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Schedule in-store appointment (MOCKED)."""
-    store_name = arguments.get("store_name", "Contoso Oxford Street")
-    preferred_date = arguments.get("preferred_date")
-    preferred_time = arguments.get("preferred_time")
-
-    return {
-        "confirmed": True,
-        "appointment_id": f"APT-{random.randint(10000, 99999)}",
-        "store": store_name,
-        "date": preferred_date or (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d"),
-        "time": preferred_time or "14:00",
-        "staff_member": random.choice(["Sarah", "James", "Emma", "Mohammed"]),
-        "message": "Appointment confirmed! You'll receive a reminder SMS."
-    }
-
-
 async def transfer_to_human_agent(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Transfer to human sales agent."""
+    """Transfer to human betting specialist."""
     reason = arguments.get("reason", "customer_request")
     context = arguments.get("context", {})
 
     return {
         "transfer_initiated": True,
         "estimated_wait_time_minutes": random.randint(2, 8),
-        "agent_type": "sales_specialist",
+        "agent_type": "betting_specialist",
         "reference_number": f"TRF-{random.randint(100000, 999999)}",
-        "message": "Connecting you to a sales specialist. Please hold..."
+        "message": "Connecting you to a betting specialist. Please hold..."
+    }
+
+
+async def send_bet_confirmation(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """Email bet confirmation to customer."""
+    email = arguments.get("email")
+    bet_id = arguments.get("bet_id", f"BET-{random.randint(100000, 999999)}")
+
+    return {
+        "sent": True,
+        "email": email,
+        "bet_id": bet_id,
+        "message": f"Bet confirmation sent to {email}"
     }
 
 
 async def customise_webpage(arguments: Dict[str, Any]) -> Dict[str, Any]:
     """AI composes the visual display based on conversation context."""
-    # Simply return the visual structure as-is
-    # The frontend will render it via FlexibleRenderer
-
     return {
         "success": True,
         "message": "Visual updated",
-        "_visual": arguments  # Pass through AI's composition directly
-    }
-
-
-async def send_quote_email(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """Email quote to customer (MOCKED)."""
-    email = arguments.get("email")
-    cart_summary = arguments.get("cart_summary", {})
-
-    return {
-        "sent": True,
-        "email": email,
-        "quote_id": f"QT-{random.randint(100000, 999999)}",
-        "valid_until": (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d"),
-        "message": f"Quote sent to {email}. Valid for 7 days."
+        "_visual": arguments
     }
 
 
@@ -1247,210 +1270,211 @@ async def send_quote_email(arguments: Dict[str, Any]) -> Dict[str, Any]:
 # =============================================================================
 
 TOOLS_REGISTRY = {
-    # Device Discovery & Recommendation
-    "search_devices_by_attributes": {
+    # Event Discovery & Information
+    "search_events": {
         "definition": {
             "type": "function",
-            "name": "search_devices_by_attributes",
-            "description": "Search for devices based on customer requirements like battery life, camera quality, price range, brand, or use case. Use this when customer describes what they need in a phone.",
+            "name": "search_events",
+            "description": "Search for football matches/events based on league, team, date, or status. Use this when customer asks about upcoming matches or specific teams.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "battery_life": {
+                    "league": {
                         "type": "string",
-                        "enum": ["good", "very_good", "excellent"],
-                        "description": "Required battery performance"
+                        "description": "League name (e.g., Premier League, La Liga, Champions League)"
                     },
-                    "camera_quality": {
+                    "team": {
                         "type": "string",
-                        "enum": ["good", "very_good", "excellent"],
-                        "description": "Required camera quality"
+                        "description": "Team name to search for"
                     },
-                    "price_max_monthly": {
-                        "type": "number",
-                        "description": "Maximum monthly payment willing to pay"
-                    },
-                    "brand": {
+                    "date_range": {
                         "type": "string",
-                        "description": "Preferred brand (Apple, Samsung, Google, etc.)"
+                        "enum": ["today", "tomorrow", "week", "upcoming"],
+                        "description": "When to search for matches"
                     },
-                    "use_case": {
+                    "status": {
                         "type": "string",
-                        "enum": ["photography", "gaming", "business", "everyday", "budget", "content_creation"],
-                        "description": "Primary use case for the device"
+                        "enum": ["upcoming", "live", "all"],
+                        "description": "Match status filter"
                     }
                 }
             }
         },
-        "executor": search_devices_by_attributes
+        "executor": search_events
     },
 
-    "get_device_details": {
+    "get_event_details": {
         "definition": {
             "type": "function",
-            "name": "get_device_details",
-            "description": "Get complete details, specifications, and reviews for a specific device.",
+            "name": "get_event_details",
+            "description": "Get complete details for a specific match including odds, team stats, form, and player information.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "device_id": {
+                    "event_id": {
                         "type": "string",
-                        "description": "Device identifier"
+                        "description": "Event/match identifier"
                     }
                 },
-                "required": ["device_id"]
+                "required": ["event_id"]
             }
         },
-        "executor": get_device_details
+        "executor": get_event_details
     },
 
-    "compare_devices": {
+    "compare_odds": {
         "definition": {
             "type": "function",
-            "name": "compare_devices",
-            "description": "Compare multiple devices side-by-side to help customer decide.",
+            "name": "compare_odds",
+            "description": "Compare odds across multiple matches or markets to find best value.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "device_ids": {
+                    "event_ids": {
                         "type": "array",
                         "items": {"type": "string"},
-                        "description": "List of device IDs to compare"
-                    }
-                },
-                "required": ["device_ids"]
-            }
-        },
-        "executor": compare_devices
-    },
-
-    "get_similar_devices": {
-        "definition": {
-            "type": "function",
-            "name": "get_similar_devices",
-            "description": "Find alternative devices at different price points (cheaper, similar, premium).",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "device_id": {
-                        "type": "string",
-                        "description": "Reference device ID"
-                    }
-                },
-                "required": ["device_id"]
-            }
-        },
-        "executor": get_similar_devices
-    },
-
-    "recommend_plan_for_device": {
-        "definition": {
-            "type": "function",
-            "name": "recommend_plan_for_device",
-            "description": "Recommend suitable plans for a device based on customer usage patterns.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "device_id": {
-                        "type": "string",
-                        "description": "Device ID"
+                        "description": "List of event IDs to compare"
                     },
-                    "estimated_data_usage_gb": {
+                    "bet_type": {
+                        "type": "string",
+                        "description": "Type of bet to compare (match_result, over_under, etc.)"
+                    }
+                },
+                "required": ["event_ids"]
+            }
+        },
+        "executor": compare_odds
+    },
+
+    "get_similar_events": {
+        "definition": {
+            "type": "function",
+            "name": "get_similar_events",
+            "description": "Find similar matches (same league, same teams, similar odds).",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "event_id": {
+                        "type": "string",
+                        "description": "Reference event ID"
+                    }
+                },
+                "required": ["event_id"]
+            }
+        },
+        "executor": get_similar_events
+    },
+
+    "recommend_bet_types": {
+        "definition": {
+            "type": "function",
+            "name": "recommend_bet_types",
+            "description": "Recommend suitable bet types based on customer preferences and risk appetite.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "event_id": {
+                        "type": "string",
+                        "description": "Event ID"
+                    },
+                    "risk_level": {
+                        "type": "string",
+                        "enum": ["low", "medium", "high", "all"],
+                        "description": "Customer's risk appetite"
+                    },
+                    "budget": {
                         "type": "number",
-                        "description": "Estimated monthly data usage in GB"
-                    },
-                    "needs_international": {
-                        "type": "boolean",
-                        "description": "Whether customer needs international roaming"
+                        "description": "Budget for betting"
                     }
                 },
-                "required": ["device_id"]
+                "required": ["event_id"]
             }
         },
-        "executor": recommend_plan_for_device
+        "executor": recommend_bet_types
     },
 
-    "get_compatible_accessories": {
+    "get_related_bets": {
         "definition": {
             "type": "function",
-            "name": "get_compatible_accessories",
-            "description": "Get accessories compatible with a device (cases, chargers, earbuds). Use for upselling.",
+            "name": "get_related_bets",
+            "description": "Get related betting suggestions for accumulator/parlay opportunities.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "device_id": {
+                    "event_id": {
                         "type": "string",
-                        "description": "Device ID"
+                        "description": "Event ID"
                     }
                 },
-                "required": ["device_id"]
+                "required": ["event_id"]
             }
         },
-        "executor": get_compatible_accessories
+        "executor": get_related_bets
     },
 
-    "calculate_total_cost": {
+    "calculate_bet_returns": {
         "definition": {
             "type": "function",
-            "name": "calculate_total_cost",
-            "description": "Calculate complete cost breakdown including upfront, monthly, and total contract value.",
+            "name": "calculate_bet_returns",
+            "description": "Calculate potential returns for single bet or accumulator with detailed breakdown.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "plan_id": {
-                        "type": "string",
-                        "description": "Plan ID"
-                    },
-                    "device_id": {
-                        "type": "string",
-                        "description": "Device ID"
-                    },
-                    "accessory_ids": {
+                    "bets": {
                         "type": "array",
-                        "items": {"type": "string"},
-                        "description": "List of accessory IDs"
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {"type": "string"},
+                                "market": {"type": "string"},
+                                "selection": {"type": "string"},
+                                "odds": {"type": "number"},
+                                "stake": {"type": "number"}
+                            }
+                        },
+                        "description": "List of bets with details"
                     },
-                    "contract_months": {
+                    "bet_type": {
+                        "type": "string",
+                        "enum": ["single", "accumulator", "system"],
+                        "description": "Type of bet"
+                    },
+                    "total_stake": {
                         "type": "number",
-                        "description": "Contract duration in months (12, 24, 36)",
-                        "enum": [12, 24, 36]
+                        "description": "Total stake amount"
                     }
                 },
-                "required": ["plan_id", "device_id"]
+                "required": ["bets"]
             }
         },
-        "executor": calculate_total_cost
+        "executor": calculate_bet_returns
     },
 
-    "check_stock_availability": {
+    "check_event_status": {
         "definition": {
             "type": "function",
-            "name": "check_stock_availability",
-            "description": "Check if device is in stock online and at nearby stores.",
+            "name": "check_event_status",
+            "description": "Check if event is available for betting, live odds status, or if suspended.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "device_id": {
+                    "event_id": {
                         "type": "string",
-                        "description": "Device ID"
-                    },
-                    "postcode": {
-                        "type": "string",
-                        "description": "Customer postcode to find nearby stores"
+                        "description": "Event ID"
                     }
                 },
-                "required": ["device_id"]
+                "required": ["event_id"]
             }
         },
-        "executor": check_stock_availability
+        "executor": check_event_status
     },
 
-    # Customer & Eligibility
-    "check_upgrade_eligibility": {
+    # Customer & Account Management
+    "check_betting_limits": {
         "definition": {
             "type": "function",
-            "name": "check_upgrade_eligibility",
-            "description": "Check if existing customer is eligible for upgrade (MOCKED).",
+            "name": "check_betting_limits",
+            "description": "Check customer's betting limits and responsible gambling settings.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -1458,187 +1482,145 @@ TOOLS_REGISTRY = {
                         "type": "string",
                         "description": "Customer account number"
                     }
-                },
-                "required": ["account_number"]
+                }
             }
         },
-        "executor": check_upgrade_eligibility
+        "executor": check_betting_limits
     },
 
-    "get_customer_usage": {
+    "get_betting_history": {
         "definition": {
             "type": "function",
-            "name": "get_customer_usage",
-            "description": "Get customer's historical data/minute usage to recommend appropriate plan (MOCKED).",
+            "name": "get_betting_history",
+            "description": "Get customer's betting history, win rate, and statistics.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "account_number": {
                         "type": "string",
                         "description": "Customer account number"
+                    },
+                    "timeframe": {
+                        "type": "string",
+                        "enum": ["week", "month", "year"],
+                        "description": "Timeframe for history"
                     }
-                },
-                "required": ["account_number"]
+                }
             }
         },
-        "executor": get_customer_usage
+        "executor": get_betting_history
     },
 
-    "check_coverage": {
+    "verify_age_identity": {
         "definition": {
             "type": "function",
-            "name": "check_coverage",
-            "description": "Check Contoso network coverage (4G/5G) at customer's location.",
+            "name": "verify_age_identity",
+            "description": "Verify customer age and identity for betting compliance (must be 18+).",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "postcode": {
-                        "type": "string",
-                        "description": "UK postcode"
-                    },
-                    "service_type": {
-                        "type": "string",
-                        "enum": ["4g", "5g", "broadband"],
-                        "description": "Type of service to check"
-                    }
-                },
-                "required": ["postcode"]
-            }
-        },
-        "executor": check_coverage
-    },
-
-    "run_credit_check": {
-        "definition": {
-            "type": "function",
-            "name": "run_credit_check",
-            "description": "Run credit check for contract approval (MOCKED - mostly approves).",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "customer_name": {
-                        "type": "string",
-                        "description": "Customer full name"
-                    },
-                    "address": {
-                        "type": "string",
-                        "description": "Full delivery address"
-                    },
-                    "postcode": {
-                        "type": "string",
-                        "description": "Customer postcode"
-                    },
-                    "date_of_birth": {
-                        "type": "string",
-                        "description": "Date of birth (YYYY-MM-DD) - optional"
-                    }
-                },
-                "required": ["customer_name", "address", "postcode"]
-            }
-        },
-        "executor": run_credit_check
-    },
-
-    "verify_identity": {
-        "definition": {
-            "type": "function",
-            "name": "verify_identity",
-            "description": "Verify customer identity (MOCKED).",
-            "parameters": {
-                "type": "object",
-                "properties": {
+                    "customer_name": {"type": "string", "description": "Full name"},
+                    "date_of_birth": {"type": "string", "description": "Date of birth (YYYY-MM-DD)"},
                     "id_type": {
                         "type": "string",
                         "enum": ["passport", "drivers_license", "national_id"],
-                        "description": "Type of ID document"
+                        "description": "ID document type"
                     },
-                    "id_number": {
-                        "type": "string",
-                        "description": "ID number"
-                    }
+                    "address": {"type": "string", "description": "Full address"},
+                    "postcode": {"type": "string", "description": "Postcode"}
                 },
-                "required": ["id_type", "id_number"]
+                "required": ["customer_name", "date_of_birth", "address", "postcode"]
             }
         },
-        "executor": verify_identity
+        "executor": verify_age_identity
     },
 
-    "check_trade_in_value": {
+    "check_account_balance": {
         "definition": {
             "type": "function",
-            "name": "check_trade_in_value",
-            "description": "Estimate trade-in value for customer's old device. Use when customer asks about trading in their current phone.",
+            "name": "check_account_balance",
+            "description": "Check customer's account balance and available funds for betting.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "device_model": {
-                        "type": "string",
-                        "description": "Model of the device to trade in (e.g., 'iPhone 14', 'Samsung Galaxy S23')"
-                    },
-                    "condition": {
-                        "type": "string",
-                        "enum": ["excellent", "good", "fair", "poor"],
-                        "description": "Condition of the device: excellent (like new), good (minor wear), fair (noticeable wear), poor (damaged)"
-                    }
-                },
-                "required": ["device_model"]
+                    "account_number": {"type": "string"}
+                }
             }
         },
-        "executor": check_trade_in_value
+        "executor": check_account_balance
     },
 
-    # Cart Management
-    "add_to_cart": {
+    "check_cashout_value": {
         "definition": {
             "type": "function",
-            "name": "add_to_cart",
-            "description": "Add device, plan, or accessory to shopping cart.",
+            "name": "check_cashout_value",
+            "description": "Check current cash-out value for an active bet.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "session_id": {"type": "string", "description": "Session identifier"},
-                    "item_type": {
+                    "bet_id": {
                         "type": "string",
-                        "enum": ["device", "plan", "accessory"],
-                        "description": "Type of item"
-                    },
-                    "item_id": {
-                        "type": "string",
-                        "description": "Item identifier"
-                    },
-                    "config": {
-                        "type": "object",
-                        "description": "Item configuration (color, storage, etc.)"
+                        "description": "Bet identifier"
                     }
                 },
-                "required": ["item_type", "item_id"]
+                "required": ["bet_id"]
             }
         },
-        "executor": add_to_cart
+        "executor": check_cashout_value
     },
 
-    "remove_from_cart": {
+    # Bet Slip Management
+    "add_to_bet_slip": {
         "definition": {
             "type": "function",
-            "name": "remove_from_cart",
-            "description": "Remove item from shopping cart.",
+            "name": "add_to_bet_slip",
+            "description": "Add a betting selection to the bet slip.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "session_id": {"type": "string"},
-                    "cart_item_id": {"type": "string", "description": "Cart item ID to remove"}
+                    "event_id": {"type": "string", "description": "Event/match ID"},
+                    "market": {
+                        "type": "string",
+                        "description": "Betting market (match_result, over_under, etc.)"
+                    },
+                    "selection": {
+                        "type": "string",
+                        "description": "Selection (home, away, over_2_5, etc.)"
+                    },
+                    "odds": {
+                        "type": "number",
+                        "description": "Current odds for this selection"
+                    }
                 },
-                "required": ["cart_item_id"]
+                "required": ["event_id", "market", "selection", "odds"]
             }
         },
-        "executor": remove_from_cart
+        "executor": add_to_bet_slip
     },
 
-    "get_cart_summary": {
+    "remove_from_bet_slip": {
         "definition": {
             "type": "function",
-            "name": "get_cart_summary",
-            "description": "Get current shopping cart with all items and pricing.",
+            "name": "remove_from_bet_slip",
+            "description": "Remove a selection from bet slip.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "session_id": {"type": "string"},
+                    "bet_id": {"type": "string", "description": "Bet slip item ID"}
+                },
+                "required": ["bet_id"]
+            }
+        },
+        "executor": remove_from_bet_slip
+    },
+
+    "get_bet_slip_summary": {
+        "definition": {
+            "type": "function",
+            "name": "get_bet_slip_summary",
+            "description": "Get current bet slip with all selections and potential returns.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -1646,86 +1628,76 @@ TOOLS_REGISTRY = {
                 }
             }
         },
-        "executor": get_cart_summary
+        "executor": get_bet_slip_summary
     },
 
-    "apply_promo_code": {
+    "apply_bonus": {
         "definition": {
             "type": "function",
-            "name": "apply_promo_code",
-            "description": "Apply promotional discount code to purchase.",
+            "name": "apply_bonus",
+            "description": "Apply bonus or promotional code to bet.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "code": {
-                        "type": "string",
-                        "description": "Promo code"
-                    },
-                    "cart_value": {
-                        "type": "number",
-                        "description": "Current cart value for percentage calculations"
-                    }
+                    "code": {"type": "string", "description": "Bonus/promo code"},
+                    "bet_value": {"type": "number", "description": "Current bet value"}
                 },
                 "required": ["code"]
             }
         },
-        "executor": apply_promo_code
+        "executor": apply_bonus
     },
 
-    "process_payment": {
+    "place_bet": {
         "definition": {
             "type": "function",
-            "name": "process_payment",
-            "description": "Process checkout and payment (MOCKED - completes order).",
+            "name": "place_bet",
+            "description": "Place bet and confirm transaction. Use after customer confirms they want to place the bet.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "payment_method": {
+                    "session_id": {"type": "string"},
+                    "bet_type": {
                         "type": "string",
-                        "enum": ["card", "paypal", "direct_debit"],
-                        "description": "Payment method"
-                    },
-                    "billing_address": {
-                        "type": "object",
-                        "description": "Billing address details"
-                    }
-                },
-                "required": ["payment_method"]
-            }
-        },
-        "executor": process_payment
-    },
-
-    "get_available_plans": {
-        "definition": {
-            "type": "function",
-            "name": "get_available_plans",
-            "description": "Browse all available Contoso plans.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "plan_type": {
-                        "type": "string",
-                        "enum": ["unlimited", "capped", "all"],
-                        "description": "Filter by plan type"
+                        "enum": ["single", "accumulator", "system"],
+                        "description": "Type of bet to place"
                     }
                 }
             }
         },
-        "executor": get_available_plans
+        "executor": place_bet
+    },
+
+    "get_available_markets": {
+        "definition": {
+            "type": "function",
+            "name": "get_available_markets",
+            "description": "Browse all available betting markets and bet types.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "enum": ["main", "player", "advanced", "combo", "all"],
+                        "description": "Filter by bet type category"
+                    }
+                }
+            }
+        },
+        "executor": get_available_markets
     },
 
     "get_active_promotions": {
         "definition": {
             "type": "function",
             "name": "get_active_promotions",
-            "description": "Get current promotions and deals available.",
+            "description": "Get current betting promotions and bonus offers.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "customer_type": {
                         "type": "string",
-                        "enum": ["new", "upgrade", "existing"],
+                        "enum": ["new", "existing"],
                         "description": "Customer type"
                     }
                 }
@@ -1735,68 +1707,50 @@ TOOLS_REGISTRY = {
     },
 
     # Support & Engagement
-    "schedule_store_appointment": {
-        "definition": {
-            "type": "function",
-            "name": "schedule_store_appointment",
-            "description": "Schedule in-person appointment at Contoso store (MOCKED).",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "store_name": {"type": "string"},
-                    "preferred_date": {"type": "string", "description": "YYYY-MM-DD"},
-                    "preferred_time": {"type": "string", "description": "HH:MM"}
-                }
-            }
-        },
-        "executor": schedule_store_appointment
-    },
-
     "transfer_to_human_agent": {
         "definition": {
             "type": "function",
             "name": "transfer_to_human_agent",
-            "description": "Transfer customer to human sales specialist.",
+            "description": "Transfer customer to human betting specialist for complex queries or high-value bets.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "reason": {"type": "string", "description": "Reason for transfer"},
-                    "context": {"type": "object", "description": "Conversation context"}
+                    "reason": {"type": "string"},
+                    "context": {"type": "object"}
                 }
             }
         },
         "executor": transfer_to_human_agent
     },
 
-    "send_quote_email": {
+    "send_bet_confirmation": {
         "definition": {
             "type": "function",
-            "name": "send_quote_email",
-            "description": "Email purchase quote to customer (MOCKED).",
+            "name": "send_bet_confirmation",
+            "description": "Email bet confirmation to customer.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "email": {"type": "string", "description": "Customer email"},
-                    "cart_summary": {"type": "object", "description": "Current cart details"}
+                    "email": {"type": "string"},
+                    "bet_id": {"type": "string"}
                 },
                 "required": ["email"]
             }
         },
-        "executor": send_quote_email
+        "executor": send_bet_confirmation
     },
 
     "customise_webpage": {
         "definition": {
             "type": "function",
             "name": "customise_webpage",
-            "description": "Update the left-side visual display based on conversation context. Use this to show products, plans, comparisons, checkout progress, or any other visual content. You have complete creative control over the layout and emphasis.",
+            "description": "Update the left-side visual display for betting interface. Use to show matches, odds, bet slip, live scores, or any betting content.",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "layout": {
                         "type": "string",
-                        "enum": ["single_focus", "two_column", "multi_section", "grid", "flow", "wizard"],
-                        "description": "Overall page layout structure"
+                        "enum": ["single_focus", "two_column", "multi_section", "grid", "flow", "wizard"]
                     },
                     "header": {
                         "type": "object",
@@ -1804,66 +1758,22 @@ TOOLS_REGISTRY = {
                             "title": {"type": "string"},
                             "subtitle": {"type": "string"},
                             "badge": {"type": "string"}
-                        },
-                        "description": "Optional header for the page"
+                        }
                     },
                     "sections": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "enum": [
-                                        "product_hero", "product_grid", "product_card", "product_carousel",
-                                        "accessory_grid", "accessory_carousel", "accessory_card",
-                                        "plan_card", "plan_selector", "plan_comparison",
-                                        "price_breakdown", "checkout_stepper", "credit_check_status",
-                                        "promo_banner", "info_callout", "section_divider"
-                                    ],
-                                    "description": "Type of component to render"
-                                },
-                                "data": {
-                                    "type": "object",
-                                    "description": "Data for this component - use results from previous tool calls"
-                                },
+                                "type": {"type": "string"},
+                                "data": {"type": "object"},
                                 "title": {"type": "string"},
-                                "emphasis": {
-                                    "type": "string",
-                                    "enum": ["low", "medium", "high", "critical"],
-                                    "description": "Visual prominence level"
-                                },
-                                "size": {
-                                    "type": "string",
-                                    "enum": ["sm", "md", "lg", "xl"]
-                                }
-                            },
-                            "required": ["type", "data"]
-                        },
-                        "description": "Array of visual sections to display"
-                    },
-                    "cta": {
-                        "type": "object",
-                        "properties": {
-                            "text": {"type": "string"},
-                            "action": {"type": "string"},
-                            "prominence": {
-                                "type": "string",
-                                "enum": ["primary", "secondary", "subtle"]
+                                "emphasis": {"type": "string"}
                             }
-                        },
-                        "description": "Optional call-to-action button"
+                        }
                     },
-                    "theme": {
-                        "type": "string",
-                        "enum": ["default", "success", "warning", "info"],
-                        "description": "Overall page theme/mood"
-                    },
-                    "animation": {
-                        "type": "string",
-                        "enum": ["fade", "slide", "scale", "none"],
-                        "description": "Entry animation"
-                    }
+                    "theme": {"type": "string"},
+                    "animation": {"type": "string"}
                 },
                 "required": ["layout", "sections"]
             }
@@ -1871,14 +1781,3 @@ TOOLS_REGISTRY = {
         "executor": customise_webpage
     }
 }
-
-async def customise_webpage(arguments: Dict[str, Any]) -> Dict[str, Any]:
-    """AI composes the visual display based on conversation context."""
-    # Simply return the visual structure as-is
-    # The frontend will render it via FlexibleRenderer
-
-    return {
-        "success": True,
-        "message": "Visual updated",
-        "_visual": arguments  # Pass through AI's composition directly
-    }
