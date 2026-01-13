@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { toast, Toaster } from 'sonner';
 import { CallControls } from '@/components/CallControls';
 import { DynamicVisualCanvas } from '@/components/contoso/DynamicVisualCanvas';
-import { CartIcon } from '@/components/contoso/CartIcon';
-import { CartSummary } from '@/components/contoso/CartSummary';
+import { BetSlipIcon } from '@/components/betting/BetSlipIcon';
+import { BetSlipPanel, BetSelection } from '@/components/betting/BetSlipPanel';
 import { MessageBubble } from '@/components/MessageBubble';
 import { ChatComposer } from '@/components/ChatComposer';
 import { useRealtimeSession } from '@/hooks/use-realtime-session';
@@ -19,9 +19,9 @@ function App() {
   // Dynamic visual state
   const [currentVisual, setCurrentVisual] = useState<any | null>(null);
 
-  // Cart state
-  const [cartItems, setCartItems] = useState<any[]>([]);
-  const [cartOpen, setCartOpen] = useState(false);
+  // Bet slip state (replaces cart)
+  const [betSelections, setBetSelections] = useState<BetSelection[]>([]);
+  const [betSlipOpen, setBetSlipOpen] = useState(false);
 
   // Prefilled text state
   const [prefilledText, setPrefilledText] = useState<string>('');
@@ -43,9 +43,10 @@ function App() {
     setCurrentVisual(visualConfig);
   }, []);
 
-  const handleCartUpdated = useCallback((cartData: any) => {
-    if (cartData.items) {
-      setCartItems(cartData.items);
+  const handleBetSlipUpdated = useCallback((slipData: any) => {
+    console.log('[APP] Bet slip updated:', slipData);
+    if (slipData.selections) {
+      setBetSelections(slipData.selections);
     }
   }, []);
 
@@ -53,7 +54,7 @@ function App() {
     onMessage: handleMessage,
     onStateChange: handleStateChange,
     onVisualUpdate: handleVisualUpdate,
-    onCartUpdated: handleCartUpdated
+    onBetSlipUpdated: handleBetSlipUpdated
   });
 
   // Auto-scroll to bottom when new messages arrive
@@ -87,28 +88,34 @@ function App() {
     }
   };
 
-  const handleProductClick = (params: any) => {
-    // Handle different click types
+  // Handle actions from visual components (match cards, etc.)
+  const handleVisualAction = (params: any) => {
     if (!params) return;
 
     let message = '';
 
-    // If it's an explicit add_to_cart action from a button
-    if (params.action === 'add_to_cart' || params.action === 'add_accessory') {
+    // Handle betting actions from MatchCard/MatchGrid
+    if (params.action === 'add_to_slip') {
+      const { eventId, market, selection, odds, team } = params;
+      message = `Add ${team || selection} to win at odds ${odds} to my bet slip for match ${eventId}`;
+    }
+    // Handle view match details
+    else if (params.action === 'view_match') {
+      message = `Show me details for match ${params.eventId}`;
+    }
+    // Legacy: handle product clicks (for backwards compatibility)
+    else if (params.action === 'add_to_cart' || params.action === 'add_accessory') {
       const itemName = params.name || params.device_id || params.item_id || 'this item';
       message = `I want to purchase ${itemName}`;
     }
-    // If it's a product object from clicking a card (just browsing)
     else if (params.id && params.name) {
       message = `Tell me more about the ${params.name}`;
     }
-    // Fallback - assume it's browsing, not purchasing
     else {
       const name = params.name || params.title || 'this item';
       message = `Tell me more about ${name}`;
     }
 
-    // Auto-send the message instead of just prefilling
     if (isConnected && message) {
       handleSendMessage(message);
     } else if (!isConnected) {
@@ -120,14 +127,18 @@ function App() {
     setPrefilledText('');
   };
 
-  const handleRemoveCartItem = (itemId: string) => {
-    // Send message to AI to remove item
-    handleSendMessage(`Please remove item ${itemId} from my cart`);
+  const handleRemoveSelection = (selectionId: string) => {
+    // Send message to AI to remove selection from bet slip
+    handleSendMessage(`Remove selection ${selectionId} from my bet slip`);
   };
 
-  const handleCheckout = () => {
-    setCartOpen(false);
-    handleSendMessage('I would like to proceed with checkout');
+  const handlePlaceBet = (stake: number) => {
+    setBetSlipOpen(false);
+    handleSendMessage(`Place my bet with a stake of £${stake}`);
+  };
+
+  const handleClearSlip = () => {
+    handleSendMessage('Clear my bet slip');
   };
 
   const handleEscalate = () => {
@@ -156,10 +167,13 @@ function App() {
     toast.info('Chat cleared');
   };
 
-  const totalMonthly = cartItems.reduce((sum, item) => sum + (item.price_monthly || 0), 0);
+  // Calculate potential return for bet slip icon
+  const combinedOdds = betSelections.reduce((acc, sel) => acc * sel.odds, 1);
+  const defaultStake = 10;
+  const potentialReturn = betSelections.length > 0 ? defaultStake * combinedOdds : 0;
 
   return (
-    <div className="h-screen bg-background flex flex-col overflow-hidden">
+    <div className="h-screen bg-slate-900 flex flex-col overflow-hidden">
       <CallControls
         sessionState={sessionState}
         onStartCall={handleStartCall}
@@ -168,21 +182,21 @@ function App() {
         onToggleVoiceResponse={toggleVoiceResponse}
         getCurrentMediaStream={getCurrentMediaStream}
         cartIcon={
-          <CartIcon
-            count={cartItems.length}
-            totalMonthly={totalMonthly}
-            onClick={() => setCartOpen(true)}
+          <BetSlipIcon
+            count={betSelections.length}
+            potentialReturn={potentialReturn}
+            onClick={() => setBetSlipOpen(true)}
           />
         }
       />
 
       <div className="flex-1 flex overflow-hidden min-h-0">
         {/* Left Panel - Dynamic Visual Canvas (70%) */}
-        <div className="w-[70%] border-r bg-muted/30 min-w-0 overflow-hidden">
+        <div className="w-[70%] border-r border-slate-700 bg-slate-900 min-w-0 overflow-hidden">
           <div className="h-full p-4 flex flex-col min-h-0">
             <DynamicVisualCanvas
               visualConfig={currentVisual}
-              onProductClick={handleProductClick}
+              onProductClick={handleVisualAction}
               onBackToSuggestions={() => setCurrentVisual(null)}
               onSuggestionClick={handleSuggestionClick}
               disabled={!isConnected}
@@ -192,16 +206,16 @@ function App() {
 
         {/* Right Panel - Chat (30%) */}
         <div className="w-[30%] flex flex-col min-w-0 overflow-hidden">
-          <div className="flex-1 bg-card border-l overflow-hidden flex flex-col min-h-0">
+          <div className="flex-1 bg-slate-800 border-l border-slate-700 overflow-hidden flex flex-col min-h-0">
             {/* Chat Header with Clear Button */}
-            <div className="border-b p-3 flex items-center justify-between bg-card flex-shrink-0">
-              <h3 className="font-semibold text-sm">Chat</h3>
+            <div className="border-b border-slate-700 p-3 flex items-center justify-between bg-slate-800 flex-shrink-0">
+              <h3 className="font-semibold text-sm text-white">Chat</h3>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleClearChat}
                 disabled={(messages || []).length === 0}
-                className="h-8 px-2 text-xs"
+                className="h-8 px-2 text-xs text-slate-400 hover:text-white hover:bg-slate-700"
               >
                 <Trash size={14} className="mr-1" />
                 Clear
@@ -211,13 +225,13 @@ function App() {
             {/* Chat Messages */}
             <div
               ref={chatScrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll min-h-0"
+              className="flex-1 overflow-y-auto p-4 space-y-4 chat-scroll min-h-0 bg-slate-800"
             >
               {(messages || []).length === 0 ? (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
+                <div className="flex items-center justify-center h-full text-slate-400">
                   <div className="text-center">
-                    <h3 className="text-lg font-semibold mb-2">Welcome to Contoso Bet</h3>
-                    <p className="text-sm">Start betting on football matches</p>
+                    <h3 className="text-lg font-semibold mb-2 text-white">Welcome to Contoso Bet</h3>
+                    <p className="text-sm text-slate-400">Start betting on football matches</p>
                   </div>
                 </div>
               ) : (
@@ -245,13 +259,14 @@ function App() {
         </div>
       </div>
 
-      {/* Cart Summary Modal */}
-      <CartSummary
-        isOpen={cartOpen}
-        onClose={() => setCartOpen(false)}
-        items={cartItems}
-        onRemoveItem={handleRemoveCartItem}
-        onCheckout={handleCheckout}
+      {/* Bet Slip Panel */}
+      <BetSlipPanel
+        isOpen={betSlipOpen}
+        onClose={() => setBetSlipOpen(false)}
+        selections={betSelections}
+        onRemoveSelection={handleRemoveSelection}
+        onPlaceBet={handlePlaceBet}
+        onClearSlip={handleClearSlip}
       />
 
       <Toaster position="top-right" />

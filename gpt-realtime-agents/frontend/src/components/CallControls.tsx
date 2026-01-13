@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { SessionState } from '@/lib/types';
-import { Phone, PhoneX, Microphone, MicrophoneSlash, PhoneCall, SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react';
+import { Phone, PhoneX, Microphone, MicrophoneSlash, PhoneCall, SpeakerHigh, SpeakerSlash, SoccerBall } from '@phosphor-icons/react';
 import { VoiceActivityIndicator } from '@/components/VoiceActivityIndicator';
 import { WaveformVisualizer } from '@/components/WaveformVisualizer';
 import { SimpleVoiceIndicator } from '@/components/SimpleVoiceIndicator';
@@ -98,7 +98,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
   
   return (
     <TooltipProvider>
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+      <div className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-slate-900/80 border-b border-slate-700">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-4">
             <Button
@@ -107,7 +107,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
               variant={isConnected ? "destructive" : "default"}
               size="lg"
               className={`gap-2 px-6 py-3 text-base font-semibold ${
-                !isConnected && !isConnecting ? 'start-call-pulse' : ''
+                !isConnected && !isConnecting ? 'bg-emerald-600 hover:bg-emerald-700 start-call-pulse' : ''
               }`}
             >
               {isConnected ? (
@@ -132,7 +132,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
                       onClick={onToggleMute}
                       variant="outline"
                       size="lg"
-                      className="gap-2"
+                      className="gap-2 border-slate-600 bg-slate-800 text-white hover:bg-slate-700 hover:text-white"
                     >
                       {sessionState.isMuted ? (
                         <MicrophoneSlash size={20} />
@@ -152,7 +152,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
                       onClick={onToggleVoiceResponse}
                       variant={sessionState.voiceResponseEnabled ? "default" : "outline"}
                       size="lg"
-                      className="gap-2"
+                      className={`gap-2 ${sessionState.voiceResponseEnabled ? 'bg-emerald-600 hover:bg-emerald-700' : 'border-slate-600 bg-slate-800 text-white hover:bg-slate-700 hover:text-white'}`}
                     >
                       {sessionState.voiceResponseEnabled ? (
                         <SpeakerHigh size={20} />
@@ -207,7 +207,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
             {isConnected && !sessionState.isMuted && !isMobile && (
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex items-center gap-2 px-3 py-2 bg-muted/30 rounded-lg">
+                  <div className="flex items-center gap-2 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg">
                     <WaveformVisualizer
                       mediaStream={mediaStream}
                       isActive={voiceActivity.isActive}
@@ -216,7 +216,7 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
                       barCount={8}
                     />
                     {voiceActivity.isSpeaking && (
-                      <span className="text-xs text-primary font-medium">Speaking</span>
+                      <span className="text-xs text-emerald-400 font-medium">Speaking</span>
                     )}
                   </div>
                 </TooltipTrigger>
@@ -225,6 +225,12 @@ export function CallControls({ sessionState, onStartCall, onEndCall, onToggleMut
                 </TooltipContent>
               </Tooltip>
             )}
+          </div>
+
+          {/* Logo - Center */}
+          <div className="flex items-center gap-2">
+            <SoccerBall size={28} weight="fill" className="text-emerald-400" />
+            <span className="text-xl font-bold text-emerald-400">Contoso Betting</span>
           </div>
 
           <div className="flex items-center gap-3">

@@ -39,7 +39,13 @@ export type ComponentType =
   // Layout components
   | 'section_divider'
   | 'info_callout'
-  | 'empty_state';
+  | 'empty_state'
+  // Betting components
+  | 'match_card'
+  | 'match_grid'
+  | 'bet_slip_preview'
+  | 'bet_confirmation'
+  | 'odds_display';
 
 export type LayoutType =
   | 'single_focus'      // One main element (hero product)

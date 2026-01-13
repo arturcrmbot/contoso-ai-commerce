@@ -301,23 +301,29 @@ async def search_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "count": len(filtered_events),
         "filters_applied": {"league": league, "team": team, "status": status},
         "_visual": {
-            "type": "product_grid",
+            "type": "match_grid",
             "title": "Upcoming Matches" if status == "upcoming" else "Live Matches" if status == "live" else "Football Matches",
-            "items": [
-                {
-                    "id": e["id"],
-                    "name": f"{e['home_team']} vs {e['away_team']}",
-                    "brand": e["league"],
-                    "price_monthly": e["odds"]["match_result"]["home"],
-                    "image_url": f"https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop",
-                    "attributes": {
+            "subtitle": f"Found {len(filtered_events)} matches",
+            "data": {
+                "matches": [
+                    {
+                        "id": e["id"],
+                        "home_team": e["home_team"],
+                        "away_team": e["away_team"],
+                        "league": e["league"],
                         "kick_off": e.get("kick_off", "TBD"),
                         "venue": e.get("venue", ""),
-                        "status": e.get("status", "upcoming")
+                        "status": e.get("status", "upcoming"),
+                        "odds": {
+                            "home": e["odds"]["match_result"]["home"],
+                            "draw": e["odds"]["match_result"]["draw"],
+                            "away": e["odds"]["match_result"]["away"]
+                        },
+                        "live_score": e.get("live_score")
                     }
-                }
-                for e in filtered_events[:10]
-            ]
+                    for e in filtered_events[:10]
+                ]
+            }
         }
     }
 
@@ -951,13 +957,17 @@ async def add_to_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "bet_id": bet_item["id"],
         "bet_slip_count": len(BET_SLIP[session_id]["selections"]),
         "message": f"Added {selection} to bet slip",
+        "selections": slip_summary.get("selections", []),
+        "combined_odds": slip_summary.get("combined_odds", 0),
+        "potential_return": slip_summary.get("potential_return", 0),
         "_visual": {
-            "type": "cart_preview",
-            "title": "Bet Slip",
-            "items": slip_summary.get("selections", []),
-            "summary": {
-                "monthly": slip_summary.get("potential_return", 0),
-                "total_24m": slip_summary.get("total_stake", 0)
+            "type": "bet_slip_preview",
+            "title": "Bet Slip Updated",
+            "data": {
+                "selections": slip_summary.get("selections", []),
+                "combined_odds": slip_summary.get("combined_odds", 0),
+                "stake": 10,
+                "potential_return": slip_summary.get("potential_return", 0)
             }
         }
     }
@@ -980,13 +990,17 @@ async def remove_from_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "success": True,
         "bet_slip_count": len(BET_SLIP.get(session_id, {}).get("selections", [])),
         "message": "Selection removed from bet slip",
+        "selections": slip_summary.get("selections", []),
+        "combined_odds": slip_summary.get("combined_odds", 0),
+        "potential_return": slip_summary.get("potential_return", 0),
         "_visual": {
-            "type": "cart_preview",
-            "title": "Bet Slip",
-            "items": slip_summary.get("selections", []),
-            "summary": {
-                "monthly": slip_summary.get("potential_return", 0),
-                "total_24m": slip_summary.get("total_stake", 0)
+            "type": "bet_slip_preview",
+            "title": "Bet Slip Updated",
+            "data": {
+                "selections": slip_summary.get("selections", []),
+                "combined_odds": slip_summary.get("combined_odds", 0),
+                "stake": 10,
+                "potential_return": slip_summary.get("potential_return", 0)
             }
         }
     }
@@ -1023,20 +1037,13 @@ async def get_bet_slip_summary(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "potential_return": potential_return,
         "potential_profit": round(potential_return - total_stake, 2) if selections else 0,
         "_visual": {
-            "type": "cart_preview",
+            "type": "bet_slip_preview",
             "title": "Your Bet Slip",
-            "items": [
-                {
-                    "name": bet["event_name"],
-                    "brand": bet["market"],
-                    "price": bet["odds"],
-                    "cart_item_id": bet["id"]
-                }
-                for bet in selections
-            ],
-            "summary": {
-                "monthly": potential_return,
-                "total_24m": total_stake
+            "data": {
+                "selections": selections,
+                "combined_odds": round(combined_odds, 2) if selections else 0,
+                "stake": stake_per_bet,
+                "potential_return": potential_return
             }
         }
     }
@@ -1091,11 +1098,18 @@ async def place_bet(arguments: Dict[str, Any]) -> Dict[str, Any]:
 
     selections = slip_summary.get("selections", [])
 
+    confirmation_number = f"CONF-{random.randint(1000000, 9999999)}"
+    stake = slip_summary.get("total_stake", 0) / len(selections) if selections else 10
+
+    # Clear the bet slip after placing
+    if session_id in BET_SLIP:
+        BET_SLIP[session_id]["selections"] = []
+
     return {
         "success": True,
         "bet_id": bet_id,
         "bet_type": bet_type,
-        "confirmation_number": f"CONF-{random.randint(1000000, 9999999)}",
+        "confirmation_number": confirmation_number,
         "status": "accepted",
         "total_stake": slip_summary.get("total_stake", 0),
         "potential_return": slip_summary.get("potential_return", 0),
@@ -1103,60 +1117,28 @@ async def place_bet(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "num_selections": len(selections),
         "settlement_time": settlement_time,
         "message": "Bet placed successfully! Good luck!",
+        "selections": [],  # Clear selections in response
         "_visual": {
-            "layout": "multi_section",
+            "layout": "flow",
             "theme": "success",
-            "header": {
-                "title": "🎉 Bet Placed!",
-                "subtitle": f"Bet ID: {bet_id}",
-                "badge": "Confirmed"
-            },
             "sections": [
                 {
-                    "type": "info_callout",
+                    "type": "bet_confirmation",
                     "data": {
-                        "message": f"✅ Your {bet_type} bet has been placed successfully"
-                    },
-                    "style": "emphasized"
-                },
-                {
-                    "type": "product_grid",
-                    "title": "Your Selections",
-                    "data": {
-                        "items": [
+                        "betId": bet_id,
+                        "confirmationNumber": confirmation_number,
+                        "selections": [
                             {
-                                "name": sel["event_name"],
-                                "brand": sel["market"],
-                                "price": sel["odds"]
+                                "event_name": sel["event_name"],
+                                "market": sel["market"],
+                                "selection": sel["selection"],
+                                "odds": sel["odds"]
                             }
-                            for sel in selections[:4]
-                        ]
-                    },
-                    "emphasis": "high"
-                },
-                {
-                    "type": "price_breakdown",
-                    "data": {
-                        "items": [
-                            {"label": "Total Stake", "amount": slip_summary.get("total_stake", 0), "type": "upfront"},
-                            {"label": f"Combined Odds", "amount": slip_summary.get("combined_odds", 0), "type": "odds"},
-                            {"label": "Potential Return", "amount": slip_summary.get("potential_return", 0), "type": "return"},
-                            {"label": "Potential Profit", "amount": slip_summary.get("potential_profit", 0), "type": "profit"}
+                            for sel in selections
                         ],
-                        "total_upfront": slip_summary.get("total_stake", 0),
-                        "total_monthly": 0,
-                        "total_24m": slip_summary.get("potential_return", 0)
-                    },
-                    "style": "minimal"
-                },
-                {
-                    "type": "section_divider",
-                    "title": "What's Next?"
-                },
-                {
-                    "type": "info_callout",
-                    "data": {
-                        "message": f"📧 Confirmation sent to your email\n📊 Track your bet in 'My Bets'\n🏆 Results after matches complete"
+                        "stake": stake,
+                        "combinedOdds": slip_summary.get("combined_odds", 0),
+                        "potentialReturn": slip_summary.get("potential_return", 0)
                     }
                 }
             ],

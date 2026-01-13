@@ -69,7 +69,7 @@ export function ChatComposer({
             size="sm"
             onClick={onEscalate}
             disabled={disabled}
-            className="gap-2"
+            className="gap-2 border-slate-600 bg-slate-700 text-slate-300 hover:bg-slate-600 hover:text-white"
           >
             <User size={16} />
             Request Human
@@ -77,7 +77,7 @@ export function ChatComposer({
         );
       case 'queued':
         return (
-          <Badge variant="secondary" className="gap-2 py-2 px-3">
+          <Badge variant="secondary" className="gap-2 py-2 px-3 bg-yellow-600/20 text-yellow-400 border border-yellow-600/30">
             <Clock size={16} />
             Queued
             {escalationState.queuePosition && ` (#${escalationState.queuePosition})`}
@@ -85,7 +85,7 @@ export function ChatComposer({
         );
       case 'connected':
         return (
-          <Badge variant="default" className="gap-2 py-2 px-3">
+          <Badge variant="default" className="gap-2 py-2 px-3 bg-emerald-600 text-white">
             <User size={16} />
             Connected to Human
           </Badge>
@@ -94,7 +94,7 @@ export function ChatComposer({
   };
 
   return (
-    <div className="border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className="border-t border-slate-700 bg-slate-800/95 backdrop-blur supports-[backdrop-filter]:bg-slate-800/80">
       <div className="p-4 space-y-3">
         <form onSubmit={handleSubmit} className="flex gap-3">
           <div className="flex-1 relative">
@@ -103,13 +103,13 @@ export function ChatComposer({
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Speak or type your question..."
               disabled={disabled}
-              className="pr-12"
+              className="pr-12 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
             />
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0 gap-1"
+              className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0 gap-1 text-slate-400 hover:text-white"
               disabled={disabled}
             >
               <Microphone size={16} />
@@ -129,10 +129,10 @@ export function ChatComposer({
             </Button>
           </div>
           
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={disabled || !message.trim()}
-            className="gap-2"
+            className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             <PaperPlaneTilt size={16} />
             Send
@@ -141,12 +141,12 @@ export function ChatComposer({
 
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="text-xs text-muted-foreground">
+            <div className="text-xs text-slate-400">
               Press Enter to send • Click mic for voice input
             </div>
             {voiceActivity.isSpeaking && (
-              <Badge variant="outline" className="text-xs py-1 px-2 gap-1">
-                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <Badge variant="outline" className="text-xs py-1 px-2 gap-1 border-emerald-500 text-emerald-400">
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                 Listening
               </Badge>
             )}

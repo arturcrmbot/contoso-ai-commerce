@@ -16,6 +16,11 @@ import { ProductCard } from '../contoso/ProductCard';
 import { PlanCards } from '../contoso/PlanCards';
 import { PromoBanner } from '../contoso/PromoBanner';
 
+// Import betting components
+import { MatchCard } from '../betting/MatchCard';
+import { MatchGrid } from '../betting/MatchGrid';
+import { BetConfirmation } from '../betting/BetConfirmation';
+
 interface FlexibleRendererProps {
   visual: FlexibleVisual;
   onAction?: (action: string, params?: any) => void;
@@ -175,6 +180,48 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
             )}
             {section.data.message && (
               <p className="text-sm text-muted-foreground">{section.data.message}</p>
+            )}
+          </div>
+        );
+
+      // Betting components
+      case 'match_card':
+        return (
+          <MatchCard
+            match={section.data}
+            onAddToBetSlip={(eventId, selection) => onAction?.('add_to_slip', { eventId, ...selection })}
+            onViewDetails={(eventId) => onAction?.('view_match', { eventId })}
+          />
+        );
+
+      case 'match_grid':
+        const matches = section.data?.matches || section.data?.items || section.data || [];
+        return (
+          <MatchGrid
+            matches={Array.isArray(matches) ? matches : []}
+            title={section.title}
+            subtitle={section.subtitle}
+            onAddToBetSlip={(eventId, selection) => onAction?.('add_to_slip', { eventId, ...selection })}
+            onViewDetails={(eventId) => onAction?.('view_match', { eventId })}
+          />
+        );
+
+      case 'bet_confirmation':
+        return <BetConfirmation {...section.data} />;
+
+      case 'bet_slip_preview':
+        // This is handled by the BetSlipPanel in App.tsx, but render a preview if needed
+        return (
+          <div className="rounded-lg border p-4 bg-muted/30">
+            <h4 className="font-semibold mb-2">Bet Slip</h4>
+            <p className="text-sm text-muted-foreground">
+              {section.data?.selections?.length || 0} selection(s)
+            </p>
+            {section.data?.combined_odds && (
+              <p className="text-sm">Combined Odds: <span className="font-bold">{section.data.combined_odds.toFixed(2)}</span></p>
+            )}
+            {section.data?.potential_return && (
+              <p className="text-sm text-green-600">Potential Return: £{section.data.potential_return.toFixed(2)}</p>
             )}
           </div>
         );

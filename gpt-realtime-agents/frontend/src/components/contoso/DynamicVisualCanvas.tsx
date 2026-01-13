@@ -2,7 +2,7 @@ import { ProductShowcase } from './ProductShowcase';
 import { ProductCard } from './ProductCard';
 import { PromoBanner } from './PromoBanner';
 import { PlanCards } from './PlanCards';
-import { SuggestionCards } from '../SuggestionCards';
+import { BettingHomepage } from '../betting/BettingHomepage';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { FlexibleRenderer } from '../visual-primitives/FlexibleRenderer';
@@ -23,19 +23,13 @@ export function DynamicVisualCanvas({
   onSuggestionClick,
   disabled
 }: DynamicVisualCanvasProps) {
-  // No visual data - show suggestions
+  // No visual data - show betting homepage
   if (!visualConfig) {
     return (
-      <>
-        <div className="mb-4">
-          <h2 className="text-xl font-bold text-foreground mb-1">Contoso Sales Assistant</h2>
-          <p className="text-sm text-muted-foreground">Find your perfect phone and plan</p>
-        </div>
-        <SuggestionCards
-          onSuggestionClick={onSuggestionClick}
-          disabled={disabled}
-        />
-      </>
+      <BettingHomepage
+        onSuggestionClick={onSuggestionClick}
+        disabled={disabled}
+      />
     );
   }
 
@@ -47,8 +41,9 @@ export function DynamicVisualCanvas({
       case 'product_click':
       case 'add_to_cart':
       case 'add_accessory':
+      case 'add_to_slip':
+      case 'view_match':
         if (onProductClick) {
-          // Pass the action type along with params
           onProductClick({ action, ...params });
         }
         break;
@@ -67,18 +62,18 @@ export function DynamicVisualCanvas({
   // New flexible visual system
   if (isFlexibleVisual(visualConfig)) {
     return (
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 -m-4 p-4">
         <Button
           variant="ghost"
           size="sm"
           onClick={onBackToSuggestions}
-          className="mb-3 -ml-2 self-start flex-shrink-0"
+          className="mb-3 -ml-2 self-start flex-shrink-0 text-slate-400 hover:text-white hover:bg-slate-800"
         >
           <ArrowLeft size={16} className="mr-1" />
-          Back to suggestions
+          Back to home
         </Button>
 
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto">
           <FlexibleRenderer visual={visualConfig} onAction={handleAction} />
         </div>
       </div>
@@ -89,15 +84,15 @@ export function DynamicVisualCanvas({
   const legacyVisual = visualConfig as LegacyVisual;
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 -m-4 p-4">
       <Button
         variant="ghost"
         size="sm"
         onClick={onBackToSuggestions}
-        className="mb-3 -ml-2 self-start"
+        className="mb-3 -ml-2 self-start text-slate-400 hover:text-white hover:bg-slate-800"
       >
         <ArrowLeft size={16} className="mr-1" />
-        Back to suggestions
+        Back to home
       </Button>
 
       <div className="flex-1 overflow-y-auto">
@@ -126,7 +121,7 @@ export function DynamicVisualCanvas({
 
         {legacyVisual.type === 'comparison_table' && legacyVisual.devices && (
           <div className="space-y-3">
-            <h3 className="text-lg font-bold">{legacyVisual.title}</h3>
+            <h3 className="text-lg font-bold text-white">{legacyVisual.title}</h3>
             <div className="grid grid-cols-2 gap-4">
               {legacyVisual.devices.map((device: any) => (
                 <ProductCard
@@ -141,20 +136,20 @@ export function DynamicVisualCanvas({
 
         {legacyVisual.type === 'cart_preview' && legacyVisual.items && (
           <div className="space-y-3">
-            <h3 className="text-lg font-bold">{legacyVisual.title}</h3>
+            <h3 className="text-lg font-bold text-white">{legacyVisual.title}</h3>
             <div className="space-y-2">
               {legacyVisual.items.map((item: any, idx: number) => (
-                <div key={idx} className="border rounded p-3">
-                  <p className="font-semibold text-sm">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">
+                <div key={idx} className="bg-slate-800 border border-slate-700 rounded p-3">
+                  <p className="font-semibold text-sm text-white">{item.name}</p>
+                  <p className="text-xs text-slate-400">
                     £{item.price_monthly || item.price}/mo
                   </p>
                 </div>
               ))}
               {legacyVisual.summary && (
-                <div className="border-t pt-3 mt-3">
-                  <p className="font-bold">Total: £{legacyVisual.summary.monthly}/mo</p>
-                  <p className="text-xs text-muted-foreground">
+                <div className="border-t border-slate-700 pt-3 mt-3">
+                  <p className="font-bold text-white">Total: £{legacyVisual.summary.monthly}/mo</p>
+                  <p className="text-xs text-slate-400">
                     24-month total: £{legacyVisual.summary.total_24m}
                   </p>
                 </div>
