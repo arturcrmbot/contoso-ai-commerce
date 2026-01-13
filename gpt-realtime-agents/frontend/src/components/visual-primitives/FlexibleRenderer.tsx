@@ -210,18 +210,47 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
         return <BetConfirmation {...section.data} />;
 
       case 'bet_slip_preview':
-        // This is handled by the BetSlipPanel in App.tsx, but render a preview if needed
+        const selections = section.data?.selections || [];
+        const combinedOdds = section.data?.combined_odds || 0;
+        const stake = section.data?.stake || 10;
+        const potentialReturn = section.data?.potential_return || 0;
+
         return (
-          <div className="rounded-lg border p-4 bg-muted/30">
-            <h4 className="font-semibold mb-2">Bet Slip</h4>
-            <p className="text-sm text-muted-foreground">
-              {section.data?.selections?.length || 0} selection(s)
-            </p>
-            {section.data?.combined_odds && (
-              <p className="text-sm">Combined Odds: <span className="font-bold">{section.data.combined_odds.toFixed(2)}</span></p>
-            )}
-            {section.data?.potential_return && (
-              <p className="text-sm text-green-600">Potential Return: £{section.data.potential_return.toFixed(2)}</p>
+          <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4 space-y-4">
+            <div className="flex justify-between items-center">
+              <h4 className="font-semibold text-white">Your Bet Slip</h4>
+              <span className="text-sm text-emerald-400">{selections.length} selection(s)</span>
+            </div>
+
+            {selections.length > 0 ? (
+              <div className="space-y-3">
+                {selections.map((sel: any, idx: number) => (
+                  <div key={sel.id || idx} className="bg-slate-900/50 rounded p-3 border border-slate-700">
+                    <p className="text-sm font-medium text-white">{sel.event_name}</p>
+                    <div className="flex justify-between items-center mt-1">
+                      <span className="text-xs text-slate-400">{sel.market}: {sel.selection}</span>
+                      <span className="text-sm font-bold text-emerald-400">{sel.odds?.toFixed(2)}</span>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="border-t border-slate-700 pt-3 mt-3 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Combined Odds:</span>
+                    <span className="font-bold text-white">{combinedOdds.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Stake:</span>
+                    <span className="text-white">£{stake.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Potential Return:</span>
+                    <span className="font-bold text-emerald-400">£{potentialReturn.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400 text-center py-4">No selections yet</p>
             )}
           </div>
         );

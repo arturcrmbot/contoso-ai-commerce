@@ -104,7 +104,7 @@ AZURE_GPT_REALTIME_URL=https://<resource>.openai.azure.com/openai/realtimeapi/se
 WEBRTC_URL=https://<region>.realtimeapi-preview.ai.azure.com/v1/realtimertc
 AZURE_GPT_REALTIME_KEY=<your-key>
 AZURE_GPT_REALTIME_DEPLOYMENT=gpt-realtime-2
-AZURE_GPT_REALTIME_VOICE=verse
+AZURE_GPT_REALTIME_VOICE=ballad
 ```
 
 ### 2. Install Dependencies

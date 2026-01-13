@@ -160,7 +160,7 @@ class RTMiddleTier:
                     if "response" in message:
                         replace = False
                         outputs = message["response"]["output"]
-                        for output in reversed(outputs):
+                        for output in reballadd(outputs):
                             if output["type"] == "function_call":
                                 outputs.remove(output)
                                 replace = True

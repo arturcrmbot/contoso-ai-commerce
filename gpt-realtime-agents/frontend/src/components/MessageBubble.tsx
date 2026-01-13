@@ -92,7 +92,7 @@ export function MessageBubble({ message, className }: MessageBubbleProps) {
   return (
     <div className={cn(
       "flex gap-3 mb-4",
-      isUser ? "flex-row-reverse" : "flex-row",
+      isUser ? "flex-row-reballad" : "flex-row",
       className
     )}>
       <Avatar className="w-8 h-8 flex-shrink-0">

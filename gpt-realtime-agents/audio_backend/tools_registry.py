@@ -439,21 +439,32 @@ async def compare_odds(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "bet_type": bet_type,
         "odds_comparison": [],
         "_visual": {
-            "type": "comparison_table",
-            "title": f"Odds Comparison - {bet_type.replace('_', ' ').title()}",
-            "devices": [
+            "layout": "flow",
+            "header": {
+                "title": f"Odds Comparison - {bet_type.replace('_', ' ').title()}"
+            },
+            "sections": [
                 {
-                    "id": e["id"],
-                    "name": f"{e['home_team']} vs {e['away_team']}",
-                    "brand": e["league"],
-                    "home_odds": e["odds"]["match_result"]["home"],
-                    "attributes": {
-                        "home_odds": e["odds"]["match_result"]["home"],
-                        "draw_odds": e["odds"]["match_result"]["draw"],
-                        "away_odds": e["odds"]["match_result"]["away"]
+                    "type": "match_grid",
+                    "data": {
+                        "matches": [
+                            {
+                                "id": e["id"],
+                                "home_team": e["home_team"],
+                                "away_team": e["away_team"],
+                                "league": e["league"],
+                                "kick_off": e.get("kick_off", "TBD"),
+                                "status": e.get("status", "upcoming"),
+                                "odds": {
+                                    "home": e["odds"]["match_result"]["home"],
+                                    "draw": e["odds"]["match_result"]["draw"],
+                                    "away": e["odds"]["match_result"]["away"]
+                                }
+                            }
+                            for e in events
+                        ]
                     }
                 }
-                for e in events
             ]
         }
     }
@@ -486,17 +497,32 @@ async def get_similar_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "current_event": current,
         "similar_events": all_similar,
         "_visual": {
-            "type": "product_grid",
-            "title": f"Similar to {current['home_team']} vs {current['away_team']}",
-            "items": [
+            "layout": "flow",
+            "header": {
+                "title": f"Similar to {current['home_team']} vs {current['away_team']}"
+            },
+            "sections": [
                 {
-                    "id": e["id"],
-                    "name": f"{e['home_team']} vs {e['away_team']}",
-                    "brand": e["league"],
-                    "home_odds": e["odds"]["match_result"]["home"],
-                    "image_url": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop"
+                    "type": "match_grid",
+                    "data": {
+                        "matches": [
+                            {
+                                "id": e["id"],
+                                "home_team": e["home_team"],
+                                "away_team": e["away_team"],
+                                "league": e["league"],
+                                "kick_off": e.get("kick_off", "TBD"),
+                                "status": e.get("status", "upcoming"),
+                                "odds": {
+                                    "home": e["odds"]["match_result"]["home"],
+                                    "draw": e["odds"]["match_result"]["draw"],
+                                    "away": e["odds"]["match_result"]["away"]
+                                }
+                            }
+                            for e in all_similar
+                        ]
+                    }
                 }
-                for e in all_similar
             ]
         }
     }
@@ -532,21 +558,32 @@ async def recommend_bet_types(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "event_name": f"{event['home_team']} vs {event['away_team']}",
         "recommendations": recommendations,
         "_visual": {
-            "type": "plan_cards",
-            "title": f"Recommended Bets for {event['home_team']} vs {event['away_team']}",
-            "items": [
+            "layout": "flow",
+            "header": {
+                "title": f"Recommended Bets",
+                "subtitle": f"{event['home_team']} vs {event['away_team']}"
+            },
+            "sections": [
                 {
-                    "id": rec["bet_type"]["id"],
-                    "name": rec["bet_type"]["name"],
-                    "type": rec["bet_type"]["category"],
-                    "potential_return": round(rec["potential_return"], 2),
-                    "highlights": [
-                        f"Stake: £{rec['stake']}",
-                        f"Potential return: £{rec['potential_return']}",
-                        f"Profit: £{rec['profit']}"
-                    ]
+                    "type": "plan_selector",
+                    "title": "Bet Recommendations",
+                    "data": {
+                        "items": [
+                            {
+                                "id": rec["bet_type"]["id"],
+                                "name": rec["bet_type"]["name"],
+                                "type": rec["bet_type"]["category"],
+                                "potential_return": round(rec["potential_return"], 2),
+                                "highlights": [
+                                    f"Stake: £{rec['stake']}",
+                                    f"Potential return: £{rec['potential_return']}",
+                                    f"Profit: £{rec['profit']}"
+                                ]
+                            }
+                            for rec in recommendations
+                        ]
+                    }
                 }
-                for rec in recommendations
             ]
         }
     }
@@ -590,18 +627,29 @@ async def get_related_bets(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "related_bets": related_bets,
         "bundle_bonus": "Add to accumulator for 10% odds boost!",
         "_visual": {
-            "type": "accessory_grid",
-            "title": f"Bet Combos for {event['home_team']} vs {event['away_team']}",
-            "items": [
+            "layout": "flow",
+            "header": {
+                "title": "Bet Combos",
+                "subtitle": f"{event['home_team']} vs {event['away_team']}"
+            },
+            "sections": [
                 {
-                    "id": bet["id"],
-                    "name": bet["name"],
-                    "type": bet["type"],
-                    "price": bet["odds"],
-                    "in_stock": True,
-                    "image_url": "https://images.unsplash.com/photo-1508970259924-5fbe90befa5a?w=400&h=300&fit=crop"
+                    "type": "accessory_grid",
+                    "title": "Popular Combinations",
+                    "data": {
+                        "items": [
+                            {
+                                "id": bet["id"],
+                                "name": bet["name"],
+                                "type": bet["type"],
+                                "price": bet["odds"],
+                                "description": bet["description"],
+                                "in_stock": True
+                            }
+                            for bet in related_bets
+                        ]
+                    }
                 }
-                for bet in related_bets
             ]
         }
     }
@@ -628,16 +676,25 @@ async def calculate_bet_returns(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "potential_return": potential_return,
             "profit": profit,
             "_visual": {
-                "type": "price_breakdown",
-                "data": {
-                    "items": [
-                        {"label": "Stake", "amount": bet.get("stake", total_stake), "type": "upfront"},
-                        {"label": f"Odds: {bet.get('odds', 2.0)}", "amount": potential_return, "type": "return"}
-                    ],
-                    "total_upfront": bet.get("stake", total_stake),
-                    "total_monthly": 0,
-                    "total_24m": potential_return
-                }
+                "layout": "flow",
+                "header": {
+                    "title": "Bet Returns",
+                    "subtitle": "Single Bet"
+                },
+                "sections": [
+                    {
+                        "type": "price_breakdown",
+                        "data": {
+                            "items": [
+                                {"label": "Stake", "amount": bet.get("stake", total_stake), "type": "upfront"},
+                                {"label": f"Odds: {bet.get('odds', 2.0)}", "amount": potential_return, "type": "return"}
+                            ],
+                            "total_upfront": bet.get("stake", total_stake),
+                            "total_monthly": 0,
+                            "total_24m": potential_return
+                        }
+                    }
+                ]
             }
         }
 
@@ -660,20 +717,29 @@ async def calculate_bet_returns(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "profit": profit,
             "warning": "All selections must win for payout",
             "_visual": {
-                "type": "price_breakdown",
-                "data": {
-                    "items": [
-                        {"label": f"Selection {i+1}: {bet.get('selection', 'N/A')}", "amount": bet.get("odds", 2.0), "type": "odds"}
-                        for i, bet in enumerate(bets)
-                    ] + [
-                        {"label": f"Combined Odds ({len(bets)} selections)", "amount": combined_odds, "type": "odds"},
-                        {"label": "Total Stake", "amount": total_stake, "type": "upfront"},
-                        {"label": "Potential Return", "amount": potential_return, "type": "return"}
-                    ],
-                    "total_upfront": total_stake,
-                    "total_monthly": 0,
-                    "total_24m": potential_return
-                }
+                "layout": "flow",
+                "header": {
+                    "title": "Accumulator Returns",
+                    "subtitle": f"{len(bets)} selections"
+                },
+                "sections": [
+                    {
+                        "type": "price_breakdown",
+                        "data": {
+                            "items": [
+                                {"label": f"Selection {i+1}: {bet.get('selection', 'N/A')}", "amount": bet.get("odds", 2.0), "type": "odds"}
+                                for i, bet in enumerate(bets)
+                            ] + [
+                                {"label": f"Combined Odds ({len(bets)} selections)", "amount": combined_odds, "type": "odds"},
+                                {"label": "Total Stake", "amount": total_stake, "type": "upfront"},
+                                {"label": "Potential Return", "amount": potential_return, "type": "return"}
+                            ],
+                            "total_upfront": total_stake,
+                            "total_monthly": 0,
+                            "total_24m": potential_return
+                        }
+                    }
+                ]
             }
         }
 
@@ -735,10 +801,19 @@ async def check_betting_limits(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "reality_check_enabled": True
         },
         "_visual": {
-            "type": "info_callout",
-            "data": {
-                "message": f"✓ Daily limit: £{daily_limit} | Remaining today: £{daily_limit - current_daily_spend}"
-            }
+            "layout": "flow",
+            "header": {
+                "title": "Betting Limits",
+                "subtitle": "Responsible Gambling"
+            },
+            "sections": [
+                {
+                    "type": "info_callout",
+                    "data": {
+                        "message": f"✓ Daily limit: £{daily_limit} | Remaining today: £{daily_limit - current_daily_spend}"
+                    }
+                }
+            ]
         }
     }
 
@@ -793,8 +868,13 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "error": "Missing required information",
             "message": "We need your full name, date of birth, address, and postcode for age verification",
             "_visual": {
-                "type": "info_callout",
-                "data": {"message": "📋 Age verification required - must be 18+ to bet"}
+                "layout": "flow",
+                "sections": [
+                    {
+                        "type": "info_callout",
+                        "data": {"message": "📋 Age verification required - must be 18+ to bet"}
+                    }
+                ]
             }
         }
 
@@ -814,8 +894,13 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "status": "underage",
             "message": "You must be 18 or older to place bets",
             "_visual": {
-                "type": "info_callout",
-                "data": {"message": "❌ Age verification failed - must be 18+"}
+                "layout": "flow",
+                "sections": [
+                    {
+                        "type": "info_callout",
+                        "data": {"message": "❌ Age verification failed - must be 18+"}
+                    }
+                ]
             }
         }
 
@@ -849,8 +934,13 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "status": "verification_failed",
             "message": "Unable to verify identity. Please contact support.",
             "_visual": {
-                "type": "info_callout",
-                "data": {"message": "⚠️ Verification failed - please contact support"}
+                "layout": "flow",
+                "sections": [
+                    {
+                        "type": "info_callout",
+                        "data": {"message": "⚠️ Verification failed - please contact support"}
+                    }
+                ]
             }
         }
 
@@ -865,19 +955,29 @@ async def check_account_balance(arguments: Dict[str, Any]) -> Dict[str, Any]:
     pending_bets = round(random.uniform(0, 50), 2)
     available = round(balance - pending_bets, 2)
 
+    bonus = round(random.uniform(0, 25), 2)
     return {
         "account_number": account_number,
         "balance": balance,
         "pending_bets": pending_bets,
         "available_to_bet": available,
         "currency": "GBP",
-        "bonus_balance": round(random.uniform(0, 25), 2),
+        "bonus_balance": bonus,
         "message": f"Available balance: £{available}",
         "_visual": {
-            "type": "info_callout",
-            "data": {
-                "message": f"💰 Balance: £{balance}\n🎯 Available: £{available}\n🎁 Bonus: £{round(random.uniform(0, 25), 2)}"
-            }
+            "layout": "flow",
+            "header": {
+                "title": "Account Balance",
+                "subtitle": "Available Funds"
+            },
+            "sections": [
+                {
+                    "type": "info_callout",
+                    "data": {
+                        "message": f"💰 Balance: £{balance}\n🎯 Available: £{available}\n🎁 Bonus: £{bonus}"
+                    }
+                }
+            ]
         }
     }
 
@@ -972,14 +1072,22 @@ async def add_to_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "combined_odds": slip_summary.get("combined_odds", 0),
         "potential_return": slip_summary.get("potential_return", 0),
         "_visual": {
-            "type": "bet_slip_preview",
-            "title": "Bet Slip Updated",
-            "data": {
-                "selections": slip_summary.get("selections", []),
-                "combined_odds": slip_summary.get("combined_odds", 0),
-                "stake": 10,
-                "potential_return": slip_summary.get("potential_return", 0)
-            }
+            "layout": "flow",
+            "header": {
+                "title": "Bet Slip Updated",
+                "subtitle": f"{len(BET_SLIP[session_id]['selections'])} selection(s)"
+            },
+            "sections": [
+                {
+                    "type": "bet_slip_preview",
+                    "data": {
+                        "selections": slip_summary.get("selections", []),
+                        "combined_odds": slip_summary.get("combined_odds", 0),
+                        "stake": 10,
+                        "potential_return": slip_summary.get("potential_return", 0)
+                    }
+                }
+            ]
         }
     }
 
@@ -996,23 +1104,32 @@ async def remove_from_bet_slip(arguments: Dict[str, Any]) -> Dict[str, Any]:
         ]
 
     slip_summary = await get_bet_slip_summary({"session_id": session_id})
+    selection_count = len(BET_SLIP.get(session_id, {}).get("selections", []))
 
     return {
         "success": True,
-        "bet_slip_count": len(BET_SLIP.get(session_id, {}).get("selections", [])),
+        "bet_slip_count": selection_count,
         "message": "Selection removed from bet slip",
         "selections": slip_summary.get("selections", []),
         "combined_odds": slip_summary.get("combined_odds", 0),
         "potential_return": slip_summary.get("potential_return", 0),
         "_visual": {
-            "type": "bet_slip_preview",
-            "title": "Bet Slip Updated",
-            "data": {
-                "selections": slip_summary.get("selections", []),
-                "combined_odds": slip_summary.get("combined_odds", 0),
-                "stake": 10,
-                "potential_return": slip_summary.get("potential_return", 0)
-            }
+            "layout": "flow",
+            "header": {
+                "title": "Bet Slip Updated",
+                "subtitle": f"{selection_count} selection(s)"
+            },
+            "sections": [
+                {
+                    "type": "bet_slip_preview",
+                    "data": {
+                        "selections": slip_summary.get("selections", []),
+                        "combined_odds": slip_summary.get("combined_odds", 0),
+                        "stake": 10,
+                        "potential_return": slip_summary.get("potential_return", 0)
+                    }
+                }
+            ]
         }
     }
 
@@ -1048,14 +1165,22 @@ async def get_bet_slip_summary(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "potential_return": potential_return,
         "potential_profit": round(potential_return - total_stake, 2) if selections else 0,
         "_visual": {
-            "type": "bet_slip_preview",
-            "title": "Your Bet Slip",
-            "data": {
-                "selections": selections,
-                "combined_odds": round(combined_odds, 2) if selections else 0,
-                "stake": stake_per_bet,
-                "potential_return": potential_return
-            }
+            "layout": "flow",
+            "header": {
+                "title": "Your Bet Slip",
+                "subtitle": f"{len(selections)} selection(s)"
+            },
+            "sections": [
+                {
+                    "type": "bet_slip_preview",
+                    "data": {
+                        "selections": selections,
+                        "combined_odds": round(combined_odds, 2) if selections else 0,
+                        "stake": stake_per_bet,
+                        "potential_return": potential_return
+                    }
+                }
+            ]
         }
     }
 
@@ -1172,20 +1297,30 @@ async def get_available_markets(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "count": len(filtered),
         "category": category or "all",
         "_visual": {
-            "type": "plan_cards",
-            "title": "Available Bet Types",
-            "items": [
+            "layout": "flow",
+            "header": {
+                "title": "Available Bet Types",
+                "subtitle": f"{len(filtered)} markets"
+            },
+            "sections": [
                 {
-                    "id": bt["id"],
-                    "name": bt["name"],
-                    "type": bt["category"],
-                    "highlights": [
-                        bt["description"],
-                        f"Risk: {bt['risk_level']}",
-                        f"Popularity: {bt['popularity']}"
-                    ]
+                    "type": "plan_selector",
+                    "data": {
+                        "items": [
+                            {
+                                "id": bt["id"],
+                                "name": bt["name"],
+                                "type": bt["category"],
+                                "highlights": [
+                                    bt["description"],
+                                    f"Risk: {bt['risk_level']}",
+                                    f"Popularity: {bt['popularity']}"
+                                ]
+                            }
+                            for bt in filtered
+                        ]
+                    }
                 }
-                for bt in filtered
             ]
         }
     }
@@ -1215,9 +1350,20 @@ async def get_active_promotions(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "available_promotions": promos,
         "expires_date": (datetime.now() + timedelta(days=30)).strftime("%Y-%m-%d"),
         "_visual": {
-            "type": "promo_banner",
-            "title": f"{customer_type.title()} Customer Offers",
-            "items": promos
+            "layout": "flow",
+            "header": {
+                "title": f"{customer_type.title()} Customer Offers",
+                "subtitle": f"{len(promos)} promotions available"
+            },
+            "sections": [
+                {
+                    "type": "promo_banner",
+                    "title": "Current Promotions",
+                    "data": {
+                        "items": promos
+                    }
+                }
+            ]
         }
     }
 

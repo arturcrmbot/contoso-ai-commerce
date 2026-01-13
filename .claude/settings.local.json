@@ -11,7 +11,11 @@
       "Bash(npm ci:*)",
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
-      "Bash(uvicorn:*)"
+      "Bash(uvicorn:*)",
+      "Bash(timeout:*)",
+      "Bash(findstr:*)",
+      "Bash(ping:*)",
+      "Bash(powershell -Command:*)"
     ],
     "deny": [],
     "ask": []
