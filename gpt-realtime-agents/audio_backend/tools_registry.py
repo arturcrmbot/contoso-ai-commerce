@@ -296,34 +296,45 @@ async def search_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
     # Sort by kick-off time
     filtered_events.sort(key=lambda e: e.get("kick_off", ""))
 
+    title = "Upcoming Matches" if status == "upcoming" else "Live Matches" if status == "live" else "Football Matches"
+
     return {
         "events": filtered_events[:10],
         "count": len(filtered_events),
         "filters_applied": {"league": league, "team": team, "status": status},
         "_visual": {
-            "type": "match_grid",
-            "title": "Upcoming Matches" if status == "upcoming" else "Live Matches" if status == "live" else "Football Matches",
-            "subtitle": f"Found {len(filtered_events)} matches",
-            "data": {
-                "matches": [
-                    {
-                        "id": e["id"],
-                        "home_team": e["home_team"],
-                        "away_team": e["away_team"],
-                        "league": e["league"],
-                        "kick_off": e.get("kick_off", "TBD"),
-                        "venue": e.get("venue", ""),
-                        "status": e.get("status", "upcoming"),
-                        "odds": {
-                            "home": e["odds"]["match_result"]["home"],
-                            "draw": e["odds"]["match_result"]["draw"],
-                            "away": e["odds"]["match_result"]["away"]
-                        },
-                        "live_score": e.get("live_score")
+            "layout": "flow",
+            "header": {
+                "title": title,
+                "subtitle": f"Found {len(filtered_events)} matches"
+            },
+            "sections": [
+                {
+                    "type": "match_grid",
+                    "title": title,
+                    "subtitle": f"Found {len(filtered_events)} matches",
+                    "data": {
+                        "matches": [
+                            {
+                                "id": e["id"],
+                                "home_team": e["home_team"],
+                                "away_team": e["away_team"],
+                                "league": e["league"],
+                                "kick_off": e.get("kick_off", "TBD"),
+                                "venue": e.get("venue", ""),
+                                "status": e.get("status", "upcoming"),
+                                "odds": {
+                                    "home": e["odds"]["match_result"]["home"],
+                                    "draw": e["odds"]["match_result"]["draw"],
+                                    "away": e["odds"]["match_result"]["away"]
+                                },
+                                "live_score": e.get("live_score")
+                            }
+                            for e in filtered_events[:10]
+                        ]
                     }
-                    for e in filtered_events[:10]
-                ]
-            }
+                }
+            ]
         }
     }
 
@@ -388,7 +399,7 @@ async def get_event_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
                         "name": f"{event['home_team']} vs {event['away_team']}",
                         "description": enhanced_event["description"],
                         "image_url": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&h=400&fit=crop",
-                        "price_monthly": event["odds"]["match_result"]["home"],
+                        "home_odds": event["odds"]["match_result"]["home"],
                         "attributes": {
                             "League": event["league"],
                             "Venue": event["venue"],
@@ -435,7 +446,7 @@ async def compare_odds(arguments: Dict[str, Any]) -> Dict[str, Any]:
                     "id": e["id"],
                     "name": f"{e['home_team']} vs {e['away_team']}",
                     "brand": e["league"],
-                    "price_monthly": e["odds"]["match_result"]["home"],
+                    "home_odds": e["odds"]["match_result"]["home"],
                     "attributes": {
                         "home_odds": e["odds"]["match_result"]["home"],
                         "draw_odds": e["odds"]["match_result"]["draw"],
@@ -482,7 +493,7 @@ async def get_similar_events(arguments: Dict[str, Any]) -> Dict[str, Any]:
                     "id": e["id"],
                     "name": f"{e['home_team']} vs {e['away_team']}",
                     "brand": e["league"],
-                    "price_monthly": e["odds"]["match_result"]["home"],
+                    "home_odds": e["odds"]["match_result"]["home"],
                     "image_url": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop"
                 }
                 for e in all_similar
@@ -528,7 +539,7 @@ async def recommend_bet_types(arguments: Dict[str, Any]) -> Dict[str, Any]:
                     "id": rec["bet_type"]["id"],
                     "name": rec["bet_type"]["name"],
                     "type": rec["bet_type"]["category"],
-                    "price_monthly": round(rec["potential_return"], 2),
+                    "potential_return": round(rec["potential_return"], 2),
                     "highlights": [
                         f"Stake: £{rec['stake']}",
                         f"Potential return: £{rec['potential_return']}",

@@ -1,0 +1,51 @@
+{
+  "customer": {
+    "id": "cust_jwilson_001",
+    "name": "James Wilson",
+    "username": "jwilson_bet",
+    "email": "james.wilson@email.com",
+    "member_since": "2023-03-15",
+    "status": "verified",
+    "age_verified": true,
+    "preferred_teams": ["Arsenal", "Liverpool"],
+    "preferred_leagues": ["Premier League", "Champions League"],
+    "betting_style": "accumulator_fan",
+    "risk_appetite": "moderate"
+  },
+  "account": {
+    "balance": 127.50,
+    "bonus_balance": 15.00,
+    "currency": "GBP",
+    "pending_bets_amount": 20.00,
+    "pending_bets_count": 2
+  },
+  "limits": {
+    "daily_limit": 100,
+    "weekly_limit": 300,
+    "monthly_limit": 1000,
+    "single_bet_max": 50,
+    "today_spend": 35
+  },
+  "recent_activity": {
+    "last_bet": {
+      "event": "Arsenal vs Wolves",
+      "selection": "Arsenal to win",
+      "result": "won",
+      "profit": 18
+    },
+    "this_month": {
+      "total_bets": 20,
+      "wins": 9,
+      "losses": 11,
+      "win_rate": 45
+    },
+    "favorite_bet_types": ["Match Result", "Over/Under 2.5 Goals", "Both Teams to Score"],
+    "favorite_markets": ["match_result", "over_under", "btts"]
+  },
+  "preferences": {
+    "notifications_enabled": true,
+    "email_confirmations": true,
+    "odds_format": "decimal",
+    "default_stake": 10
+  }
+}
