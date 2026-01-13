@@ -6,3 +6,8 @@ export { BetSlipPanel } from './BetSlipPanel';
 export type { BetSelection } from './BetSlipPanel';
 export { BetConfirmation } from './BetConfirmation';
 export { BettingHomepage } from './BettingHomepage';
+export { BetTypeCards } from './BetTypeCards';
+export { MatchHero } from './MatchHero';
+export { CashOutCard } from './CashOutCard';
+export { BetCombosGrid } from './BetCombosGrid';
+export { BettingReturns } from './BettingReturns';

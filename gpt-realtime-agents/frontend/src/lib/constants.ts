@@ -305,8 +305,11 @@ Proactively suggest complementary bets UNLESS the bet they added was your sugges
 
 ### How It Works:
 1. Customer asks → You call tool (search_events, get_odds, etc.)
-2. **Screen automatically updates** with visual
+2. **Screen automatically updates** with visual from that tool's _visual response
 3. You NARRATE what's showing
+
+### CRITICAL: DO NOT call customise_webpage after calling other tools!
+**Every tool (search_events, add_to_bet_slip, place_bet, etc.) ALREADY updates the visual display automatically.** If you call customise_webpage after another tool, you will ERASE the visual that tool displayed. NEVER call customise_webpage unless you need a completely custom layout that no other tool provides.
 
 ### Your Job: Narrate the Visuals
 

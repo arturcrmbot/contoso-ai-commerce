@@ -394,7 +394,7 @@ async def get_event_details(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "theme": "default",
             "sections": [
                 {
-                    "type": "product_hero",
+                    "type": "match_hero",
                     "data": {
                         "name": f"{event['home_team']} vs {event['away_team']}",
                         "description": enhanced_event["description"],
@@ -565,7 +565,7 @@ async def recommend_bet_types(arguments: Dict[str, Any]) -> Dict[str, Any]:
             },
             "sections": [
                 {
-                    "type": "plan_selector",
+                    "type": "bet_type_cards",
                     "title": "Bet Recommendations",
                     "data": {
                         "items": [
@@ -634,7 +634,7 @@ async def get_related_bets(arguments: Dict[str, Any]) -> Dict[str, Any]:
             },
             "sections": [
                 {
-                    "type": "accessory_grid",
+                    "type": "bet_combos",
                     "title": "Popular Combinations",
                     "data": {
                         "items": [
@@ -1007,8 +1007,9 @@ async def check_cashout_value(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "theme": "info",
             "sections": [
                 {
-                    "type": "trade_in_value",
+                    "type": "cash_out",
                     "data": {
+                        "bet_id": bet_id,
                         "device_model": f"Bet #{bet_id}",
                         "condition": "Active",
                         "trade_in_value": cashout_value,
@@ -1304,7 +1305,7 @@ async def get_available_markets(arguments: Dict[str, Any]) -> Dict[str, Any]:
             },
             "sections": [
                 {
-                    "type": "plan_selector",
+                    "type": "bet_type_cards",
                     "data": {
                         "items": [
                             {
@@ -1883,7 +1884,7 @@ TOOLS_REGISTRY = {
         "definition": {
             "type": "function",
             "name": "customise_webpage",
-            "description": "Update the left-side visual display for betting interface. Use to show matches, odds, bet slip, live scores, or any betting content.",
+            "description": "IMPORTANT: DO NOT use this tool if you just called another tool (like search_events, get_event_details, add_to_bet_slip, etc.) - those tools ALREADY update the visual display automatically via their _visual response. Only use customise_webpage for CUSTOM layouts when no other tool provides the visual you need. If you call this after another tool, you will ERASE the visual that tool already displayed.",
             "parameters": {
                 "type": "object",
                 "properties": {
