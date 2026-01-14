@@ -260,6 +260,369 @@ MOCK_PLAYERS = {
     "default": ["Player A", "Player B", "Player C"]
 }
 
+# =============================================================================
+# RICH STATISTICS DATA FOR AI ANALYSIS
+# =============================================================================
+
+# Player statistics for intelligent analysis
+PLAYER_STATS = {
+    "Erling Haaland": {
+        "team": "Manchester City",
+        "position": "Striker",
+        "goals_this_season": 22,
+        "games_played": 20,
+        "goals_per_game": 1.1,
+        "last_5_games": ["GOAL x2", "GOAL", "GOAL", "GOAL x2", "GOAL"],
+        "home_scoring_rate": 1.3,
+        "away_scoring_rate": 0.9,
+        "vs_top_6": 0.8,
+        "takes_penalties": True,
+        "on_hot_streak": True,
+        "minutes_per_goal": 78,
+        "shot_conversion": 28.5
+    },
+    "Mohamed Salah": {
+        "team": "Liverpool",
+        "position": "Winger",
+        "goals_this_season": 16,
+        "games_played": 20,
+        "goals_per_game": 0.8,
+        "last_5_games": ["GOAL", "GOAL", "-", "GOAL", "-"],
+        "home_scoring_rate": 1.0,
+        "away_scoring_rate": 0.6,
+        "vs_top_6": 0.7,
+        "takes_penalties": True,
+        "on_hot_streak": False,
+        "minutes_per_goal": 105,
+        "shot_conversion": 22.1
+    },
+    "Cole Palmer": {
+        "team": "Chelsea",
+        "position": "Midfielder",
+        "goals_this_season": 14,
+        "games_played": 19,
+        "goals_per_game": 0.74,
+        "last_5_games": ["GOAL", "GOAL x2", "-", "GOAL", "GOAL"],
+        "home_scoring_rate": 0.9,
+        "away_scoring_rate": 0.55,
+        "vs_top_6": 0.5,
+        "takes_penalties": True,
+        "on_hot_streak": True,
+        "minutes_per_goal": 115,
+        "shot_conversion": 25.8
+    },
+    "Bukayo Saka": {
+        "team": "Arsenal",
+        "position": "Winger",
+        "goals_this_season": 11,
+        "games_played": 20,
+        "goals_per_game": 0.55,
+        "last_5_games": ["-", "GOAL", "-", "-", "GOAL"],
+        "home_scoring_rate": 0.7,
+        "away_scoring_rate": 0.4,
+        "vs_top_6": 0.45,
+        "takes_penalties": False,
+        "on_hot_streak": False,
+        "minutes_per_goal": 155,
+        "shot_conversion": 18.2
+    },
+    "Son Heung-min": {
+        "team": "Tottenham",
+        "position": "Winger",
+        "goals_this_season": 12,
+        "games_played": 19,
+        "goals_per_game": 0.63,
+        "last_5_games": ["GOAL", "-", "GOAL x2", "-", "-"],
+        "home_scoring_rate": 0.75,
+        "away_scoring_rate": 0.5,
+        "vs_top_6": 0.6,
+        "takes_penalties": False,
+        "on_hot_streak": False,
+        "minutes_per_goal": 135,
+        "shot_conversion": 20.5
+    },
+    "Harry Kane": {
+        "team": "Bayern Munich",
+        "position": "Striker",
+        "goals_this_season": 26,
+        "games_played": 22,
+        "goals_per_game": 1.18,
+        "last_5_games": ["GOAL x2", "GOAL", "GOAL x2", "GOAL", "GOAL"],
+        "home_scoring_rate": 1.4,
+        "away_scoring_rate": 1.0,
+        "vs_top_6": 0.9,
+        "takes_penalties": True,
+        "on_hot_streak": True,
+        "minutes_per_goal": 72,
+        "shot_conversion": 31.2
+    },
+    "Robert Lewandowski": {
+        "team": "Barcelona",
+        "position": "Striker",
+        "goals_this_season": 18,
+        "games_played": 21,
+        "goals_per_game": 0.86,
+        "last_5_games": ["GOAL", "-", "GOAL", "GOAL", "-"],
+        "home_scoring_rate": 1.1,
+        "away_scoring_rate": 0.6,
+        "vs_top_6": 0.7,
+        "takes_penalties": True,
+        "on_hot_streak": False,
+        "minutes_per_goal": 98,
+        "shot_conversion": 24.5
+    },
+    "Darwin Núñez": {
+        "team": "Liverpool",
+        "position": "Striker",
+        "goals_this_season": 9,
+        "games_played": 18,
+        "goals_per_game": 0.5,
+        "last_5_games": ["GOAL x2", "-", "-", "GOAL", "-"],
+        "home_scoring_rate": 0.65,
+        "away_scoring_rate": 0.35,
+        "vs_top_6": 0.4,
+        "takes_penalties": False,
+        "on_hot_streak": False,
+        "minutes_per_goal": 165,
+        "shot_conversion": 15.8
+    },
+    "Marcus Rashford": {
+        "team": "Manchester United",
+        "position": "Winger",
+        "goals_this_season": 7,
+        "games_played": 20,
+        "goals_per_game": 0.35,
+        "last_5_games": ["-", "-", "GOAL", "-", "-"],
+        "home_scoring_rate": 0.45,
+        "away_scoring_rate": 0.25,
+        "vs_top_6": 0.3,
+        "takes_penalties": False,
+        "on_hot_streak": False,
+        "minutes_per_goal": 230,
+        "shot_conversion": 11.2
+    }
+}
+
+# Team statistics for intelligent analysis
+TEAM_STATS = {
+    "Arsenal": {
+        "league_position": 2,
+        "form": "WWDWW",
+        "home_form": "WWWWW",
+        "away_form": "WDWDL",
+        "goals_scored": 45,
+        "goals_conceded": 18,
+        "clean_sheets": 10,
+        "avg_goals_scored": 2.25,
+        "avg_goals_conceded": 0.9,
+        "btts_percentage": 55,
+        "over_2_5_percentage": 65,
+        "win_percentage": 70,
+        "home_win_percentage": 85,
+        "away_win_percentage": 55,
+        "injuries": ["Timber (ACL)", "Zinchenko (muscle)"],
+        "key_insight": "Dominant at home, struggled in big away games"
+    },
+    "Chelsea": {
+        "league_position": 5,
+        "form": "WDWLW",
+        "home_form": "WWWDW",
+        "away_form": "LDWLW",
+        "goals_scored": 42,
+        "goals_conceded": 28,
+        "clean_sheets": 6,
+        "avg_goals_scored": 2.1,
+        "avg_goals_conceded": 1.4,
+        "btts_percentage": 70,
+        "over_2_5_percentage": 75,
+        "win_percentage": 55,
+        "home_win_percentage": 70,
+        "away_win_percentage": 40,
+        "injuries": ["Reece James (hamstring)"],
+        "key_insight": "High-scoring but leaky defence, great for BTTS"
+    },
+    "Manchester City": {
+        "league_position": 1,
+        "form": "WWWWW",
+        "home_form": "WWWWW",
+        "away_form": "WWWWD",
+        "goals_scored": 52,
+        "goals_conceded": 15,
+        "clean_sheets": 12,
+        "avg_goals_scored": 2.6,
+        "avg_goals_conceded": 0.75,
+        "btts_percentage": 45,
+        "over_2_5_percentage": 70,
+        "win_percentage": 85,
+        "home_win_percentage": 95,
+        "away_win_percentage": 75,
+        "injuries": [],
+        "key_insight": "Ruthless at home, rarely concede, back overs in their games"
+    },
+    "Liverpool": {
+        "league_position": 3,
+        "form": "DWWWD",
+        "home_form": "WWWWW",
+        "away_form": "DDDWD",
+        "goals_scored": 48,
+        "goals_conceded": 22,
+        "clean_sheets": 8,
+        "avg_goals_scored": 2.4,
+        "avg_goals_conceded": 1.1,
+        "btts_percentage": 60,
+        "over_2_5_percentage": 72,
+        "win_percentage": 65,
+        "home_win_percentage": 90,
+        "away_win_percentage": 40,
+        "injuries": ["Jota (knee)"],
+        "key_insight": "Fortress at Anfield but inconsistent away, huge home/away split"
+    },
+    "Manchester United": {
+        "league_position": 7,
+        "form": "LDWDL",
+        "home_form": "WDWDL",
+        "away_form": "LLDWL",
+        "goals_scored": 28,
+        "goals_conceded": 32,
+        "clean_sheets": 4,
+        "avg_goals_scored": 1.4,
+        "avg_goals_conceded": 1.6,
+        "btts_percentage": 65,
+        "over_2_5_percentage": 55,
+        "win_percentage": 35,
+        "home_win_percentage": 50,
+        "away_win_percentage": 20,
+        "injuries": ["Mount (calf)", "Eriksen (ankle)"],
+        "key_insight": "Poor form, avoid backing them especially away"
+    },
+    "Tottenham": {
+        "league_position": 4,
+        "form": "WLWWL",
+        "home_form": "WWWLW",
+        "away_form": "LLWWL",
+        "goals_scored": 44,
+        "goals_conceded": 30,
+        "clean_sheets": 5,
+        "avg_goals_scored": 2.2,
+        "avg_goals_conceded": 1.5,
+        "btts_percentage": 72,
+        "over_2_5_percentage": 78,
+        "win_percentage": 55,
+        "home_win_percentage": 70,
+        "away_win_percentage": 40,
+        "injuries": ["Romero (hamstring)"],
+        "key_insight": "Entertaining but unpredictable, great for BTTS and goals"
+    },
+    "Real Madrid": {
+        "league_position": 1,
+        "form": "WWWDW",
+        "home_form": "WWWWW",
+        "away_form": "WWDWD",
+        "goals_scored": 50,
+        "goals_conceded": 18,
+        "clean_sheets": 11,
+        "avg_goals_scored": 2.5,
+        "avg_goals_conceded": 0.9,
+        "btts_percentage": 50,
+        "over_2_5_percentage": 65,
+        "win_percentage": 80,
+        "home_win_percentage": 95,
+        "away_win_percentage": 65,
+        "injuries": ["Courtois (ACL)"],
+        "key_insight": "Clinical at Bernabéu, tight defence, perfect for home wins"
+    },
+    "Barcelona": {
+        "league_position": 2,
+        "form": "WDWWW",
+        "home_form": "WWWWW",
+        "away_form": "DWDWL",
+        "goals_scored": 46,
+        "goals_conceded": 24,
+        "clean_sheets": 7,
+        "avg_goals_scored": 2.3,
+        "avg_goals_conceded": 1.2,
+        "btts_percentage": 62,
+        "over_2_5_percentage": 70,
+        "win_percentage": 70,
+        "home_win_percentage": 90,
+        "away_win_percentage": 50,
+        "injuries": ["Pedri (muscle)"],
+        "key_insight": "Strong at Camp Nou, inconsistent travels"
+    },
+    "Bayern Munich": {
+        "league_position": 1,
+        "form": "WWWWW",
+        "home_form": "WWWWW",
+        "away_form": "WWWWW",
+        "goals_scored": 58,
+        "goals_conceded": 20,
+        "clean_sheets": 9,
+        "avg_goals_scored": 2.9,
+        "avg_goals_conceded": 1.0,
+        "btts_percentage": 58,
+        "over_2_5_percentage": 82,
+        "win_percentage": 88,
+        "home_win_percentage": 95,
+        "away_win_percentage": 80,
+        "injuries": [],
+        "key_insight": "Dominant everywhere, Kane firing, over 2.5 almost guaranteed"
+    },
+    "Borussia Dortmund": {
+        "league_position": 4,
+        "form": "WDLWW",
+        "home_form": "WWWWW",
+        "away_form": "LDLLW",
+        "goals_scored": 40,
+        "goals_conceded": 32,
+        "clean_sheets": 4,
+        "avg_goals_scored": 2.0,
+        "avg_goals_conceded": 1.6,
+        "btts_percentage": 75,
+        "over_2_5_percentage": 70,
+        "win_percentage": 55,
+        "home_win_percentage": 85,
+        "away_win_percentage": 25,
+        "injuries": ["Haller (illness)"],
+        "key_insight": "Yellow Wall factor huge, avoid them away from home"
+    },
+    "Newcastle": {
+        "league_position": 6,
+        "form": "DWWWD",
+        "home_form": "WWWWW",
+        "away_form": "DDDWD",
+        "goals_scored": 38,
+        "goals_conceded": 22,
+        "clean_sheets": 8,
+        "avg_goals_scored": 1.9,
+        "avg_goals_conceded": 1.1,
+        "btts_percentage": 55,
+        "over_2_5_percentage": 58,
+        "win_percentage": 55,
+        "home_win_percentage": 80,
+        "away_win_percentage": 30,
+        "injuries": ["Wilson (hamstring)"],
+        "key_insight": "St James' Park a fortress, very tight at home"
+    },
+    "Aston Villa": {
+        "league_position": 4,
+        "form": "WWLWW",
+        "home_form": "WWWWD",
+        "away_form": "WLWWL",
+        "goals_scored": 44,
+        "goals_conceded": 26,
+        "clean_sheets": 6,
+        "avg_goals_scored": 2.2,
+        "avg_goals_conceded": 1.3,
+        "btts_percentage": 65,
+        "over_2_5_percentage": 68,
+        "win_percentage": 62,
+        "home_win_percentage": 75,
+        "away_win_percentage": 50,
+        "injuries": [],
+        "key_insight": "Punching above weight, Watkins in great form"
+    }
+}
+
 # Bet slip (in-memory - will be lost on restart)
 BET_SLIP = {}
 
@@ -898,7 +1261,7 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
                 "sections": [
                     {
                         "type": "info_callout",
-                        "data": {"message": "❌ Age verification failed - must be 18+"}
+                        "data": {"message": "[X] Age verification failed - must be 18+"}
                     }
                 ]
             }
@@ -921,7 +1284,7 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
                     {
                         "type": "info_callout",
                         "data": {
-                            "message": f"✅ Identity Verified\n👤 {customer_name}\n📍 {postcode}"
+                            "message": f"[OK] Identity Verified\nName: {customer_name}\nAddress: {postcode}"
                         },
                         "style": "emphasized"
                     }
@@ -938,7 +1301,7 @@ async def verify_age_identity(arguments: Dict[str, Any]) -> Dict[str, Any]:
                 "sections": [
                     {
                         "type": "info_callout",
-                        "data": {"message": "⚠️ Verification failed - please contact support"}
+                        "data": {"message": "[!] Verification failed - please contact support"}
                     }
                 ]
             }
@@ -1402,6 +1765,182 @@ async def customise_webpage(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "success": True,
         "message": "Visual updated",
         "_visual": arguments
+    }
+
+
+# =============================================================================
+# INTELLIGENT ANALYSIS TOOLS
+# =============================================================================
+
+async def analyze_player_markets(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Get comprehensive player goalscorer data for AI to analyze and recommend.
+    Returns raw statistics - AI should reason about which players offer value.
+    """
+    focus = arguments.get("focus")  # "form", "value", "longshot", or None
+
+    players_data = []
+
+    for event in MOCK_EVENTS:
+        if event["status"] != "upcoming":
+            continue
+
+        for team_key in ["home_team", "away_team"]:
+            team = event[team_key]
+            is_home = team_key == "home_team"
+            opponent = event["away_team"] if is_home else event["home_team"]
+
+            # Get players for this team
+            team_players = MOCK_PLAYERS.get(team, MOCK_PLAYERS["default"])[:3]
+
+            for player_name in team_players:
+                # Get player stats (use default if not in PLAYER_STATS)
+                if player_name in PLAYER_STATS:
+                    stats = PLAYER_STATS[player_name]
+                else:
+                    # Generate reasonable defaults
+                    stats = {
+                        "position": "Forward",
+                        "goals_this_season": random.randint(5, 12),
+                        "games_played": random.randint(15, 20),
+                        "goals_per_game": round(random.uniform(0.3, 0.6), 2),
+                        "last_5_games": random.choices(["-", "GOAL", "GOAL x2"], weights=[50, 40, 10], k=5),
+                        "home_scoring_rate": round(random.uniform(0.4, 0.7), 2),
+                        "away_scoring_rate": round(random.uniform(0.2, 0.5), 2),
+                        "takes_penalties": random.choice([True, False]),
+                        "on_hot_streak": random.choice([True, False, False]),
+                    }
+
+                # Generate odds based on player quality
+                base_anytime = round(random.uniform(2.2, 4.5), 2)
+                base_first = round(base_anytime * random.uniform(2.5, 3.5), 2)
+
+                # Adjust for player quality
+                if stats.get("goals_per_game", 0.5) > 0.8:
+                    base_anytime = round(base_anytime * 0.7, 2)
+                    base_first = round(base_first * 0.7, 2)
+
+                players_data.append({
+                    "player": player_name,
+                    "team": team,
+                    "opponent": opponent,
+                    "match": f"{event['home_team']} vs {event['away_team']}",
+                    "kick_off": event["kick_off"],
+                    "venue": event.get("venue", "TBD"),
+                    "is_home": is_home,
+                    "stats": {
+                        "goals_this_season": stats.get("goals_this_season", 0),
+                        "games_played": stats.get("games_played", 0),
+                        "goals_per_game": stats.get("goals_per_game", 0),
+                        "recent_form": stats.get("last_5_games", []),
+                        "home_rate": stats.get("home_scoring_rate", 0.5),
+                        "away_rate": stats.get("away_scoring_rate", 0.3),
+                        "penalties": stats.get("takes_penalties", False),
+                        "hot_streak": stats.get("on_hot_streak", False),
+                    },
+                    "odds": {
+                        "anytime_scorer": base_anytime,
+                        "first_scorer": base_first
+                    }
+                })
+
+    # Calculate analysis hints
+    hot_players = [p for p in players_data if p["stats"]["hot_streak"]]
+    home_scorers = [p for p in players_data if p["is_home"] and p["stats"]["home_rate"] > 0.7]
+    penalty_takers = [p for p in players_data if p["stats"]["penalties"]]
+
+    return {
+        "players": players_data,
+        "total_players": len(players_data),
+        "analysis_summary": {
+            "players_on_hot_streak": [p["player"] for p in hot_players],
+            "strong_home_scorers": [p["player"] for p in home_scorers],
+            "penalty_takers": [p["player"] for p in penalty_takers]
+        },
+        "note_for_ai": "Analyze this data to find good betting opportunities. Consider: form (hot_streak, recent goals), venue (home/away rates), opponent strength, and odds value. Explain your reasoning when making recommendations."
+    }
+
+
+async def analyze_match_betting(arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Get comprehensive match/team data for AI to analyze and recommend bets.
+    Returns team stats, form, and betting patterns for intelligent analysis.
+    """
+    focus = arguments.get("focus")  # "winner", "goals", "btts", or None for all
+
+    matches_data = []
+
+    for event in MOCK_EVENTS:
+        if event["status"] != "upcoming":
+            continue
+
+        home_team = event["home_team"]
+        away_team = event["away_team"]
+
+        # Get team stats
+        home_stats = TEAM_STATS.get(home_team, {})
+        away_stats = TEAM_STATS.get(away_team, {})
+
+        # Calculate analysis metrics
+        home_strength = home_stats.get("home_win_percentage", 50) / 100
+        away_strength = away_stats.get("away_win_percentage", 30) / 100
+
+        # Goals analysis
+        expected_goals = (home_stats.get("avg_goals_scored", 1.5) + away_stats.get("avg_goals_conceded", 1.2) +
+                        away_stats.get("avg_goals_scored", 1.3) + home_stats.get("avg_goals_conceded", 1.0)) / 2
+
+        btts_likelihood = (home_stats.get("btts_percentage", 55) + away_stats.get("btts_percentage", 55)) / 2
+
+        matches_data.append({
+            "match": f"{home_team} vs {away_team}",
+            "event_id": event["id"],
+            "kick_off": event["kick_off"],
+            "league": event["league"],
+            "venue": event.get("venue", "TBD"),
+            "home_team": {
+                "name": home_team,
+                "form": home_stats.get("form", "?????"),
+                "home_form": home_stats.get("home_form", "?????"),
+                "league_position": home_stats.get("league_position", "?"),
+                "home_win_rate": f"{home_stats.get('home_win_percentage', 50)}%",
+                "avg_goals_home": home_stats.get("avg_goals_scored", 1.5),
+                "clean_sheet_rate": f"{round(home_stats.get('clean_sheets', 5) / 20 * 100)}%",
+                "injuries": home_stats.get("injuries", []),
+                "key_insight": home_stats.get("key_insight", "No data")
+            },
+            "away_team": {
+                "name": away_team,
+                "form": away_stats.get("form", "?????"),
+                "away_form": away_stats.get("away_form", "?????"),
+                "league_position": away_stats.get("league_position", "?"),
+                "away_win_rate": f"{away_stats.get('away_win_percentage', 30)}%",
+                "avg_goals_away": away_stats.get("avg_goals_scored", 1.3),
+                "injuries": away_stats.get("injuries", []),
+                "key_insight": away_stats.get("key_insight", "No data")
+            },
+            "odds": event["odds"],
+            "analysis": {
+                "expected_total_goals": round(expected_goals, 1),
+                "btts_likelihood": f"{round(btts_likelihood)}%",
+                "over_2_5_history": f"{round((home_stats.get('over_2_5_percentage', 55) + away_stats.get('over_2_5_percentage', 55)) / 2)}%",
+                "home_advantage_strong": home_stats.get("home_win_percentage", 50) > 70,
+                "away_team_poor_travellers": away_stats.get("away_win_percentage", 30) < 35
+            },
+            "head_to_head": event.get("head_to_head", "No recent meetings")
+        })
+
+    return {
+        "matches": matches_data,
+        "total_matches": len(matches_data),
+        "quick_picks": {
+            "strongest_home_teams": [m["home_team"]["name"] for m in matches_data
+                                     if m["analysis"]["home_advantage_strong"]],
+            "high_scoring_likely": [m["match"] for m in matches_data
+                                    if m["analysis"]["expected_total_goals"] > 2.5],
+            "btts_candidates": [m["match"] for m in matches_data
+                               if float(m["analysis"]["btts_likelihood"].rstrip('%')) > 65]
+        },
+        "note_for_ai": "Analyze this data to recommend bets. Consider: team form (especially home/away splits), expected goals, BTTS likelihood, injuries, and head-to-head. Explain your reasoning - don't just list odds."
     }
 
 
@@ -1919,5 +2458,44 @@ TOOLS_REGISTRY = {
             }
         },
         "executor": customise_webpage
+    },
+
+    # Intelligent Analysis Tools
+    "analyze_player_markets": {
+        "definition": {
+            "type": "function",
+            "name": "analyze_player_markets",
+            "description": "Get comprehensive player goalscorer data with form, statistics, and odds for intelligent analysis. Use this when customer asks about player bets, goalscorer markets, who's in form, or wants goalscorer recommendations. YOU must analyze the data and explain your reasoning - don't just list players and odds.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "focus": {
+                        "type": "string",
+                        "enum": ["form", "value", "longshot"],
+                        "description": "Optional: Focus on players in form, value odds, or longshots"
+                    }
+                }
+            }
+        },
+        "executor": analyze_player_markets
+    },
+
+    "analyze_match_betting": {
+        "definition": {
+            "type": "function",
+            "name": "analyze_match_betting",
+            "description": "Get comprehensive match and team data with form, statistics, and betting patterns for intelligent analysis. Use this when customer asks about match predictions, team bets, over/under, BTTS, or wants betting recommendations. YOU must analyze the data and explain your reasoning - don't just read back stats.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "focus": {
+                        "type": "string",
+                        "enum": ["winner", "goals", "btts"],
+                        "description": "Optional: Focus on match winner, goals markets, or both teams to score"
+                    }
+                }
+            }
+        },
+        "executor": analyze_match_betting
     }
 }
