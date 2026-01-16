@@ -1855,9 +1855,30 @@ async def analyze_player_markets(arguments: Dict[str, Any]) -> Dict[str, Any]:
         "analysis_summary": {
             "players_on_hot_streak": [p["player"] for p in hot_players],
             "strong_home_scorers": [p["player"] for p in home_scorers],
-            "penalty_takers": [p["player"] for p in penalty_takers]
+            "penalty_takers": [p["player"] for p in penalty_takers],
+            "hot_players_count": len(hot_players),
+            "penalty_takers_count": len(penalty_takers),
+            "best_home_scorers": [p["player"] for p in home_scorers[:3]]
         },
-        "note_for_ai": "Analyze this data to find good betting opportunities. Consider: form (hot_streak, recent goals), venue (home/away rates), opponent strength, and odds value. Explain your reasoning when making recommendations."
+        "note_for_ai": "Analyze this data to find good betting opportunities. Consider: form (hot_streak, recent goals), venue (home/away rates), opponent strength, and odds value. Explain your reasoning when making recommendations.",
+        "_visual": {
+            "layout": "single_focus",
+            "sections": [
+                {
+                    "type": "player_analysis",
+                    "data": {
+                        "players": players_data,
+                        "analysis_summary": {
+                            "hot_players_count": len(hot_players),
+                            "penalty_takers_count": len(penalty_takers),
+                            "best_home_scorers": [p["player"] for p in home_scorers[:3]]
+                        },
+                        "title": "Player Market Analysis"
+                    },
+                    "emphasis": "high"
+                }
+            ]
+        }
     }
 
 
@@ -1929,18 +1950,34 @@ async def analyze_match_betting(arguments: Dict[str, Any]) -> Dict[str, Any]:
             "head_to_head": event.get("head_to_head", "No recent meetings")
         })
 
+    quick_picks = {
+        "strongest_home_teams": [m["home_team"]["name"] for m in matches_data
+                                 if m["analysis"]["home_advantage_strong"]],
+        "high_scoring_likely": [m["match"] for m in matches_data
+                                if m["analysis"]["expected_total_goals"] > 2.5],
+        "btts_candidates": [m["match"] for m in matches_data
+                           if float(m["analysis"]["btts_likelihood"].rstrip('%')) > 65]
+    }
+
     return {
         "matches": matches_data,
         "total_matches": len(matches_data),
-        "quick_picks": {
-            "strongest_home_teams": [m["home_team"]["name"] for m in matches_data
-                                     if m["analysis"]["home_advantage_strong"]],
-            "high_scoring_likely": [m["match"] for m in matches_data
-                                    if m["analysis"]["expected_total_goals"] > 2.5],
-            "btts_candidates": [m["match"] for m in matches_data
-                               if float(m["analysis"]["btts_likelihood"].rstrip('%')) > 65]
-        },
-        "note_for_ai": "Analyze this data to recommend bets. Consider: team form (especially home/away splits), expected goals, BTTS likelihood, injuries, and head-to-head. Explain your reasoning - don't just list odds."
+        "quick_picks": quick_picks,
+        "note_for_ai": "Analyze this data to recommend bets. Consider: team form (especially home/away splits), expected goals, BTTS likelihood, injuries, and head-to-head. Explain your reasoning - don't just list odds.",
+        "_visual": {
+            "layout": "single_focus",
+            "sections": [
+                {
+                    "type": "match_analysis",
+                    "data": {
+                        "matches": matches_data,
+                        "quick_picks": quick_picks,
+                        "title": "Match Betting Analysis"
+                    },
+                    "emphasis": "high"
+                }
+            ]
+        }
     }
 
 

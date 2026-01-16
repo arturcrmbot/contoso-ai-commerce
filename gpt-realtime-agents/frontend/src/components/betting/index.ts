@@ -11,3 +11,5 @@ export { MatchHero } from './MatchHero';
 export { CashOutCard } from './CashOutCard';
 export { BetCombosGrid } from './BetCombosGrid';
 export { BettingReturns } from './BettingReturns';
+export { PlayerAnalysisCard } from './PlayerAnalysisCard';
+export { MatchAnalysisCard } from './MatchAnalysisCard';

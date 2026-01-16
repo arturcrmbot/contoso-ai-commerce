@@ -18,6 +18,8 @@ import { MatchHero } from '../betting/MatchHero';
 import { CashOutCard } from '../betting/CashOutCard';
 import { BetCombosGrid } from '../betting/BetCombosGrid';
 import { BettingReturns } from '../betting/BettingReturns';
+import { PlayerAnalysisCard } from '../betting/PlayerAnalysisCard';
+import { MatchAnalysisCard } from '../betting/MatchAnalysisCard';
 
 interface FlexibleRendererProps {
   visual: FlexibleVisual;
@@ -53,6 +55,14 @@ export function FlexibleRenderer({ visual, onAction }: FlexibleRendererProps) {
         case 'match_hero':
         case 'product_hero':  // Legacy mapping - product_hero now shows match
           return <MatchHero data={section.data} onAction={onAction} emphasis={section.emphasis} />;
+
+        // Player Analysis - intelligent player market analysis
+        case 'player_analysis':
+          return <PlayerAnalysisCard data={section.data} onAction={onAction} emphasis={section.emphasis} />;
+
+        // Match Analysis - intelligent match betting analysis
+        case 'match_analysis':
+          return <MatchAnalysisCard data={section.data} onAction={onAction} emphasis={section.emphasis} />;
 
         // Cash Out Card - shows cash out value for active bets
         case 'cash_out':
