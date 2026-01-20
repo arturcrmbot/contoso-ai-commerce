@@ -1,0 +1,8 @@
+{
+  "appUrl": "https://contoso-bet.happysea-e0f3a770.eastus2.azurecontainerapps.io",
+  "containerAppName": "contoso-bet",
+  "resourceGroup": "rg-contosoaicommerce",
+  "principalId": "594efdc2-2ce7-41f2-aee8-e90506dc6d6a",
+  "appName": "contoso-bet",
+  "acrLoginServer": "contoso7jrjas2dwovpw.azurecr.io"
+}

@@ -16,9 +16,8 @@ param azureGptRealtimeUrl string
 @description('WebRTC URL')
 param webrtcUrl string
 
-@description('Azure OpenAI Realtime API Key')
-@secure()
-param azureGptRealtimeKey string
+@description('Azure OpenAI Resource ID for role assignment (optional)')
+param azureOpenAIResourceId string = ''
 
 @description('Azure OpenAI Realtime Deployment Name')
 param azureGptRealtimeDeployment string = 'gpt-realtime-2'
@@ -81,11 +80,14 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2023-05-01' = {
   }
 }
 
-// 4. Container App
+// 4. Container App with system-assigned managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
   location: location
   tags: tags
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
@@ -112,10 +114,6 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
           name: 'acr-password'
           value: acr.listCredentials().passwords[0].value
         }
-        {
-          name: 'azure-gpt-realtime-key'
-          value: azureGptRealtimeKey
-        }
       ]
     }
     template: {
@@ -135,10 +133,6 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
             {
               name: 'WEBRTC_URL'
               value: webrtcUrl
-            }
-            {
-              name: 'AZURE_GPT_REALTIME_KEY'
-              secretRef: 'azure-gpt-realtime-key'
             }
             {
               name: 'AZURE_GPT_REALTIME_DEPLOYMENT'
@@ -163,6 +157,17 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 
+// Role assignment: Cognitive Services User role for the Container App's managed identity
+resource cognitiveServicesUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(azureOpenAIResourceId)) {
+  name: guid(containerApp.id, azureOpenAIResourceId, 'cognitive-services-user')
+  scope: resourceGroup()
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908') // Cognitive Services User
+    principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
 // Outputs
 output acrLoginServer string = acr.properties.loginServer
 output acrName string = acr.name
@@ -170,3 +175,4 @@ output acrUsername string = acr.listCredentials().username
 output containerAppUrl string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 output containerAppName string = containerApp.name
 output resourceGroupName string = resourceGroup().name
+output containerAppPrincipalId string = containerApp.identity.principalId

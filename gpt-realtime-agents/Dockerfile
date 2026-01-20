@@ -18,7 +18,7 @@ RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
 COPY audio_backend/ ./audio_backend
-COPY .env ./.env
+COPY prompts/ ./prompts
 COPY --from=frontend-builder /frontend/dist ./audio_backend/frontend_dist
 
 EXPOSE 8080

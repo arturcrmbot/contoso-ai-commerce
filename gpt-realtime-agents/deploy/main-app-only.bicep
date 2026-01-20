@@ -1,8 +1,11 @@
 // Create Container App only (after image is pushed)
 targetScope = 'resourceGroup'
 
-@description('Base name for resources')
-param baseName string = 'contoso'
+@description('Unique app name for this deployment (e.g., contoso-bet, contoso-commerce)')
+param appName string = 'contoso-bet'
+
+@description('Image name in ACR (defaults to appName)')
+param imageName string = ''
 
 @description('Location for all resources')
 param location string = resourceGroup().location
@@ -29,9 +32,8 @@ param azureGptRealtimeUrl string
 @description('WebRTC URL')
 param webrtcUrl string
 
-@description('Azure OpenAI Realtime API Key')
-@secure()
-param azureGptRealtimeKey string
+@description('Azure OpenAI Resource ID for role assignment')
+param azureOpenAIResourceId string = ''
 
 @description('Azure OpenAI Realtime Deployment Name')
 param azureGptRealtimeDeployment string = 'gpt-realtime-2'
@@ -39,11 +41,12 @@ param azureGptRealtimeDeployment string = 'gpt-realtime-2'
 @description('Azure OpenAI Realtime Voice')
 param azureGptRealtimeVoice string = 'verse'
 
-var uniqueSuffix = uniqueString(resourceGroup().id)
-var containerAppName = '${baseName}-app-${uniqueSuffix}'
+// Use appName directly as container app name (caller provides unique name)
+var containerAppName = appName
+var actualImageName = empty(imageName) ? appName : imageName
 
 var tags = {
-  application: 'Contoso AI Commerce'
+  application: appName
   environment: 'production'
 }
 
@@ -52,11 +55,14 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2023-05-01' existing
   name: split(containerEnvId, '/')[8]  // Extract name from resource ID
 }
 
-// Container App
+// Container App with system-assigned managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: containerAppName
   location: location
   tags: tags
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     managedEnvironmentId: containerEnvId
     configuration: {
@@ -83,17 +89,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
           name: 'acr-password'
           value: acrPassword
         }
-        {
-          name: 'azure-gpt-realtime-key'
-          value: azureGptRealtimeKey
-        }
       ]
     }
     template: {
       containers: [
         {
           name: 'contoso-ai-commerce'
-          image: '${acrLoginServer}/${baseName}:${imageTag}'
+          image: '${acrLoginServer}/${actualImageName}:${imageTag}'
           resources: {
             cpu: json('1.0')
             memory: '2Gi'
@@ -106,10 +108,6 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
             {
               name: 'WEBRTC_URL'
               value: webrtcUrl
-            }
-            {
-              name: 'AZURE_GPT_REALTIME_KEY'
-              secretRef: 'azure-gpt-realtime-key'
             }
             {
               name: 'AZURE_GPT_REALTIME_DEPLOYMENT'
@@ -134,7 +132,20 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 
+// Role assignment: Cognitive Services User role for the Container App's managed identity
+// This allows the app to authenticate to Azure OpenAI using DefaultAzureCredential
+resource cognitiveServicesUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(azureOpenAIResourceId)) {
+  name: guid(containerApp.id, azureOpenAIResourceId, 'cognitive-services-user')
+  scope: resourceGroup()
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'a97b65f3-24c7-4388-baec-2e87135dc908') // Cognitive Services User
+    principalId: containerApp.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
 // Outputs
 output containerAppName string = containerApp.name
 output containerAppUrl string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 output containerAppFqdn string = containerApp.properties.configuration.ingress.fqdn
+output containerAppPrincipalId string = containerApp.identity.principalId
