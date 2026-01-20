@@ -115,6 +115,7 @@ if ($LASTEXITCODE -ne 0) {
 $fullImageName = "${acrLoginServer}/${AppName}:${ImageTag}"
 Write-Host "Building: $fullImageName" -ForegroundColor Gray
 
+# Force rebuild to pick up frontend changes
 docker build --no-cache -t $fullImageName -f Dockerfile .
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Docker build failed" -ForegroundColor Red

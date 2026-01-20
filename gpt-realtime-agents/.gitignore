@@ -212,3 +212,7 @@ do_not_commit/
 # Claude Code specific files (not needed in repo)
 CLAUDE.md
 .claude/
+
+# Built frontend (generated during Docker build, should not be committed)
+audio_backend/frontend_dist/
+frontend/dist/
