@@ -9,6 +9,46 @@ from openai.types.beta.realtime.session_update_event import Session, SessionTurn
 from typing import Any, Literal, Optional
 from tools import Tool
 
+
+def format_customer_profile(profile: dict) -> str:
+    """Format customer profile JSON into readable text for the system prompt."""
+    customer = profile.get("customer", {})
+    account = profile.get("account", {})
+    limits = profile.get("limits", {})
+    recent = profile.get("recent_activity", {})
+    prefs = profile.get("preferences", {})
+
+    # Calculate remaining daily limit
+    daily_remaining = limits.get("daily_limit", 0) - limits.get("today_spend", 0)
+
+    lines = [
+        f"**Customer:** {customer.get('name', 'Unknown')} (@{customer.get('username', 'unknown')})",
+        f"**Member since:** {customer.get('member_since', 'Unknown')}",
+        f"**Status:** {customer.get('status', 'unknown').title()}, Age Verified: {'Yes' if customer.get('age_verified') else 'No'}",
+        "",
+        f"**Favorite Teams:** {', '.join(customer.get('preferred_teams', []))}",
+        f"**Favorite Leagues:** {', '.join(customer.get('preferred_leagues', []))}",
+        f"**Betting Style:** {customer.get('betting_style', 'unknown').replace('_', ' ').title()}",
+        f"**Risk Appetite:** {customer.get('risk_appetite', 'unknown').title()}",
+        "",
+        f"**Account Balance:** £{account.get('balance', 0):.2f}",
+        f"**Bonus Balance:** £{account.get('bonus_balance', 0):.2f}",
+        f"**Pending Bets:** {account.get('pending_bets_count', 0)} (£{account.get('pending_bets_amount', 0):.2f})",
+        "",
+        f"**Daily Limit:** £{limits.get('daily_limit', 0)} (£{daily_remaining} remaining today)",
+        f"**Weekly Limit:** £{limits.get('weekly_limit', 0)}",
+        f"**Single Bet Max:** £{limits.get('single_bet_max', 0)}",
+        "",
+        f"**Last Bet:** {recent.get('last_bet', {}).get('event', 'None')} - {recent.get('last_bet', {}).get('selection', '')} ({recent.get('last_bet', {}).get('result', 'pending')})",
+        f"**This Month:** {recent.get('this_month', {}).get('total_bets', 0)} bets, {recent.get('this_month', {}).get('wins', 0)} wins ({recent.get('this_month', {}).get('win_rate', 0)}% win rate)",
+        f"**Favorite Bet Types:** {', '.join(recent.get('favorite_bet_types', []))}",
+        "",
+        f"**Default Stake:** £{prefs.get('default_stake', 10)}",
+        f"**Odds Format:** {prefs.get('odds_format', 'decimal').title()}",
+    ]
+
+    return "\n".join(lines)
+
 def transform_acs_to_openai_format(msg_data: Any, model: Optional[str], tools: dict[str, Tool], system_message: Optional[str], temperature: Optional[float], max_tokens: Optional[int], disable_audio: Optional[bool], voice: str) -> InputAudioBufferAppendEvent | SessionUpdateEvent | Any | None:
     """
     Transforms websocket message data from Azure Communication Services (ACS) to the OpenAI Realtime API format.
@@ -107,4 +147,24 @@ def transform_openai_to_acs_format(msg_data: Any) -> Optional[Any]:
 async def load_prompt_from_markdown(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         prompt = file.read()
+
+    # Load and inject customer profile
+    # The customer_profile.json is in the audio_backend folder
+    prompt_path = Path(file_path)
+    # Go up from prompts/ to project root, then into audio_backend/
+    customer_profile_path = prompt_path.parent.parent / "audio_backend" / "customer_profile.json"
+
+    if customer_profile_path.exists():
+        try:
+            with open(customer_profile_path, 'r', encoding='utf-8') as f:
+                profile = json.load(f)
+            profile_text = format_customer_profile(profile)
+            prompt = prompt.replace("{{CUSTOMER_PROFILE}}", profile_text)
+        except Exception as e:
+            print(f"Warning: Could not load customer profile: {e}")
+            prompt = prompt.replace("{{CUSTOMER_PROFILE}}", "(Customer profile not available)")
+    else:
+        print(f"Warning: Customer profile not found at {customer_profile_path}")
+        prompt = prompt.replace("{{CUSTOMER_PROFILE}}", "(Customer profile not available)")
+
     return prompt

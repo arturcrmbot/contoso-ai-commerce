@@ -39,7 +39,7 @@ param azureOpenAIResourceId string = ''
 param azureGptRealtimeDeployment string = 'gpt-realtime-2'
 
 @description('Azure OpenAI Realtime Voice')
-param azureGptRealtimeVoice string = 'verse'
+param azureGptRealtimeVoice string = 'ballad'
 
 // Use appName directly as container app name (caller provides unique name)
 var containerAppName = appName

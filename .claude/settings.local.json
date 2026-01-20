@@ -5,7 +5,17 @@
       "Bash(az containerapp list:*)",
       "Bash(az containerapp logs show:*)",
       "Bash(az containerapp show:*)",
-      "Bash(docker build:*)"
+      "Bash(docker build:*)",
+      "Bash(dir:*)",
+      "Bash(pip install:*)",
+      "Bash(npm ci:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(uvicorn:*)",
+      "Bash(timeout:*)",
+      "Bash(findstr:*)",
+      "Bash(ping:*)",
+      "Bash(powershell -Command:*)"
     ],
     "deny": [],
     "ask": []

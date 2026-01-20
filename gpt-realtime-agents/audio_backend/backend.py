@@ -74,7 +74,7 @@ def _clean_env(name: str, default: str | None = None) -> str:
 REALTIME_SESSION_URL = _clean_env("AZURE_GPT_REALTIME_URL")
 WEBRTC_URL = _clean_env("WEBRTC_URL")
 DEFAULT_DEPLOYMENT = os.getenv("AZURE_GPT_REALTIME_DEPLOYMENT", "gpt-realtime")
-DEFAULT_VOICE = os.getenv("AZURE_GPT_REALTIME_VOICE", "verse")
+DEFAULT_VOICE = os.getenv("AZURE_GPT_REALTIME_VOICE", "ballad")
 AZURE_API_KEY_RAW = os.getenv("AZURE_GPT_REALTIME_KEY")
 AZURE_API_KEY = AZURE_API_KEY_RAW.strip().strip('"').strip("'") if AZURE_API_KEY_RAW else None
 

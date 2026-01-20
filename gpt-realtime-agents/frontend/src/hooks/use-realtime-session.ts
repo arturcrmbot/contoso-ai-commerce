@@ -14,6 +14,7 @@ interface UseRealtimeSessionProps {
   onProductsDiscovered?: (products: any[]) => void;
   onCartUpdated?: (cartData: any) => void;
   onVisualUpdate?: (visualConfig: any) => void;
+  onBetSlipUpdated?: (slipData: any) => void;
 }
 
 
@@ -45,7 +46,12 @@ function convertToFlexibleVisual(visual: any): any {
     'accessory_grid': 'accessory_grid',
     'price_breakdown': 'price_breakdown',
     'credit_check_status': 'credit_check_status',
-    'info_callout': 'info_callout'
+    'info_callout': 'info_callout',
+    // Betting components
+    'match_grid': 'match_grid',
+    'match_card': 'match_card',
+    'bet_slip_preview': 'bet_slip_preview',
+    'bet_confirmation': 'bet_confirmation'
   };
 
   const componentType = typeToComponent[type] || 'info_callout';
@@ -63,7 +69,7 @@ function convertToFlexibleVisual(visual: any): any {
   };
 }
 
-export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate }: UseRealtimeSessionProps) {
+export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscovered, onCartUpdated, onVisualUpdate, onBetSlipUpdated }: UseRealtimeSessionProps) {
   const [sessionState, setSessionState] = useState<SessionState>({
     status: 'idle',
     isMuted: false,
@@ -251,7 +257,7 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
         }
       }
 
-      // Extract cart updates
+      // Extract cart updates (legacy)
       if (onCartUpdated) {
         if (functionName === 'add_to_cart' && result.output.cart_count) {
           // When item added, fetch full cart summary
@@ -274,6 +280,40 @@ export function useRealtimeSession({ onMessage, onStateChange, onProductsDiscove
           }
         } else if (functionName === 'get_cart_summary') {
           onCartUpdated(result.output);
+        }
+      }
+
+      // Extract bet slip updates
+      if (onBetSlipUpdated) {
+        const betSlipTools = ['add_to_bet_slip', 'remove_from_bet_slip', 'get_bet_slip_summary', 'place_bet'];
+
+        if (betSlipTools.includes(functionName)) {
+          // If we have selections in the response, update the bet slip
+          if (result.output.selections) {
+            console.log('[BET SLIP UPDATE]', functionName, result.output);
+            onBetSlipUpdated(result.output);
+          }
+          // For add/remove, fetch the full bet slip summary
+          else if (functionName === 'add_to_bet_slip' || functionName === 'remove_from_bet_slip') {
+            try {
+              const slipResponse = await fetch(`${CONFIG.backendBaseUrl}/function-call`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  name: "get_bet_slip_summary",
+                  call_id: "slip_refresh",
+                  arguments: { session_id: "default" }
+                }),
+              });
+              if (slipResponse.ok) {
+                const slipResult = await slipResponse.json();
+                console.log('[BET SLIP REFRESH]', slipResult.output);
+                onBetSlipUpdated(slipResult.output);
+              }
+            } catch (e) {
+              console.error("Failed to fetch bet slip", e);
+            }
+          }
         }
       }
 
