@@ -15,8 +15,10 @@ Deploy Contoso AI Commerce to Azure Container Apps using simplified Bicep templa
 
 - Azure CLI installed and logged in
 - Docker Desktop running
-- `.env` file configured with Azure OpenAI credentials
+- `.env` file configured with Azure OpenAI credentials (copy from `.env.sample`)
 - PowerShell (Windows) or pwsh (Linux/Mac)
+
+> **⚠️ Security Note**: Never commit `.env` or `main.parameters.json` with real credentials. Use `main.parameters.sample.json` as a template and copy it to `main.parameters.json` with your actual values.
 
 ## Deployment Steps
 

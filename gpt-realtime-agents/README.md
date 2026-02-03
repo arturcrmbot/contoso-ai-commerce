@@ -4,6 +4,8 @@ Azure OpenAI Realtime-powered sales assistant that combines voice and chat to he
 
 **Based on:** [gpt-realtime-agents](https://github.com/samelhousseini/gpt-realtime-agents) by samelhousseini
 
+> **⚠️ Security Notice**: Before deploying to production or making this repository public, please review [SECURITY.md](SECURITY.md) for important security guidelines and best practices.
+
 ## Architecture
 
 - **Backend:** FastAPI serving API endpoints and static frontend

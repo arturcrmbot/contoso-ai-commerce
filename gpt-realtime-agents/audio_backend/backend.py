@@ -54,10 +54,26 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
+# CORS Configuration - can be customized via environment variable
+# For production, set CORS_ORIGINS to a comma-separated list of allowed origins
+# Example: CORS_ORIGINS="https://yourdomain.com,https://www.yourdomain.com"
+CORS_ORIGINS_ENV = os.getenv("CORS_ORIGINS", "*")
+CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS_ENV.split(",")] if CORS_ORIGINS_ENV != "*" else ["*"]
+
+if CORS_ORIGINS == ["*"]:
+    logger.warning(
+        "⚠️  CORS is configured to allow ALL origins. "
+        "This is insecure for production. Set CORS_ORIGINS environment variable to restrict access."
+    )
+
 app = FastAPI(title="Realtime Function Calling Backend", version="0.1.0")
+
+# CORS Middleware Configuration
+# SECURITY WARNING: The default configuration allows all origins for demo/development purposes.
+# For production deployments, set the CORS_ORIGINS environment variable to your specific domain(s)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # demo purposes only; tighten for production
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -88,11 +104,15 @@ def _optional_env(name: str, default: str) -> str:
 FRONTEND_DIST_DIR = Path(__file__).resolve().parent / "frontend_dist"
 FRONTEND_BACKEND_BASE_URL = _optional_env("VITE_BACKEND_BASE_URL", "http://localhost:8080/api")
 
-print("REALTIME_SESSION_URL", REALTIME_SESSION_URL)
-print("WEBRTC_URL", WEBRTC_URL)
-print("DEFAULT_DEPLOYMENT", DEFAULT_DEPLOYMENT)
-print("DEFAULT_VOICE", DEFAULT_VOICE)
-print("AZURE_API_KEY", AZURE_API_KEY is not None)
+# Log configuration (without exposing sensitive URLs in production)
+logger.info("Backend configuration loaded:")
+logger.info("  Deployment: %s", DEFAULT_DEPLOYMENT)
+logger.info("  Voice: %s", DEFAULT_VOICE)
+logger.info("  Authentication: %s", "API Key" if AZURE_API_KEY else "Managed Identity")
+# Only log full URLs in debug mode to avoid exposing endpoints
+if os.getenv("DEBUG", "").lower() in ("true", "1", "yes"):
+    logger.debug("  Realtime URL: %s", REALTIME_SESSION_URL)
+    logger.debug("  WebRTC URL: %s", WEBRTC_URL)
 
 
 
