@@ -95,11 +95,15 @@ def _optional_env(name: str, default: str) -> str:
 FRONTEND_DIST_DIR = Path(__file__).resolve().parent / "frontend_dist"
 FRONTEND_BACKEND_BASE_URL = _optional_env("VITE_BACKEND_BASE_URL", "http://localhost:8080/api")
 
-print("REALTIME_SESSION_URL", REALTIME_SESSION_URL)
-print("WEBRTC_URL", WEBRTC_URL)
-print("DEFAULT_DEPLOYMENT", DEFAULT_DEPLOYMENT)
-print("DEFAULT_VOICE", DEFAULT_VOICE)
-print("AZURE_API_KEY", AZURE_API_KEY is not None)
+# Log configuration (without exposing sensitive URLs in production)
+logger.info("Backend configuration loaded:")
+logger.info("  Deployment: %s", DEFAULT_DEPLOYMENT)
+logger.info("  Voice: %s", DEFAULT_VOICE)
+logger.info("  Authentication: %s", "API Key" if AZURE_API_KEY else "Managed Identity")
+# Only log full URLs in debug mode to avoid exposing endpoints
+if os.getenv("DEBUG", "").lower() in ("true", "1", "yes"):
+    logger.debug("  Realtime URL: %s", REALTIME_SESSION_URL)
+    logger.debug("  WebRTC URL: %s", WEBRTC_URL)
 
 
 
