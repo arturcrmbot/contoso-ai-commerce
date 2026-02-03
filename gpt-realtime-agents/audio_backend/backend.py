@@ -58,7 +58,7 @@ logging.basicConfig(level=logging.INFO)
 # For production, set CORS_ORIGINS to a comma-separated list of allowed origins
 # Example: CORS_ORIGINS="https://yourdomain.com,https://www.yourdomain.com"
 CORS_ORIGINS_ENV = os.getenv("CORS_ORIGINS", "*")
-CORS_ORIGINS = CORS_ORIGINS_ENV.split(",") if CORS_ORIGINS_ENV != "*" else ["*"]
+CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS_ENV.split(",")] if CORS_ORIGINS_ENV != "*" else ["*"]
 
 if CORS_ORIGINS == ["*"]:
     logger.warning(
