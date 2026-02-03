@@ -2,5 +2,6 @@
 deployment-outputs.json
 infra-outputs.json
 
-# Backup parameters files with secrets
+# Parameters files with secrets
+main.parameters.json
 *.parameters.local.json

@@ -55,9 +55,16 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="Realtime Function Calling Backend", version="0.1.0")
+
+# CORS Configuration
+# SECURITY WARNING: The current configuration allows all origins for demo purposes.
+# For production deployments:
+# 1. Replace ["*"] with specific allowed origins (e.g., ["https://yourdomain.com"])
+# 2. Set allow_credentials=False if you don't need credentials
+# 3. Restrict allow_methods and allow_headers to only what you need
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # demo purposes only; tighten for production
+    allow_origins=["*"],  # TODO: Replace with specific origins for production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
