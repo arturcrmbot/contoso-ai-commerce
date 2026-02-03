@@ -55,9 +55,28 @@ The application supports two authentication methods:
 
 ### CORS Configuration
 
-The default CORS configuration allows all origins (`allow_origins=["*"]`). **This is insecure for production.**
+The default CORS configuration allows all origins for development purposes. **This is insecure for production.**
 
-Update `audio_backend/backend.py`:
+**Method 1: Environment Variable (Recommended)**
+
+Set the `CORS_ORIGINS` environment variable in your `.env` file or deployment configuration:
+
+```bash
+# Single origin
+CORS_ORIGINS="https://yourdomain.com"
+
+# Multiple origins (comma-separated)
+CORS_ORIGINS="https://yourdomain.com,https://www.yourdomain.com"
+```
+
+The application will automatically:
+- Use the specified origins for CORS
+- Log a warning if CORS is set to "*" (all origins)
+- Validate origins on every request
+
+**Method 2: Code Modification (Alternative)**
+
+If you prefer to hardcode the configuration, edit `audio_backend/backend.py`:
 
 ```python
 app.add_middleware(

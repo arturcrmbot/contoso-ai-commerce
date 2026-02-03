@@ -54,17 +54,26 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
+# CORS Configuration - can be customized via environment variable
+# For production, set CORS_ORIGINS to a comma-separated list of allowed origins
+# Example: CORS_ORIGINS="https://yourdomain.com,https://www.yourdomain.com"
+CORS_ORIGINS_ENV = os.getenv("CORS_ORIGINS", "*")
+CORS_ORIGINS = CORS_ORIGINS_ENV.split(",") if CORS_ORIGINS_ENV != "*" else ["*"]
+
+if CORS_ORIGINS == ["*"]:
+    logger.warning(
+        "⚠️  CORS is configured to allow ALL origins. "
+        "This is insecure for production. Set CORS_ORIGINS environment variable to restrict access."
+    )
+
 app = FastAPI(title="Realtime Function Calling Backend", version="0.1.0")
 
-# CORS Configuration
-# SECURITY WARNING: The current configuration allows all origins for demo purposes.
-# For production deployments:
-# 1. Replace ["*"] with specific allowed origins (e.g., ["https://yourdomain.com"])
-# 2. Set allow_credentials=False if you don't need credentials
-# 3. Restrict allow_methods and allow_headers to only what you need
+# CORS Middleware Configuration
+# SECURITY WARNING: The default configuration allows all origins for demo/development purposes.
+# For production deployments, set the CORS_ORIGINS environment variable to your specific domain(s)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # TODO: Replace with specific origins for production
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
